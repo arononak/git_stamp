@@ -1,0 +1,3 @@
+const jsonOutput = '''
+[{"hash":"db8e2dd","subject":"Updated files.png","date":"2023-12-13 00:40"},{"hash":"e9d298f","subject":"Added CHANGELOG.md","date":"2023-12-12 08:25"},{"hash":"19a7340","subject":"Updated pubspec.yaml","date":"2023-12-12 08:24"},{"hash":"b7eb795","subject":"Update README.md","date":"2023-12-12 07:24"},{"hash":"9b69ae6","subject":"Add files via upload","date":"2023-12-12 07:18"},{"hash":"a447afe","subject":"Create README.md","date":"2023-12-12 07:17"},{"hash":"c32f785","subject":"Added file generator fix","date":"2023-12-12 06:12"},{"hash":"0e3e69a","subject":"Added file generator","date":"2023-12-12 05:44"},{"hash":"3e66c39","subject":"Initial commit","date":"2023-12-11 21:03"}]
+''';
