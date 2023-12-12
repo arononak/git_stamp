@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 const gitStampCommit = '''
@@ -94,11 +95,13 @@ void main() {
     [
       'log',
       '--pretty=format:{"hash":"%h","subject":"%s","date":"%ad"}',
-      '--date=format-local:"%Y-%m-%d %H:%M"'
+      '--date=format-local:%Y-%m-%d %H:%M',
     ],
   ).stdout;
 
-  final jsonOutput = 'const jsonOutput = \'\'\'\n$gitLogJson\n\'\'\';';
+  final logs = LineSplitter.split(gitLogJson).map((line) => json.decode(line)).toList();
+  
+  final jsonOutput = 'const jsonOutput = \'\'\'\n${jsonEncode(logs)}\n\'\'\';';
 
   File('$outputFolder/git_stamp_json_output.dart').writeAsStringSync(jsonOutput);
   File('$outputFolder/git_stamp_commit.dart').writeAsStringSync(gitStampCommit);
