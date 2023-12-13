@@ -2,4 +2,8 @@ include: package:flutter_lints/flutter.yaml
 
 linter:
   rules:
+    - lines_longer_than_80_chars: ignore
 
+analyzer:
+  exclude:
+    - "./example/**"
