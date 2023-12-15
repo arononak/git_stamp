@@ -77,7 +77,7 @@ class GitStampPage extends StatelessWidget {
                   TextSpan(
                     children: [
                       TextSpan(
-                        text: '${commit.hash.substring(0, 7)}',
+                        text: commit.hash.substring(0, 7),
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.primary,
                           fontWeight: FontWeight.bold,
@@ -99,7 +99,7 @@ class GitStampPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '${commit.authorName} (${commit.authorEmail})',
+                      commit.authorName + '(' + commit.authorEmail + ')',
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.onSurface,
                         fontStyle: FontStyle.italic,
