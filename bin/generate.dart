@@ -10,17 +10,23 @@ class GitStampCommit {
   final String hash;
   final String subject;
   final String date;
+  final String authorName;
+  final String authorEmail;
 
   GitStampCommit({
     required this.hash,
     required this.subject,
     required this.date,
+    required this.authorName,
+    required this.authorEmail,
   });
 
   factory GitStampCommit.fromJson(Map<String, dynamic> json) => GitStampCommit(
         hash: json['hash'],
         subject: json['subject'],
         date: json['date'],
+        authorName: json['authorName'],
+        authorEmail: json['authorEmail'],
       );
 
   static List<GitStampCommit> get commitList =>
@@ -30,6 +36,7 @@ class GitStampCommit {
 
 const gitStampPage = '''
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'git_stamp_commit.dart';
 
@@ -55,30 +62,76 @@ class GitStampPage extends StatelessWidget {
         itemCount: GitStampCommit.commitList.length,
         itemBuilder: (context, index) {
           final commit = GitStampCommit.commitList[index];
+
           return Card(
-            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            child: ListTile(
-              leading: const Icon(Icons.code),
-              title: Text(
-                commit.hash.substring(0, 7),
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    commit.date,
-                    style: const TextStyle(fontStyle: FontStyle.italic),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: ListTile(
+                contentPadding: EdgeInsets.all(0),
+                leading: Icon(
+                  Icons.code,
+                  size: 36,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+                title: Text.rich(
+                  TextSpan(
+                    children: [
+                      TextSpan(
+                        text: '${commit.hash.substring(0, 7)}',
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                          fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                      TextSpan(
+                        text: ' - ',
+                        style: TextStyle(fontWeight: FontWeight.normal),
+                      ),
+                      TextSpan(
+                        text: commit.subject,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 4),
-                  Text(commit.subject),
-                ],
+                ),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${commit.authorName} (${commit.authorEmail})',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onSurface,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                    Text(
+                      commit.date,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                      ),
+                    ),
+                  ],
+                ),
+                trailing: IconButton(
+                  onPressed: () => _copyToClipboard(context, commit.hash),
+                  icon: Icon(
+                    Icons.content_copy,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
               ),
             ),
           );
         },
       ),
     );
+  }
+
+  void _copyToClipboard(BuildContext context, String text) {
+    Clipboard.setData(ClipboardData(text: text));
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: const Text('Copied to clipboard !')));
   }
 }
 ''';
@@ -94,7 +147,7 @@ void main() {
     'git',
     [
       'log',
-      '--pretty=format:{"hash":"%h","subject":"%s","date":"%ad"}',
+      '--pretty=format:{"hash":"%H","subject":"%s","date":"%ad","authorName":"%an","authorEmail":"%ae"}',
       '--date=format-local:%Y-%m-%d %H:%M',
     ],
   ).stdout;
