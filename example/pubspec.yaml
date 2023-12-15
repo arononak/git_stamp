@@ -9,7 +9,10 @@ dependencies:
   flutter:
     sdk: flutter
 dev_dependencies:
-  git_stamp: ^1.0.0
+  git_stamp:
+    git:
+      url: https://github.com/arononak/git_stamp
+      ref: a1e62f0e8033cb6f87c18b5a98000feefb501729
   flutter_driver:
     sdk: flutter
   flutter_test:
