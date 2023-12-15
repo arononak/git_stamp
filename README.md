@@ -10,7 +10,9 @@
 
 ## Preview
 
-![](https://github.com/arononak/git_stamp/blob/main/preview.png?raw=true)
+| Light                                                                           | Dark                                                                           |
+|:-------------------------------------------------------------------------------:|:------------------------------------------------------------------------------:|
+| ![](https://github.com/arononak/git_stamp/blob/main/preview_light.png?raw=true) | ![](https://github.com/arononak/git_stamp/blob/main/preview_dark.png?raw=true) |
 
 ## Installation
 
