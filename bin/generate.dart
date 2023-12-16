@@ -58,13 +58,11 @@ class GitStampPage extends StatelessWidget {
       appBar: AppBar(
         title: Row(
           children: [
-            Text('Git Stamp'),
+            Text('Git Stamp - commits:'),
             SizedBox(width: 8),
             CircleAvatar(
               child: Text(GitStampCommit.commitList.length.toString()),
             ),
-            SizedBox(width: 8),
-            Text('commits'),
           ],
         ),
       ),
@@ -104,6 +102,8 @@ class GitStampPage extends StatelessWidget {
                       ),
                     ],
                   ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
