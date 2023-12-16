@@ -109,7 +109,7 @@ class GitStampPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      commit.authorName + '(' + commit.authorEmail + ')',
+                      commit.authorName + ' (' + commit.authorEmail + ')',
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.onSurface,
                         fontStyle: FontStyle.italic,
