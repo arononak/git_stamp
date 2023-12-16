@@ -7,7 +7,8 @@ void showGitStampPage({
   required BuildContext context,
   bool useRootNavigator = false,
 }) {
-  Navigator.of(context, rootNavigator: useRootNavigator).push(MaterialPageRoute<void>(
+  Navigator.of(context, rootNavigator: useRootNavigator)
+      .push(MaterialPageRoute<void>(
     builder: (BuildContext context) => const GitStampPage(),
   ));
 }
@@ -71,7 +72,10 @@ class GitStampPage extends StatelessWidget {
                     Text(
                       commit.date,
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                        color: Theme.of(context)
+                            .colorScheme
+                            .onSurface
+                            .withOpacity(0.6),
                       ),
                     ),
                   ],

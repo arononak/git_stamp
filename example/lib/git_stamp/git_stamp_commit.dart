@@ -25,6 +25,8 @@ class GitStampCommit {
         authorEmail: json['authorEmail'],
       );
 
-  static List<GitStampCommit> get commitList =>
-      json.decode(jsonOutput).map<GitStampCommit>((json) => GitStampCommit.fromJson(json)).toList();
+  static List<GitStampCommit> get commitList => json
+      .decode(jsonOutput)
+      .map<GitStampCommit>((json) => GitStampCommit.fromJson(json))
+      .toList();
 }
