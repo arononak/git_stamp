@@ -152,11 +152,18 @@ void main() {
     ],
   ).stdout;
 
-  final logs = LineSplitter.split(gitLogJson).map((line) => json.decode(line)).toList();
-  
-  final jsonOutput = 'const jsonOutput = \'\'\'\n${jsonEncode(logs)}\n\'\'\';';
+  final logs =
+      LineSplitter.split(gitLogJson).map((line) => json.decode(line)).toList();
 
-  File('$outputFolder/git_stamp_json_output.dart').writeAsStringSync(jsonOutput);
-  File('$outputFolder/git_stamp_commit.dart').writeAsStringSync(gitStampCommit);
-  File('$outputFolder/git_stamp_page.dart').writeAsStringSync(gitStampPage);
+  final gitStampJsonOutput = '''
+    const jsonOutput = \'\'\'\n${jsonEncode(logs)}\n\'\'\';
+  ''';
+
+  void saveFile(String filename, String content) {
+    File(filename).writeAsStringSync(content);
+  }
+
+  saveFile('$outputFolder/git_stamp_json_output.dart', gitStampJsonOutput);
+  saveFile('$outputFolder/git_stamp_commit.dart', gitStampCommit);
+  saveFile('$outputFolder/git_stamp_page.dart', gitStampPage);
 }
