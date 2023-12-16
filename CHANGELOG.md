@@ -10,3 +10,6 @@
 
 * New card style
 
+## 1.2.0
+
+* GitStampPage - Number of commits
