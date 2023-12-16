@@ -56,7 +56,17 @@ class GitStampPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Git Stamp'),
+        title: Row(
+          children: [
+            Text('Git Stamp'),
+            SizedBox(width: 8),
+            CircleAvatar(
+              child: Text(GitStampCommit.commitList.length.toString()),
+            ),
+            SizedBox(width: 8),
+            Text('commits'),
+          ],
+        ),
       ),
       body: ListView.builder(
         itemCount: GitStampCommit.commitList.length,
@@ -99,7 +109,7 @@ class GitStampPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      commit.authorName + ' (' + commit.authorEmail + ')',
+                      commit.authorName + '(' + commit.authorEmail + ')',
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.onSurface,
                         fontStyle: FontStyle.italic,
