@@ -12,7 +12,7 @@ dev_dependencies:
   git_stamp:
     git:
       url: https://github.com/arononak/git_stamp
-      ref: c6d50253b1b640bb68ca8a1002fabf8e1f886e61
+      ref: 63753e5e62c22c2d53d71549bba6b8c730e2fbdd
   flutter_driver:
     sdk: flutter
   flutter_test:
