@@ -8,13 +8,13 @@
 
 ##### Have you ever struggled with pushing or merging changes into the automatic build system? Worry no more! Now, effortlessly track the specific commits that shaped the final build.
 
-## Preview
+## 🏞️ Preview
 
 | Light                                                                           | Dark                                                                           |
 |:-------------------------------------------------------------------------------:|:------------------------------------------------------------------------------:|
 | ![](https://github.com/arononak/git_stamp/blob/main/preview_light.png?raw=true) | ![](https://github.com/arononak/git_stamp/blob/main/preview_dark.png?raw=true) |
 
-## Installation
+## 🛠️ Installation
 
 ```yaml
 dev_dependencies:
@@ -24,15 +24,18 @@ dev_dependencies:
       ref: main
 ```
 
-## Generating Files
+## 🏗️ Generating Files
 
 ```
 flutter pub run git_stamp:generate.dart
 ```
 
+> [!CAUTION]
+> Generating requires the use of the `git` command-line interface (CLI).
+
 ![](https://github.com/arononak/git_stamp/blob/main/files.png?raw=true)
 
-## Usage
+## 💻 Usage
 
 ```dart
 if (isProd == false) ...[
