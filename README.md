@@ -35,10 +35,12 @@ flutter pub run git_stamp:generate.dart
 ## Usage
 
 ```dart
-IconButton(
-  onPressed: () => showGitStampPage(context: context),
-  icon: const Icon(Icons.book),
-),
+if (isProd == false) ...[
+  IconButton(
+    onPressed: () => showGitStampPage(context: context),
+    icon: const Icon(Icons.book),
+  ),
+],
 ```
 
 Explore the power of Git Stamp and enhance your development workflow! 🚀
