@@ -35,6 +35,9 @@ flutter pub run git_stamp:generate.dart
 > [!CAUTION]
 > Generating requires the use of the `git` command-line interface (CLI).
 
+> [!IMPORTANT]  
+> If you use Github Action, you only get a single commit because GitHub Actions by default only retrieves the latest version (single commit) and does not include the full history of the repository. This is normal behavior to optimize the build process and improve performance, especially for large repositories. Try configuring github actions or generating Git Stamp files before `git push`.
+
 ![](https://github.com/arononak/git_stamp/blob/main/files.png?raw=true)
 
 ## 💻 Usage
