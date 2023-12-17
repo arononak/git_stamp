@@ -48,4 +48,6 @@ if (isProd == false) ...[
 ],
 ```
 
+## 📋 [TODO](./TODO.md) LIST
+
 Explore the power of Git Stamp and enhance your development workflow! 🚀
