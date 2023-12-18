@@ -56,14 +56,23 @@ class GitStampPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          children: [
-            Text('Git Stamp - commits:'),
-            SizedBox(width: 8),
-            CircleAvatar(
-              child: Text(GitStampCommit.commitList.length.toString()),
+        title: const Text('Git Stamp'),
+        flexibleSpace: Center(
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  const Icon(Icons.call_split),
+                  const SizedBox(width: 8),
+                  CircleAvatar(
+                    child: Text(GitStampCommit.commitList.length.toString()),
+                  ),
+                ],
+              ),
             ),
-          ],
+          ),
         ),
       ),
       body: ListView.builder(
@@ -73,9 +82,9 @@ class GitStampPage extends StatelessWidget {
 
           return Card(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: ListTile(
-                contentPadding: EdgeInsets.all(0),
+                contentPadding: const EdgeInsets.all(0),
                 leading: Icon(
                   Icons.code,
                   size: 36,
@@ -92,13 +101,13 @@ class GitStampPage extends StatelessWidget {
                           fontStyle: FontStyle.italic,
                         ),
                       ),
-                      TextSpan(
+                      const TextSpan(
                         text: ' - ',
                         style: TextStyle(fontWeight: FontWeight.normal),
                       ),
                       TextSpan(
                         text: commit.subject,
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -109,6 +118,7 @@ class GitStampPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
+                      // ignore: prefer_interpolation_to_compose_strings
                       commit.authorName + ' (' + commit.authorEmail + ')',
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.onSurface,
@@ -141,7 +151,7 @@ class GitStampPage extends StatelessWidget {
   void _copyToClipboard(BuildContext context, String text) {
     Clipboard.setData(ClipboardData(text: text));
     ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: const Text('Copied to clipboard !')));
+        .showSnackBar(const SnackBar(content: Text('Copied to clipboard !')));
   }
 }
 ''';
