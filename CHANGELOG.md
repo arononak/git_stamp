@@ -13,3 +13,7 @@
 ## 1.2.0
 
 * GitStampPage - Number of commits
+
+## 1.3.0
+
+* GitStampPage - Number of commits - new design
