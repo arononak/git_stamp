@@ -1,4 +1,4 @@
-generate:
+sync:
 	flutter pub run git_stamp:generate.dart
 	dart format .
 
