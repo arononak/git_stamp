@@ -1,6 +1,6 @@
 # 📋 TODO list
 
-- [ ] Github Actions - deploy to pub.dev
+- [x] Github Actions - deploy to pub.dev
 - [ ] InApp - AppBar commit count right & icon
 - [ ] InApp - Git remote config informations
 - [ ] InApp - Build branch
