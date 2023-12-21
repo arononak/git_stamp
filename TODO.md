@@ -3,7 +3,7 @@
 - [x] Github Actions - deploy to pub.dev
 - [x] InApp - AppBar commit count right & icon
 - [ ] InApp - Git remote config informations
-- [ ] InApp - Build branch
+- [x] InApp - Build branch
 - [ ] InApp - Files changes
 - [ ] InApp - Open author email in app
 - [ ] InApp - Commit details page
