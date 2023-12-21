@@ -38,6 +38,7 @@ const gitStampPage = '''
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'git_stamp_branch_output.dart';
 import 'git_stamp_commit.dart';
 
 void showGitStampPage({
@@ -56,7 +57,19 @@ class GitStampPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Git Stamp'),
+        title: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text(
+              'Build branch: ',
+              style: TextStyle(fontSize: 18),
+            ),
+            Text(
+              buildBranch,
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
         flexibleSpace: Center(
           child: SafeArea(
             child: Padding(
@@ -171,19 +184,20 @@ void main() {
       '--date=format-local:%Y-%m-%d %H:%M',
     ],
   ).stdout;
-
-  final logs =
-      LineSplitter.split(gitLogJson).map((line) => json.decode(line)).toList();
-
+  final logs = LineSplitter.split(gitLogJson).map((line) => json.decode(line)).toList();
   final gitStampJsonOutput = '''
     const jsonOutput = \'\'\'\n${jsonEncode(logs)}\n\'\'\';
   ''';
+
+  final gitBranch = Process.runSync('git', ['rev-parse', '--abbrev-ref', 'HEAD']).stdout;
+  final gitBranchOutput = 'const buildBranch = "${gitBranch.toString().trim()}";';
 
   void saveFile(String filename, String content) {
     File(filename).writeAsStringSync(content);
   }
 
   saveFile('$outputFolder/git_stamp_json_output.dart', gitStampJsonOutput);
+  saveFile('$outputFolder/git_stamp_branch_output.dart', gitBranchOutput);
   saveFile('$outputFolder/git_stamp_commit.dart', gitStampCommit);
   saveFile('$outputFolder/git_stamp_page.dart', gitStampPage);
 }
