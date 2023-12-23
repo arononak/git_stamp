@@ -8,7 +8,8 @@ void showGitStampPage({
   required BuildContext context,
   bool useRootNavigator = false,
 }) {
-  Navigator.of(context, rootNavigator: useRootNavigator).push(MaterialPageRoute<void>(
+  Navigator.of(context, rootNavigator: useRootNavigator)
+      .push(MaterialPageRoute<void>(
     builder: (BuildContext context) => const GitStampPage(),
   ));
 }
@@ -20,16 +21,25 @@ class GitStampPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Build branch: ',
-              style: TextStyle(fontSize: 18),
+              'Git Stamp',
+              style: TextStyle(fontSize: 20),
             ),
-            Text(
-              buildBranch,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  'Build branch: ',
+                  style: TextStyle(fontSize: 12),
+                ),
+                Text(
+                  buildBranch,
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                ),
+              ],
             ),
           ],
         ),
@@ -43,7 +53,10 @@ class GitStampPage extends StatelessWidget {
                   const Icon(Icons.call_split),
                   const SizedBox(width: 8),
                   CircleAvatar(
-                    child: Text(GitStampCommit.commitList.length.toString()),
+                    child: Text(
+                      GitStampCommit.commitList.length.toString(),
+                      style: TextStyle(fontSize: 16),
+                    ),
                   ),
                 ],
               ),
@@ -104,7 +117,10 @@ class GitStampPage extends StatelessWidget {
                     Text(
                       commit.date,
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                        color: Theme.of(context)
+                            .colorScheme
+                            .onSurface
+                            .withOpacity(0.6),
                       ),
                     ),
                   ],
