@@ -10,3 +10,4 @@
 - [ ] InApp - Commit details page
 - [ ] InApp - Filter by author
 - [ ] Makefile - make commit argument, make sync history files
+- [ ] InApp - GroupBy day
