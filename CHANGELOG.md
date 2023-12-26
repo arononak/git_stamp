@@ -17,3 +17,7 @@
 ## 1.3.0
 
 * GitStampPage - Number of commits - new design
+
+## 1.4.0
+
+* GitStampPage - Build branch
