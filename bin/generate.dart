@@ -196,13 +196,19 @@ void main() {
       '--date=format-local:%Y-%m-%d %H:%M',
     ],
   ).stdout;
-  final logs = LineSplitter.split(gitLogJson).map((line) => json.decode(line)).toList();
+  
+  final logs =
+      LineSplitter.split(gitLogJson).map((line) => json.decode(line)).toList();
+  
   final gitStampJsonOutput = '''
     const jsonOutput = \'\'\'\n${jsonEncode(logs)}\n\'\'\';
   ''';
 
-  final gitBranch = Process.runSync('git', ['rev-parse', '--abbrev-ref', 'HEAD']).stdout;
-  final gitBranchOutput = 'const buildBranch = "${gitBranch.toString().trim()}";';
+  final gitBranch =
+      Process.runSync('git', ['rev-parse', '--abbrev-ref', 'HEAD']).stdout;
+  
+  final gitBranchOutput =
+      'const buildBranch = "${gitBranch.toString().trim()}";';
 
   void saveFile(String filename, String content) {
     File(filename).writeAsStringSync(content);
