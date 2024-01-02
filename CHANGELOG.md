@@ -21,3 +21,7 @@
 ## 1.4.0
 
 * GitStampPage - Build branch
+
+## 1.4.1
+
+* GitStampPage - Fixed texts

@@ -26,14 +26,14 @@ class GitStampPage extends StatelessWidget {
           children: [
             Text(
               'Git Stamp',
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 24),
             ),
             Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   'Build branch: ',
-                  style: TextStyle(fontSize: 12),
+                  style: TextStyle(fontSize: 14),
                 ),
                 Text(
                   buildBranch,
