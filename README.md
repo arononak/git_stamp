@@ -15,7 +15,7 @@
 |:-------------------------------------------------------------------------------:|:------------------------------------------------------------------------------:|
 | ![](https://github.com/arononak/git_stamp/blob/main/preview_light.png?raw=true) | ![](https://github.com/arononak/git_stamp/blob/main/preview_dark.png?raw=true) |
 
-## 🛠️ Installation
+## 🛠️ Installation from source
 
 ```yaml
 dev_dependencies:
