@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:intl/intl.dart';
+
 const gitStampCommit = '''
 import 'dart:convert';
 
@@ -35,6 +37,7 @@ class GitStampCommit {
 ''';
 
 const gitStampPage = '''
+import 'package:example/git_stamp/git_stamp_build_date_time.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -60,23 +63,7 @@ class GitStampPage extends StatelessWidget {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Git Stamp',
-              style: TextStyle(fontSize: 20),
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  'Build branch: ',
-                  style: TextStyle(fontSize: 12),
-                ),
-                Text(
-                  buildBranch,
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
+            Text('Git Stamp', style: TextStyle(fontSize: 20)),
           ],
         ),
         flexibleSpace: Center(
@@ -86,13 +73,59 @@ class GitStampPage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  const Icon(Icons.call_split),
-                  const SizedBox(width: 8),
-                  CircleAvatar(
-                    child: Text(
-                      GitStampCommit.commitList.length.toString(),
-                      style: TextStyle(fontSize: 16),
-                    ),
+                  IconButton(
+                    onPressed: () {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Container(
+                            padding: EdgeInsets.all(16.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      'Commit count: ',
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                    Text(
+                                      GitStampCommit.commitList.length.toString(),
+                                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      'Build branch: ',
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                    Text(
+                                      buildBranch,
+                                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      'Build time: ',
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                    Text(
+                                      buildDateTime,
+                                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    icon: const Icon(Icons.info_outline),
                   ),
                 ],
               ),
@@ -196,26 +229,29 @@ void main() {
       '--date=format-local:%Y-%m-%d %H:%M',
     ],
   ).stdout;
-  
+
   final logs =
       LineSplitter.split(gitLogJson).map((line) => json.decode(line)).toList();
-  
-  final gitStampJsonOutput = '''
-    const jsonOutput = \'\'\'\n${jsonEncode(logs)}\n\'\'\';
-  ''';
+  final logsOutput =
+      '''const jsonOutput = \'\'\'\n${jsonEncode(logs)}\n\'\'\';''';
 
-  final gitBranch =
+  final branch =
       Process.runSync('git', ['rev-parse', '--abbrev-ref', 'HEAD']).stdout;
-  
-  final gitBranchOutput =
-      'const buildBranch = "${gitBranch.toString().trim()}";';
+  final branchOutput = 'const buildBranch = "${branch.toString().trim()}";';
+
+  final buildDateTime =
+      DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
+  final buildDateTimeOutput =
+      'const buildDateTime = "${buildDateTime.toString().trim()}";';
 
   void saveFile(String filename, String content) {
     File(filename).writeAsStringSync(content);
   }
 
-  saveFile('$outputFolder/git_stamp_json_output.dart', gitStampJsonOutput);
-  saveFile('$outputFolder/git_stamp_branch_output.dart', gitBranchOutput);
+  saveFile('$outputFolder/git_stamp_json_output.dart', logsOutput);
+  saveFile('$outputFolder/git_stamp_branch_output.dart', branchOutput);
+  saveFile('$outputFolder/git_stamp_build_date_time.dart', buildDateTimeOutput);
+
   saveFile('$outputFolder/git_stamp_commit.dart', gitStampCommit);
   saveFile('$outputFolder/git_stamp_page.dart', gitStampPage);
 }

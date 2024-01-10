@@ -11,9 +11,10 @@
 
 ## 🏞️ Preview
 
-| Light                                                                           | Dark                                                                           |
-|:-------------------------------------------------------------------------------:|:------------------------------------------------------------------------------:|
-| ![](https://github.com/arononak/git_stamp/blob/main/preview_light.png?raw=true) | ![](https://github.com/arononak/git_stamp/blob/main/preview_dark.png?raw=true) |
+| Light                                                                            | Dark                                                                            |
+|:--------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------:|
+| ![](https://github.com/arononak/git_stamp/blob/main/preview_light.png?raw=true)  | ![](https://github.com/arononak/git_stamp/blob/main/preview_dark.png?raw=true)  |
+| ![](https://github.com/arononak/git_stamp/blob/main/preview_light2.png?raw=true) | ![](https://github.com/arononak/git_stamp/blob/main/preview_dark2.png?raw=true) |
 
 ## 🛠️ Installation from source
 
@@ -44,8 +45,9 @@ flutter pub run git_stamp:generate.dart
 |-- ios/
 |-- lib/
 |   |-- git_stamp/
-|       |-- git_stamp_commit.dart
 |       |-- git_stamp_branch_output.dart
+|       |-- git_stamp_build_date_time.dart
+|       |-- git_stamp_commit.dart
 |       |-- git_stamp_json_output.dart
 |       |-- git_stamp_page.dart
 |   |-- main.dart

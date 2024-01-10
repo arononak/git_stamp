@@ -4,7 +4,7 @@
 - [x] InApp - AppBar commit count right & icon
 - [ ] InApp - Git remote config informations
 - [x] InApp - Build branch
-- [ ] InApp - Build Time
+- [x] InApp - Build Time
 - [ ] InApp - Files changes
 - [ ] InApp - Open author email in app
 - [ ] InApp - Commit details page
