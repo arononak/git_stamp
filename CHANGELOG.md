@@ -25,3 +25,7 @@
 ## 1.4.1
 
 * GitStampPage - Fixed texts
+
+## 1.5.0
+
+* GitStampPage - Added build date time & new design
