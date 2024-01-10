@@ -1,6 +1,6 @@
 name: git_stamp
 description: "A tool to generate a git history that you can see when you run the application."
-version: 1.4.1
+version: 1.5.0
 homepage: https://aroncode.com
 repository: https://github.com/arononak/git_stamp
 environment:
