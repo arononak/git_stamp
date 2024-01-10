@@ -1,3 +1,4 @@
+import 'package:example/git_stamp/git_stamp_build_date_time.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -8,8 +9,7 @@ void showGitStampPage({
   required BuildContext context,
   bool useRootNavigator = false,
 }) {
-  Navigator.of(context, rootNavigator: useRootNavigator)
-      .push(MaterialPageRoute<void>(
+  Navigator.of(context, rootNavigator: useRootNavigator).push(MaterialPageRoute<void>(
     builder: (BuildContext context) => const GitStampPage(),
   ));
 }
@@ -24,23 +24,7 @@ class GitStampPage extends StatelessWidget {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Git Stamp',
-              style: TextStyle(fontSize: 24),
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  'Build branch: ',
-                  style: TextStyle(fontSize: 14),
-                ),
-                Text(
-                  buildBranch,
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
+            Text('Git Stamp', style: TextStyle(fontSize: 20)),
           ],
         ),
         flexibleSpace: Center(
@@ -50,13 +34,59 @@ class GitStampPage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  const Icon(Icons.call_split),
-                  const SizedBox(width: 8),
-                  CircleAvatar(
-                    child: Text(
-                      GitStampCommit.commitList.length.toString(),
-                      style: TextStyle(fontSize: 16),
-                    ),
+                  IconButton(
+                    onPressed: () {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Container(
+                            padding: EdgeInsets.all(16.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      'Commit count: ',
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                    Text(
+                                      GitStampCommit.commitList.length.toString(),
+                                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      'Build branch: ',
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                    Text(
+                                      buildBranch,
+                                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      'Build time: ',
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                    Text(
+                                      buildDateTime,
+                                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    icon: const Icon(Icons.info_outline),
                   ),
                 ],
               ),
@@ -117,10 +147,7 @@ class GitStampPage extends StatelessWidget {
                     Text(
                       commit.date,
                       style: TextStyle(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .onSurface
-                            .withOpacity(0.6),
+                        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                       ),
                     ),
                   ],
