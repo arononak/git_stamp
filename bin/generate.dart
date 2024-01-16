@@ -40,6 +40,7 @@ const gitStampPage = '''
 import 'package:example/git_stamp/git_stamp_build_date_time.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'git_stamp_branch_output.dart';
 import 'git_stamp_commit.dart';
@@ -51,6 +52,29 @@ void showGitStampPage({
   Navigator.of(context, rootNavigator: useRootNavigator).push(MaterialPageRoute<void>(
     builder: (BuildContext context) => const GitStampPage(),
   ));
+}
+
+void openEmail({
+  required String email,
+  String? subject,
+}) {
+  String? encodeQueryParameters(Map<String, String> params) {
+    return params.entries.map(
+      (MapEntry<String, String> e) {
+        return Uri.encodeComponent(e.key) + '=' + Uri.encodeComponent(e.value);
+      },
+    ).join('&');
+  }
+
+  launchUrl(
+    Uri(
+      scheme: 'mailto',
+      path: email,
+      query: encodeQueryParameters(
+        <String, String>{'subject': subject ?? ''},
+      ),
+    ),
+  );
 }
 
 class GitStampPage extends StatelessWidget {
@@ -175,12 +199,15 @@ class GitStampPage extends StatelessWidget {
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      // ignore: prefer_interpolation_to_compose_strings
-                      commit.authorName + ' (' + commit.authorEmail + ')',
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.onSurface,
-                        fontStyle: FontStyle.italic,
+                    InkWell(
+                      onTap: () => openEmail(email: commit.authorEmail),
+                      child: Text(
+                        // ignore: prefer_interpolation_to_compose_strings
+                        commit.authorName + ' (' + commit.authorEmail + ')',
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onSurface,
+                          fontStyle: FontStyle.italic,
+                        ),
                       ),
                     ),
                     Text(

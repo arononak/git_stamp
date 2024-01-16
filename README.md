@@ -18,7 +18,11 @@
 
 ## 🛠️ Installation from source
 
+`url_launcher` is required.
+
 ```yaml
+dependencies:
+  url_launcher: ^6.2.3
 dev_dependencies:
   git_stamp:
     git:
