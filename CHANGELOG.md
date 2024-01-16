@@ -29,3 +29,7 @@
 ## 1.5.0
 
 * GitStampPage - Added build date time & new design
+
+## 1.5.1
+
+* GitStampPage - Added opening author email
