@@ -5,7 +5,8 @@
 [![MIT License](https://img.shields.io/badge/License-MIT-orange.svg?labelColor=orange&color=white)](https://opensource.org/licenses)
 [![Pub Package](https://img.shields.io/pub/v/git_stamp.svg?labelColor=purple&color=white)](https://pub.dev/packages/git_stamp)
 
-### 🚀 Build-Time Git History Integration in Your Flutter App
+### 🚀 Build-Time Git History Integration in Your Flutter App [MORE](https://medium.com/@arononak/git-stamp-a-new-tool-for-testing-flutter-applications-in-2024-bdf4f9c5f8ab)
+
 
 ##### Have you ever struggled with pushing or merging changes into the automatic build system? Worry no more! Now, effortlessly track the specific commits that shaped the final build.
 
