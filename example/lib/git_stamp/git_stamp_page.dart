@@ -39,6 +39,16 @@ void openEmail({
   );
 }
 
+Map<String, int> commitCountByAuthor() {
+  Map<String, int> map = {};
+
+  for (GitStampCommit commit in GitStampCommit.commitList) {
+    map.update(commit.authorName, (value) => (value) + 1, ifAbsent: () => 1);
+  }
+
+  return map;
+}
+
 class GitStampPage extends StatelessWidget {
   const GitStampPage({super.key});
 
@@ -66,53 +76,77 @@ class GitStampPage extends StatelessWidget {
                         builder: (BuildContext context) {
                           return Container(
                             padding: EdgeInsets.all(16.0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Commit count: ',
-                                      style: TextStyle(fontSize: 12),
-                                    ),
-                                    Text(
-                                      GitStampCommit.commitList.length
-                                          .toString(),
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Build branch: ',
-                                      style: TextStyle(fontSize: 12),
-                                    ),
-                                    Text(
-                                      buildBranch,
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Build time: ',
-                                      style: TextStyle(fontSize: 12),
-                                    ),
-                                    Text(
-                                      buildDateTime,
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                            child: SingleChildScrollView(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        'Commit count: ',
+                                        style: TextStyle(fontSize: 12),
+                                      ),
+                                      Text(
+                                        GitStampCommit.commitList.length
+                                            .toString(),
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        'Build branch: ',
+                                        style: TextStyle(fontSize: 12),
+                                      ),
+                                      Text(
+                                        buildBranch,
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        'Build time: ',
+                                        style: TextStyle(fontSize: 12),
+                                      ),
+                                      Text(
+                                        buildDateTime,
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text('Commit stats:',
+                                      style: TextStyle(fontSize: 12)),
+                                  ...commitCountByAuthor().entries.map(
+                                        (entry) => Row(
+                                          children: [
+                                            SizedBox(width: 16),
+                                            Text(
+                                              '${entry.key}: ',
+                                              style: TextStyle(fontSize: 12),
+                                            ),
+                                            Text(
+                                              entry.value.toString(),
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                ],
+                              ),
                             ),
                           );
                         },
