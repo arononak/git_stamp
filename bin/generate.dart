@@ -49,7 +49,8 @@ void showGitStampPage({
   required BuildContext context,
   bool useRootNavigator = false,
 }) {
-  Navigator.of(context, rootNavigator: useRootNavigator).push(MaterialPageRoute<void>(
+  Navigator.of(context, rootNavigator: useRootNavigator)
+      .push(MaterialPageRoute<void>(
     builder: (BuildContext context) => const GitStampPage(),
   ));
 }
@@ -75,6 +76,16 @@ void openEmail({
       ),
     ),
   );
+}
+
+Map<String, int> commitCountByAuthor() {
+  Map<String, int> map = {};
+
+  for (GitStampCommit commit in GitStampCommit.commitList) {
+    map.update(commit.authorName, (value) => (value) + 1, ifAbsent: () => 1);
+  }
+
+  return map;
 }
 
 class GitStampPage extends StatelessWidget {
@@ -104,46 +115,77 @@ class GitStampPage extends StatelessWidget {
                         builder: (BuildContext context) {
                           return Container(
                             padding: EdgeInsets.all(16.0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Commit count: ',
-                                      style: TextStyle(fontSize: 12),
-                                    ),
-                                    Text(
-                                      GitStampCommit.commitList.length.toString(),
-                                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Build branch: ',
-                                      style: TextStyle(fontSize: 12),
-                                    ),
-                                    Text(
-                                      buildBranch,
-                                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Build time: ',
-                                      style: TextStyle(fontSize: 12),
-                                    ),
-                                    Text(
-                                      buildDateTime,
-                                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                            child: SingleChildScrollView(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        'Commit count: ',
+                                        style: TextStyle(fontSize: 12),
+                                      ),
+                                      Text(
+                                        GitStampCommit.commitList.length
+                                            .toString(),
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        'Build branch: ',
+                                        style: TextStyle(fontSize: 12),
+                                      ),
+                                      Text(
+                                        buildBranch,
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        'Build time: ',
+                                        style: TextStyle(fontSize: 12),
+                                      ),
+                                      Text(
+                                        buildDateTime,
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text('Commit stats:',
+                                      style: TextStyle(fontSize: 12)),
+                                  ...commitCountByAuthor().entries.map(
+                                        (entry) => Row(
+                                          children: [
+                                            SizedBox(width: 16),
+                                            Text(
+                                              '${entry.key}: ',
+                                              style: TextStyle(fontSize: 12),
+                                            ),
+                                            Text(
+                                              entry.value.toString(),
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                ],
+                              ),
                             ),
                           );
                         },
@@ -213,7 +255,10 @@ class GitStampPage extends StatelessWidget {
                     Text(
                       commit.date,
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                        color: Theme.of(context)
+                            .colorScheme
+                            .onSurface
+                            .withOpacity(0.6),
                       ),
                     ),
                   ],
@@ -239,15 +284,10 @@ class GitStampPage extends StatelessWidget {
         .showSnackBar(const SnackBar(content: Text('Copied to clipboard !')));
   }
 }
+
 ''';
 
-void main() {
-  const outputFolder = 'lib/git_stamp';
-
-  if (!Directory(outputFolder).existsSync()) {
-    Directory(outputFolder).createSync(recursive: true);
-  }
-
+String gitLogOutput() {
   final gitLogJson = Process.runSync(
     'git',
     [
@@ -257,27 +297,43 @@ void main() {
     ],
   ).stdout;
 
-  final logs =
-      LineSplitter.split(gitLogJson).map((line) => json.decode(line)).toList();
-  final logsOutput =
-      '''const jsonOutput = \'\'\'\n${jsonEncode(logs)}\n\'\'\';''';
+  final logs = LineSplitter.split(gitLogJson).map((line) => json.decode(line)).toList();
 
-  final branch =
-      Process.runSync('git', ['rev-parse', '--abbrev-ref', 'HEAD']).stdout;
+  final logsOutput = '''const jsonOutput = \'\'\'\n${jsonEncode(logs)}\n\'\'\';''';
+
+  return logsOutput;
+}
+
+String gitBranchOutput() {
+  final branch = Process.runSync('git', ['rev-parse', '--abbrev-ref', 'HEAD']).stdout;
+
   final branchOutput = 'const buildBranch = "${branch.toString().trim()}";';
 
-  final buildDateTime =
-      DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
-  final buildDateTimeOutput =
-      'const buildDateTime = "${buildDateTime.toString().trim()}";';
+  return branchOutput;
+}
+
+String buildDateOutput() {
+  final buildDateTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
+
+  final buildDateTimeOutput = 'const buildDateTime = "${buildDateTime.toString().trim()}";';
+
+  return buildDateTimeOutput;
+}
+
+void main() {
+  const outputFolder = 'lib/git_stamp';
+
+  if (!Directory(outputFolder).existsSync()) {
+    Directory(outputFolder).createSync(recursive: true);
+  }
 
   void saveFile(String filename, String content) {
     File(filename).writeAsStringSync(content);
   }
 
-  saveFile('$outputFolder/git_stamp_json_output.dart', logsOutput);
-  saveFile('$outputFolder/git_stamp_branch_output.dart', branchOutput);
-  saveFile('$outputFolder/git_stamp_build_date_time.dart', buildDateTimeOutput);
+  saveFile('$outputFolder/git_stamp_json_output.dart', gitLogOutput());
+  saveFile('$outputFolder/git_stamp_branch_output.dart', gitBranchOutput());
+  saveFile('$outputFolder/git_stamp_build_date_time.dart', buildDateOutput());
 
   saveFile('$outputFolder/git_stamp_commit.dart', gitStampCommit);
   saveFile('$outputFolder/git_stamp_page.dart', gitStampPage);
