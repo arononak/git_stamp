@@ -171,7 +171,7 @@ class GitStampPage extends StatelessWidget {
                                           children: [
                                             SizedBox(width: 16),
                                             Text(
-                                              '${entry.key}: ',
+                                              '\${entry.key}: ',
                                               style: TextStyle(fontSize: 12),
                                             ),
                                             Text(
@@ -297,15 +297,18 @@ String gitLogOutput() {
     ],
   ).stdout;
 
-  final logs = LineSplitter.split(gitLogJson).map((line) => json.decode(line)).toList();
+  final logs =
+      LineSplitter.split(gitLogJson).map((line) => json.decode(line)).toList();
 
-  final logsOutput = '''const jsonOutput = \'\'\'\n${jsonEncode(logs)}\n\'\'\';''';
+  final logsOutput =
+      '''const jsonOutput = \'\'\'\n${jsonEncode(logs)}\n\'\'\';''';
 
   return logsOutput;
 }
 
 String gitBranchOutput() {
-  final branch = Process.runSync('git', ['rev-parse', '--abbrev-ref', 'HEAD']).stdout;
+  final branch =
+      Process.runSync('git', ['rev-parse', '--abbrev-ref', 'HEAD']).stdout;
 
   final branchOutput = 'const buildBranch = "${branch.toString().trim()}";';
 
@@ -313,9 +316,11 @@ String gitBranchOutput() {
 }
 
 String buildDateOutput() {
-  final buildDateTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
+  final buildDateTime =
+      DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
 
-  final buildDateTimeOutput = 'const buildDateTime = "${buildDateTime.toString().trim()}";';
+  final buildDateTimeOutput =
+      'const buildDateTime = "${buildDateTime.toString().trim()}";';
 
   return buildDateTimeOutput;
 }
