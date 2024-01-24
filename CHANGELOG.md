@@ -37,3 +37,7 @@
 ## 1.6.0
 
 * GitStampPage - Added commit count by author
+
+## 1.6.1
+
+* Dart code format
