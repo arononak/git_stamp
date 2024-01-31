@@ -325,6 +325,22 @@ String buildDateOutput() {
   return buildDateTimeOutput;
 }
 
+String buildSystemInfo() {
+  final systemInfo = Process.runSync('flutter', ['doctor']).stdout;
+
+  String? systemInfoParsed = systemInfo
+      .toString()
+      .split('\n')
+      .where((line) => line.contains('] Flutter'))
+      .toList()
+      .firstOrNull;
+
+  final systemInfoOutput =
+      'const buildSystemInfo = "${systemInfoParsed.toString().trim()}";';
+
+  return systemInfoOutput;
+}
+
 void main() {
   const outputFolder = 'lib/git_stamp';
 
@@ -339,6 +355,7 @@ void main() {
   saveFile('$outputFolder/git_stamp_json_output.dart', gitLogOutput());
   saveFile('$outputFolder/git_stamp_branch_output.dart', gitBranchOutput());
   saveFile('$outputFolder/git_stamp_build_date_time.dart', buildDateOutput());
+  saveFile('$outputFolder/git_stamp_build_system_info.dart', buildSystemInfo());
 
   saveFile('$outputFolder/git_stamp_commit.dart', gitStampCommit);
   saveFile('$outputFolder/git_stamp_page.dart', gitStampPage);
