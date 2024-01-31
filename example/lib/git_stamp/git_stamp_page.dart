@@ -1,4 +1,5 @@
 import 'package:example/git_stamp/git_stamp_build_date_time.dart';
+import 'package:example/git_stamp/git_stamp_build_system_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -84,6 +85,44 @@ class GitStampPage extends StatelessWidget {
                                   Row(
                                     children: [
                                       Text(
+                                        'Build time: ',
+                                        style: TextStyle(fontSize: 12),
+                                      ),
+                                      Text(
+                                        buildDateTime,
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Build system: ',
+                                        style: TextStyle(fontSize: 12),
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          buildSystemInfo,
+                                          softWrap: true,
+                                          maxLines: 5,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 20),
+                                  Row(
+                                    children: [
+                                      Text(
                                         'Commit count: ',
                                         style: TextStyle(fontSize: 12),
                                       ),
@@ -91,8 +130,9 @@ class GitStampPage extends StatelessWidget {
                                         GitStampCommit.commitList.length
                                             .toString(),
                                         style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold),
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -105,28 +145,17 @@ class GitStampPage extends StatelessWidget {
                                       Text(
                                         buildBranch,
                                         style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        'Build time: ',
-                                        style: TextStyle(fontSize: 12),
-                                      ),
-                                      Text(
-                                        buildDateTime,
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold),
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ],
                                   ),
                                   const SizedBox(height: 8),
-                                  Text('Commit stats:',
-                                      style: TextStyle(fontSize: 12)),
+                                  Text(
+                                    'Commit stats:',
+                                    style: TextStyle(fontSize: 12),
+                                  ),
                                   ...commitCountByAuthor().entries.map(
                                         (entry) => Row(
                                           children: [
