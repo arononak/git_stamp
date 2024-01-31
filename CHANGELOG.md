@@ -41,3 +41,7 @@
 ## 1.6.1
 
 * Dart code format
+
+## 1.7.0
+
+* GitStampPage - Added build system info label
