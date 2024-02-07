@@ -45,3 +45,7 @@
 ## 1.7.0
 
 * GitStampPage - Added build system info label
+
+## 1.8.0
+
+* GitStampPage - Added about modal
