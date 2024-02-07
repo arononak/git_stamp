@@ -40,6 +40,14 @@ void openEmail({
   );
 }
 
+void openProjectHomepage() {
+  launchUrl(Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'arononak/git_stamp',
+  ));
+}
+
 Map<String, int> commitCountByAuthor() {
   Map<String, int> map = {};
 
@@ -75,113 +83,64 @@ class GitStampPage extends StatelessWidget {
                       showModalBottomSheet(
                         context: context,
                         builder: (BuildContext context) {
+                          return _buildRepoDetailsModal();
+                        },
+                      );
+                    },
+                    icon: const Icon(Icons.expand_less),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (BuildContext context) {
                           return Container(
                             padding: EdgeInsets.all(16.0),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        'Build time: ',
-                                        style: TextStyle(fontSize: 12),
-                                      ),
-                                      Text(
-                                        buildDateTime,
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  'Git Stamp',
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
                                   ),
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Build system: ',
-                                        style: TextStyle(fontSize: 12),
-                                      ),
-                                      Expanded(
-                                        child: Text(
-                                          buildSystemInfo,
-                                          softWrap: true,
-                                          maxLines: 5,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 20),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        'Commit count: ',
-                                        style: TextStyle(fontSize: 12),
-                                      ),
-                                      Text(
-                                        GitStampCommit.commitList.length
-                                            .toString(),
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        'Build branch: ',
-                                        style: TextStyle(fontSize: 12),
-                                      ),
-                                      Text(
-                                        buildBranch,
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    'Commit stats:',
-                                    style: TextStyle(fontSize: 12),
-                                  ),
-                                  ...commitCountByAuthor().entries.map(
-                                        (entry) => Row(
-                                          children: [
-                                            SizedBox(width: 16),
-                                            Text(
-                                              '${entry.key}: ',
-                                              style: TextStyle(fontSize: 12),
-                                            ),
-                                            Text(
-                                              entry.value.toString(),
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                ],
-                              ),
+                                ),
+                                SizedBox(height: 20),
+                                Row(
+                                  children: [
+                                    Text(
+                                      'Have a great idea for Git Stamp ? ',
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    IconButton(
+                                      onPressed: () => openEmail(
+                                          email: 'arononak@gmail.com'),
+                                      icon: Icon(Icons.mail),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      'You love Git Stamp ? ',
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    IconButton(
+                                      onPressed: () => openProjectHomepage(),
+                                      icon: Icon(Icons.star),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           );
                         },
                       );
                     },
-                    icon: const Icon(Icons.info_outline),
+                    icon: const Icon(Icons.more_vert),
                   ),
                 ],
               ),
@@ -273,4 +232,108 @@ class GitStampPage extends StatelessWidget {
     ScaffoldMessenger.of(context)
         .showSnackBar(const SnackBar(content: Text('Copied to clipboard !')));
   }
+}
+
+Widget _buildRepoDetailsModal() {
+  return Container(
+    padding: EdgeInsets.all(16.0),
+    child: SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Text(
+                'Build time: ',
+                style: TextStyle(fontSize: 12),
+              ),
+              Text(
+                buildDateTime,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Build system: ',
+                style: TextStyle(fontSize: 12),
+              ),
+              Expanded(
+                child: Text(
+                  buildSystemInfo,
+                  softWrap: true,
+                  maxLines: 5,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+          Row(
+            children: [
+              Text(
+                'Commit count: ',
+                style: TextStyle(fontSize: 12),
+              ),
+              Text(
+                GitStampCommit.commitList.length.toString(),
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Text(
+                'Build branch: ',
+                style: TextStyle(fontSize: 12),
+              ),
+              Text(
+                buildBranch,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Commit stats:',
+            style: TextStyle(fontSize: 12),
+          ),
+          ...commitCountByAuthor().entries.map(
+                (entry) => Row(
+                  children: [
+                    SizedBox(width: 16),
+                    Text(
+                      '${entry.key}: ',
+                      style: TextStyle(fontSize: 12),
+                    ),
+                    Text(
+                      entry.value.toString(),
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+        ],
+      ),
+    ),
+  );
 }
