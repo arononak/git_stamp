@@ -15,7 +15,6 @@
 | Light                                                                            | Dark                                                                            |
 |:--------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------:|
 | ![](https://github.com/arononak/git_stamp/blob/main/preview_light.png?raw=true)  | ![](https://github.com/arononak/git_stamp/blob/main/preview_dark.png?raw=true)  |
-| ![](https://github.com/arononak/git_stamp/blob/main/preview_light2.png?raw=true) | ![](https://github.com/arononak/git_stamp/blob/main/preview_dark2.png?raw=true) |
 
 ## 🛠️ Installation from source
 
