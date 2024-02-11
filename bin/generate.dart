@@ -78,6 +78,16 @@ void openEmail({
   );
 }
 
+void showSnackbar(BuildContext context, String message) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(message),
+      showCloseIcon: true,
+      duration: Duration(seconds: 5),
+    ),
+  );
+}
+
 void openProjectHomepage() {
   launchUrl(Uri(
     scheme: 'https',
@@ -94,6 +104,12 @@ Map<String, int> commitCountByAuthor() {
   }
 
   return map;
+}
+
+List<String> parseBuildSystemInfo(text) {
+  List<String> resultList = RegExp(r'\(([^)]+)\)').firstMatch(text)?.group(1)?.split(', ') ?? [];
+
+  return resultList.isEmpty ? ["No data :/"] : resultList;
 }
 
 class GitStampPage extends StatelessWidget {
@@ -121,7 +137,7 @@ class GitStampPage extends StatelessWidget {
                       showModalBottomSheet(
                         context: context,
                         builder: (BuildContext context) {
-                          return _buildRepoDetailsModal();
+                          return _buildRepoDetailsModal(context);
                         },
                       );
                     },
@@ -261,12 +277,11 @@ class GitStampPage extends StatelessWidget {
 
   void _copyToClipboard(BuildContext context, String text) {
     Clipboard.setData(ClipboardData(text: text));
-    ScaffoldMessenger.of(context)
-        .showSnackBar(const SnackBar(content: Text('Copied to clipboard !')));
+    showSnackbar(context, 'Copied to clipboard !');
   }
 }
 
-Widget _buildRepoDetailsModal() {
+Widget _buildRepoDetailsModal(BuildContext context) {
   return Container(
     padding: EdgeInsets.all(16.0),
     child: SingleChildScrollView(
@@ -298,7 +313,7 @@ Widget _buildRepoDetailsModal() {
               ),
               Expanded(
                 child: Text(
-                  buildSystemInfo,
+                  parseBuildSystemInfo(buildSystemInfo).join('\n'),
                   softWrap: true,
                   maxLines: 5,
                   overflow: TextOverflow.ellipsis,
@@ -307,6 +322,13 @@ Widget _buildRepoDetailsModal() {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+              ),
+              IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  showSnackbar(context, buildSystemInfo);
+                },
+                icon: Icon(Icons.info_outline),
               ),
             ],
           ),
@@ -369,6 +391,7 @@ Widget _buildRepoDetailsModal() {
     ),
   );
 }
+
 
 ''';
 
