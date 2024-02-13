@@ -49,3 +49,7 @@
 ## 1.8.0
 
 * GitStampPage - Added about modal
+
+## 1.9.0
+
+* GitStampPage - new build system text
