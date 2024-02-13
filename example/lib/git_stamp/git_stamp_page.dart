@@ -11,7 +11,8 @@ void showGitStampPage({
   required BuildContext context,
   bool useRootNavigator = false,
 }) {
-  Navigator.of(context, rootNavigator: useRootNavigator).push(MaterialPageRoute<void>(
+  Navigator.of(context, rootNavigator: useRootNavigator)
+      .push(MaterialPageRoute<void>(
     builder: (BuildContext context) => const GitStampPage(),
   ));
 }
@@ -68,7 +69,8 @@ Map<String, int> commitCountByAuthor() {
 }
 
 List<String> parseBuildSystemInfo(text) {
-  List<String> resultList = RegExp(r'\(([^)]+)\)').firstMatch(text)?.group(1)?.split(', ') ?? [];
+  List<String> resultList =
+      RegExp(r'(([^)]+))').firstMatch(text)?.group(1)?.split(', ') ?? [];
 
   return resultList.isEmpty ? ["No data :/"] : resultList;
 }
@@ -126,10 +128,12 @@ class GitStampPage extends StatelessWidget {
                                   children: [
                                     Text(
                                       'Have a great idea for Git Stamp ? ',
-                                      style: const TextStyle(fontWeight: FontWeight.bold),
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     IconButton(
-                                      onPressed: () => openEmail(email: 'arononak@gmail.com'),
+                                      onPressed: () => openEmail(
+                                          email: 'arononak@gmail.com'),
                                       icon: Icon(Icons.mail),
                                     ),
                                   ],
@@ -138,7 +142,8 @@ class GitStampPage extends StatelessWidget {
                                   children: [
                                     Text(
                                       'You love Git Stamp ? ',
-                                      style: const TextStyle(fontWeight: FontWeight.bold),
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     IconButton(
                                       onPressed: () => openProjectHomepage(),
@@ -216,7 +221,10 @@ class GitStampPage extends StatelessWidget {
                     Text(
                       commit.date,
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                        color: Theme.of(context)
+                            .colorScheme
+                            .onSurface
+                            .withOpacity(0.6),
                       ),
                     ),
                   ],
