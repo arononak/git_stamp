@@ -53,3 +53,7 @@
 ## 1.9.0
 
 * GitStampPage - new build system text
+
+## 1.10.0
+
+* GitStampPage - Added grouping by day
