@@ -69,10 +69,10 @@ Map<String, int> commitCountByAuthor() {
 }
 
 List<String> parseBuildSystemInfo(text) {
-  List<String> resultList =
-      RegExp(r'(([^)]+))').firstMatch(text)?.group(1)?.split(', ') ?? [];
+  List<String> elements =
+      RegExp(r'\((.*?)\)').firstMatch(text)?.group(1)?.split(', ') ?? [];
 
-  return resultList.isEmpty ? ["No data :/"] : resultList;
+  return elements.isEmpty ? ["No data :/"] : elements;
 }
 
 class GitStampPage extends StatelessWidget {
