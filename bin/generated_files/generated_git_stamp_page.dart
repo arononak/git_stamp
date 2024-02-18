@@ -4,6 +4,7 @@ import 'package:example/git_stamp/git_stamp_build_system_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:collection/collection.dart';
 
 import 'git_stamp_branch_output.dart';
 import 'git_stamp_commit.dart';
@@ -69,9 +70,9 @@ Map<String, int> commitCountByAuthor() {
 }
 
 List<String> parseBuildSystemInfo(text) {
-  List<String> resultList = RegExp(r'\(([^)]+)\)').firstMatch(text)?.group(1)?.split(', ') ?? [];
+  List<String> elements = RegExp(r'\\((.*?)\\)').firstMatch(text)?.group(1)?.split(', ') ?? [];
 
-  return resultList.isEmpty ? ["No data :/"] : resultList;
+  return elements.isEmpty ? ["No data :/"] : elements;
 }
 
 class GitStampPage extends StatelessWidget {
@@ -161,86 +162,114 @@ class GitStampPage extends StatelessWidget {
           ),
         ),
       ),
-      body: ListView.builder(
-        itemCount: GitStampCommit.commitList.length,
-        itemBuilder: (context, index) {
-          final commit = GitStampCommit.commitList[index];
+      body: _buildCommitList(GitStampCommit.commitList),
+    );
+  }
+}
 
-          return Card(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: ListTile(
-                contentPadding: const EdgeInsets.all(0),
-                leading: Icon(
-                  Icons.code,
-                  size: 36,
+void _copyToClipboard(BuildContext context, String text) {
+  Clipboard.setData(ClipboardData(text: text));
+  showSnackbar(context, 'Copied to clipboard !');
+}
+
+Widget _buildCommitList(elements) {
+  Map<String, List<GitStampCommit>> groupedCommit = groupBy(
+    elements,
+    (element) {
+      DateTime date = DateTime.parse(element.date);
+      return date.year.toString() + '-' + date.month.toString().padLeft(2, '0') + '-' + date.day.toString().padLeft(2, '0');
+    },
+  );
+
+  return ListView.builder(
+    itemCount: groupedCommit.length,
+    itemBuilder: (context, index) {
+      String header = groupedCommit.keys.elementAt(index);
+      List<GitStampCommit> commits = groupedCommit[header]!;
+
+      return Column(
+        children: [
+          Text(
+            header,
+            style: TextStyle(
+              fontSize: 20,
+              color: Theme.of(context).colorScheme.onSecondaryContainer,
+            ),
+          ),
+          ...commits.map((commit) => _buildCommitElement(context, commit)).toList()
+        ],
+      );
+    },
+  );
+}
+
+Widget _buildCommitElement(context, commit) {
+  return Card(
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: ListTile(
+        contentPadding: const EdgeInsets.all(0),
+        leading: Icon(
+          Icons.code,
+          size: 36,
+          color: Theme.of(context).colorScheme.primary,
+        ),
+        title: Text.rich(
+          TextSpan(
+            children: [
+              TextSpan(
+                text: commit.hash.substring(0, 7),
+                style: TextStyle(
                   color: Theme.of(context).colorScheme.primary,
+                  fontWeight: FontWeight.bold,
+                  fontStyle: FontStyle.italic,
                 ),
-                title: Text.rich(
-                  TextSpan(
-                    children: [
-                      TextSpan(
-                        text: commit.hash.substring(0, 7),
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                          fontWeight: FontWeight.bold,
-                          fontStyle: FontStyle.italic,
-                        ),
-                      ),
-                      const TextSpan(
-                        text: ' - ',
-                        style: TextStyle(fontWeight: FontWeight.normal),
-                      ),
-                      TextSpan(
-                        text: commit.subject,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    InkWell(
-                      onTap: () => openEmail(email: commit.authorEmail),
-                      child: Text(
-                        // ignore: prefer_interpolation_to_compose_strings
-                        commit.authorName + ' (' + commit.authorEmail + ')',
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.onSurface,
-                          fontStyle: FontStyle.italic,
-                        ),
-                      ),
-                    ),
-                    Text(
-                      commit.date,
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
-                      ),
-                    ),
-                  ],
-                ),
-                trailing: IconButton(
-                  onPressed: () => _copyToClipboard(context, commit.hash),
-                  icon: Icon(
-                    Icons.content_copy,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
+              ),
+              const TextSpan(
+                text: ' - ',
+                style: TextStyle(fontWeight: FontWeight.normal),
+              ),
+              TextSpan(
+                text: commit.subject,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            InkWell(
+              onTap: () => openEmail(email: commit.authorEmail),
+              child: Text(
+                // ignore: prefer_interpolation_to_compose_strings
+                commit.authorName + ' (' + commit.authorEmail + ')',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface,
+                  fontStyle: FontStyle.italic,
                 ),
               ),
             ),
-          );
-        },
+            Text(
+              commit.date,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+              ),
+            ),
+          ],
+        ),
+        trailing: IconButton(
+          onPressed: () => _copyToClipboard(context, commit.hash),
+          icon: Icon(
+            Icons.content_copy,
+            color: Theme.of(context).colorScheme.primary,
+          ),
+        ),
       ),
-    );
-  }
-
-  void _copyToClipboard(BuildContext context, String text) {
-    Clipboard.setData(ClipboardData(text: text));
-    showSnackbar(context, 'Copied to clipboard !');
-  }
+    ),
+  );
 }
 
 Widget _buildRepoDetailsModal(BuildContext context) {
@@ -275,7 +304,7 @@ Widget _buildRepoDetailsModal(BuildContext context) {
               ),
               Expanded(
                 child: Text(
-                  parseBuildSystemInfo(buildSystemInfo).join('\\n'),
+                  parseBuildSystemInfo(buildSystemInfo).join(String.fromCharCode(10)),
                   softWrap: true,
                   maxLines: 5,
                   overflow: TextOverflow.ellipsis,
@@ -335,7 +364,7 @@ Widget _buildRepoDetailsModal(BuildContext context) {
                   children: [
                     SizedBox(width: 16),
                     Text(
-                      '\${entry.key}: ',
+                      entry.key + ': ',
                       style: TextStyle(fontSize: 12),
                     ),
                     Text(
@@ -353,4 +382,5 @@ Widget _buildRepoDetailsModal(BuildContext context) {
     ),
   );
 }
+
 ''';
