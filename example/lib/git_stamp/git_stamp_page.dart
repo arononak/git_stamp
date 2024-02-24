@@ -197,11 +197,23 @@ Widget _buildCommitList(elements) {
 
       return Column(
         children: [
-          Text(
-            header,
-            style: TextStyle(
-              fontSize: 20,
-              color: Theme.of(context).colorScheme.onSecondaryContainer,
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            child: Row(
+              children: [
+                Icon(Icons.commit,
+                    color: Theme.of(context).colorScheme.secondary),
+                SizedBox(width: 8),
+                Text(
+                  header,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    fontStyle: FontStyle.italic,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                ),
+              ],
             ),
           ),
           ...commits
