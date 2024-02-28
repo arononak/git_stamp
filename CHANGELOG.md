@@ -61,3 +61,7 @@
 ## 1.11.0
 
 * GitStampPage - New date header style
+
+## 1.11.1
+
+* Updated pubspec.yaml
