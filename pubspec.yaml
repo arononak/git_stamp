@@ -3,16 +3,29 @@ description: "A tool to generate a git history that you can see when you run the
 version: 1.11.0
 homepage: https://aroncode.com
 repository: https://github.com/arononak/git_stamp
+issue_tracker: https://github.com/arononak/git_stamp/issues
+license: MIT
+
+topics:
+ - git
+ - git-history
+ - git-integration
+ - tool
+ - codegen
+
 environment:
   sdk: '>=3.2.3 <4.0.0'
   flutter: ">=1.17.0"
+
 dependencies:
   flutter:
     sdk: flutter
   intl: ^0.19.0
+
 dev_dependencies:
   flutter_lints: ^3.0.1
   flutter_test:
     sdk: flutter
+
 flutter:
   uses-material-design: true
