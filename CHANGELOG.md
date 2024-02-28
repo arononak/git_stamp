@@ -8,7 +8,7 @@
 
 ## 1.1.0
 
-* New card style
+* New card stylegit lo
 
 ## 1.2.0
 
@@ -57,3 +57,7 @@
 ## 1.10.0
 
 * GitStampPage - Added grouping by day
+
+## 1.11.0
+
+* GitStampPage - New date header style
