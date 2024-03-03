@@ -1,5 +1,6 @@
 import 'package:example/git_stamp/git_stamp_build_date_time.dart';
 import 'package:example/git_stamp/git_stamp_build_system_info.dart';
+import 'package:example/git_stamp/git_stamp_repo_creation_date.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -305,11 +306,26 @@ Widget _buildRepoDetailsModal(BuildContext context) {
           Row(
             children: [
               Text(
-                'Build time: ',
+                'Build date: ',
                 style: TextStyle(fontSize: 12),
               ),
               Text(
                 buildDateTime,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Text(
+                'Build branch: ',
+                style: TextStyle(fontSize: 12),
+              ),
+              Text(
+                buildBranch,
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
@@ -350,6 +366,21 @@ Widget _buildRepoDetailsModal(BuildContext context) {
           Row(
             children: [
               Text(
+                'Creation date: ',
+                style: TextStyle(fontSize: 12),
+              ),
+              Text(
+                repoCreationDate,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Text(
                 'Commit count: ',
                 style: TextStyle(fontSize: 12),
               ),
@@ -362,22 +393,6 @@ Widget _buildRepoDetailsModal(BuildContext context) {
               ),
             ],
           ),
-          Row(
-            children: [
-              Text(
-                'Build branch: ',
-                style: TextStyle(fontSize: 12),
-              ),
-              Text(
-                buildBranch,
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
           Text(
             'Commit stats:',
             style: TextStyle(fontSize: 12),
