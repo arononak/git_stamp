@@ -51,9 +51,11 @@ flutter pub run git_stamp:generate.dart
 |   |-- git_stamp/
 |       |-- git_stamp_branch_output.dart
 |       |-- git_stamp_build_date_time.dart
+|       |-- git_stamp_build_system_info.dart
 |       |-- git_stamp_commit.dart
 |       |-- git_stamp_json_output.dart
 |       |-- git_stamp_page.dart
+|       |-- git_stamp_repo_creation_date.dart
 |   |-- main.dart
 |-- linux/
 |-- macos/
