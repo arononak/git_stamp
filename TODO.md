@@ -16,3 +16,4 @@ New version every Wednesday !
 - [ ] Makefile - make commit argument, make sync history files
 - [ ] InApp - GroupBy day
 - [ ] InApp - flutter --no-version-check --version --machine
+- [ ] InApp - git rev-parse --show-toplevel
