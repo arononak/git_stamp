@@ -18,3 +18,4 @@ New version every Wednesday !
 - [ ] InApp - flutter --no-version-check --version --machine
 - [ ] InApp - git rev-parse --show-toplevel
 - [ ] InApp - flutter --no-version-check pub pub outdated --json --up-to-date --no-dev-dependencies --no-dependency-overrides
+- [ ] InApp - git ls-tree -r --name-only --full-tree origin/main
