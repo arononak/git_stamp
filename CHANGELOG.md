@@ -65,3 +65,8 @@
 ## 1.11.1
 
 * Updated pubspec.yaml
+
+## 1.12.0
+
+* GitStampPage - Added repo creation date
+
