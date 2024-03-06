@@ -5,7 +5,8 @@
 - [ ] InApp - Git remote config informations
 - [x] InApp - Build branch
 - [x] InApp - Build Time
-- [ ] InApp - Repository create date
+- [x] InApp - Repository create date
+- [x] InApp - generate version from git tag
 - [ ] InApp - Files changes
 - [ ] InApp - Open author email in app
 - [ ] InApp - Commit details page
