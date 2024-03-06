@@ -1,5 +1,7 @@
 # 📋 TODO list
 
+New version every Wednesday !
+
 - [x] Github Actions - deploy to pub.dev
 - [x] InApp - AppBar commit count right & icon
 - [ ] InApp - Git remote config informations
