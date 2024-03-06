@@ -17,3 +17,4 @@ New version every Wednesday !
 - [ ] InApp - GroupBy day
 - [ ] InApp - flutter --no-version-check --version --machine
 - [ ] InApp - git rev-parse --show-toplevel
+- [ ] InApp - flutter --no-version-check pub pub outdated --json --up-to-date --no-dev-dependencies --no-dependency-overrides
