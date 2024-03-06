@@ -15,3 +15,4 @@ New version every Wednesday !
 - [ ] InApp - Filter by author
 - [ ] Makefile - make commit argument, make sync history files
 - [ ] InApp - GroupBy day
+- [ ] InApp - flutter --no-version-check --version --machine
