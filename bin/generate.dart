@@ -25,7 +25,7 @@ String gitLogOutput() {
   return logsOutput;
 }
 
-String gitRepoCreationDateOutput() {
+String gitCreationDateOutput() {
   final date = Process.runSync(
     'git',
     [
@@ -88,14 +88,11 @@ void main() {
     File(filename).writeAsStringSync(content);
   }
 
-  saveFile('$outputFolder/git_stamp_json_output.dart', gitLogOutput());
-  saveFile('$outputFolder/git_stamp_repo_creation_date_output.dart',
-      gitRepoCreationDateOutput());
-  saveFile('$outputFolder/git_stamp_branch_output.dart', gitBranchOutput());
-  saveFile(
-      '$outputFolder/git_stamp_build_date_time_output.dart', buildDateOutput());
-  saveFile('$outputFolder/git_stamp_build_system_info_output.dart',
-      buildSystemInfo());
+  saveFile('$outputFolder/json_output.dart', gitLogOutput());
+  saveFile('$outputFolder/creation_date_output.dart', gitCreationDateOutput());
+  saveFile('$outputFolder/branch_output.dart', gitBranchOutput());
+  saveFile('$outputFolder/build_date_time_output.dart', buildDateOutput());
+  saveFile('$outputFolder/build_system_info_output.dart', buildSystemInfo());
 
   saveFile('$outputFolder/git_stamp_commit.dart', generatedGitStampCommit);
   saveFile('$outputFolder/git_stamp_page.dart', generatedGitStampPage);
