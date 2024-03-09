@@ -77,6 +77,15 @@ String buildSystemInfo() {
   return systemInfoOutput;
 }
 
+String gitRepoPathOutput() {
+  final repoPath =
+      Process.runSync('git', ['rev-parse', '--show-toplevel']).stdout;
+
+  final repoPathOutput = 'const repoPath = "${repoPath.toString().trim()}";';
+
+  return repoPathOutput;
+}
+
 void main() {
   const outputFolder = 'lib/git_stamp';
 
@@ -93,6 +102,7 @@ void main() {
   saveFile('$outputFolder/branch_output.dart', gitBranchOutput());
   saveFile('$outputFolder/build_date_time_output.dart', buildDateOutput());
   saveFile('$outputFolder/build_system_info_output.dart', buildSystemInfo());
+  saveFile('$outputFolder/repo_path_output.dart', gitRepoPathOutput());
 
   saveFile('$outputFolder/git_stamp_commit.dart', generatedGitStampCommit);
   saveFile('$outputFolder/git_stamp_page.dart', generatedGitStampPage);
