@@ -1,13 +1,14 @@
 const generatedGitStampPage = '''
-import 'package:example/git_stamp/git_stamp_build_date_time_output.dart';
-import 'package:example/git_stamp/git_stamp_build_system_info_output.dart';
-import 'package:example/git_stamp/git_stamp_repo_creation_date_output.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:collection/collection.dart';
 
-import 'git_stamp_branch_output.dart';
+import 'branch_output.dart';
+import 'build_date_time_output.dart';
+import 'build_system_info_output.dart';
+import 'creation_date_output.dart';
+
 import 'git_stamp_commit.dart';
 
 void showGitStampPage({
