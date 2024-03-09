@@ -309,7 +309,22 @@ Widget _buildRepoDetailsModal(BuildContext context) {
               ),
             ],
           ),
-                    Row(
+          Row(
+            children: [
+              Text(
+                'Build path: ',
+                style: TextStyle(fontSize: 12),
+              ),
+              Text(
+                repoPath,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          Row(
             children: [
               Text(
                 'Build branch: ',
