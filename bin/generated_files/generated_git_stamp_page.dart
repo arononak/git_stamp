@@ -1,7 +1,7 @@
 const generatedGitStampPage = '''
-import 'package:example/git_stamp/git_stamp_build_date_time.dart';
-import 'package:example/git_stamp/git_stamp_build_system_info.dart';
-import 'package:example/git_stamp/git_stamp_repo_creation_date.dart';
+import 'package:example/git_stamp/git_stamp_build_date_time_output.dart';
+import 'package:example/git_stamp/git_stamp_build_system_info_output.dart';
+import 'package:example/git_stamp/git_stamp_repo_creation_date_output.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
