@@ -7,6 +7,7 @@ import 'branch_output.dart';
 import 'build_date_time_output.dart';
 import 'build_system_info_output.dart';
 import 'creation_date_output.dart';
+import 'repo_path_output.dart';
 
 import 'git_stamp_commit.dart';
 
