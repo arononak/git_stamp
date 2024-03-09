@@ -13,9 +13,9 @@ New version every Wednesday !
 - [ ] InApp - List - Filter by author
 - [ ] InApp - Details - Commit details page
 - [ ] InApp - Details - Files changes
-- [ ] Makefile - make commit argument, make sync history files
 - [ ] InApp - Git remote config informations
 - [ ] InApp - git rev-parse --show-toplevel
 - [ ] InApp - git ls-tree -r --name-only --full-tree origin/main
 - [ ] InApp - flutter --no-version-check --version --machine
 - [ ] InApp - flutter --no-version-check pub pub outdated --json --up-to-date --no-dev-dependencies --no-dependency-overrides
+- [ ] Makefile - make commit argument, make sync history files
