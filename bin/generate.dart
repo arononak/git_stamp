@@ -80,20 +80,22 @@ String buildSystemInfo() {
 void main() {
   const outputFolder = 'lib/git_stamp';
 
-  if (!Directory(outputFolder).existsSync()) {
-    Directory(outputFolder).createSync(recursive: true);
-  }
+  final directory = Directory(outputFolder);
+  directory.deleteSync(recursive: true);
+  directory.createSync(recursive: true);
 
   void saveFile(String filename, String content) {
     File(filename).writeAsStringSync(content);
   }
 
   saveFile('$outputFolder/git_stamp_json_output.dart', gitLogOutput());
-  saveFile('$outputFolder/git_stamp_repo_creation_date.dart',
+  saveFile('$outputFolder/git_stamp_repo_creation_date_output.dart',
       gitRepoCreationDateOutput());
   saveFile('$outputFolder/git_stamp_branch_output.dart', gitBranchOutput());
-  saveFile('$outputFolder/git_stamp_build_date_time.dart', buildDateOutput());
-  saveFile('$outputFolder/git_stamp_build_system_info.dart', buildSystemInfo());
+  saveFile(
+      '$outputFolder/git_stamp_build_date_time_output.dart', buildDateOutput());
+  saveFile('$outputFolder/git_stamp_build_system_info_output.dart',
+      buildSystemInfo());
 
   saveFile('$outputFolder/git_stamp_commit.dart', generatedGitStampCommit);
   saveFile('$outputFolder/git_stamp_page.dart', generatedGitStampPage);
