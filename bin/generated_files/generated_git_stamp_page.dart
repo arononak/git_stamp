@@ -107,7 +107,7 @@ class GitStampPage extends StatelessWidget {
                         },
                       );
                     },
-                    icon: const Icon(Icons.expand_less),
+                    icon: const Icon(Icons.tag),
                   ),
                   IconButton(
                     onPressed: () {
