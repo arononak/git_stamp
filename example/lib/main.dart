@@ -48,6 +48,7 @@ class SettingsPage extends StatelessWidget {
           if (kDebugMode) ...[
             ListTile(
               title: const Text('Git Stamp'),
+              subtitle: const Text('For debugging only'),
               leading: const Icon(Icons.commit),
               onTap: () => showGitStampPage(context: context),
             ),
