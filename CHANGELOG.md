@@ -70,3 +70,8 @@
 
 * GitStampPage - Added repo creation date
 
+## 1.13.0
+
+* GitStampPage - New details icon
+* Refactor
+

@@ -56,6 +56,7 @@ flutter pub run git_stamp:generate.dart
 |       |-- git_stamp_commit.dart
 |       |-- git_stamp_page.dart
 |       |-- json_output.dart
+|       |-- repo_path_output.dart
 |   |-- main.dart
 |-- linux/
 |-- macos/
