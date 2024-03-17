@@ -118,38 +118,45 @@ class GitStampPage extends StatelessWidget {
                             padding: EdgeInsets.all(16.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
                                 Text(
                                   'Git Stamp',
                                   style: TextStyle(
-                                    fontSize: 24,
+                                    fontSize: 28,
                                     fontWeight: FontWeight.bold,
+                                    letterSpacing: 1.2,
                                   ),
                                 ),
                                 SizedBox(height: 20),
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Have a great idea for Git Stamp ? ',
-                                      style: const TextStyle(fontWeight: FontWeight.bold),
-                                    ),
-                                    IconButton(
-                                      onPressed: () => openEmail(email: 'arononak@gmail.com'),
-                                      icon: Icon(Icons.mail),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      'You love Git Stamp ? ',
-                                      style: const TextStyle(fontWeight: FontWeight.bold),
-                                    ),
-                                    IconButton(
-                                      onPressed: () => openProjectHomepage(),
-                                      icon: Icon(Icons.star),
-                                    ),
-                                  ],
+                                Flexible(
+                                  child: ListView(
+                                    shrinkWrap: true,
+                                    children: [
+                                      ListTile(
+                                        onTap: () => openEmail(email: 'arononak@gmail.com'),
+                                        title: Text(
+                                          'Have a great idea for Git Stamp?',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                        trailing: Icon(Icons.mail),
+                                      ),
+                                      ListTile(
+                                        onTap: () => openProjectHomepage(),
+                                        title: Text(
+                                          'You love Git Stamp?',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                        trailing: Icon(Icons.star),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
