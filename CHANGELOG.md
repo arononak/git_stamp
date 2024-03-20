@@ -75,3 +75,6 @@
 * GitStampPage - New details icon
 * Refactor
 
+## 1.14.0
+
+* GitStampPage - New MoreModal
