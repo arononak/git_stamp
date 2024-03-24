@@ -293,6 +293,21 @@ Widget _buildCommitElement(context, commit) {
   );
 }
 
+Widget _buildDoubleText(String left, String right) {
+  return Row(
+    children: [
+      Text(
+        left,
+        style: TextStyle(fontSize: 12),
+      ),
+      Text(
+        right,
+        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+      ),
+    ],
+  );
+}
+
 Widget _buildRepoDetailsModal(BuildContext context) {
   return Container(
     padding: EdgeInsets.all(16.0),
@@ -301,56 +316,16 @@ Widget _buildRepoDetailsModal(BuildContext context) {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Text(
-                'Build date: ',
-                style: TextStyle(fontSize: 12),
-              ),
-              Text(
-                buildDateTime,
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Text(
-                'Build path: ',
-                style: TextStyle(fontSize: 12),
-              ),
-              Text(
-                repoPath,
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Text(
-                'Build branch: ',
-                style: TextStyle(fontSize: 12),
-              ),
-              Text(
-                buildBranch,
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
+          Text('Build', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          const SizedBox(height: 4),
+          _buildDoubleText('Date: ', buildDateTime),
+          _buildDoubleText('Path: ', repoPath),
+          _buildDoubleText('Branch: ', buildBranch),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Build system: ',
+                'Environment: ',
                 style: TextStyle(fontSize: 12),
               ),
               Expanded(
@@ -374,37 +349,11 @@ Widget _buildRepoDetailsModal(BuildContext context) {
               ),
             ],
           ),
-          const SizedBox(height: 20),
-          Row(
-            children: [
-              Text(
-                'Creation date: ',
-                style: TextStyle(fontSize: 12),
-              ),
-              Text(
-                repoCreationDate,
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Text(
-                'Commit count: ',
-                style: TextStyle(fontSize: 12),
-              ),
-              Text(
-                GitStampCommit.commitList.length.toString(),
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
+          const SizedBox(height: 32),
+          Text('Repository', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          const SizedBox(height: 4),
+          _buildDoubleText('Created: ', repoCreationDate),
+          _buildDoubleText('Commit count: ', GitStampCommit.commitList.length.toString()),
           Text(
             'Commit stats:',
             style: TextStyle(fontSize: 12),
@@ -419,10 +368,7 @@ Widget _buildRepoDetailsModal(BuildContext context) {
                     ),
                     Text(
                       entry.value.toString(),
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
