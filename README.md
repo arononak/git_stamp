@@ -5,18 +5,18 @@
 [![MIT License](https://img.shields.io/badge/License-MIT-orange.svg?labelColor=orange&color=white)](https://opensource.org/licenses)
 [![Pub Package](https://img.shields.io/pub/v/git_stamp.svg?labelColor=purple&color=white)](https://pub.dev/packages/git_stamp)
 
-### 🚀 Build-Time Git History Integration in Your Flutter App [MORE](https://medium.com/@arononak/git-stamp-a-new-tool-for-testing-flutter-applications-in-2024-bdf4f9c5f8ab)
+## 🚀 Build-Time Git History Integration in Your Flutter App [MORE](https://medium.com/@arononak/git-stamp-a-new-tool-for-testing-flutter-applications-in-2024-bdf4f9c5f8ab)
 
 
 ##### Have you ever struggled with pushing or merging changes into the automatic build system? Worry no more! Now, effortlessly track the specific commits that shaped the final build.
 
-## 🏞️ Preview
+# 🏞️ Preview
 
 | Light                                                                            | Dark                                                                            |
 |:--------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------:|
 | ![](https://github.com/arononak/git_stamp/blob/main/preview_light.png?raw=true)  | ![](https://github.com/arononak/git_stamp/blob/main/preview_dark.png?raw=true)  |
 
-## 🛠️ Installation from source
+# 🛠️ Installation from source
 
 `url_launcher` is required.
 
@@ -30,7 +30,7 @@ dev_dependencies:
       ref: main
 ```
 
-## 🏗️ Generating Files
+# 🏗️ Generating Files
 
 ```
 flutter pub run git_stamp:generate.dart
@@ -66,7 +66,7 @@ flutter pub run git_stamp:generate.dart
 |-- pubspec.yaml
 ```
 
-## 💻 Usage
+# 💻 Usage
 
 ```dart
 if (isProd == false) ...[
@@ -77,4 +77,18 @@ if (isProd == false) ...[
 ],
 ```
 
-## 📋 [TODO](./TODO.md) LIST
+# 🔧 Pre-Deployment Steps ([TODO](./TODO.md))
+
+| Step                     | Description                                                     |
+|--------------------------|-----------------------------------------------------------------|
+| 🔧 Run `pana` command    | Check 140/140 points                                            |
+| 📸 New SS                | Create a new screenshots                                        |
+| 🔍 Generated file names  | In README.md                                                    |
+| 🏷️ New tag and push      | Deploy every **Wednesday !**                                    |
+
+# 📝 License
+
+> [!NOTE]
+> Copyright © 2024 Aron Onak. All rights reserved.<br>
+> Licensed under the [MIT](LICENSE) license.<br>
+> If you have any feedback, please contact me at arononak@gmail.com
