@@ -78,3 +78,7 @@
 ## 1.14.0
 
 * GitStampPage - New MoreModal
+
+## 1.15.0
+
+* GitStampPage - RepoDetailsModal - New design
