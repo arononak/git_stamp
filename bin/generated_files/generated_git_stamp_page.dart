@@ -316,28 +316,32 @@ Widget _buildRepoDetailsModal(BuildContext context) {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Build', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          Text(
+            'Build',
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
           const SizedBox(height: 4),
           _buildDoubleText('Date: ', buildDateTime),
           _buildDoubleText('Path: ', repoPath),
           _buildDoubleText('Branch: ', buildBranch),
+          const SizedBox(height: 32),
+          Text(
+            'Environment',
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 4),
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                'Environment: ',
-                style: TextStyle(fontSize: 12),
-              ),
               Expanded(
                 child: Text(
-                  parseBuildSystemInfo(buildSystemInfo).join(String.fromCharCode(10)),
+                  parseBuildSystemInfo(buildSystemInfo).join(
+                    String.fromCharCode(10),
+                  ),
                   softWrap: true,
                   maxLines: 5,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 12),
                 ),
               ),
               IconButton(
@@ -350,10 +354,16 @@ Widget _buildRepoDetailsModal(BuildContext context) {
             ],
           ),
           const SizedBox(height: 32),
-          Text('Repository', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          Text(
+            'Repository',
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
           const SizedBox(height: 4),
           _buildDoubleText('Created: ', repoCreationDate),
-          _buildDoubleText('Commit count: ', GitStampCommit.commitList.length.toString()),
+          _buildDoubleText(
+            'Commit count: ',
+            GitStampCommit.commitList.length.toString(),
+          ),
           Text(
             'Commit stats:',
             style: TextStyle(fontSize: 12),
@@ -368,7 +378,10 @@ Widget _buildRepoDetailsModal(BuildContext context) {
                     ),
                     Text(
                       entry.value.toString(),
-                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ],
                 ),
