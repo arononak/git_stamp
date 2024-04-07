@@ -86,9 +86,23 @@ String gitRepoPathOutput() {
   return repoPathOutput;
 }
 
+String gitDiffOutput() {
+  final hashes = Process.runSync('git', ['rev-list', '--all']).stdout.toString().trim().split('\n');
+
+  Map<String, String> gitShowMap = {};
+
+  for (var hash in hashes) {
+    gitShowMap[hash] = Process.runSync('git', ['show', hash]).stdout.toString();
+    print('git show $hash');
+  }
+
+  final diffOutput = 'const diffOutput = <String, String>${jsonEncode(gitShowMap).replaceAll(r'$', r'\$')};';
+
+  return diffOutput;
+}
+
 void main() {
   const outputFolder = 'lib/git_stamp';
-
   final directory = Directory(outputFolder);
   directory.deleteSync(recursive: true);
   directory.createSync(recursive: true);
@@ -97,7 +111,9 @@ void main() {
     File(filename).writeAsStringSync(content);
   }
 
-  saveFile('$outputFolder/json_output.dart', gitLogOutput());
+  saveFile('$outputFolder/json_output.dart', gitLogOutput());  // List
+  saveFile('$outputFolder/diff_output.dart', gitDiffOutput()); // Details
+  
   saveFile('$outputFolder/creation_date_output.dart', gitCreationDateOutput());
   saveFile('$outputFolder/branch_output.dart', gitBranchOutput());
   saveFile('$outputFolder/build_date_time_output.dart', buildDateOutput());

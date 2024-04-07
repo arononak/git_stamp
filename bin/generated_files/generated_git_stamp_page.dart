@@ -1,4 +1,5 @@
 const generatedGitStampPage = '''
+import 'package:example/git_stamp/diff_output.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -225,67 +226,83 @@ Widget _buildCommitList(elements) {
 }
 
 Widget _buildCommitElement(context, commit) {
-  return Card(
-    child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: ListTile(
-        contentPadding: const EdgeInsets.all(0),
-        leading: Icon(
-          Icons.code,
-          size: 36,
-          color: Theme.of(context).colorScheme.primary,
-        ),
-        title: Text.rich(
-          TextSpan(
+  return GestureDetector(
+    onTap: () {
+      showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return Container(
+            padding: EdgeInsets.all(16.0),
+            child: SingleChildScrollView(
+              child: Text(diffOutput[commit.hash ?? ''] ?? ''),
+            ),
+          );
+        },
+      );
+    },
+    child: Card(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: ListTile(
+          contentPadding: const EdgeInsets.all(0),
+          leading: Icon(
+            Icons.code,
+            size: 36,
+            color: Theme.of(context).colorScheme.primary,
+          ),
+          title: Text.rich(
+            TextSpan(
+              children: [
+                TextSpan(
+                  text: commit.hash.substring(0, 7),
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+                const TextSpan(
+                  text: ' - ',
+                  style: TextStyle(fontWeight: FontWeight.normal),
+                ),
+                TextSpan(
+                  text: commit.subject,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              TextSpan(
-                text: commit.hash.substring(0, 7),
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontWeight: FontWeight.bold,
-                  fontStyle: FontStyle.italic,
+              InkWell(
+                onTap: () => openEmail(email: commit.authorEmail),
+                child: Text(
+                  // ignore: prefer_interpolation_to_compose_strings
+                  commit.authorName + ' (' + commit.authorEmail + ')',
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onSurface,
+                    fontStyle: FontStyle.italic,
+                  ),
                 ),
               ),
-              const TextSpan(
-                text: ' - ',
-                style: TextStyle(fontWeight: FontWeight.normal),
-              ),
-              TextSpan(
-                text: commit.subject,
-                style: const TextStyle(fontWeight: FontWeight.bold),
+              Text(
+                commit.date,
+                style: TextStyle(
+                  color:
+                      Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                ),
               ),
             ],
           ),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            InkWell(
-              onTap: () => openEmail(email: commit.authorEmail),
-              child: Text(
-                // ignore: prefer_interpolation_to_compose_strings
-                commit.authorName + ' (' + commit.authorEmail + ')',
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSurface,
-                  fontStyle: FontStyle.italic,
-                ),
-              ),
+          trailing: IconButton(
+            onPressed: () => _copyToClipboard(context, commit.hash),
+            icon: Icon(
+              Icons.content_copy,
+              color: Theme.of(context).colorScheme.primary,
             ),
-            Text(
-              commit.date,
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
-              ),
-            ),
-          ],
-        ),
-        trailing: IconButton(
-          onPressed: () => _copyToClipboard(context, commit.hash),
-          icon: Icon(
-            Icons.content_copy,
-            color: Theme.of(context).colorScheme.primary,
           ),
         ),
       ),
