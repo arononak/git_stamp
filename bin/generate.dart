@@ -87,7 +87,11 @@ String gitRepoPathOutput() {
 }
 
 String gitDiffOutput() {
-  final hashes = Process.runSync('git', ['rev-list', '--all']).stdout.toString().trim().split('\n');
+  final hashes = Process.runSync('git', ['rev-list', '--all'])
+      .stdout
+      .toString()
+      .trim()
+      .split('\n');
 
   Map<String, String> gitShowMap = {};
 
@@ -96,7 +100,8 @@ String gitDiffOutput() {
     print('git show $hash');
   }
 
-  final diffOutput = 'const diffOutput = <String, String>${jsonEncode(gitShowMap).replaceAll(r'$', r'\$')};';
+  final diffOutput =
+      'const diffOutput = <String, String>${jsonEncode(gitShowMap).replaceAll(r'$', r'\$')};';
 
   return diffOutput;
 }
@@ -111,9 +116,9 @@ void main() {
     File(filename).writeAsStringSync(content);
   }
 
-  saveFile('$outputFolder/json_output.dart', gitLogOutput());  // List
+  saveFile('$outputFolder/json_output.dart', gitLogOutput()); // List
   saveFile('$outputFolder/diff_output.dart', gitDiffOutput()); // Details
-  
+
   saveFile('$outputFolder/creation_date_output.dart', gitCreationDateOutput());
   saveFile('$outputFolder/branch_output.dart', gitBranchOutput());
   saveFile('$outputFolder/build_date_time_output.dart', buildDateOutput());

@@ -53,6 +53,7 @@ flutter pub run git_stamp:generate.dart
 |       |-- build_date_time_output.dart
 |       |-- build_system_info_output.dart
 |       |-- creation_date_output.dart
+|       |-- diff_output.dart
 |       |-- git_stamp_commit.dart
 |       |-- git_stamp_page.dart
 |       |-- json_output.dart

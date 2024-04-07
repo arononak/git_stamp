@@ -87,3 +87,6 @@
 
 * GitStampPage - RepoDetailsModal - Next new design
 
+## 2.0.0
+
+* GitStampPage - Added commit changes
