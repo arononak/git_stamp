@@ -1,4 +1,5 @@
 const generatedGitStampPage = '''
+import 'package:example/git_stamp/git_stamp_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 
@@ -16,8 +17,7 @@ void showGitStampPage({
   required BuildContext context,
   bool useRootNavigator = false,
 }) {
-  Navigator.of(context, rootNavigator: useRootNavigator)
-      .push(MaterialPageRoute<void>(
+  Navigator.of(context, rootNavigator: useRootNavigator).push(MaterialPageRoute<void>(
     builder: (BuildContext context) => const GitStampPage(),
   ));
 }
@@ -78,8 +78,7 @@ class GitStampPage extends StatelessWidget {
                                     shrinkWrap: true,
                                     children: [
                                       ListTile(
-                                        onTap: () => openEmail(
-                                            email: 'arononak@gmail.com'),
+                                        onTap: () => openEmail(email: 'arononak@gmail.com'),
                                         title: Text(
                                           'Have a great idea for Git Stamp?',
                                           style: TextStyle(
@@ -147,8 +146,7 @@ Widget _buildCommitList(elements) {
             padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             child: Row(
               children: [
-                Icon(Icons.commit,
-                    color: Theme.of(context).colorScheme.secondary),
+                Icon(Icons.commit, color: Theme.of(context).colorScheme.secondary),
                 SizedBox(width: 8),
                 Text(
                   header,
@@ -162,9 +160,7 @@ Widget _buildCommitList(elements) {
               ],
             ),
           ),
-          ...commits
-              .map((commit) => _buildCommitElement(context, commit))
-              .toList()
+          ...commits.map((commit) => _buildCommitElement(context, commit)).toList()
         ],
       );
     },
@@ -179,8 +175,19 @@ Widget _buildCommitElement(context, commit) {
         builder: (BuildContext context) {
           return Container(
             padding: EdgeInsets.all(16.0),
-            child: SingleChildScrollView(
-              child: Text(diffOutput[commit.hash ?? ''] ?? ''),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                IconButton(
+                  onPressed: () => showGitStampDetailsPage(context: context, commitHash: commit.hash),
+                  icon: Icon(Icons.arrow_forward),
+                ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Text(diffOutput[commit.hash ?? ''] ?? ''),
+                  ),
+                ),
+              ],
             ),
           );
         },
@@ -237,8 +244,7 @@ Widget _buildCommitElement(context, commit) {
               Text(
                 commit.date,
                 style: TextStyle(
-                  color:
-                      Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                 ),
               ),
             ],
