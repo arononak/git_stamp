@@ -1,10 +1,10 @@
 const generatedGitStampPage = '''
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:collection/collection.dart';
 
 import 'git_stamp_commit.dart';
+import 'git_stamp_utils.dart';
+
 import 'data/diff_output.dart';
 import 'data/branch_output.dart';
 import 'data/build_date_time_output.dart';
@@ -16,66 +16,10 @@ void showGitStampPage({
   required BuildContext context,
   bool useRootNavigator = false,
 }) {
-  Navigator.of(context, rootNavigator: useRootNavigator).push(MaterialPageRoute<void>(
+  Navigator.of(context, rootNavigator: useRootNavigator)
+      .push(MaterialPageRoute<void>(
     builder: (BuildContext context) => const GitStampPage(),
   ));
-}
-
-void openEmail({
-  required String email,
-  String? subject,
-}) {
-  String? encodeQueryParameters(Map<String, String> params) {
-    return params.entries.map(
-      (MapEntry<String, String> e) {
-        return Uri.encodeComponent(e.key) + '=' + Uri.encodeComponent(e.value);
-      },
-    ).join('&');
-  }
-
-  launchUrl(
-    Uri(
-      scheme: 'mailto',
-      path: email,
-      query: encodeQueryParameters(
-        <String, String>{'subject': subject ?? ''},
-      ),
-    ),
-  );
-}
-
-void showSnackbar(BuildContext context, String message) {
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      content: Text(message),
-      showCloseIcon: true,
-      duration: Duration(seconds: 5),
-    ),
-  );
-}
-
-void openProjectHomepage() {
-  launchUrl(Uri(
-    scheme: 'https',
-    host: 'github.com',
-    path: 'arononak/git_stamp',
-  ));
-}
-
-Map<String, int> commitCountByAuthor() {
-  Map<String, int> map = {};
-
-  for (GitStampCommit commit in GitStampCommit.commitList) {
-    map.update(commit.authorName, (value) => (value) + 1, ifAbsent: () => 1);
-  }
-
-  return map;
-}
-
-List<String> parseBuildSystemInfo(text) {
-  List<String> elements = RegExp(r'\\((.*?)\\)').firstMatch(text)?.group(1)?.split(', ') ?? [];
-
-  return elements.isEmpty ? ["No data :/"] : elements;
 }
 
 class GitStampPage extends StatelessWidget {
@@ -134,7 +78,8 @@ class GitStampPage extends StatelessWidget {
                                     shrinkWrap: true,
                                     children: [
                                       ListTile(
-                                        onTap: () => openEmail(email: 'arononak@gmail.com'),
+                                        onTap: () => openEmail(
+                                            email: 'arononak@gmail.com'),
                                         title: Text(
                                           'Have a great idea for Git Stamp?',
                                           style: TextStyle(
@@ -177,17 +122,16 @@ class GitStampPage extends StatelessWidget {
   }
 }
 
-void _copyToClipboard(BuildContext context, String text) {
-  Clipboard.setData(ClipboardData(text: text));
-  showSnackbar(context, 'Copied to clipboard !');
-}
-
 Widget _buildCommitList(elements) {
   Map<String, List<GitStampCommit>> groupedCommit = groupBy(
     elements,
     (element) {
       DateTime date = DateTime.parse(element.date);
-      return date.year.toString() + '-' + date.month.toString().padLeft(2, '0') + '-' + date.day.toString().padLeft(2, '0');
+      return date.year.toString() +
+          '-' +
+          date.month.toString().padLeft(2, '0') +
+          '-' +
+          date.day.toString().padLeft(2, '0');
     },
   );
 
@@ -203,7 +147,8 @@ Widget _buildCommitList(elements) {
             padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             child: Row(
               children: [
-                Icon(Icons.commit, color: Theme.of(context).colorScheme.secondary),
+                Icon(Icons.commit,
+                    color: Theme.of(context).colorScheme.secondary),
                 SizedBox(width: 8),
                 Text(
                   header,
@@ -217,7 +162,9 @@ Widget _buildCommitList(elements) {
               ],
             ),
           ),
-          ...commits.map((commit) => _buildCommitElement(context, commit)).toList()
+          ...commits
+              .map((commit) => _buildCommitElement(context, commit))
+              .toList()
         ],
       );
     },
@@ -297,7 +244,7 @@ Widget _buildCommitElement(context, commit) {
             ],
           ),
           trailing: IconButton(
-            onPressed: () => _copyToClipboard(context, commit.hash),
+            onPressed: () => copyToClipboard(context, commit.hash),
             icon: Icon(
               Icons.content_copy,
               color: Theme.of(context).colorScheme.primary,

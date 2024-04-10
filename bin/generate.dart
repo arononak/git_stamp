@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 
 import 'generated_files/generated_git_stamp_commit.dart';
 import 'generated_files/generated_git_stamp_page.dart';
+import 'generated_files/generated_git_stamp_utils.dart';
 
 String gitLogOutput() {
   final gitLogJson = Process.runSync(
@@ -129,5 +130,6 @@ void main() {
   saveFile('$dataFolder/repo_path_output.dart', gitRepoPathOutput());
 
   saveFile('$mainFolder/git_stamp_commit.dart', generatedGitStampCommit);
+  saveFile('$mainFolder/git_stamp_utils.dart', generatedGitStampUtils);
   saveFile('$mainFolder/git_stamp_page.dart', generatedGitStampPage);
 }
