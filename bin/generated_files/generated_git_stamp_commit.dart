@@ -1,7 +1,7 @@
 const generatedGitStampCommit = '''
 import 'dart:convert';
 
-import 'json_output.dart';
+import 'data/json_output.dart';
 
 class GitStampCommit {
   final String hash;

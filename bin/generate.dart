@@ -107,24 +107,27 @@ String gitDiffOutput() {
 }
 
 void main() {
-  const outputFolder = 'lib/git_stamp';
-  final directory = Directory(outputFolder);
-  directory.deleteSync(recursive: true);
-  directory.createSync(recursive: true);
+  const mainFolder = 'lib/git_stamp';
+  const dataFolder = 'lib/git_stamp/data';
+
+  Directory(mainFolder)
+    ..deleteSync(recursive: true)
+    ..createSync(recursive: true);
+
+  Directory(dataFolder).createSync(recursive: true);
 
   void saveFile(String filename, String content) {
     File(filename).writeAsStringSync(content);
   }
 
-  saveFile('$outputFolder/json_output.dart', gitLogOutput()); // List
-  saveFile('$outputFolder/diff_output.dart', gitDiffOutput()); // Details
+  saveFile('$dataFolder/json_output.dart', gitLogOutput()); // List
+  saveFile('$dataFolder/diff_output.dart', gitDiffOutput()); // Details
+  saveFile('$dataFolder/creation_date_output.dart', gitCreationDateOutput());
+  saveFile('$dataFolder/branch_output.dart', gitBranchOutput());
+  saveFile('$dataFolder/build_date_time_output.dart', buildDateOutput());
+  saveFile('$dataFolder/build_system_info_output.dart', buildSystemInfo());
+  saveFile('$dataFolder/repo_path_output.dart', gitRepoPathOutput());
 
-  saveFile('$outputFolder/creation_date_output.dart', gitCreationDateOutput());
-  saveFile('$outputFolder/branch_output.dart', gitBranchOutput());
-  saveFile('$outputFolder/build_date_time_output.dart', buildDateOutput());
-  saveFile('$outputFolder/build_system_info_output.dart', buildSystemInfo());
-  saveFile('$outputFolder/repo_path_output.dart', gitRepoPathOutput());
-
-  saveFile('$outputFolder/git_stamp_commit.dart', generatedGitStampCommit);
-  saveFile('$outputFolder/git_stamp_page.dart', generatedGitStampPage);
+  saveFile('$mainFolder/git_stamp_commit.dart', generatedGitStampCommit);
+  saveFile('$mainFolder/git_stamp_page.dart', generatedGitStampPage);
 }
