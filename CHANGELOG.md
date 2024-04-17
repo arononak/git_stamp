@@ -90,3 +90,8 @@
 ## 2.0.0
 
 * GitStampPage - Added commit changes
+
+## 2.1.0
+
+* New generation files structure & refactor
+* Added GitStampDetailsPage
