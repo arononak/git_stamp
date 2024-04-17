@@ -2,9 +2,12 @@
 
 # Git Stamp 🏷
 
-[![MIT License](https://img.shields.io/badge/License-MIT-orange.svg?labelColor=orange&color=white)](https://opensource.org/licenses)
+[![Latest Tag](https://img.shields.io/github/v/tag/arononak/git_stamp?labelColor=orange&color=white)](https://github.com/arononak/git_stamp/tags)
+
 [![Pub Package](https://img.shields.io/pub/v/git_stamp.svg?labelColor=purple&color=white)](https://pub.dev/packages/git_stamp)
+
 [![Commits](https://img.shields.io/github/commit-activity/m/arononak/git_stamp?labelColor=blue&color=white)](https://github.com/arononak/git_stamp/graphs/contributors)
+
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/arononak/git_stamp/.github%2Fworkflows%2Fpublish.yml?labelColor=yellow&color=white)
 
 ## 🚀 Build-Time Git History Integration in Your Flutter App [MORE](https://medium.com/@arononak/git-stamp-a-new-tool-for-testing-flutter-applications-in-2024-bdf4f9c5f8ab)
