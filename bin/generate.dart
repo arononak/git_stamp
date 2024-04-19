@@ -1,5 +1,8 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:intl/intl.dart';
 
@@ -108,6 +111,19 @@ String gitDiffOutput() {
   return diffOutput;
 }
 
+String getFileSize(String filepath, int decimals) {
+    const suffixes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+    final bytes = File(filepath).lengthSync();
+
+    if (bytes <= 0) {
+      return "0 B";
+    }
+
+    final i = (log(bytes) / log(1024)).floor();
+
+    return '${(bytes / pow(1024, i)).toStringAsFixed(decimals)} ${suffixes[i]}';  
+}
+
 void main() {
   const mainFolder = 'lib/git_stamp';
   const dataFolder = 'lib/git_stamp/data';
@@ -124,6 +140,13 @@ void main() {
 
   saveFile('$dataFolder/json_output.dart', gitLogOutput()); // List
   saveFile('$dataFolder/diff_output.dart', gitDiffOutput()); // Details
+
+  final listSize = getFileSize('$dataFolder/json_output.dart', 2);
+  final detailsSize = getFileSize('$dataFolder/diff_output.dart', 2);
+
+  print('List size: $listSize');
+  print('Details size: $detailsSize');
+
   saveFile('$dataFolder/creation_date_output.dart', gitCreationDateOutput());
   saveFile('$dataFolder/branch_output.dart', gitBranchOutput());
   saveFile('$dataFolder/build_date_time_output.dart', buildDateOutput());
@@ -133,6 +156,5 @@ void main() {
   saveFile('$mainFolder/git_stamp_commit.dart', generatedGitStampCommit);
   saveFile('$mainFolder/git_stamp_utils.dart', generatedGitStampUtils);
   saveFile('$mainFolder/git_stamp_page.dart', generatedGitStampPage);
-  saveFile(
-      '$mainFolder/git_stamp_details_page.dart', generatedGitStampDetailsPage);
+  saveFile('$mainFolder/git_stamp_details_page.dart', generatedGitStampDetailsPage);
 }
