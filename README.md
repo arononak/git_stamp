@@ -55,16 +55,19 @@ dev_dependencies:
 |-- ios/
 |-- lib/
 |   |-- git_stamp/
-|       |-- branch_output.dart
-|       |-- build_date_time_output.dart
-|       |-- build_system_info_output.dart
-|       |-- creation_date_output.dart
-|       |-- diff_output.dart
-|       |-- generated_version.dart
+|       |-- data/
+|           |-- branch_output.dart
+|           |-- build_date_time_output.dart
+|           |-- build_system_info_output.dart
+|           |-- creation_date_output.dart
+|           |-- diff_output.dart
+|           |-- generated_version.dart
+|           |-- json_output.dart
+|           |-- repo_path_output.dart
 |       |-- git_stamp_commit.dart
+|       |-- git_stamp_details_page.dart
 |       |-- git_stamp_page.dart
-|       |-- json_output.dart
-|       |-- repo_path_output.dart
+|       |-- git_stamp_utils.dart
 |   |-- main.dart
 |-- linux/
 |-- macos/
