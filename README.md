@@ -37,9 +37,10 @@ dev_dependencies:
 
 # 🏗️ Generating Files
 
-```
-flutter pub run git_stamp:generate.dart
-```
+| Build type               | Command                                                         |
+|--------------------------|-----------------------------------------------------------------|
+| LITE                     | ```flutter pub run git_stamp:generate.dart lite```              |
+| FULL                     | ```flutter pub run git_stamp:generate.dart full```              |
 
 > [!CAUTION]
 > Generating requires the use of the `git` command-line interface (CLI).
@@ -59,6 +60,7 @@ flutter pub run git_stamp:generate.dart
 |       |-- build_system_info_output.dart
 |       |-- creation_date_output.dart
 |       |-- diff_output.dart
+|       |-- generated_version.dart
 |       |-- git_stamp_commit.dart
 |       |-- git_stamp_page.dart
 |       |-- json_output.dart

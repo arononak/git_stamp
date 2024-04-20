@@ -91,18 +91,20 @@ String gitRepoPathOutput() {
   return repoPathOutput;
 }
 
-String gitDiffOutput() {
-  final hashes = Process.runSync('git', ['rev-list', '--all'])
-      .stdout
-      .toString()
-      .trim()
-      .split('\n');
-
+String gitDiffOutput({required bool generateEmpty}) {
   Map<String, String> gitShowMap = {};
 
-  for (var hash in hashes) {
-    gitShowMap[hash] = Process.runSync('git', ['show', hash]).stdout.toString();
-    print('git show $hash');
+  if (generateEmpty == false) {
+    final hashes = Process.runSync('git', ['rev-list', '--all'])
+        .stdout
+        .toString()
+        .trim()
+        .split('\n');
+
+    for (var hash in hashes) {
+      gitShowMap[hash] =
+          Process.runSync('git', ['show', hash]).stdout.toString();
+    }
   }
 
   final diffOutput =
@@ -112,40 +114,42 @@ String gitDiffOutput() {
 }
 
 String getFileSize(String filepath, int decimals) {
-    const suffixes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
-    final bytes = File(filepath).lengthSync();
+  const suffixes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+  final bytes = File(filepath).lengthSync();
 
-    if (bytes <= 0) {
-      return "0 B";
-    }
+  if (bytes <= 0) {
+    return "0 B";
+  }
 
-    final i = (log(bytes) / log(1024)).floor();
+  final i = (log(bytes) / log(1024)).floor();
 
-    return '${(bytes / pow(1024, i)).toStringAsFixed(decimals)} ${suffixes[i]}';  
+  return '${(bytes / pow(1024, i)).toStringAsFixed(decimals)} ${suffixes[i]}';
 }
 
-void main() {
+void saveFile(String filename, String content) {
+  File(filename).writeAsStringSync(content);
+}
+
+void main(List<String> arguments) {
   const mainFolder = 'lib/git_stamp';
   const dataFolder = 'lib/git_stamp/data';
 
-  Directory(mainFolder)
-    ..deleteSync(recursive: true)
-    ..createSync(recursive: true);
+  final isLiteVersion = arguments.first.toLowerCase() == 'LITE'.toLowerCase();
+  print('Generation version: ${isLiteVersion ? 'LITE' : 'FULL'}');
 
+  Directory(mainFolder).deleteSync(recursive: true);
+  Directory(mainFolder).createSync(recursive: true);
   Directory(dataFolder).createSync(recursive: true);
 
-  void saveFile(String filename, String content) {
-    File(filename).writeAsStringSync(content);
-  }
-
+  saveFile('$dataFolder/generated_version.dart',
+      'const isLiteVersion = $isLiteVersion;');
   saveFile('$dataFolder/json_output.dart', gitLogOutput()); // List
-  saveFile('$dataFolder/diff_output.dart', gitDiffOutput()); // Details
+  saveFile('$dataFolder/diff_output.dart',
+      gitDiffOutput(generateEmpty: isLiteVersion)); // Details
 
   final listSize = getFileSize('$dataFolder/json_output.dart', 2);
   final detailsSize = getFileSize('$dataFolder/diff_output.dart', 2);
-
-  print('List size: $listSize');
-  print('Details size: $detailsSize');
+  print('Generated files size: <List: $listSize, Details: $detailsSize>');
 
   saveFile('$dataFolder/creation_date_output.dart', gitCreationDateOutput());
   saveFile('$dataFolder/branch_output.dart', gitBranchOutput());
@@ -156,5 +160,6 @@ void main() {
   saveFile('$mainFolder/git_stamp_commit.dart', generatedGitStampCommit);
   saveFile('$mainFolder/git_stamp_utils.dart', generatedGitStampUtils);
   saveFile('$mainFolder/git_stamp_page.dart', generatedGitStampPage);
-  saveFile('$mainFolder/git_stamp_details_page.dart', generatedGitStampDetailsPage);
+  saveFile(
+      '$mainFolder/git_stamp_details_page.dart', generatedGitStampDetailsPage);
 }

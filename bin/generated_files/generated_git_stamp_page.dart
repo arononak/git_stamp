@@ -1,4 +1,5 @@
 const generatedGitStampPage = '''
+import 'package:example/git_stamp/data/generated_version.dart';
 import 'package:example/git_stamp/git_stamp_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
@@ -293,6 +294,15 @@ Widget _buildRepoDetailsModal(BuildContext context) {
           _buildDoubleText('Date: ', buildDateTime),
           _buildDoubleText('Path: ', repoPath),
           _buildDoubleText('Branch: ', buildBranch),
+          Row(
+            children: [
+              Text('GitStamp build type: <', style: TextStyle(fontSize: 12)),
+              Text('LITE', style: TextStyle(fontSize: 12, fontWeight: isLiteVersion ? FontWeight.bold : FontWeight.normal)),
+              Text(', ', style: TextStyle(fontSize: 12)),
+              Text('FULL', style: TextStyle(fontSize: 12, fontWeight: isLiteVersion ? FontWeight.normal : FontWeight.bold)),
+              Text('>', style: TextStyle(fontSize: 12)),
+            ],
+          ),
           const SizedBox(height: 32),
           Text(
             'Environment',
