@@ -95,3 +95,7 @@
 
 * New generation files structure & refactor
 * Added GitStampDetailsPage
+
+## 2.2.0
+
+* Added 2 types of file generation: LITE & FULL
