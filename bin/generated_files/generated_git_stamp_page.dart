@@ -30,10 +30,26 @@ class GitStampPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        title: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text('Git Stamp', style: TextStyle(fontSize: 20)),
+            SizedBox(width: 8.0),
+            Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: 8.0,
+                vertical: 4.0,
+              ),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.inversePrimary,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                GitStampCommit.commitList.length.toString(),
+                maxLines: 1,
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
           ],
         ),
         flexibleSpace: Center(
@@ -297,9 +313,11 @@ Widget _buildRepoDetailsModal(BuildContext context) {
           Row(
             children: [
               Text('GitStamp build type: <', style: TextStyle(fontSize: 12)),
-              Text('LITE', style: TextStyle(fontSize: 12, fontWeight: isLiteVersion ? FontWeight.bold : FontWeight.normal)),
+              Text('LITE',
+                  style: TextStyle(fontSize: 12, fontWeight: isLiteVersion ? FontWeight.bold : FontWeight.normal)),
               Text(', ', style: TextStyle(fontSize: 12)),
-              Text('FULL', style: TextStyle(fontSize: 12, fontWeight: isLiteVersion ? FontWeight.normal : FontWeight.bold)),
+              Text('FULL',
+                  style: TextStyle(fontSize: 12, fontWeight: isLiteVersion ? FontWeight.normal : FontWeight.bold)),
               Text('>', style: TextStyle(fontSize: 12)),
             ],
           ),
