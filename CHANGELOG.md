@@ -99,3 +99,7 @@
 ## 2.2.0
 
 * Added 2 types of file generation: LITE & FULL
+
+## 2.3.0
+
+* GitStampPage - Added commits count
