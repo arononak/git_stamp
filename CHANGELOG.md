@@ -103,3 +103,7 @@
 ## 2.3.0
 
 * GitStampPage - Added commits count
+
+## 2.4.0
+
+* Added ability to generate code without url_launcher package

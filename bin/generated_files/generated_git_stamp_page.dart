@@ -1,6 +1,7 @@
 const generatedGitStampPage = '''
 import 'package:example/git_stamp/data/generated_version.dart';
 import 'package:example/git_stamp/git_stamp_details_page.dart';
+import 'package:example/git_stamp/git_stamp_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 

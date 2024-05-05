@@ -12,7 +12,6 @@
 
 ## 🚀 Build-Time Git History Integration in Your Flutter App [MORE](https://medium.com/@arononak/git-stamp-a-new-tool-for-testing-flutter-applications-in-2024-bdf4f9c5f8ab)
 
-
 ##### Have you ever struggled with pushing or merging changes into the automatic build system? Worry no more! Now, effortlessly track the specific commits that shaped the final build.
 
 # 🏞️ Preview
@@ -21,9 +20,7 @@
 |:--------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------:|
 | ![](https://github.com/arononak/git_stamp/blob/main/preview_light.png?raw=true)  | ![](https://github.com/arononak/git_stamp/blob/main/preview_dark.png?raw=true)  |
 
-# 🛠️ Installation from source
-
-`url_launcher` is required.
+# 🛠️ Installation from source with `url_launcher`
 
 ```yaml
 dependencies:
@@ -35,12 +32,21 @@ dev_dependencies:
       ref: main
 ```
 
+or
+
+```yaml
+dev_dependencies:
+  git_stamp: ^2.3.0
+```
+
 # 🏗️ Generating Files
 
-| Build type               | Command                                                         |
-|--------------------------|-----------------------------------------------------------------|
-| LITE                     | ```flutter pub run git_stamp:generate.dart lite```              |
-| FULL                     | ```flutter pub run git_stamp:generate.dart full```              |
+| Build type | Use ```url_launcher``` | CLI Command                                             |
+|------------|------------------------|---------------------------------------------------------|
+| LITE       | DISABLED               | `flutter pub run git_stamp:generate.dart lite disabled` |
+| FULL       | ENABLED                | `flutter pub run git_stamp:generate.dart full enabled`  |
+
+
 
 > [!CAUTION]
 > Generating requires the use of the `git` command-line interface (CLI).

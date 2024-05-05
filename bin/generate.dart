@@ -8,6 +8,8 @@ import 'package:intl/intl.dart';
 
 import 'generated_files/generated_git_stamp_commit.dart';
 import 'generated_files/generated_git_stamp_details_page.dart';
+import 'generated_files/generated_git_stamp_launcher.dart';
+import 'generated_files/generated_git_stamp_launcher_empty.dart';
 import 'generated_files/generated_git_stamp_page.dart';
 import 'generated_files/generated_git_stamp_utils.dart';
 
@@ -131,11 +133,19 @@ void saveFile(String filename, String content) {
 }
 
 void main(List<String> arguments) {
+  if (arguments.length != 2) {
+    print('Usage: flutter pub run git_stamp:generate.dart full enabled');
+  }
+
   const mainFolder = 'lib/git_stamp';
   const dataFolder = 'lib/git_stamp/data';
 
   final isLiteVersion = arguments.first.toLowerCase() == 'LITE'.toLowerCase();
   print('Generation version: ${isLiteVersion ? 'LITE' : 'FULL'}');
+
+  final withoutUrlLauncher =
+      arguments[1].toLowerCase() == 'disabled'.toLowerCase();
+  print('url_launcher: ${withoutUrlLauncher ? 'disabled' : 'enabled'}');
 
   Directory(mainFolder).deleteSync(recursive: true);
   Directory(mainFolder).createSync(recursive: true);
@@ -157,8 +167,14 @@ void main(List<String> arguments) {
   saveFile('$dataFolder/build_system_info_output.dart', buildSystemInfo());
   saveFile('$dataFolder/repo_path_output.dart', gitRepoPathOutput());
 
-  saveFile('$mainFolder/git_stamp_commit.dart', generatedGitStampCommit);
   saveFile('$mainFolder/git_stamp_utils.dart', generatedGitStampUtils);
+  saveFile(
+      '$mainFolder/git_stamp_launcher.dart',
+      withoutUrlLauncher
+          ? generatedGitStampLauncherEmpty
+          : generatedGitStampLauncher);
+
+  saveFile('$mainFolder/git_stamp_commit.dart', generatedGitStampCommit);
   saveFile('$mainFolder/git_stamp_page.dart', generatedGitStampPage);
   saveFile(
       '$mainFolder/git_stamp_details_page.dart', generatedGitStampDetailsPage);
