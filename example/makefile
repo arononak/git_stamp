@@ -1,5 +1,5 @@
 sync:
-	flutter pub run git_stamp:generate.dart FULL
+	flutter pub run git_stamp:generate.dart full disabled
 	dart format .
 
 run:
