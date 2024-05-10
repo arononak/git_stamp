@@ -194,11 +194,22 @@ Widget _buildCommitElement(context, commit) {
           return Container(
             padding: EdgeInsets.all(16.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                IconButton(
-                  onPressed: () => showGitStampDetailsPage(context: context, commitHash: commit.hash),
-                  icon: Icon(Icons.arrow_forward),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: _buildCommitHeader(context, commit),
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () => showGitStampDetailsPage(context: context, commitHash: commit.hash),
+                      icon: Icon(Icons.arrow_forward),
+                    ),
+                  ],
                 ),
                 Expanded(
                   child: SingleChildScrollView(
@@ -221,30 +232,7 @@ Widget _buildCommitElement(context, commit) {
             size: 36,
             color: Theme.of(context).colorScheme.primary,
           ),
-          title: Text.rich(
-            TextSpan(
-              children: [
-                TextSpan(
-                  text: commit.hash.substring(0, 7),
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.primary,
-                    fontWeight: FontWeight.bold,
-                    fontStyle: FontStyle.italic,
-                  ),
-                ),
-                const TextSpan(
-                  text: ' - ',
-                  style: TextStyle(fontWeight: FontWeight.normal),
-                ),
-                TextSpan(
-                  text: commit.subject,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
+          title: _buildCommitHeader(context, commit),
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -277,6 +265,27 @@ Widget _buildCommitElement(context, commit) {
         ),
       ),
     ),
+  );
+}
+
+Widget _buildCommitHeader(context, commit) {
+  return Text.rich(
+    TextSpan(
+      children: [
+        TextSpan(
+          text: commit.hash.substring(0, 7),
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.primary,
+            fontWeight: FontWeight.bold,
+            fontStyle: FontStyle.italic,
+          ),
+        ),
+        const TextSpan(text: ' - ', style: TextStyle(fontWeight: FontWeight.normal)),
+        TextSpan(text: commit.subject, style: const TextStyle(fontWeight: FontWeight.bold)),
+      ],
+    ),
+    maxLines: 1,
+    overflow: TextOverflow.ellipsis,
   );
 }
 
