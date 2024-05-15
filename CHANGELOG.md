@@ -107,3 +107,7 @@
 ## 2.4.0
 
 * Added ability to generate code without url_launcher package
+
+## 2.5.0
+
+* GitStampPage - Added commit hash & commit title to commit modal
