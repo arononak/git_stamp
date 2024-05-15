@@ -20,7 +20,12 @@
 |:--------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------:|
 | ![](https://github.com/arononak/git_stamp/blob/main/preview_light.png?raw=true)  | ![](https://github.com/arononak/git_stamp/blob/main/preview_dark.png?raw=true)  |
 
-# 🛠️ Installation from source with `url_launcher`
+# 🛠️ Installation
+
+```yaml
+dev_dependencies:
+  git_stamp: ^2.6.0
+```
 
 ```yaml
 dependencies:
@@ -32,21 +37,12 @@ dev_dependencies:
       ref: main
 ```
 
-or
-
-```yaml
-dev_dependencies:
-  git_stamp: ^2.3.0
-```
-
 # 🏗️ Generating Files
 
-| Build type | Use ```url_launcher``` | CLI Command                                             |
-|------------|------------------------|---------------------------------------------------------|
-| LITE       | DISABLED               | `flutter pub run git_stamp:generate.dart lite disabled` |
-| FULL       | ENABLED                | `flutter pub run git_stamp:generate.dart full enabled`  |
-
-
+| CLI Command                                                      | Build type | Use ```url_launcher``` |
+|------------------------------------------------------------------|------------|------------------------|
+| `dart pub run git_stamp`                                         | LITE       | DISABLED               |
+| `dart pub run git_stamp --buildtype full --url_launcher enabled` | FULL       | ENABLED                |
 
 > [!CAUTION]
 > Generating requires the use of the `git` command-line interface (CLI).
