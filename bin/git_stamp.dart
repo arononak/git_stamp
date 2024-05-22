@@ -24,9 +24,11 @@ String gitLogOutput() {
     ],
   ).stdout;
 
-  final logs = LineSplitter.split(gitLogJson).map((line) => json.decode(line)).toList();
+  final logs =
+      LineSplitter.split(gitLogJson).map((line) => json.decode(line)).toList();
 
-  final logsOutput = '''const jsonOutput = \'\'\'\n${jsonEncode(logs)}\n\'\'\';''';
+  final logsOutput =
+      '''const jsonOutput = \'\'\'\n${jsonEncode(logs)}\n\'\'\';''';
 
   return logsOutput;
 }
@@ -34,16 +36,23 @@ String gitLogOutput() {
 String gitCreationDateOutput() {
   final date = Process.runSync(
     'git',
-    ['log', '--reverse', '--pretty=format:%ad', '--date=format:%Y-%m-%d %H:%M:%S'],
+    [
+      'log',
+      '--reverse',
+      '--pretty=format:%ad',
+      '--date=format:%Y-%m-%d %H:%M:%S'
+    ],
   ).stdout;
 
-  final dateOutput = 'const repoCreationDate = "${date.toString().split('\n').first.trim()}";';
+  final dateOutput =
+      'const repoCreationDate = "${date.toString().split('\n').first.trim()}";';
 
   return dateOutput;
 }
 
 String gitBranchOutput() {
-  final branch = Process.runSync('git', ['rev-parse', '--abbrev-ref', 'HEAD']).stdout;
+  final branch =
+      Process.runSync('git', ['rev-parse', '--abbrev-ref', 'HEAD']).stdout;
 
   final branchOutput = 'const buildBranch = "${branch.toString().trim()}";';
 
@@ -51,9 +60,11 @@ String gitBranchOutput() {
 }
 
 String buildDateOutput() {
-  final buildDateTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
+  final buildDateTime =
+      DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
 
-  final buildDateTimeOutput = 'const buildDateTime = "${buildDateTime.toString().trim()}";';
+  final buildDateTimeOutput =
+      'const buildDateTime = "${buildDateTime.toString().trim()}";';
 
   return buildDateTimeOutput;
 }
@@ -61,16 +72,22 @@ String buildDateOutput() {
 String buildSystemInfo() {
   final systemInfo = Process.runSync('flutter', ['doctor']).stdout;
 
-  String? systemInfoParsed =
-      systemInfo.toString().split('\n').where((line) => line.contains('] Flutter')).toList().firstOrNull;
+  String? systemInfoParsed = systemInfo
+      .toString()
+      .split('\n')
+      .where((line) => line.contains('] Flutter'))
+      .toList()
+      .firstOrNull;
 
-  final systemInfoOutput = 'const buildSystemInfo = "${systemInfoParsed.toString().trim()}";';
+  final systemInfoOutput =
+      'const buildSystemInfo = "${systemInfoParsed.toString().trim()}";';
 
   return systemInfoOutput;
 }
 
 String gitRepoPathOutput() {
-  final repoPath = Process.runSync('git', ['rev-parse', '--show-toplevel']).stdout;
+  final repoPath =
+      Process.runSync('git', ['rev-parse', '--show-toplevel']).stdout;
 
   final repoPathOutput = 'const repoPath = "${repoPath.toString().trim()}";';
 
@@ -81,14 +98,20 @@ String gitDiffOutput(bool generateEmpty) {
   Map<String, String> gitShowMap = {};
 
   if (generateEmpty == false) {
-    final hashes = Process.runSync('git', ['rev-list', '--all']).stdout.toString().trim().split('\n');
+    final hashes = Process.runSync('git', ['rev-list', '--all'])
+        .stdout
+        .toString()
+        .trim()
+        .split('\n');
 
     for (var hash in hashes) {
-      gitShowMap[hash] = Process.runSync('git', ['show', hash]).stdout.toString();
+      gitShowMap[hash] =
+          Process.runSync('git', ['show', hash]).stdout.toString();
     }
   }
 
-  final diffOutput = 'const diffOutput = <String, String>${jsonEncode(gitShowMap).replaceAll(r'$', r'\$')};';
+  final diffOutput =
+      'const diffOutput = <String, String>${jsonEncode(gitShowMap).replaceAll(r'$', r'\$')};';
 
   return diffOutput;
 }
@@ -204,5 +227,6 @@ void _generateFiles(bool isLiteVersion, bool urlLauncher) {
 
   _saveFile('$mainFolder/git_stamp_commit.dart', generatedGitStampCommit);
   _saveFile('$mainFolder/git_stamp_page.dart', generatedGitStampPage);
-  _saveFile('$mainFolder/git_stamp_details_page.dart', generatedGitStampDetailsPage);
+  _saveFile(
+      '$mainFolder/git_stamp_details_page.dart', generatedGitStampDetailsPage);
 }
