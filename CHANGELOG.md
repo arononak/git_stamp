@@ -111,3 +111,7 @@
 ## 2.5.0
 
 * GitStampPage - Added commit hash & commit title to commit modal
+
+## 2.6.0
+
+* Added advanced CLI
