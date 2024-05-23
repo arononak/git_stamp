@@ -21,10 +21,12 @@ jobs:
           java-version: "12.x"
       - run: dart pub get
       - run: dart doc
+      - run: ls -R doc
+      - run: echo '!doc/' >> .gitignore
       - run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add .
+          git add doc
           git commit -m 'DOC Update'
           git push
         env:
