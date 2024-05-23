@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="generator" content="made with love by dartdoc 8.0.3">
+  <meta name="description" content="git_stamp API docs, for the Dart programming language.">
+  <title>git_stamp - Dart API docs</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="static-assets/github.css?v1">
+  <link rel="stylesheet" href="static-assets/styles.css?v1">
+  <link rel="icon" href="static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="" data-using-base-href="false" class="light-theme">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="https://aroncode.com">git_stamp package</a></li>
+  </ol>
+  <div class="self-name">git_stamp</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <div class="toggle" id="theme-button">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span id="dark-theme-button" class="material-symbols-outlined">
+        brightness_4
+      </span>
+      <span id="light-theme-button" class="material-symbols-outlined">
+        brightness_5
+      </span>
+    </label>
+  </div>
+</header>
+<main>
+
+  <div id="dartdoc-main-content" class="main-content">
+      
+<section class="desc markdown">
+  <p><a href="https://www.gov.pl/web/rolnictwo/produkt-polski1"><img src="https://www.gov.pl/photo/f98cae42-2b90-4596-904c-752278f85606" height="100" align="right"></a></p>
+<h1 id="git-stamp-">Git Stamp 🏷</h1>
+<p><a href="https://github.com/arononak/git_stamp/tags"><img src="https://img.shields.io/github/v/tag/arononak/git_stamp?labelColor=orange&amp;color=white" alt="Latest Tag"></a></p>
+<p><a href="https://pub.dev/packages/git_stamp"><img src="https://img.shields.io/pub/v/git_stamp.svg?labelColor=purple&amp;color=white" alt="Pub Package"></a></p>
+<p><a href="https://github.com/arononak/git_stamp/graphs/contributors"><img src="https://img.shields.io/github/commit-activity/m/arononak/git_stamp?labelColor=blue&amp;color=white" alt="Commits"></a></p>
+<p><img src="https://img.shields.io/github/actions/workflow/status/arononak/git_stamp/.github%2Fworkflows%2Fpublish.yml?labelColor=yellow&amp;color=white" alt="GitHub Workflow Status"></p>
+<h2 id="-build-time-git-history-integration-in-your-flutter-app-morehttpsmediumcomarononakgit-stamp-a-new-tool-for-testing-flutter-applications-in-2024-bdf4f9c5f8ab">🚀 Build-Time Git History Integration in Your Flutter App <a href="https://medium.com/@arononak/git-stamp-a-new-tool-for-testing-flutter-applications-in-2024-bdf4f9c5f8ab">MORE</a></h2>
+<h5 id="have-you-ever-struggled-with-pushing-or-merging-changes-into-the-automatic-build-system-worry-no-more-now-effortlessly-track-the-specific-commits-that-shaped-the-final-build">Have you ever struggled with pushing or merging changes into the automatic build system? Worry no more! Now, effortlessly track the specific commits that shaped the final build.</h5>
+<h1 id="-preview">🏞️ Preview</h1>
+<p><img src="https://github.com/arononak/git_stamp/blob/main/development.png?raw=true" alt=""></p>
+<table>
+<thead>
+<tr>
+<th align="center">Light</th>
+<th align="center">Dark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><img src="https://github.com/arononak/git_stamp/blob/main/preview_light.png?raw=true" alt=""></td>
+<td align="center"><img src="https://github.com/arononak/git_stamp/blob/main/preview_dark.png?raw=true" alt=""></td>
+</tr>
+</tbody>
+</table>
+<h1 id="-installation">🛠️ Installation</h1>
+<pre class="language-yaml"><code class="language-yaml">dev_dependencies:
+  git_stamp: ^2.6.0
+</code></pre>
+<pre class="language-yaml"><code class="language-yaml">dependencies:
+  url_launcher: ^6.2.3
+dev_dependencies:
+  git_stamp:
+    git:
+      url: https://github.com/arononak/git_stamp
+      ref: main
+</code></pre>
+<h1 id="-generating-files">🏗️ Generating Files</h1>
+<table>
+<thead>
+<tr>
+<th>CLI Command</th>
+<th>Build type</th>
+<th>Use <code>url_launcher</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dart pub run git_stamp</code></td>
+<td>LITE</td>
+<td>DISABLED</td>
+</tr>
+<tr>
+<td><code>dart pub run git_stamp --buildtype full --url_launcher enabled</code></td>
+<td>FULL</td>
+<td>ENABLED</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>!CAUTION</code>
+Generating requires the use of the <code>git</code> command-line interface (CLI).</p>
+</blockquote>
+<blockquote>
+<p><code>!IMPORTANT</code><br>
+If you use Github Action, you only get a single commit because GitHub Actions by default only retrieves the latest version (single commit) and does not include the full history of the repository. This is normal behavior to optimize the build process and improve performance, especially for large repositories. Try configuring github actions or generating Git Stamp files before <code>git push</code>.</p>
+</blockquote>
+<pre class="language-dart"><code>|-- android/
+|-- assets/
+|-- build/
+|-- ios/
+|-- lib/
+|   |-- git_stamp/
+|       |-- data/
+|           |-- branch_output.dart
+|           |-- build_date_time_output.dart
+|           |-- build_system_info_output.dart
+|           |-- creation_date_output.dart
+|           |-- diff_output.dart
+|           |-- generated_version.dart
+|           |-- json_output.dart
+|           |-- repo_path_output.dart
+|       |-- git_stamp_commit.dart
+|       |-- git_stamp_details_page.dart
+|       |-- git_stamp_page.dart
+|       |-- git_stamp_utils.dart
+|   |-- main.dart
+|-- linux/
+|-- macos/
+|-- test/
+|-- web/
+|-- windows/
+|-- pubspec.yaml
+</code></pre>
+<h1 id="-usage">💻 Usage</h1>
+<pre class="language-dart"><code class="language-dart">if (isProd == false) ...[
+  IconButton(
+    onPressed: () =&gt; showGitStampPage(context: context),
+    icon: const Icon(Icons.book),
+  ),
+],
+</code></pre>
+<h1 id="-pre-deployment-steps-todotodomd">🔧 Pre-Deployment Steps (<a href="./TODO.md">TODO</a>)</h1>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🔧 Run <code>pana</code> command</td>
+<td>Check 140/140 points</td>
+</tr>
+<tr>
+<td>📸 New SS</td>
+<td>Create a new screenshots</td>
+</tr>
+<tr>
+<td>🔍 Generated file names</td>
+<td>In README.md</td>
+</tr>
+<tr>
+<td>🏷️ New tag and push</td>
+<td>Deploy every <strong>Wednesday !</strong></td>
+</tr>
+</tbody>
+</table>
+<h1 id="-license">📝 License</h1>
+<blockquote>
+<p><code>!NOTE</code>
+Copyright © 2024 Aron Onak. All rights reserved.<br>
+Licensed under the <a href="LICENSE">MIT</a> license.<br>
+If you have any feedback, please contact me at <a href="mailto:arononak@gmail.com">arononak@gmail.com</a></p>
+</blockquote>
+</section>
+
+
+      <section class="summary">
+          <h2>Libraries</h2>
+        <dl>
+        </dl>
+      </section>
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="https://aroncode.com">git_stamp package</a></li>
+</ol>
+
+
+    <h5 class="hidden-xs"><span class="package-name">git_stamp</span> <span class="package-kind">package</span></h5>
+    <ol>
+      <li class="section-title">Libraries</li>
+</ol>
+
+  </div>
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div>
+
+</main>
+
+<footer>
+  <span class="no-break">
+    git_stamp
+      2.6.0
+  </span>
+
+  
+</footer>
+
+
+
+<script src="static-assets/highlight.pack.js?v1"></script>
+<script src="static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+
