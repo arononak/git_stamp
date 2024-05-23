@@ -21,8 +21,6 @@ jobs:
           java-version: "12.x"
       - run: dart pub get
       - run: dart doc
-      - run: ls -R doc
-      - run: git update-index --no-assume-unchanged doc
       - run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
