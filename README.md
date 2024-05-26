@@ -14,8 +14,6 @@
 
 # 🏞️ Preview
 
-![](https://github.com/arononak/git_stamp/blob/main/development.png?raw=true)
-
 | Light                                                                            | Dark                                                                            |
 |:--------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------:|
 | ![](https://github.com/arononak/git_stamp/blob/main/preview_light.png?raw=true)  | ![](https://github.com/arononak/git_stamp/blob/main/preview_dark.png?raw=true)  |
@@ -90,7 +88,9 @@ if (isProd == false) ...[
 ],
 ```
 
-# 🔧 Pre-Deployment Steps ([TODO](./TODO.md))
+![](https://github.com/arononak/git_stamp/blob/main/development.png?raw=true)
+
+# 🔧 Development - Git Stamp ([TODO](./TODO.md))
 
 | Step                     | Description                                                     |
 |--------------------------|-----------------------------------------------------------------|
