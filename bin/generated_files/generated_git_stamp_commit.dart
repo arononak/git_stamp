@@ -1,7 +1,7 @@
 const generatedGitStampCommit = '''
 import 'dart:convert';
 
-import 'data/json_output.dart';
+import 'git_stamp.dart';
 
 class GitStampCommit {
   final String hash;
@@ -26,7 +26,9 @@ class GitStampCommit {
         authorEmail: json['authorEmail'],
       );
 
-  static List<GitStampCommit> get commitList =>
-      json.decode(jsonOutput).map<GitStampCommit>((json) => GitStampCommit.fromJson(json)).toList();
+  static List<GitStampCommit> get commitList => json
+      .decode(GitStamp.jsonOutput)
+      .map<GitStampCommit>((json) => GitStampCommit.fromJson(json))
+      .toList();
 }
 ''';

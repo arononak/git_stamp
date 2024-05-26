@@ -1,5 +1,5 @@
 const generatedGitStampPage = '''
-import 'package:example/git_stamp/data/generated_version.dart';
+import 'package:example/git_stamp/git_stamp.dart';
 import 'package:example/git_stamp/git_stamp_details_page.dart';
 import 'package:example/git_stamp/git_stamp_launcher.dart';
 import 'package:flutter/material.dart';
@@ -8,18 +8,12 @@ import 'package:collection/collection.dart';
 import 'git_stamp_commit.dart';
 import 'git_stamp_utils.dart';
 
-import 'data/diff_output.dart';
-import 'data/branch_output.dart';
-import 'data/build_date_time_output.dart';
-import 'data/build_system_info_output.dart';
-import 'data/creation_date_output.dart';
-import 'data/repo_path_output.dart';
-
 void showGitStampPage({
   required BuildContext context,
   bool useRootNavigator = false,
 }) {
-  Navigator.of(context, rootNavigator: useRootNavigator).push(MaterialPageRoute<void>(
+  Navigator.of(context, rootNavigator: useRootNavigator)
+      .push(MaterialPageRoute<void>(
     builder: (BuildContext context) => const GitStampPage(),
   ));
 }
@@ -96,7 +90,8 @@ class GitStampPage extends StatelessWidget {
                                     shrinkWrap: true,
                                     children: [
                                       ListTile(
-                                        onTap: () => openEmail(email: 'arononak@gmail.com'),
+                                        onTap: () => openEmail(
+                                            email: 'arononak@gmail.com'),
                                         title: Text(
                                           'Have a great idea for Git Stamp?',
                                           style: TextStyle(
@@ -164,7 +159,8 @@ Widget _buildCommitList(elements) {
             padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             child: Row(
               children: [
-                Icon(Icons.commit, color: Theme.of(context).colorScheme.secondary),
+                Icon(Icons.commit,
+                    color: Theme.of(context).colorScheme.secondary),
                 SizedBox(width: 8),
                 Text(
                   header,
@@ -178,7 +174,9 @@ Widget _buildCommitList(elements) {
               ],
             ),
           ),
-          ...commits.map((commit) => _buildCommitElement(context, commit)).toList()
+          ...commits
+              .map((commit) => _buildCommitElement(context, commit))
+              .toList()
         ],
       );
     },
@@ -206,14 +204,15 @@ Widget _buildCommitElement(context, commit) {
                       ),
                     ),
                     IconButton(
-                      onPressed: () => showGitStampDetailsPage(context: context, commitHash: commit.hash),
+                      onPressed: () => showGitStampDetailsPage(
+                          context: context, commitHash: commit.hash),
                       icon: Icon(Icons.arrow_forward),
                     ),
                   ],
                 ),
                 Expanded(
                   child: SingleChildScrollView(
-                    child: Text(diffOutput[commit.hash ?? ''] ?? ''),
+                    child: Text(GitStamp.diffOutput[commit.hash ?? ''] ?? ''),
                   ),
                 ),
               ],
@@ -250,7 +249,8 @@ Widget _buildCommitElement(context, commit) {
               Text(
                 commit.date,
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                  color:
+                      Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                 ),
               ),
             ],
@@ -280,8 +280,11 @@ Widget _buildCommitHeader(context, commit) {
             fontStyle: FontStyle.italic,
           ),
         ),
-        const TextSpan(text: ' - ', style: TextStyle(fontWeight: FontWeight.normal)),
-        TextSpan(text: commit.subject, style: const TextStyle(fontWeight: FontWeight.bold)),
+        const TextSpan(
+            text: ' - ', style: TextStyle(fontWeight: FontWeight.normal)),
+        TextSpan(
+            text: commit.subject,
+            style: const TextStyle(fontWeight: FontWeight.bold)),
       ],
     ),
     maxLines: 1,
@@ -317,17 +320,23 @@ Widget _buildRepoDetailsModal(BuildContext context) {
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 4),
-          _buildDoubleText('Date: ', buildDateTime),
-          _buildDoubleText('Path: ', repoPath),
-          _buildDoubleText('Branch: ', buildBranch),
+          _buildDoubleText('Date: ', GitStamp.buildDateTime),
+          _buildDoubleText('Path: ', GitStamp.repoPath),
+          _buildDoubleText('Branch: ', GitStamp.buildBranch),
           Row(
             children: [
               Text('GitStamp build type: <', style: TextStyle(fontSize: 12)),
               Text('LITE',
-                  style: TextStyle(fontSize: 12, fontWeight: isLiteVersion ? FontWeight.bold : FontWeight.normal)),
+                  style: TextStyle(
+                      fontSize: 12,
+                      fontWeight:
+                          GitStamp.isLiteVersion ? FontWeight.bold : FontWeight.normal)),
               Text(', ', style: TextStyle(fontSize: 12)),
               Text('FULL',
-                  style: TextStyle(fontSize: 12, fontWeight: isLiteVersion ? FontWeight.normal : FontWeight.bold)),
+                  style: TextStyle(
+                      fontSize: 12,
+                      fontWeight:
+                          GitStamp.isLiteVersion ? FontWeight.normal : FontWeight.bold)),
               Text('>', style: TextStyle(fontSize: 12)),
             ],
           ),
@@ -342,7 +351,7 @@ Widget _buildRepoDetailsModal(BuildContext context) {
             children: [
               Expanded(
                 child: Text(
-                  parseBuildSystemInfo(buildSystemInfo).join(
+                  parseBuildSystemInfo(GitStamp.buildSystemInfo).join(
                     String.fromCharCode(10),
                   ),
                   softWrap: true,
@@ -354,7 +363,7 @@ Widget _buildRepoDetailsModal(BuildContext context) {
               IconButton(
                 onPressed: () {
                   Navigator.pop(context);
-                  showSnackbar(context, buildSystemInfo);
+                  showSnackbar(context, GitStamp.buildSystemInfo);
                 },
                 icon: Icon(Icons.info_outline),
               ),
@@ -366,7 +375,7 @@ Widget _buildRepoDetailsModal(BuildContext context) {
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 4),
-          _buildDoubleText('Created: ', repoCreationDate),
+          _buildDoubleText('Created: ', GitStamp.repoCreationDate),
           _buildDoubleText(
             'Commit count: ',
             GitStampCommit.commitList.length.toString(),
@@ -398,5 +407,6 @@ Widget _buildRepoDetailsModal(BuildContext context) {
     ),
   );
 }
+
 
 ''';

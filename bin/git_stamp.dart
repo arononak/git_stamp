@@ -7,6 +7,7 @@ import 'dart:math';
 import 'package:args/args.dart';
 import 'package:intl/intl.dart';
 
+import 'generated_files/generated_git_stamp.dart';
 import 'generated_files/generated_git_stamp_commit.dart';
 import 'generated_files/generated_git_stamp_details_page.dart';
 import 'generated_files/generated_git_stamp_launcher.dart';
@@ -28,7 +29,7 @@ String gitLogOutput() {
       LineSplitter.split(gitLogJson).map((line) => json.decode(line)).toList();
 
   final logsOutput =
-      '''const jsonOutput = \'\'\'\n${jsonEncode(logs)}\n\'\'\';''';
+      '''const generatedJsonOutput = \'\'\'\n${jsonEncode(logs)}\n\'\'\';''';
 
   return logsOutput;
 }
@@ -45,7 +46,7 @@ String gitCreationDateOutput() {
   ).stdout;
 
   final dateOutput =
-      'const repoCreationDate = "${date.toString().split('\n').first.trim()}";';
+      'const generatedRepoCreationDate = "${date.toString().split('\n').first.trim()}";';
 
   return dateOutput;
 }
@@ -54,7 +55,8 @@ String gitBranchOutput() {
   final branch =
       Process.runSync('git', ['rev-parse', '--abbrev-ref', 'HEAD']).stdout;
 
-  final branchOutput = 'const buildBranch = "${branch.toString().trim()}";';
+  final branchOutput =
+      'const generatedBuildBranch = "${branch.toString().trim()}";';
 
   return branchOutput;
 }
@@ -64,7 +66,7 @@ String buildDateOutput() {
       DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
 
   final buildDateTimeOutput =
-      'const buildDateTime = "${buildDateTime.toString().trim()}";';
+      'const generatedBuildDateTime = "${buildDateTime.toString().trim()}";';
 
   return buildDateTimeOutput;
 }
@@ -80,7 +82,7 @@ String buildSystemInfo() {
       .firstOrNull;
 
   final systemInfoOutput =
-      'const buildSystemInfo = "${systemInfoParsed.toString().trim()}";';
+      'const generatedBuildSystemInfo = "${systemInfoParsed.toString().trim()}";';
 
   return systemInfoOutput;
 }
@@ -89,7 +91,8 @@ String gitRepoPathOutput() {
   final repoPath =
       Process.runSync('git', ['rev-parse', '--show-toplevel']).stdout;
 
-  final repoPathOutput = 'const repoPath = "${repoPath.toString().trim()}";';
+  final repoPathOutput =
+      'const generatedRepoPath = "${repoPath.toString().trim()}";';
 
   return repoPathOutput;
 }
@@ -111,7 +114,7 @@ String gitDiffOutput(bool generateEmpty) {
   }
 
   final diffOutput =
-      'const diffOutput = <String, String>${jsonEncode(gitShowMap).replaceAll(r'$', r'\$')};';
+      'const generatedDiffOutput = <String, String>${jsonEncode(gitShowMap).replaceAll(r'$', r'\$')};';
 
   return diffOutput;
 }
@@ -130,7 +133,7 @@ String getFileSize(String filepath, int decimals) {
 }
 
 String getGeneratedVersion(bool isLiteVersion) {
-  return 'const isLiteVersion = $isLiteVersion;';
+  return 'const generatedIsLiteVersion = $isLiteVersion;';
 }
 
 void main(List<String> arguments) {
@@ -229,4 +232,6 @@ void _generateFiles(bool isLiteVersion, bool urlLauncher) {
   _saveFile('$mainFolder/git_stamp_page.dart', generatedGitStampPage);
   _saveFile(
       '$mainFolder/git_stamp_details_page.dart', generatedGitStampDetailsPage);
+
+  _saveFile('$mainFolder/git_stamp.dart', generatedGitStamp);
 }

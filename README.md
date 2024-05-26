@@ -79,6 +79,8 @@ dev_dependencies:
 
 # 💻 Usage
 
+### Default usage:
+
 ```dart
 if (isProd == false) ...[
   IconButton(
@@ -89,6 +91,31 @@ if (isProd == false) ...[
 ```
 
 ![](https://github.com/arononak/git_stamp/blob/main/development.png?raw=true)
+
+### Advanced usage:
+
+Central GitStamp node:
+
+```dart
+class GitStamp {
+  static const buildBranch = generatedBuildBranch;
+  static const buildDateTime = generatedBuildDateTime;
+  static const buildSystemInfo = generatedBuildSystemInfo;
+  static const repoCreationDate = generatedRepoCreationDate;
+  static const diffOutput = generatedDiffOutput;
+  static const isLiteVersion = generatedIsLiteVersion;
+  static const jsonOutput = generatedJsonOutput;
+  static const repoPath = generatedRepoPath;
+}
+```
+
+Example usage:
+
+```dart
+import 'git_stamp.dart';
+
+Text(GitStamp.buildDateTime),
+```
 
 # 🔧 Development - Git Stamp ([TODO](./TODO.md))
 
