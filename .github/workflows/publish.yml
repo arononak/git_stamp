@@ -24,6 +24,7 @@ jobs:
       - run: dart pub get
       - run: dart doc
       - run: |
+          git status
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add doc
