@@ -115,3 +115,7 @@
 ## 2.6.0
 
 * Added advanced CLI
+
+## 2.7.0
+
+* Added GitStamp central data node
