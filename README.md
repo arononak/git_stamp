@@ -66,8 +66,10 @@ dev_dependencies:
 |           |-- repo_path_output.dart
 |       |-- git_stamp_commit.dart
 |       |-- git_stamp_details_page.dart
+|       |-- git_stamp_launcher.dart
 |       |-- git_stamp_page.dart
 |       |-- git_stamp_utils.dart
+|       |-- git_stamp.dart
 |   |-- main.dart
 |-- linux/
 |-- macos/
