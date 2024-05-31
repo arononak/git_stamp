@@ -75,9 +75,13 @@
 </tbody>
 </table>
 <h1 id="-installation">🛠️ Installation</h1>
+<pre class="language-dart"><code>  dart pub add git_stamp
+</code></pre>
+<p>or</p>
 <pre class="language-yaml"><code class="language-yaml">dev_dependencies:
   git_stamp: ^2.6.0
 </code></pre>
+<p>or</p>
 <pre class="language-yaml"><code class="language-yaml">dependencies:
   url_launcher: ^6.2.3
 dev_dependencies:
@@ -97,12 +101,12 @@ dev_dependencies:
 </thead>
 <tbody>
 <tr>
-<td><code>dart pub run git_stamp</code></td>
+<td><code>dart run git_stamp</code></td>
 <td>LITE</td>
 <td>DISABLED</td>
 </tr>
 <tr>
-<td><code>dart pub run git_stamp --buildtype full --url_launcher enabled</code></td>
+<td><code>dart run git_stamp --buildtype full --url_launcher enabled</code></td>
 <td>FULL</td>
 <td>ENABLED</td>
 </tr>
@@ -133,8 +137,10 @@ If you use Github Action, you only get a single commit because GitHub Actions by
 |           |-- repo_path_output.dart
 |       |-- git_stamp_commit.dart
 |       |-- git_stamp_details_page.dart
+|       |-- git_stamp_launcher.dart
 |       |-- git_stamp_page.dart
 |       |-- git_stamp_utils.dart
+|       |-- git_stamp.dart
 |   |-- main.dart
 |-- linux/
 |-- macos/
@@ -144,6 +150,7 @@ If you use Github Action, you only get a single commit because GitHub Actions by
 |-- pubspec.yaml
 </code></pre>
 <h1 id="-usage">💻 Usage</h1>
+<h3 id="default-usage">Default usage:</h3>
 <pre class="language-dart"><code class="language-dart">if (isProd == false) ...[
   IconButton(
     onPressed: () =&gt; showGitStampPage(context: context),
@@ -152,6 +159,24 @@ If you use Github Action, you only get a single commit because GitHub Actions by
 ],
 </code></pre>
 <p><img src="https://github.com/arononak/git_stamp/blob/main/development.png?raw=true" alt=""></p>
+<h3 id="advanced-usage">Advanced usage:</h3>
+<p>Central GitStamp node:</p>
+<pre class="language-dart"><code class="language-dart">class GitStamp {
+  static const buildBranch
+  static const buildDateTime
+  static const buildSystemInfo
+  static const repoCreationDate
+  static const diffOutput
+  static const isLiteVersion
+  static const jsonOutput
+  static const repoPath
+}
+</code></pre>
+<p>Example usage:</p>
+<pre class="language-dart"><code class="language-dart">import 'git_stamp.dart';
+
+Text(GitStamp.buildDateTime),
+</code></pre>
 <h1 id="-development---git-stamp-todotodomd">🔧 Development - Git Stamp (<a href="./TODO.md">TODO</a>)</h1>
 <table>
 <thead>
@@ -225,7 +250,7 @@ If you have any feedback, please contact me at <a href="mailto:arononak@gmail.co
 <footer>
   <span class="no-break">
     git_stamp
-      2.6.0
+      2.7.0
   </span>
 
   
