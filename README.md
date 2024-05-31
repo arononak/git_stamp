@@ -20,10 +20,18 @@
 
 # 🛠️ Installation
 
+```
+  dart pub add git_stamp
+```
+
+or
+
 ```yaml
 dev_dependencies:
   git_stamp: ^2.6.0
 ```
+
+or
 
 ```yaml
 dependencies:
@@ -37,10 +45,10 @@ dev_dependencies:
 
 # 🏗️ Generating Files
 
-| CLI Command                                                      | Build type | Use ```url_launcher``` |
-|------------------------------------------------------------------|------------|------------------------|
-| `dart pub run git_stamp`                                         | LITE       | DISABLED               |
-| `dart pub run git_stamp --buildtype full --url_launcher enabled` | FULL       | ENABLED                |
+| CLI Command                                                  | Build type | Use ```url_launcher``` |
+|--------------------------------------------------------------|------------|------------------------|
+| `dart run git_stamp`                                         | LITE       | DISABLED               |
+| `dart run git_stamp --buildtype full --url_launcher enabled` | FULL       | ENABLED                |
 
 > [!CAUTION]
 > Generating requires the use of the `git` command-line interface (CLI).
@@ -100,14 +108,14 @@ Central GitStamp node:
 
 ```dart
 class GitStamp {
-  static const buildBranch = generatedBuildBranch;
-  static const buildDateTime = generatedBuildDateTime;
-  static const buildSystemInfo = generatedBuildSystemInfo;
-  static const repoCreationDate = generatedRepoCreationDate;
-  static const diffOutput = generatedDiffOutput;
-  static const isLiteVersion = generatedIsLiteVersion;
-  static const jsonOutput = generatedJsonOutput;
-  static const repoPath = generatedRepoPath;
+  static const buildBranch
+  static const buildDateTime
+  static const buildSystemInfo
+  static const repoCreationDate
+  static const diffOutput
+  static const isLiteVersion
+  static const jsonOutput
+  static const repoPath
 }
 ```
 
