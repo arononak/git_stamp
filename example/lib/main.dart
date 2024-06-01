@@ -2,6 +2,8 @@ import 'package:example/git_stamp/git_stamp_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'git_stamp/git_stamp.dart';
+
 void main() {
   runApp(ExampleApp());
 }
@@ -71,7 +73,7 @@ class SettingsPage extends StatelessWidget {
           if (kDebugMode) ...[
             ListTile(
               title: const Text('Git Stamp'),
-              subtitle: const Text('For debugging only'),
+              subtitle: Text(GitStamp.latestCommit.hash),
               leading: const Icon(Icons.commit),
               onTap: () => showGitStampPage(context: context),
             ),
