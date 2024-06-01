@@ -20,9 +20,9 @@
 
 ## 🏞️ Preview
 
-| Light                                                                            | Dark                                                                            |
-|:--------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------:|
-| ![](https://github.com/arononak/git_stamp/blob/main/preview_light.png?raw=true)  | ![](https://github.com/arononak/git_stamp/blob/main/preview_dark.png?raw=true)  |
+|                                      Light                                      |                                      Dark                                      |
+| :-----------------------------------------------------------------------------: | :----------------------------------------------------------------------------: |
+| ![](https://github.com/arononak/git_stamp/blob/main/preview_light.png?raw=true) | ![](https://github.com/arononak/git_stamp/blob/main/preview_dark.png?raw=true) |
 
 ## 🛠️ Installation
 
@@ -52,7 +52,7 @@ dev_dependencies:
 ## 🏗️ Generating
 
 | CLI Command                                                  | Build type | Use ```url_launcher``` |
-|--------------------------------------------------------------|------------|------------------------|
+| ------------------------------------------------------------ | ---------- | ---------------------- |
 | `dart run git_stamp`                                         | LITE       | DISABLED               |
 | `dart run git_stamp --buildtype full --url_launcher enabled` | FULL       | ENABLED                |
 
@@ -110,7 +110,7 @@ if (isProd == false) ...[
 
 #### Advanced usage:
 
-Central GitStamp node:
+Central **GitStamp** node:
 
 ```dart
 class GitStamp {
@@ -122,6 +122,9 @@ class GitStamp {
   static const isLiteVersion
   static const jsonOutput
   static const repoPath
+
+  static List<GitStampCommit> commitList
+  static GitStampCommit latestCommit;
 }
 ```
 
@@ -130,17 +133,17 @@ Example usage:
 ```dart
 import 'git_stamp.dart';
 
-Text(GitStamp.buildDateTime),
+Text(GitStamp.latestCommit.hash),
 ```
 
 ## [🔧 Development](./TODO.md)
 
-| Step                     | Description                                                     |
-|--------------------------|-----------------------------------------------------------------|
-| 🔧 Run `pana` command    | Check 140/140 points                                            |
-| 📸 New SS                | Create a new screenshots                                        |
-| 🔍 Generated file names  | In README.md                                                    |
-| 🏷️ New tag and push      | Deploy every **Wednesday !**                                    |
+| Step                    | Description                  |
+| ----------------------- | ---------------------------- |
+| 🔧 Run `pana` command   | Check 140/140 points         |
+| 📸 New SS               | Create a new screenshots     |
+| 🔍 Generated file names | In README.md                 |
+| 🏷️ New tag and push     | Deploy every **Wednesday !** |
 
 ## 📝 License
 

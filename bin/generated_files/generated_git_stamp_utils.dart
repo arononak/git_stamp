@@ -2,6 +2,7 @@ const generatedGitStampUtils = '''
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'git_stamp.dart';
 import 'git_stamp_commit.dart';
 
 void showSnackbar(BuildContext context, String message) {
@@ -22,7 +23,7 @@ void copyToClipboard(BuildContext context, String text) {
 Map<String, int> commitCountByAuthor() {
   Map<String, int> map = {};
 
-  for (GitStampCommit commit in GitStampCommit.commitList) {
+  for (GitStampCommit commit in GitStamp.commitList) {
     map.update(commit.authorName, (value) => (value) + 1, ifAbsent: () => 1);
   }
 

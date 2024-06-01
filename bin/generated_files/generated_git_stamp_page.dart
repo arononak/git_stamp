@@ -40,7 +40,7 @@ class GitStampPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
-                GitStampCommit.commitList.length.toString(),
+                GitStamp.commitList.length.toString(),
                 maxLines: 1,
                 style: TextStyle(fontSize: 20),
               ),
@@ -129,7 +129,7 @@ class GitStampPage extends StatelessWidget {
           ),
         ),
       ),
-      body: _buildCommitList(GitStampCommit.commitList),
+      body: _buildCommitList(GitStamp.commitList),
     );
   }
 }
@@ -329,14 +329,16 @@ Widget _buildRepoDetailsModal(BuildContext context) {
               Text('LITE',
                   style: TextStyle(
                       fontSize: 12,
-                      fontWeight:
-                          GitStamp.isLiteVersion ? FontWeight.bold : FontWeight.normal)),
+                      fontWeight: GitStamp.isLiteVersion
+                          ? FontWeight.bold
+                          : FontWeight.normal)),
               Text(', ', style: TextStyle(fontSize: 12)),
               Text('FULL',
                   style: TextStyle(
                       fontSize: 12,
-                      fontWeight:
-                          GitStamp.isLiteVersion ? FontWeight.normal : FontWeight.bold)),
+                      fontWeight: GitStamp.isLiteVersion
+                          ? FontWeight.normal
+                          : FontWeight.bold)),
               Text('>', style: TextStyle(fontSize: 12)),
             ],
           ),
@@ -378,7 +380,7 @@ Widget _buildRepoDetailsModal(BuildContext context) {
           _buildDoubleText('Created: ', GitStamp.repoCreationDate),
           _buildDoubleText(
             'Commit count: ',
-            GitStampCommit.commitList.length.toString(),
+            GitStamp.commitList.length.toString(),
           ),
           Text(
             'Commit stats:',
@@ -407,6 +409,5 @@ Widget _buildRepoDetailsModal(BuildContext context) {
     ),
   );
 }
-
 
 ''';
