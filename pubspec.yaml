@@ -4,6 +4,8 @@ version: 2.7.0
 homepage: https://aroncode.com
 repository: https://github.com/arononak/git_stamp
 issue_tracker: https://github.com/arononak/git_stamp/issues
+documentation: https://arononak.github.io/git_stamp/doc/api/index.html
+author: Aron Onak <arononak@gmail.com>
 license: MIT
 
 topics:
