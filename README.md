@@ -12,12 +12,12 @@
 <details>
 <summary>Table of Contents</summary>
   
-- [🏞 Preview](#-preview)
-- [🔨 Installation](#-installation)
-- [🏗️ Generating](#-generating)
-- [💻 Usage](#-usage)
-- [🖥️ Development](#️-development)
-- [📝 License](#-license)
+- [🏞 Preview](#preview)
+- [🔨 Installation](#installation)
+- [🏗️ Generating](#generating)
+- [💻 Usage](#usage)
+- [🖥️ Development](#️development)
+- [📝 License](#license)
 
 </details>
 
