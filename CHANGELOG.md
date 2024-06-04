@@ -119,3 +119,7 @@
 ## 2.7.0
 
 * Added GitStamp central data node
+
+## 2.8.0
+
+* Added latest commit access from GitStamp node
