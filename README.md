@@ -9,8 +9,7 @@
 [![Commits](https://img.shields.io/github/commit-activity/m/arononak/git_stamp?labelColor=blue&color=white)](https://github.com/arononak/git_stamp/graphs/contributors)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/arononak/git_stamp/.github%2Fworkflows%2Fpublish.yml?labelColor=yellow&color=white)
 
-<details>
-<summary>Table of Contents</summary>
+## Table of contents
   
 - [🏞 Preview](#preview)
 - [🔨 Installation](#installation)
@@ -19,15 +18,13 @@
 - [🖥️ Development](#️development)
 - [📝 License](#license)
 
-</details>
-
-# 🏞️ Preview
+## 🏞️ Preview
 
 | Light                                                                            | Dark                                                                            |
 |:--------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------:|
 | ![](https://github.com/arononak/git_stamp/blob/main/preview_light.png?raw=true)  | ![](https://github.com/arononak/git_stamp/blob/main/preview_dark.png?raw=true)  |
 
-# 🛠️ Installation
+## 🛠️ Installation
 
 ```
   dart pub add git_stamp
@@ -52,7 +49,7 @@ dev_dependencies:
       ref: main
 ```
 
-# 🏗️ Generating
+## 🏗️ Generating
 
 | CLI Command                                                  | Build type | Use ```url_launcher``` |
 |--------------------------------------------------------------|------------|------------------------|
@@ -96,9 +93,9 @@ dev_dependencies:
 |-- pubspec.yaml
 ```
 
-# 💻 Usage
+## 💻 Usage
 
-### Default usage:
+#### Default usage:
 
 ```dart
 if (isProd == false) ...[
@@ -111,7 +108,7 @@ if (isProd == false) ...[
 
 ![](https://github.com/arononak/git_stamp/blob/main/development.png?raw=true)
 
-### Advanced usage:
+#### Advanced usage:
 
 Central GitStamp node:
 
@@ -136,7 +133,7 @@ import 'git_stamp.dart';
 Text(GitStamp.buildDateTime),
 ```
 
-# [🔧 Development](./TODO.md)
+## [🔧 Development](./TODO.md)
 
 | Step                     | Description                                                     |
 |--------------------------|-----------------------------------------------------------------|
@@ -145,7 +142,7 @@ Text(GitStamp.buildDateTime),
 | 🔍 Generated file names  | In README.md                                                    |
 | 🏷️ New tag and push      | Deploy every **Wednesday !**                                    |
 
-# 📝 License
+## 📝 License
 
 > [!NOTE]
 > Copyright © 2024 Aron Onak. All rights reserved.<br>
