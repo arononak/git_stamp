@@ -59,18 +59,16 @@
 <a href="https://pub.dev/packages/git_stamp"><img src="https://img.shields.io/pub/v/git_stamp.svg?labelColor=purple&amp;color=white" alt="Pub Package"></a>
 <a href="https://github.com/arononak/git_stamp/graphs/contributors"><img src="https://img.shields.io/github/commit-activity/m/arononak/git_stamp?labelColor=blue&amp;color=white" alt="Commits"></a>
 <img src="https://img.shields.io/github/actions/workflow/status/arononak/git_stamp/.github%2Fworkflows%2Fpublish.yml?labelColor=yellow&amp;color=white" alt="GitHub Workflow Status"></p>
-<details>
-<summary>Table of Contents</summary>
+<h2 id="table-of-contents">Table of contents</h2>
 <ul>
-<li><a href="#-preview">🏞 Preview</a></li>
-<li><a href="#-installation">🔨 Installation</a></li>
-<li><a href="#-generating">🏗️ Generating</a></li>
-<li><a href="#-usage">💻 Usage</a></li>
-<li><a href="#%EF%B8%8F-development">🖥️ Development</a></li>
-<li><a href="#-license">📝 License</a></li>
+<li><a href="#preview">🏞 Preview</a></li>
+<li><a href="#installation">🔨 Installation</a></li>
+<li><a href="#generating">🏗️ Generating</a></li>
+<li><a href="#usage">💻 Usage</a></li>
+<li><a href="#%EF%B8%8Fdevelopment">🖥️ Development</a></li>
+<li><a href="#license">📝 License</a></li>
 </ul>
-</details>
-<h1 id="-preview">🏞️ Preview</h1>
+<h2 id="-preview">🏞️ Preview</h2>
 <table>
 <thead>
 <tr>
@@ -85,7 +83,7 @@
 </tr>
 </tbody>
 </table>
-<h1 id="-installation">🛠️ Installation</h1>
+<h2 id="-installation">🛠️ Installation</h2>
 <pre class="language-dart"><code>  dart pub add git_stamp
 </code></pre>
 <p>or</p>
@@ -101,7 +99,7 @@ dev_dependencies:
       url: https://github.com/arononak/git_stamp
       ref: main
 </code></pre>
-<h1 id="-generating">🏗️ Generating</h1>
+<h2 id="-generating">🏗️ Generating</h2>
 <table>
 <thead>
 <tr>
@@ -160,8 +158,8 @@ If you use Github Action, you only get a single commit because GitHub Actions by
 |-- windows/
 |-- pubspec.yaml
 </code></pre>
-<h1 id="-usage">💻 Usage</h1>
-<h3 id="default-usage">Default usage:</h3>
+<h2 id="-usage">💻 Usage</h2>
+<h4 id="default-usage">Default usage:</h4>
 <pre class="language-dart"><code class="language-dart">if (isProd == false) ...[
   IconButton(
     onPressed: () =&gt; showGitStampPage(context: context),
@@ -170,7 +168,7 @@ If you use Github Action, you only get a single commit because GitHub Actions by
 ],
 </code></pre>
 <p><img src="https://github.com/arononak/git_stamp/blob/main/development.png?raw=true" alt=""></p>
-<h3 id="advanced-usage">Advanced usage:</h3>
+<h4 id="advanced-usage">Advanced usage:</h4>
 <p>Central GitStamp node:</p>
 <pre class="language-dart"><code class="language-dart">class GitStamp {
   static const buildBranch
@@ -188,7 +186,7 @@ If you use Github Action, you only get a single commit because GitHub Actions by
 
 Text(GitStamp.buildDateTime),
 </code></pre>
-<h1 id="-developmenttodomd"><a href="./TODO.md">🔧 Development</a></h1>
+<h2 id="-developmenttodomd"><a href="./TODO.md">🔧 Development</a></h2>
 <table>
 <thead>
 <tr>
@@ -215,7 +213,7 @@ Text(GitStamp.buildDateTime),
 </tr>
 </tbody>
 </table>
-<h1 id="-license">📝 License</h1>
+<h2 id="-license">📝 License</h2>
 <blockquote>
 <p><code>!NOTE</code>
 Copyright © 2024 Aron Onak. All rights reserved.<br>
