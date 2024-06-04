@@ -11,12 +11,12 @@
 
 ## Table of contents
   
-- [🏞 Preview](#-preview)
-- [🔨 Installation](#-installation)
-- [🏗️ Generating](#-generating)
-- [💻 Usage](#-usage)
-- [🖥️ Development](#️-development)
-- [📝 License](#-license)
+- [🏞️ Preview](#🏞️-preview)
+- [🔨 Installation](#🔨-installation)
+- [🏗️ Generating](#🏗️-generating)
+- [💻 Usage](#💻-usage)
+- [🖥️ Development](#🖥️-development)
+- [📝 License](#📝-license)
 
 ## 🏞️ Preview
 
