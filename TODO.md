@@ -12,10 +12,16 @@ New version every Wednesday !
 - [x] InApp - List - GroupBy day
 - [ ] InApp - List - Filter by author
 - [x] InApp - Details - Commit details page
-- [ ] InApp - Details - Files changes
+- [x] InApp - Details - Files changes
 - [ ] InApp - Git remote config informations
 - [x] InApp - git rev-parse --show-toplevel
 - [ ] InApp - git ls-tree -r --name-only --full-tree origin/main
 - [ ] InApp - flutter --no-version-check --version --machine
 - [ ] InApp - flutter --no-version-check pub pub outdated --json --up-to-date --no-dev-dependencies --no-dependency-overrides
-- [ ] Makefile - make commit argument, make sync history files
+- [ ] GithubActions - dependabot
+- [ ] InApp - Observed files
+- [ ] Git - Remove example project git_stamp files
+- [ ] InApp - Arrow if git diff exists
+- [ ] InApp - Responsive pages
+- [ ] README.md - imports mermaid.js graph
+- [ ] GitStamp 3.0.0 - promo video
