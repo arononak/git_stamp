@@ -59,14 +59,30 @@
 <a href="https://pub.dev/packages/git_stamp"><img src="https://img.shields.io/pub/v/git_stamp.svg?labelColor=purple&amp;color=white" alt="Pub Package"></a>
 <a href="https://github.com/arononak/git_stamp/graphs/contributors"><img src="https://img.shields.io/github/commit-activity/m/arononak/git_stamp?labelColor=blue&amp;color=white" alt="Commits"></a>
 <img src="https://img.shields.io/github/actions/workflow/status/arononak/git_stamp/.github%2Fworkflows%2Fpublish.yml?labelColor=yellow&amp;color=white" alt="GitHub Workflow Status"></p>
+<h3 align="center">
+<a href="https://github.com/arononak/git_stamp">
+<img src="https://github.com/arononak/git_stamp/blob/main/usage.png?raw=true" width="500">
+</a>
+</h3>
 <h2 id="table-of-contents">Table of contents</h2>
 <ul>
-<li><a href="#-preview">Preview</a></li>
-<li><a href="#-installation">Installation</a></li>
-<li><a href="#-generating">Generating</a></li>
-<li><a href="#-usage">Usage</a></li>
-<li><a href="#-development">Development</a></li>
-<li><a href="#-license">License</a></li>
+<li><a href="#git-stamp-">Git Stamp 🏷</a>
+<ul>
+<li><a href="#build-time-git-history-integration-in-your-flutter-app">Build-Time Git History Integration in Your Flutter App</a></li>
+<li><a href="#table-of-contents">Table of contents</a></li>
+<li><a href="#%EF%B8%8F-preview">🏞️ Preview</a></li>
+<li><a href="#%EF%B8%8F-installation">🛠️ Installation</a></li>
+<li><a href="#%EF%B8%8F-generating">🏗️ Generating</a></li>
+<li><a href="#-usage">💻 Usage</a>
+<ul>
+<li><a href="#default-usage">Default usage:</a></li>
+<li><a href="#advanced-usage">Advanced usage:</a></li>
+</ul>
+</li>
+<li><a href="#-development">🔧 Development</a></li>
+<li><a href="#-license">📝 License</a></li>
+</ul>
+</li>
 </ul>
 <h2 id="-preview">🏞️ Preview</h2>
 <table>
@@ -169,7 +185,7 @@ If you use Github Action, you only get a single commit because GitHub Actions by
 </code></pre>
 <p><img src="https://github.com/arononak/git_stamp/blob/main/development.png?raw=true" alt=""></p>
 <h4 id="advanced-usage">Advanced usage:</h4>
-<p>Central GitStamp node:</p>
+<p>Central <strong>GitStamp</strong> node:</p>
 <pre class="language-dart"><code class="language-dart">class GitStamp {
   static const buildBranch
   static const buildDateTime
@@ -179,12 +195,15 @@ If you use Github Action, you only get a single commit because GitHub Actions by
   static const isLiteVersion
   static const jsonOutput
   static const repoPath
+
+  static List&lt;GitStampCommit&gt; commitList
+  static GitStampCommit latestCommit;
 }
 </code></pre>
 <p>Example usage:</p>
 <pre class="language-dart"><code class="language-dart">import 'git_stamp.dart';
 
-Text(GitStamp.buildDateTime),
+Text(GitStamp.latestCommit.hash),
 </code></pre>
 <h2 id="-developmenttodomd"><a href="./TODO.md">🔧 Development</a></h2>
 <table>
