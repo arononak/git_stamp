@@ -9,14 +9,26 @@
 [![Commits](https://img.shields.io/github/commit-activity/m/arononak/git_stamp?labelColor=blue&color=white)](https://github.com/arononak/git_stamp/graphs/contributors)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/arononak/git_stamp/.github%2Fworkflows%2Fpublish.yml?labelColor=yellow&color=white)
 
+<h3 align="center">
+  <a href="https://github.com/arononak/git_stamp">
+    <img src="https://github.com/arononak/git_stamp/blob/main/usage.png?raw=true" width="500" />
+  </a>
+</h3>
+
+
 ## Table of contents
   
-- [Preview](#-preview)
-- [Installation](#-installation)
-- [Generating](#-generating)
-- [Usage](#-usage)
-- [Development](#-development)
-- [License](#-license)
+- [Git Stamp 🏷](#git-stamp-)
+    - [Build-Time Git History Integration in Your Flutter App](#build-time-git-history-integration-in-your-flutter-app)
+  - [Table of contents](#table-of-contents)
+  - [🏞️ Preview](#️-preview)
+  - [🛠️ Installation](#️-installation)
+  - [🏗️ Generating](#️-generating)
+  - [💻 Usage](#-usage)
+      - [Default usage:](#default-usage)
+      - [Advanced usage:](#advanced-usage)
+  - [🔧 Development](#-development)
+  - [📝 License](#-license)
 
 ## 🏞️ Preview
 
