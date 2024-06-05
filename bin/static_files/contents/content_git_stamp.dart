@@ -10,6 +10,7 @@ import 'data/creation_date_output.dart';
 import 'data/diff_output.dart';
 import 'data/generated_version.dart';
 import 'data/json_output.dart';
+import 'data/observed_files.dart';
 import 'data/repo_path_output.dart';
 
 import 'git_stamp_commit.dart';
@@ -23,6 +24,7 @@ class GitStamp {
   static const isLiteVersion = generatedIsLiteVersion;
   static const jsonOutput = generatedJsonOutput;
   static const repoPath = generatedRepoPath;
+  static const observedFiles = generatedObservedFiles;
 
   static List<GitStampCommit> get commitList => json
       .decode(GitStamp.jsonOutput)

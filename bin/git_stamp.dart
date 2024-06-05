@@ -66,11 +66,14 @@ void _generateFiles(bool isLiteVersion, bool urlLauncher) {
     BuildDateTime(),
     BuildSystemInfo(),
     RepoPath(),
+    ObservedFiles(),
+
     GitStampUtils(),
     GitStampLauncher(urlLauncher),
     GitStampCommit(),
     GitStampPage(),
     GitStampDetailsPage(),
+
     GitStampNodeFile(),
   ];
 

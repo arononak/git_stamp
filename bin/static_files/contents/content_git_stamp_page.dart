@@ -1,4 +1,5 @@
 const contentGitStampPage = '''
+import 'package:example/git_stamp/data/observed_files.dart';
 import 'package:example/git_stamp/git_stamp.dart';
 import 'package:example/git_stamp/git_stamp_details_page.dart';
 import 'package:example/git_stamp/git_stamp_launcher.dart';
@@ -12,8 +13,7 @@ void showGitStampPage({
   required BuildContext context,
   bool useRootNavigator = false,
 }) {
-  Navigator.of(context, rootNavigator: useRootNavigator)
-      .push(MaterialPageRoute<void>(
+  Navigator.of(context, rootNavigator: useRootNavigator).push(MaterialPageRoute<void>(
     builder: (BuildContext context) => const GitStampPage(),
   ));
 }
@@ -72,6 +72,33 @@ class GitStampPage extends StatelessWidget {
                         builder: (BuildContext context) {
                           return Container(
                             padding: EdgeInsets.all(16.0),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Repository files',
+                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                                  ),
+                                  SizedBox(height: 16.0),
+                                  Text(generatedObservedFiles),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    icon: const Icon(Icons.folder),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Container(
+                            padding: EdgeInsets.all(16.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -90,8 +117,7 @@ class GitStampPage extends StatelessWidget {
                                     shrinkWrap: true,
                                     children: [
                                       ListTile(
-                                        onTap: () => openEmail(
-                                            email: 'arononak@gmail.com'),
+                                        onTap: () => openEmail(email: 'arononak@gmail.com'),
                                         title: Text(
                                           'Have a great idea for Git Stamp?',
                                           style: TextStyle(
@@ -159,8 +185,7 @@ Widget _buildCommitList(elements) {
             padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             child: Row(
               children: [
-                Icon(Icons.commit,
-                    color: Theme.of(context).colorScheme.secondary),
+                Icon(Icons.commit, color: Theme.of(context).colorScheme.secondary),
                 SizedBox(width: 8),
                 Text(
                   header,
@@ -174,9 +199,7 @@ Widget _buildCommitList(elements) {
               ],
             ),
           ),
-          ...commits
-              .map((commit) => _buildCommitElement(context, commit))
-              .toList()
+          ...commits.map((commit) => _buildCommitElement(context, commit)).toList()
         ],
       );
     },
@@ -204,8 +227,7 @@ Widget _buildCommitElement(context, commit) {
                       ),
                     ),
                     IconButton(
-                      onPressed: () => showGitStampDetailsPage(
-                          context: context, commitHash: commit.hash),
+                      onPressed: () => showGitStampDetailsPage(context: context, commitHash: commit.hash),
                       icon: Icon(Icons.arrow_forward),
                     ),
                   ],
@@ -249,8 +271,7 @@ Widget _buildCommitElement(context, commit) {
               Text(
                 commit.date,
                 style: TextStyle(
-                  color:
-                      Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                 ),
               ),
             ],
@@ -280,11 +301,8 @@ Widget _buildCommitHeader(context, commit) {
             fontStyle: FontStyle.italic,
           ),
         ),
-        const TextSpan(
-            text: ' - ', style: TextStyle(fontWeight: FontWeight.normal)),
-        TextSpan(
-            text: commit.subject,
-            style: const TextStyle(fontWeight: FontWeight.bold)),
+        const TextSpan(text: ' - ', style: TextStyle(fontWeight: FontWeight.normal)),
+        TextSpan(text: commit.subject, style: const TextStyle(fontWeight: FontWeight.bold)),
       ],
     ),
     maxLines: 1,
@@ -328,17 +346,11 @@ Widget _buildRepoDetailsModal(BuildContext context) {
               Text('GitStamp build type: <', style: TextStyle(fontSize: 12)),
               Text('LITE',
                   style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: GitStamp.isLiteVersion
-                          ? FontWeight.bold
-                          : FontWeight.normal)),
+                      fontSize: 12, fontWeight: GitStamp.isLiteVersion ? FontWeight.bold : FontWeight.normal)),
               Text(', ', style: TextStyle(fontSize: 12)),
               Text('FULL',
                   style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: GitStamp.isLiteVersion
-                          ? FontWeight.normal
-                          : FontWeight.bold)),
+                      fontSize: 12, fontWeight: GitStamp.isLiteVersion ? FontWeight.normal : FontWeight.bold)),
               Text('>', style: TextStyle(fontSize: 12)),
             ],
           ),
