@@ -1,4 +1,4 @@
-const generatedGitStampCommit = '''
+const contentGitStampCommit = '''
 class GitStampCommit {
   final String hash;
   final String subject;

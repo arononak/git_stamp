@@ -1,4 +1,4 @@
-const generatedGitStampPage = '''
+const contentGitStampPage = '''
 import 'package:example/git_stamp/git_stamp.dart';
 import 'package:example/git_stamp/git_stamp_details_page.dart';
 import 'package:example/git_stamp/git_stamp_launcher.dart';

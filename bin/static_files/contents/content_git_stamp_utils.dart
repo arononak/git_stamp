@@ -1,4 +1,4 @@
-const generatedGitStampUtils = '''
+const contentGitStampUtils = '''
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

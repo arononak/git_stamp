@@ -1,4 +1,4 @@
-const generatedGitStampDetailsPage = '''
+const contentGitStampDetailsPage = '''
 import 'package:example/git_stamp/git_stamp.dart';
 import 'package:flutter/material.dart';
 

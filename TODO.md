@@ -25,3 +25,4 @@ New version every Wednesday !
 - [ ] InApp - Responsive pages
 - [ ] README.md - imports mermaid.js graph
 - [ ] GitStamp 3.0.0 - promo video
+- [ ] Generator time in ms

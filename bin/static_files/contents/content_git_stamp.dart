@@ -1,4 +1,4 @@
-const generatedGitStamp = '''
+const contentGitStamp = '''
 library git_stamp;
 
 import 'dart:convert';
