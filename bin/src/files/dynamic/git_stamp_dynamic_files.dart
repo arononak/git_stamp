@@ -3,8 +3,8 @@ import 'dart:io';
 
 import 'package:intl/intl.dart';
 
-import '../git_stamp_directory.dart';
-import '../git_stamp_file.dart';
+import '../../git_stamp_directory.dart';
+import '../../git_stamp_file.dart';
 
 class GitLog extends GitStampFile {
   @override
@@ -131,10 +131,10 @@ class GitDiff extends GitStampFile {
   }
 }
 
-class GitStampGeneratedVersion extends GitStampFile {
+class GeneratedGitStampVersion extends GitStampFile {
   final bool isLiteVersion;
 
-  GitStampGeneratedVersion(this.isLiteVersion);
+  GeneratedGitStampVersion(this.isLiteVersion);
 
   @override
   String filename() => '${GitStampDirectory.dataFolder}/generated_version.dart';
@@ -151,7 +151,7 @@ class ObservedFiles extends GitStampFile {
   String content() {
     final toplevel = Process.runSync('git', ['rev-parse', '--show-toplevel']).stdout.toString().trim();
     final files = Process.runSync('git', ['-C', toplevel, 'ls-files']).stdout;
-    
+
     return 'const generatedObservedFiles = """$files""";';
   }
 }

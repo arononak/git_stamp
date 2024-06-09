@@ -1,8 +1,8 @@
-import 'package:example/git_stamp/git_stamp_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'git_stamp/git_stamp.dart';
+import 'git_stamp/src/git_stamp_page.dart';
 
 void main() {
   runApp(ExampleApp());

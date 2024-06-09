@@ -14,14 +14,17 @@
 
 ## Table of contents
   
-- [🏞️ Preview](#️-preview)
-- [🛠️ Installation](#️-installation)
-- [🏗️ Generating](#️-generating)
-- [💻 Usage](#-usage)
-  - [Default usage:](#default-usage)
-  - [Advanced usage:](#advanced-usage)
-- [🔧 Development](#-development)
-- [📝 License](#-license)
+- [Git Stamp 🏷](#git-stamp-)
+      - [Build-Time Git History Integration in Your Flutter App](#build-time-git-history-integration-in-your-flutter-app)
+  - [Table of contents](#table-of-contents)
+  - [🏞️ Preview](#️-preview)
+  - [🛠️ Installation](#️-installation)
+  - [🏗️ Generating](#️-generating)
+  - [💻 Usage](#-usage)
+      - [Default usage:](#default-usage)
+      - [Advanced usage:](#advanced-usage)
+  - [🔧 Development](#-development)
+  - [📝 License](#-license)
 
 ## 🏞️ Preview
 
@@ -145,7 +148,7 @@ Text(GitStamp.latestCommit.hash),
 
 | Step                    | Description                  |
 | ----------------------- | ---------------------------- |
-| 🔧 Run `pana` command   | Check 140/140 points         |
+| 🔧 Run `pana` command   | Check 160/160 points         |
 | 📸 New SS               | Create a new screenshots     |
 | 🔍 Generated file names | In README.md                 |
 | 🏷️ New tag and push     | Deploy every **Wednesday !** |

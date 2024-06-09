@@ -1,6 +1,7 @@
-const contentGitStampDetailsPage = '''
-import 'package:example/git_stamp/git_stamp.dart';
+const rawGitStampDetailsPage = '''
 import 'package:flutter/material.dart';
+
+import '../git_stamp.dart';
 
 void showGitStampDetailsPage({
   required BuildContext context,

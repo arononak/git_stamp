@@ -1,4 +1,4 @@
-const contentGitStampLauncher = '''
+const rawGitStampLauncher = '''
 import 'package:url_launcher/url_launcher.dart';
 
 void openEmail({

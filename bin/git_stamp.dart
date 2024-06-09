@@ -3,9 +3,9 @@
 import 'dart:io';
 import 'package:args/args.dart';
 
-import 'git_stamp_directory.dart';
-import 'dynamic_files/git_stamp_dynamic_files.dart';
-import 'static_files/git_stamp_static_files.dart';
+import 'src/git_stamp_directory.dart';
+import 'src/files/dynamic/git_stamp_dynamic_files.dart';
+import 'src/files/static/git_stamp_static_files.dart';
 
 void main(List<String> arguments) {
   final parser = ArgParser()
@@ -58,7 +58,15 @@ void _generateFiles(bool isLiteVersion, bool urlLauncher) {
   GitStampDirectory.recreateDirectories();
 
   final gitStampFiles = [
-    GitStampGeneratedVersion(isLiteVersion),
+    GitStampMainFile(),
+
+    GitStampUtils(),
+    GitStampLauncher(urlLauncher),
+    GitStampCommit(),
+    GitStampPage(),
+    GitStampDetailsPage(),
+
+    GeneratedGitStampVersion(isLiteVersion),
     GitLog(),
     GitDiff(isLiteVersion),
     GitCreationDate(),
@@ -67,14 +75,6 @@ void _generateFiles(bool isLiteVersion, bool urlLauncher) {
     BuildSystemInfo(),
     RepoPath(),
     ObservedFiles(),
-
-    GitStampUtils(),
-    GitStampLauncher(urlLauncher),
-    GitStampCommit(),
-    GitStampPage(),
-    GitStampDetailsPage(),
-
-    GitStampNodeFile(),
   ];
 
   for (var element in gitStampFiles) {

@@ -1,13 +1,15 @@
-const contentGitStampPage = '''
-import 'package:example/git_stamp/data/observed_files.dart';
-import 'package:example/git_stamp/git_stamp.dart';
-import 'package:example/git_stamp/git_stamp_details_page.dart';
-import 'package:example/git_stamp/git_stamp_launcher.dart';
+const rawGitStampPage = '''
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 
+import '../git_stamp.dart';
+
 import 'git_stamp_commit.dart';
+import 'git_stamp_details_page.dart';
+import 'git_stamp_launcher.dart';
 import 'git_stamp_utils.dart';
+
+import 'data/observed_files.dart';
 
 void showGitStampPage({
   required BuildContext context,

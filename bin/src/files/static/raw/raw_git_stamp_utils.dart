@@ -1,8 +1,8 @@
-const contentGitStampUtils = '''
+const rawGitStampUtils = '''
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'git_stamp.dart';
+import '../git_stamp.dart';
 import 'git_stamp_commit.dart';
 
 void showSnackbar(BuildContext context, String message) {
