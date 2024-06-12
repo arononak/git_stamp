@@ -123,3 +123,8 @@
 ## 2.8.0
 
 * Added latest commit access from GitStamp node
+
+## 2.9.0
+
+* New OOP generator
+* Added Repository Files list
