@@ -70,37 +70,6 @@ dev_dependencies:
 > [!IMPORTANT]  
 > If you use Github Action, you only get a single commit because GitHub Actions by default only retrieves the latest version (single commit) and does not include the full history of the repository. This is normal behavior to optimize the build process and improve performance, especially for large repositories. Try configuring github actions or generating Git Stamp files before `git push`.
 
-```
-|-- android/
-|-- assets/
-|-- build/
-|-- ios/
-|-- lib/
-|   |-- git_stamp/
-|       |-- data/
-|           |-- branch_output.dart
-|           |-- build_date_time_output.dart
-|           |-- build_system_info_output.dart
-|           |-- creation_date_output.dart
-|           |-- diff_output.dart
-|           |-- generated_version.dart
-|           |-- json_output.dart
-|           |-- repo_path_output.dart
-|       |-- git_stamp_commit.dart
-|       |-- git_stamp_details_page.dart
-|       |-- git_stamp_launcher.dart
-|       |-- git_stamp_page.dart
-|       |-- git_stamp_utils.dart
-|       |-- git_stamp.dart
-|   |-- main.dart
-|-- linux/
-|-- macos/
-|-- test/
-|-- web/
-|-- windows/
-|-- pubspec.yaml
-```
-
 ## 💻 Usage
 
 #### Default usage:
@@ -150,7 +119,6 @@ Text(GitStamp.latestCommit.hash),
 | ----------------------- | ---------------------------- |
 | 🔧 Run `pana` command   | Check 160/160 points         |
 | 📸 New SS               | Create a new screenshots     |
-| 🔍 Generated file names | In README.md                 |
 | 🏷️ New tag and push     | Deploy every **Wednesday !** |
 
 ## 📝 License
