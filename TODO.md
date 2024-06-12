@@ -26,3 +26,6 @@ New version every Wednesday !
 - [ ] README.md - imports mermaid.js graph
 - [ ] GitStamp 3.0.0 - promo video
 - [ ] Generator time in ms
+- [ ] CI - dart analize & dart format
+- [ ] CI - Fix generate doc
+- [ ] CI - Auto deploy every 7 days ?
