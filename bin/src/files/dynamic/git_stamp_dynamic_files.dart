@@ -21,9 +21,12 @@ class GitLog extends GitStampFile {
       ],
     ).stdout;
 
-    final logs = LineSplitter.split(gitLogJson).map((line) => json.decode(line)).toList();
+    final logs = LineSplitter.split(gitLogJson)
+        .map((line) => json.decode(line))
+        .toList();
 
-    final logsOutput = '''const generatedJsonOutput = \'\'\'\n${jsonEncode(logs)}\n\'\'\';''';
+    final logsOutput =
+        '''const generatedJsonOutput = \'\'\'\n${jsonEncode(logs)}\n\'\'\';''';
 
     return logsOutput;
   }
@@ -31,16 +34,23 @@ class GitLog extends GitStampFile {
 
 class GitCreationDate extends GitStampFile {
   @override
-  String filename() => '${GitStampDirectory.dataFolder}/creation_date_output.dart';
+  String filename() =>
+      '${GitStampDirectory.dataFolder}/creation_date_output.dart';
 
   @override
   String content() {
     final date = Process.runSync(
       'git',
-      ['log', '--reverse', '--pretty=format:%ad', '--date=format:%Y-%m-%d %H:%M:%S'],
+      [
+        'log',
+        '--reverse',
+        '--pretty=format:%ad',
+        '--date=format:%Y-%m-%d %H:%M:%S'
+      ],
     ).stdout;
 
-    final dateOutput = 'const generatedRepoCreationDate = "${date.toString().split('\n').first.trim()}";';
+    final dateOutput =
+        'const generatedRepoCreationDate = "${date.toString().split('\n').first.trim()}";';
 
     return dateOutput;
   }
@@ -52,9 +62,11 @@ class GitBranch extends GitStampFile {
 
   @override
   String content() {
-    final branch = Process.runSync('git', ['rev-parse', '--abbrev-ref', 'HEAD']).stdout;
+    final branch =
+        Process.runSync('git', ['rev-parse', '--abbrev-ref', 'HEAD']).stdout;
 
-    final branchOutput = 'const generatedBuildBranch = "${branch.toString().trim()}";';
+    final branchOutput =
+        'const generatedBuildBranch = "${branch.toString().trim()}";';
 
     return branchOutput;
   }
@@ -62,13 +74,16 @@ class GitBranch extends GitStampFile {
 
 class BuildDateTime extends GitStampFile {
   @override
-  String filename() => '${GitStampDirectory.dataFolder}/build_date_time_output.dart';
+  String filename() =>
+      '${GitStampDirectory.dataFolder}/build_date_time_output.dart';
 
   @override
   String content() {
-    final buildDateTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
+    final buildDateTime =
+        DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
 
-    final buildDateTimeOutput = 'const generatedBuildDateTime = "${buildDateTime.toString().trim()}";';
+    final buildDateTimeOutput =
+        'const generatedBuildDateTime = "${buildDateTime.toString().trim()}";';
 
     return buildDateTimeOutput;
   }
@@ -76,16 +91,22 @@ class BuildDateTime extends GitStampFile {
 
 class BuildSystemInfo extends GitStampFile {
   @override
-  String filename() => '${GitStampDirectory.dataFolder}/build_system_info_output.dart';
+  String filename() =>
+      '${GitStampDirectory.dataFolder}/build_system_info_output.dart';
 
   @override
   String content() {
     final systemInfo = Process.runSync('flutter', ['doctor']).stdout;
 
-    String? systemInfoParsed =
-        systemInfo.toString().split('\n').where((line) => line.contains('] Flutter')).toList().firstOrNull;
+    String? systemInfoParsed = systemInfo
+        .toString()
+        .split('\n')
+        .where((line) => line.contains('] Flutter'))
+        .toList()
+        .firstOrNull;
 
-    final systemInfoOutput = 'const generatedBuildSystemInfo = "${systemInfoParsed.toString().trim()}";';
+    final systemInfoOutput =
+        'const generatedBuildSystemInfo = "${systemInfoParsed.toString().trim()}";';
 
     return systemInfoOutput;
   }
@@ -97,9 +118,11 @@ class RepoPath extends GitStampFile {
 
   @override
   String content() {
-    final repoPath = Process.runSync('git', ['rev-parse', '--show-toplevel']).stdout;
+    final repoPath =
+        Process.runSync('git', ['rev-parse', '--show-toplevel']).stdout;
 
-    final repoPathOutput = 'const generatedRepoPath = "${repoPath.toString().trim()}";';
+    final repoPathOutput =
+        'const generatedRepoPath = "${repoPath.toString().trim()}";';
 
     return repoPathOutput;
   }
@@ -118,14 +141,20 @@ class GitDiff extends GitStampFile {
     Map<String, String> gitShowMap = {};
 
     if (generateEmpty == false) {
-      final hashes = Process.runSync('git', ['rev-list', '--all']).stdout.toString().trim().split('\n');
+      final hashes = Process.runSync('git', ['rev-list', '--all'])
+          .stdout
+          .toString()
+          .trim()
+          .split('\n');
 
       for (var hash in hashes) {
-        gitShowMap[hash] = Process.runSync('git', ['show', hash]).stdout.toString();
+        gitShowMap[hash] =
+            Process.runSync('git', ['show', hash]).stdout.toString();
       }
     }
 
-    final diffOutput = 'const generatedDiffOutput = <String, String>${jsonEncode(gitShowMap).replaceAll(r'$', r'\$')};';
+    final diffOutput =
+        'const generatedDiffOutput = <String, String>${jsonEncode(gitShowMap).replaceAll(r'$', r'\$')};';
 
     return diffOutput;
   }
@@ -149,7 +178,10 @@ class ObservedFiles extends GitStampFile {
 
   @override
   String content() {
-    final toplevel = Process.runSync('git', ['rev-parse', '--show-toplevel']).stdout.toString().trim();
+    final toplevel = Process.runSync('git', ['rev-parse', '--show-toplevel'])
+        .stdout
+        .toString()
+        .trim();
     final files = Process.runSync('git', ['-C', toplevel, 'ls-files']).stdout;
 
     return 'const generatedObservedFiles = """$files""";';

@@ -59,13 +59,11 @@ void _generateFiles(bool isLiteVersion, bool urlLauncher) {
 
   final gitStampFiles = [
     GitStampMainFile(),
-
     GitStampUtils(),
     GitStampLauncher(urlLauncher),
     GitStampCommit(),
     GitStampPage(),
     GitStampDetailsPage(),
-
     GeneratedGitStampVersion(isLiteVersion),
     GitLog(),
     GitDiff(isLiteVersion),

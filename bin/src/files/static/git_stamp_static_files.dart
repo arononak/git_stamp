@@ -32,7 +32,8 @@ class GitStampLauncher extends GitStampFile {
   String filename() => '${GitStampDirectory.srcFolder}/git_stamp_launcher.dart';
 
   @override
-  String content() => useUrlLauncher ? rawGitStampUtils : rawGitStampLauncherEmpty;
+  String content() =>
+      useUrlLauncher ? rawGitStampUtils : rawGitStampLauncherEmpty;
 }
 
 class GitStampCommit extends GitStampFile {
@@ -53,7 +54,8 @@ class GitStampPage extends GitStampFile {
 
 class GitStampDetailsPage extends GitStampFile {
   @override
-  String filename() => '${GitStampDirectory.srcFolder}/git_stamp_details_page.dart';
+  String filename() =>
+      '${GitStampDirectory.srcFolder}/git_stamp_details_page.dart';
 
   @override
   String content() => rawGitStampDetailsPage;
