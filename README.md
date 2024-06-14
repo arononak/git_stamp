@@ -110,7 +110,10 @@ Example usage:
 ```dart
 import 'git_stamp.dart';
 
-Text(GitStamp.latestCommit.hash),
+Text('Version: v1.2.3'),
+Text('Build: 1234'),
+Text('Branch: ${GitStamp.buildBranch}'),
+Text('SHA: ${GitStamp.latestCommit.hash}'),
 ```
 
 ## [🔧 Development](./TODO.md)
