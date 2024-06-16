@@ -20,8 +20,15 @@ void showGitStampPage({
   ));
 }
 
-class GitStampPage extends StatelessWidget {
+class GitStampPage extends StatefulWidget {
   const GitStampPage({super.key});
+
+  @override
+  State<GitStampPage> createState() => _GitStampPageState();
+}
+
+class _GitStampPageState extends State<GitStampPage> {
+  String? _filterAuthorName;
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +68,60 @@ class GitStampPage extends StatelessWidget {
                       showModalBottomSheet(
                         context: context,
                         builder: (BuildContext context) {
+                          return Container(
+                            padding: EdgeInsets.all(16.0),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  Text('Filter',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold)),
+                                  SizedBox(height: 20),
+                                  Flexible(
+                                    child: ListView(
+                                      shrinkWrap: true,
+                                      children: <String?>[
+                                        null,
+                                        ...commitAuthors()
+                                      ]
+                                          .map(
+                                            (e) => ListTile(
+                                              leading: Icon(e != null
+                                                  ? Icons.person
+                                                  : Icons.close),
+                                              title: Text(
+                                                e != null ? e : 'No filter',
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 12),
+                                              ),
+                                              onTap: () {
+                                                Navigator.pop(context);
+                                                setState(() =>
+                                                    _filterAuthorName = e);
+                                              },
+                                            ),
+                                          )
+                                          .toList(),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    icon: const Icon(Icons.filter_list),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (BuildContext context) {
                           return _buildRepoDetailsModal(context);
                         },
                       );
@@ -81,7 +142,9 @@ class GitStampPage extends StatelessWidget {
                                 children: [
                                   Text(
                                     'Repository files',
-                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16),
                                   ),
                                   SizedBox(height: 16.0),
                                   Text(generatedObservedFiles),
@@ -119,7 +182,8 @@ class GitStampPage extends StatelessWidget {
                                     shrinkWrap: true,
                                     children: [
                                       ListTile(
-                                        onTap: () => openEmail(email: 'arononak@gmail.com'),
+                                        onTap: () => openEmail(
+                                            email: 'arononak@gmail.com'),
                                         title: Text(
                                           'Have a great idea for Git Stamp?',
                                           style: TextStyle(
@@ -157,16 +221,19 @@ class GitStampPage extends StatelessWidget {
           ),
         ),
       ),
-      body: _buildCommitList(GitStamp.commitList),
+      body: _buildCommitList(GitStamp.commitList, _filterAuthorName),
     );
   }
 }
 
-Widget _buildCommitList(elements) {
+Widget _buildCommitList(
+    List<GitStampCommit> elements, String? filterAuthorName) {
   Map<String, List<GitStampCommit>> groupedCommit = groupBy(
-    elements,
+    elements.where((e) =>
+        filterAuthorName == null ? true : e.authorName == filterAuthorName),
     (element) {
       DateTime date = DateTime.parse(element.date);
+
       return date.year.toString() +
           '-' +
           date.month.toString().padLeft(2, '0') +
@@ -187,7 +254,8 @@ Widget _buildCommitList(elements) {
             padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             child: Row(
               children: [
-                Icon(Icons.commit, color: Theme.of(context).colorScheme.secondary),
+                Icon(Icons.commit,
+                    color: Theme.of(context).colorScheme.secondary),
                 SizedBox(width: 8),
                 Text(
                   header,
@@ -201,7 +269,9 @@ Widget _buildCommitList(elements) {
               ],
             ),
           ),
-          ...commits.map((commit) => _buildCommitElement(context, commit)).toList()
+          ...commits
+              .map((commit) => _buildCommitElement(context, commit))
+              .toList()
         ],
       );
     },
@@ -229,7 +299,8 @@ Widget _buildCommitElement(context, commit) {
                       ),
                     ),
                     IconButton(
-                      onPressed: () => showGitStampDetailsPage(context: context, commitHash: commit.hash),
+                      onPressed: () => showGitStampDetailsPage(
+                          context: context, commitHash: commit.hash),
                       icon: Icon(Icons.arrow_forward),
                     ),
                   ],
@@ -273,7 +344,8 @@ Widget _buildCommitElement(context, commit) {
               Text(
                 commit.date,
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                  color:
+                      Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                 ),
               ),
             ],
@@ -303,8 +375,11 @@ Widget _buildCommitHeader(context, commit) {
             fontStyle: FontStyle.italic,
           ),
         ),
-        const TextSpan(text: ' - ', style: TextStyle(fontWeight: FontWeight.normal)),
-        TextSpan(text: commit.subject, style: const TextStyle(fontWeight: FontWeight.bold)),
+        const TextSpan(
+            text: ' - ', style: TextStyle(fontWeight: FontWeight.normal)),
+        TextSpan(
+            text: commit.subject,
+            style: const TextStyle(fontWeight: FontWeight.bold)),
       ],
     ),
     maxLines: 1,
@@ -348,11 +423,17 @@ Widget _buildRepoDetailsModal(BuildContext context) {
               Text('GitStamp build type: <', style: TextStyle(fontSize: 12)),
               Text('LITE',
                   style: TextStyle(
-                      fontSize: 12, fontWeight: GitStamp.isLiteVersion ? FontWeight.bold : FontWeight.normal)),
+                      fontSize: 12,
+                      fontWeight: GitStamp.isLiteVersion
+                          ? FontWeight.bold
+                          : FontWeight.normal)),
               Text(', ', style: TextStyle(fontSize: 12)),
               Text('FULL',
                   style: TextStyle(
-                      fontSize: 12, fontWeight: GitStamp.isLiteVersion ? FontWeight.normal : FontWeight.bold)),
+                      fontSize: 12,
+                      fontWeight: GitStamp.isLiteVersion
+                          ? FontWeight.normal
+                          : FontWeight.bold)),
               Text('>', style: TextStyle(fontSize: 12)),
             ],
           ),

@@ -10,7 +10,7 @@ New version every Wednesday !
 - [x] InApp - generate version from git tag
 - [x] InApp - Open author email in app
 - [x] InApp - List - GroupBy day
-- [ ] InApp - List - Filter by author
+- [x] InApp - List - Filter by author
 - [x] InApp - Details - Commit details page
 - [x] InApp - Details - Files changes
 - [ ] InApp - Git remote config informations

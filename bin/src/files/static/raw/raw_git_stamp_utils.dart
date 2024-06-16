@@ -30,6 +30,16 @@ Map<String, int> commitCountByAuthor() {
   return map;
 }
 
+List<String> commitAuthors() {
+  Set<String> authors = {};
+
+  for (GitStampCommit commit in GitStamp.commitList) {
+    authors.add(commit.authorName);
+  }
+
+  return authors.toList();
+}
+
 List<String> parseBuildSystemInfo(text) {
   List<String> elements = RegExp(r'\\((.*?)\\)').firstMatch(text)?.group(1)?.split(', ') ?? [];
 
