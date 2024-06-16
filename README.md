@@ -23,7 +23,7 @@
   - [💻 Usage](#-usage)
       - [Default usage:](#default-usage)
       - [Advanced usage:](#advanced-usage)
-  - [🔧 Development](#-development)
+  - [🔧 Git Stamp - Development](#-git-stamp-development)
   - [📝 License](#-license)
 
 ## 🏞️ Preview
@@ -116,13 +116,36 @@ Text('Branch: ${GitStamp.buildBranch}'),
 Text('SHA: ${GitStamp.latestCommit.hash}'),
 ```
 
-## [🔧 Development](./TODO.md)
+## [🔧 Git Stamp - Development](./TODO.md)
+
+```mermaid
+graph TD
+    CODE((SOURCE CODE))-->SYNC(flutter pub get)
+    SYNC-->BUILD(flutter build ...)
+    GENERATOR(GENERATOR)-->|dart pub add git_stamp|PUB
+
+    subgraph "App"
+        CODE
+        PUB
+        PUB((PACKAGES))-->CODE
+    end
+
+    subgraph "Git Stamp"
+        GIT_CLI(GIT CLI)-->GENERATOR
+        DART_CLI(DART CLI)-->GENERATOR
+        FLUTTER_CLI(FLUTTER CLI)-->GENERATOR
+
+        GENERATOR-->|dart run git_stamp|CODE
+    end
+```
 
 | Step                    | Description                  |
 | ----------------------- | ---------------------------- |
 | 🔧 Run `pana` command   | Check 160/160 points         |
 | 📸 New SS               | Create a new screenshots     |
 | 🏷️ New tag and push     | Deploy every **Wednesday !** |
+
+#### Package structure
 
 ## 📝 License
 
