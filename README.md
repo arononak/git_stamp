@@ -144,7 +144,7 @@ graph TD
     ADD-->|Add package|PUB
 
     GENERATOR-->GENERATE(~$ dart run git_stamp)
-    GENERATE-->|Create /git_stamp directory|CODE
+    GENERATE-->|Create ./git_stamp directory with .dart files|CODE
 ```
 
 | Step                    | Description                  |
