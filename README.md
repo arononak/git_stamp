@@ -122,7 +122,6 @@ Text('SHA: ${GitStamp.latestCommit.hash}'),
 graph TD
     CODE((SOURCE CODE))-->SYNC(flutter pub get)
     SYNC-->BUILD(flutter build ...)
-    GENERATOR(GENERATOR)-->|dart pub add git_stamp|PUB
 
     subgraph "App"
         CODE
@@ -134,9 +133,18 @@ graph TD
         GIT_CLI(GIT CLI)-->GENERATOR
         DART_CLI(DART CLI)-->GENERATOR
         FLUTTER_CLI(FLUTTER CLI)-->GENERATOR
-
-        GENERATOR-->|dart run git_stamp|CODE
     end
+
+    subgraph "Git Stamp CLI"
+        GENERATE
+        ADD
+    end
+
+    GENERATOR((GENERATOR))-->ADD(~$ dart pub add git_stamp)
+    ADD-->|Add package|PUB
+
+    GENERATOR-->GENERATE(~$ dart run git_stamp)
+    GENERATE-->|Create /git_stamp directory|CODE
 ```
 
 | Step                    | Description                  |
