@@ -32,6 +32,35 @@
 | :-----------------------------------------------------------------------------: | :----------------------------------------------------------------------------: |
 | ![](https://github.com/arononak/git_stamp/blob/main/preview_light.png?raw=true) | ![](https://github.com/arononak/git_stamp/blob/main/preview_dark.png?raw=true) |
 
+```mermaid
+graph TD
+    CODE((SOURCE CODE))-->SYNC(flutter pub get)
+    SYNC-->BUILD(flutter build ...)
+
+    subgraph "App"
+        CODE
+        PUB
+        PUB((PACKAGES))-->CODE
+    end
+
+    subgraph "Git Stamp"
+        GIT_CLI(GIT CLI)-->GENERATOR
+        DART_CLI(DART CLI)-->GENERATOR
+        FLUTTER_CLI(FLUTTER CLI)-->GENERATOR
+    end
+
+    subgraph "Git Stamp CLI"
+        GENERATE
+        ADD
+    end
+
+    GENERATOR((GENERATOR))-->ADD(~$ dart pub add git_stamp)
+    ADD-->|Add package|PUB
+
+    GENERATOR-->GENERATE(~$ dart run git_stamp)
+    GENERATE-->|Create ./git_stamp directory with .dart files|CODE
+```
+
 ## 🛠️ Installation
 
 ```
@@ -57,6 +86,11 @@ dev_dependencies:
       ref: main
 ```
 
+> [!IMPORTANT]
+> Add **git_stamp** to .gitignore.
+> 
+> ```echo "lib/git_stamp/" >> .gitignore```.
+
 ## 🏗️ Generating
 
 | CLI Command                                                  | Build type | Use ```url_launcher``` |
@@ -67,7 +101,7 @@ dev_dependencies:
 > [!CAUTION]
 > Generating requires the use of the `git` command-line interface (CLI).
 
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > If you use Github Action, you only get a single commit because GitHub Actions by default only retrieves the latest version (single commit) and does not include the full history of the repository. This is normal behavior to optimize the build process and improve performance, especially for large repositories. Try configuring github actions or generating Git Stamp files before `git push`.
 
 ## 💻 Usage
@@ -117,35 +151,6 @@ Text('SHA: ${GitStamp.latestCommit.hash}'),
 ```
 
 ## [🔧 Git Stamp - Development](./TODO.md)
-
-```mermaid
-graph TD
-    CODE((SOURCE CODE))-->SYNC(flutter pub get)
-    SYNC-->BUILD(flutter build ...)
-
-    subgraph "App"
-        CODE
-        PUB
-        PUB((PACKAGES))-->CODE
-    end
-
-    subgraph "Git Stamp"
-        GIT_CLI(GIT CLI)-->GENERATOR
-        DART_CLI(DART CLI)-->GENERATOR
-        FLUTTER_CLI(FLUTTER CLI)-->GENERATOR
-    end
-
-    subgraph "Git Stamp CLI"
-        GENERATE
-        ADD
-    end
-
-    GENERATOR((GENERATOR))-->ADD(~$ dart pub add git_stamp)
-    ADD-->|Add package|PUB
-
-    GENERATOR-->GENERATE(~$ dart run git_stamp)
-    GENERATE-->|Create ./git_stamp directory with .dart files|CODE
-```
 
 | Step                    | Description                  |
 | ----------------------- | ---------------------------- |
