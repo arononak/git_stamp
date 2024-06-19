@@ -128,3 +128,7 @@
 
 * New OOP generator
 * Added Repository Files list
+
+## 2.10.0
+
+* GitStampPage - Added filter by author
