@@ -18,6 +18,7 @@
       - [Build-Time Git History Integration in Your Flutter App](#build-time-git-history-integration-in-your-flutter-app)
   - [Table of contents](#table-of-contents)
   - [🏞️ Preview](#️-preview)
+  - [🕯️ Mechanism](#️-mechanism)
   - [🛠️ Installation](#️-installation)
   - [🏗️ Generating](#️-generating)
   - [💻 Usage](#-usage)
@@ -31,6 +32,8 @@
 |                                      Light                                      |                                      Dark                                      |
 | :-----------------------------------------------------------------------------: | :----------------------------------------------------------------------------: |
 | ![](https://github.com/arononak/git_stamp/blob/main/preview_light.png?raw=true) | ![](https://github.com/arononak/git_stamp/blob/main/preview_dark.png?raw=true) |
+
+## 🕯️ Mechanism
 
 ```mermaid
 graph TD
