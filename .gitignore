@@ -21,3 +21,5 @@ pubspec.lock
 
 .flutter-plugins
 .flutter-plugins-dependencies
+
+example/lib/git_stamp/
