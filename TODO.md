@@ -18,9 +18,9 @@ New version every Wednesday !
 - [ ] InApp - git ls-tree -r --name-only --full-tree origin/main
 - [ ] InApp - flutter --no-version-check --version --machine
 - [ ] InApp - flutter --no-version-check pub pub outdated --json --up-to-date --no-dev-dependencies --no-dependency-overrides
-- [ ] GithubActions - dependabot
-- [ ] InApp - Observed files
-- [ ] Git - Remove example project git_stamp files
+- [ ] CI - dependabot
+- [x] InApp - Observed files
+- [x] Git - Remove example project git_stamp files
 - [ ] InApp - Arrow if git diff exists
 - [ ] InApp - Responsive pages
 - [ ] README.md - imports mermaid.js graph
@@ -29,3 +29,5 @@ New version every Wednesday !
 - [ ] CI - dart analize & dart format
 - [ ] CI - Fix generate doc
 - [ ] CI - Auto deploy every 7 days ?
+- [ ] InApp - last commit tag
+- [ ] InApp - repo url - origin
