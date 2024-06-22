@@ -36,5 +36,4 @@ class GitStampDetailsPage extends StatelessWidget {
     );
   }
 }
-
 ''';

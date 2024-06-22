@@ -4,13 +4,6 @@ import 'package:collection/collection.dart';
 
 import '../git_stamp.dart';
 
-import 'git_stamp_commit.dart';
-import 'git_stamp_details_page.dart';
-import 'git_stamp_launcher.dart';
-import 'git_stamp_utils.dart';
-
-import 'data/observed_files.dart';
-
 void showGitStampPage({
   required BuildContext context,
   bool useRootNavigator = false,
@@ -147,7 +140,7 @@ class _GitStampPageState extends State<GitStampPage> {
                                         fontSize: 16),
                                   ),
                                   SizedBox(height: 16.0),
-                                  Text(generatedObservedFiles),
+                                  Text(GitStamp.observedFiles),
                                 ],
                               ),
                             ),
@@ -504,5 +497,4 @@ Widget _buildRepoDetailsModal(BuildContext context) {
     ),
   );
 }
-
 ''';

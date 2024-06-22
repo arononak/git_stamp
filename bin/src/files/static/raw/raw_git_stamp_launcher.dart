@@ -25,5 +25,4 @@ void openProjectHomepage() {
     path: 'arononak/git_stamp',
   ));
 }
-
 ''';

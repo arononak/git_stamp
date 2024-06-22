@@ -15,6 +15,12 @@ import 'src/data/json_output.dart';
 import 'src/data/observed_files.dart';
 import 'src/data/repo_path_output.dart';
 
+export 'src/git_stamp_commit.dart';
+export 'src/git_stamp_details_page.dart';
+export 'src/git_stamp_launcher.dart';
+export 'src/git_stamp_page.dart';
+export 'src/git_stamp_utils.dart';
+
 class GitStamp {
   static const buildBranch = generatedBuildBranch;
   static const buildDateTime = generatedBuildDateTime;
@@ -33,5 +39,4 @@ class GitStamp {
 
   static GitStampCommit get latestCommit => commitList.first;
 }
-
 ''';

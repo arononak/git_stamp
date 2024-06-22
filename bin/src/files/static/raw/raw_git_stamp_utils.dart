@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../git_stamp.dart';
-import 'git_stamp_commit.dart';
 
 void showSnackbar(BuildContext context, String message) {
   ScaffoldMessenger.of(context).showSnackBar(
@@ -45,5 +44,4 @@ List<String> parseBuildSystemInfo(text) {
 
   return elements.isEmpty ? ["No data :/"] : elements;
 }
-
 ''';

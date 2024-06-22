@@ -22,5 +22,4 @@ class GitStampCommit {
         authorEmail: json['authorEmail'],
       );
 }
-
 ''';
