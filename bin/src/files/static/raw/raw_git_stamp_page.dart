@@ -4,6 +4,10 @@ import 'package:collection/collection.dart';
 
 import '../git_stamp.dart';
 
+const _text = TextStyle(fontSize: 12);
+const _textBold = TextStyle(fontSize: 12, fontWeight: FontWeight.bold);
+const _textTitle = TextStyle(fontSize: 16, fontWeight: FontWeight.bold);
+
 void showGitStampPage({
   required BuildContext context,
   bool useRootNavigator = false,
@@ -62,39 +66,28 @@ class _GitStampPageState extends State<GitStampPage> {
                         context: context,
                         builder: (BuildContext context) {
                           return Container(
-                            padding: EdgeInsets.all(16.0),
+                            padding: EdgeInsets.symmetric(vertical: 16.0),
                             child: SingleChildScrollView(
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
-                                  Text('Filter',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold)),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                                    child: Text('Filter', style: _textTitle),
+                                  ),
                                   SizedBox(height: 20),
                                   Flexible(
                                     child: ListView(
                                       shrinkWrap: true,
-                                      children: <String?>[
-                                        null,
-                                        ...commitAuthors()
-                                      ]
+                                      children: <String?>[null, ...commitAuthors()]
                                           .map(
                                             (e) => ListTile(
-                                              leading: Icon(e != null
-                                                  ? Icons.person
-                                                  : Icons.close),
-                                              title: Text(
-                                                e != null ? e : 'No filter',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 12),
-                                              ),
+                                              leading: Icon(e != null ? Icons.person : Icons.close),
+                                              title: Text(e != null ? e : 'No filter', style: _textBold),
                                               onTap: () {
                                                 Navigator.pop(context);
-                                                setState(() =>
-                                                    _filterAuthorName = e);
+                                                setState(() => _filterAuthorName = e);
                                               },
                                             ),
                                           )
@@ -133,14 +126,9 @@ class _GitStampPageState extends State<GitStampPage> {
                                 mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    'Repository files',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16),
-                                  ),
+                                  Text('Repository files', style: _textTitle),
                                   SizedBox(height: 16.0),
-                                  Text(GitStamp.observedFiles),
+                                  Text(GitStamp.observedFiles, style: _text),
                                 ],
                               ),
                             ),
@@ -156,18 +144,14 @@ class _GitStampPageState extends State<GitStampPage> {
                         context: context,
                         builder: (BuildContext context) {
                           return Container(
-                            padding: EdgeInsets.all(16.0),
+                            padding: EdgeInsets.symmetric(vertical: 16.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                Text(
-                                  'Git Stamp',
-                                  style: TextStyle(
-                                    fontSize: 28,
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: 1.2,
-                                  ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                  child: Text('Git Stamp', style: _textTitle),
                                 ),
                                 SizedBox(height: 20),
                                 Flexible(
@@ -175,27 +159,14 @@ class _GitStampPageState extends State<GitStampPage> {
                                     shrinkWrap: true,
                                     children: [
                                       ListTile(
-                                        onTap: () => openEmail(
-                                            email: 'arononak@gmail.com'),
-                                        title: Text(
-                                          'Have a great idea for Git Stamp?',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                        trailing: Icon(Icons.mail),
+                                        onTap: () => openEmail(email: 'arononak@gmail.com'),
+                                        title: Text('Have a great idea for Git Stamp?', style: _textBold),
+                                        leading: Icon(Icons.mail),
                                       ),
                                       ListTile(
                                         onTap: () => openProjectHomepage(),
-                                        title: Text(
-                                          'You love Git Stamp?',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                        trailing: Icon(Icons.star),
+                                        title: Text('You love Git Stamp?', style: _textBold),
+                                        leading: Icon(Icons.star),
                                       ),
                                     ],
                                   ),
@@ -219,11 +190,9 @@ class _GitStampPageState extends State<GitStampPage> {
   }
 }
 
-Widget _buildCommitList(
-    List<GitStampCommit> elements, String? filterAuthorName) {
+Widget _buildCommitList(List<GitStampCommit> elements, String? filterAuthorName) {
   Map<String, List<GitStampCommit>> groupedCommit = groupBy(
-    elements.where((e) =>
-        filterAuthorName == null ? true : e.authorName == filterAuthorName),
+    elements.where((e) => filterAuthorName == null ? true : e.authorName == filterAuthorName),
     (element) {
       DateTime date = DateTime.parse(element.date);
 
@@ -247,8 +216,7 @@ Widget _buildCommitList(
             padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             child: Row(
               children: [
-                Icon(Icons.commit,
-                    color: Theme.of(context).colorScheme.secondary),
+                Icon(Icons.commit, color: Theme.of(context).colorScheme.secondary),
                 SizedBox(width: 8),
                 Text(
                   header,
@@ -262,9 +230,7 @@ Widget _buildCommitList(
               ],
             ),
           ),
-          ...commits
-              .map((commit) => _buildCommitElement(context, commit))
-              .toList()
+          ...commits.map((commit) => _buildCommitElement(context, commit)).toList()
         ],
       );
     },
@@ -292,8 +258,7 @@ Widget _buildCommitElement(context, commit) {
                       ),
                     ),
                     IconButton(
-                      onPressed: () => showGitStampDetailsPage(
-                          context: context, commitHash: commit.hash),
+                      onPressed: () => showGitStampDetailsPage(context: context, commitHash: commit.hash),
                       icon: Icon(Icons.arrow_forward),
                     ),
                   ],
@@ -337,8 +302,7 @@ Widget _buildCommitElement(context, commit) {
               Text(
                 commit.date,
                 style: TextStyle(
-                  color:
-                      Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                 ),
               ),
             ],
@@ -368,11 +332,8 @@ Widget _buildCommitHeader(context, commit) {
             fontStyle: FontStyle.italic,
           ),
         ),
-        const TextSpan(
-            text: ' - ', style: TextStyle(fontWeight: FontWeight.normal)),
-        TextSpan(
-            text: commit.subject,
-            style: const TextStyle(fontWeight: FontWeight.bold)),
+        const TextSpan(text: ' - ', style: TextStyle(fontWeight: FontWeight.normal)),
+        TextSpan(text: commit.subject, style: const TextStyle(fontWeight: FontWeight.bold)),
       ],
     ),
     maxLines: 1,
@@ -383,14 +344,8 @@ Widget _buildCommitHeader(context, commit) {
 Widget _buildDoubleText(String left, String right) {
   return Row(
     children: [
-      Text(
-        left,
-        style: TextStyle(fontSize: 12),
-      ),
-      Text(
-        right,
-        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-      ),
+      Text(left, style: _text),
+      Text(right, style: _textBold),
     ],
   );
 }
@@ -403,38 +358,22 @@ Widget _buildRepoDetailsModal(BuildContext context) {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Build',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
+          Text('Build', style: _textTitle),
           const SizedBox(height: 4),
           _buildDoubleText('Date: ', GitStamp.buildDateTime),
           _buildDoubleText('Path: ', GitStamp.repoPath),
           _buildDoubleText('Branch: ', GitStamp.buildBranch),
           Row(
             children: [
-              Text('GitStamp build type: <', style: TextStyle(fontSize: 12)),
-              Text('LITE',
-                  style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: GitStamp.isLiteVersion
-                          ? FontWeight.bold
-                          : FontWeight.normal)),
-              Text(', ', style: TextStyle(fontSize: 12)),
-              Text('FULL',
-                  style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: GitStamp.isLiteVersion
-                          ? FontWeight.normal
-                          : FontWeight.bold)),
-              Text('>', style: TextStyle(fontSize: 12)),
+              Text('GitStamp build type: [', style: _text),
+              Text('LITE', style: GitStamp.isLiteVersion ? _textBold : _text),
+              Text(', ', style: _text),
+              Text('FULL', style: GitStamp.isLiteVersion ? _text : _textBold),
+              Text(']', style: _text),
             ],
           ),
           const SizedBox(height: 32),
-          Text(
-            'Environment',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
+          Text('Environment', style: _textTitle),
           const SizedBox(height: 4),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -447,7 +386,7 @@ Widget _buildRepoDetailsModal(BuildContext context) {
                   softWrap: true,
                   maxLines: 5,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontSize: 12),
+                  style: _text,
                 ),
               ),
               IconButton(
@@ -460,35 +399,20 @@ Widget _buildRepoDetailsModal(BuildContext context) {
             ],
           ),
           const SizedBox(height: 32),
-          Text(
-            'Repository',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
+          Text('Repository', style: _textTitle),
           const SizedBox(height: 4),
           _buildDoubleText('Created: ', GitStamp.repoCreationDate),
           _buildDoubleText(
             'Commit count: ',
             GitStamp.commitList.length.toString(),
           ),
-          Text(
-            'Commit stats:',
-            style: TextStyle(fontSize: 12),
-          ),
+          Text('Commit stats:', style: _text),
           ...commitCountByAuthor().entries.map(
                 (entry) => Row(
                   children: [
                     SizedBox(width: 16),
-                    Text(
-                      entry.key + ': ',
-                      style: TextStyle(fontSize: 12),
-                    ),
-                    Text(
-                      entry.value.toString(),
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    Text(entry.key + ': ', style: _text),
+                    Text(entry.value.toString(), style: _textBold),
                   ],
                 ),
               ),
