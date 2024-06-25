@@ -132,3 +132,9 @@
 ## 2.10.0
 
 * GitStampPage - Added filter by author
+
+## 2.11.0
+
+* Import refactor
+* Generator - Added ASCII logo-text
+* GitStampPage - Font refactor
