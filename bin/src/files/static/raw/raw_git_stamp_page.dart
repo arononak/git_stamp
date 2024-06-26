@@ -128,7 +128,7 @@ class _GitStampPageState extends State<GitStampPage> {
                                 children: [
                                   Text('Repository files', style: _textTitle),
                                   SizedBox(height: 16.0),
-                                  Text(GitStamp.observedFiles, style: _text),
+                                  Text(GitStamp.observedFilesList, style: _text),
                                 ],
                               ),
                             ),
@@ -265,7 +265,7 @@ Widget _buildCommitElement(context, commit) {
                 ),
                 Expanded(
                   child: SingleChildScrollView(
-                    child: Text(GitStamp.diffOutput[commit.hash ?? ''] ?? ''),
+                    child: Text(GitStamp.diffList[commit.hash ?? ''] ?? ''),
                   ),
                 ),
               ],

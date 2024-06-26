@@ -1,6 +1,7 @@
 import 'raw/raw_git_stamp.dart';
 import 'raw/raw_git_stamp_commit.dart';
 import 'raw/raw_git_stamp_details_page.dart';
+import 'raw/raw_git_stamp_launcher.dart';
 import 'raw/raw_git_stamp_launcher_empty.dart';
 import 'raw/raw_git_stamp_page.dart';
 import 'raw/raw_git_stamp_utils.dart';
@@ -33,7 +34,7 @@ class GitStampLauncher extends GitStampFile {
 
   @override
   String content() =>
-      useUrlLauncher ? rawGitStampUtils : rawGitStampLauncherEmpty;
+      useUrlLauncher ? rawGitStampLauncher : rawGitStampLauncherEmpty;
 }
 
 class GitStampCommit extends GitStampFile {

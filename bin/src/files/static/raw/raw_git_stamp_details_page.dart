@@ -30,7 +30,7 @@ class GitStampDetailsPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(16.0),
-          child: Text(GitStamp.diffOutput[commitHash] ?? ''),
+          child: Text(GitStamp.diffList[commitHash] ?? ''),
         ),
       ),
     );

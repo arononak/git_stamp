@@ -73,15 +73,15 @@ void _generateFiles(bool isLiteVersion, bool urlLauncher) {
     GitStampCommit(),
     GitStampPage(),
     GitStampDetailsPage(),
-    GeneratedGitStampVersion(isLiteVersion),
-    GitLog(),
-    GitDiff(isLiteVersion),
-    GitCreationDate(),
-    GitBranch(),
+    IsLiteVersion(isLiteVersion),
+    CommitList(),
+    DiffList(isLiteVersion),
+    RepoCreationDate(),
+    BuildBranch(),
     BuildDateTime(),
     BuildSystemInfo(),
     RepoPath(),
-    ObservedFiles(),
+    ObservedFilesList(),
   ];
 
   for (var element in gitStampFiles) {

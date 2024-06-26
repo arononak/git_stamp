@@ -3,17 +3,16 @@ library git_stamp;
 
 import 'dart:convert';
 
+import 'src/data/build_branch.dart';
+import 'src/data/build_date_time.dart';
+import 'src/data/build_system_info.dart';
+import 'src/data/commit_list.dart';
+import 'src/data/diff_list.dart';
+import 'src/data/is_lite_version.dart';
+import 'src/data/observed_files_list.dart';
+import 'src/data/repo_creation_date.dart';
+import 'src/data/repo_path.dart';
 import 'src/git_stamp_commit.dart';
-
-import 'src/data/branch_output.dart';
-import 'src/data/build_date_time_output.dart';
-import 'src/data/build_system_info_output.dart';
-import 'src/data/creation_date_output.dart';
-import 'src/data/diff_output.dart';
-import 'src/data/generated_version.dart';
-import 'src/data/json_output.dart';
-import 'src/data/observed_files.dart';
-import 'src/data/repo_path_output.dart';
 
 export 'src/git_stamp_commit.dart';
 export 'src/git_stamp_details_page.dart';
@@ -22,21 +21,21 @@ export 'src/git_stamp_page.dart';
 export 'src/git_stamp_utils.dart';
 
 class GitStamp {
-  static const buildBranch = generatedBuildBranch;
-  static const buildDateTime = generatedBuildDateTime;
-  static const buildSystemInfo = generatedBuildSystemInfo;
-  static const repoCreationDate = generatedRepoCreationDate;
-  static const diffOutput = generatedDiffOutput;
-  static const isLiteVersion = generatedIsLiteVersion;
-  static const jsonOutput = generatedJsonOutput;
-  static const repoPath = generatedRepoPath;
-  static const observedFiles = generatedObservedFiles;
-
   static List<GitStampCommit> get commitList => json
-      .decode(GitStamp.jsonOutput)
+      .decode(gitStampCommitList)
       .map<GitStampCommit>((json) => GitStampCommit.fromJson(json))
       .toList();
 
+  static const Map<String, String> diffList = gitStampDiffList;
+
   static GitStampCommit get latestCommit => commitList.first;
+
+  static const String buildBranch = gitStampBuildBranch;
+  static const String buildDateTime = gitStampBuildDateTime;
+  static const String buildSystemInfo = gitStampBuildSystemInfo;
+  static const String repoCreationDate = gitStampRepoCreationDate;
+  static const bool isLiteVersion = gitStampIsLiteVersion;
+  static const String repoPath = gitStampRepoPath;
+  static const String observedFilesList = gitStampObservedFilesList;
 }
 ''';

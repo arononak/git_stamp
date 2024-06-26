@@ -132,17 +132,17 @@ Central **GitStamp** node:
 
 ```dart
 class GitStamp {
-  static const buildBranch
-  static const buildDateTime
-  static const buildSystemInfo
-  static const repoCreationDate
-  static const diffOutput
-  static const isLiteVersion
-  static const jsonOutput
-  static const repoPath
-
   static List<GitStampCommit> commitList
-  static GitStampCommit latestCommit;
+  static Map<String, String> diffList
+  static GitStampCommit latestCommit
+
+  static String buildBranch
+  static String buildDateTime
+  static String buildSystemInfo
+  static String repoCreationDate
+  static bool isLiteVersion
+  static String repoPath
+  static String observedFilesList
 }
 ```
 

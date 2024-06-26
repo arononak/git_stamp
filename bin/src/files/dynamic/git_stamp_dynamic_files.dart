@@ -6,9 +6,9 @@ import 'package:intl/intl.dart';
 import '../../git_stamp_directory.dart';
 import '../../git_stamp_file.dart';
 
-class GitLog extends GitStampFile {
+class CommitList extends GitStampFile {
   @override
-  String filename() => '${GitStampDirectory.dataFolder}/json_output.dart';
+  String filename() => '${GitStampDirectory.dataFolder}/commit_list.dart';
 
   @override
   String content() {
@@ -25,165 +25,179 @@ class GitLog extends GitStampFile {
         .map((line) => json.decode(line))
         .toList();
 
-    final logsOutput =
-        '''const generatedJsonOutput = \'\'\'\n${jsonEncode(logs)}\n\'\'\';''';
-
-    return logsOutput;
+    return '''const gitStampCommitList = \'\'\'\n${jsonEncode(logs)}\n\'\'\';''';
   }
 }
 
-class GitCreationDate extends GitStampFile {
+class RepoCreationDate extends GitStampFile {
   @override
   String filename() =>
-      '${GitStampDirectory.dataFolder}/creation_date_output.dart';
+      '${GitStampDirectory.dataFolder}/repo_creation_date.dart';
 
   @override
   String content() {
-    final date = Process.runSync(
+    final creationDate = Process.runSync(
       'git',
       [
         'log',
         '--reverse',
         '--pretty=format:%ad',
-        '--date=format:%Y-%m-%d %H:%M:%S'
+        '--date=format:%Y-%m-%d %H:%M:%S',
       ],
     ).stdout;
 
-    final dateOutput =
-        'const generatedRepoCreationDate = "${date.toString().split('\n').first.trim()}";';
-
-    return dateOutput;
+    return 'const gitStampRepoCreationDate = "${creationDate.toString().split('\n').first.trim()}";';
   }
 }
 
-class GitBranch extends GitStampFile {
+class BuildBranch extends GitStampFile {
   @override
-  String filename() => '${GitStampDirectory.dataFolder}/branch_output.dart';
+  String filename() => '${GitStampDirectory.dataFolder}/build_branch.dart';
 
   @override
   String content() {
-    final branch =
-        Process.runSync('git', ['rev-parse', '--abbrev-ref', 'HEAD']).stdout;
+    final currentBranch = Process.runSync(
+      'git',
+      [
+        'rev-parse',
+        '--abbrev-ref',
+        'HEAD',
+      ],
+    ).stdout;
 
-    final branchOutput =
-        'const generatedBuildBranch = "${branch.toString().trim()}";';
-
-    return branchOutput;
+    return 'const gitStampBuildBranch = "${currentBranch.toString().trim()}";';
   }
 }
 
 class BuildDateTime extends GitStampFile {
   @override
-  String filename() =>
-      '${GitStampDirectory.dataFolder}/build_date_time_output.dart';
+  String filename() => '${GitStampDirectory.dataFolder}/build_date_time.dart';
 
   @override
   String content() {
     final buildDateTime =
         DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
 
-    final buildDateTimeOutput =
-        'const generatedBuildDateTime = "${buildDateTime.toString().trim()}";';
-
-    return buildDateTimeOutput;
+    return 'const gitStampBuildDateTime = "${buildDateTime.toString().trim()}";';
   }
 }
 
 class BuildSystemInfo extends GitStampFile {
   @override
-  String filename() =>
-      '${GitStampDirectory.dataFolder}/build_system_info_output.dart';
+  String filename() => '${GitStampDirectory.dataFolder}/build_system_info.dart';
 
   @override
   String content() {
-    final systemInfo = Process.runSync('flutter', ['doctor']).stdout;
+    final systemInfo = Process.runSync(
+      'flutter',
+      [
+        'doctor',
+      ],
+    ).stdout;
 
     String? systemInfoParsed = systemInfo
         .toString()
         .split('\n')
-        .where((line) => line.contains('] Flutter'))
+        .where(
+          (line) => line.contains('] Flutter'),
+        )
         .toList()
         .firstOrNull;
 
-    final systemInfoOutput =
-        'const generatedBuildSystemInfo = "${systemInfoParsed.toString().trim()}";';
-
-    return systemInfoOutput;
+    return 'const gitStampBuildSystemInfo = "${systemInfoParsed?.toString().trim()}";';
   }
 }
 
 class RepoPath extends GitStampFile {
   @override
-  String filename() => '${GitStampDirectory.dataFolder}/repo_path_output.dart';
+  String filename() => '${GitStampDirectory.dataFolder}/repo_path.dart';
 
   @override
   String content() {
-    final repoPath =
-        Process.runSync('git', ['rev-parse', '--show-toplevel']).stdout;
+    final repoPath = Process.runSync(
+      'git',
+      [
+        'rev-parse',
+        '--show-toplevel',
+      ],
+    ).stdout;
 
-    final repoPathOutput =
-        'const generatedRepoPath = "${repoPath.toString().trim()}";';
-
-    return repoPathOutput;
+    return 'const gitStampRepoPath = "${repoPath.toString().trim()}";';
   }
 }
 
-class GitDiff extends GitStampFile {
+class DiffList extends GitStampFile {
   bool generateEmpty;
 
-  GitDiff(this.generateEmpty);
+  DiffList(this.generateEmpty);
 
   @override
-  String filename() => '${GitStampDirectory.dataFolder}/diff_output.dart';
+  String filename() => '${GitStampDirectory.dataFolder}/diff_list.dart';
 
   @override
   String content() {
     Map<String, String> gitShowMap = {};
 
     if (generateEmpty == false) {
-      final hashes = Process.runSync('git', ['rev-list', '--all'])
-          .stdout
-          .toString()
-          .trim()
-          .split('\n');
+      final hashes = Process.runSync(
+        'git',
+        [
+          'rev-list',
+          '--all',
+        ],
+      ).stdout.toString().trim().split('\n');
 
       for (var hash in hashes) {
-        gitShowMap[hash] =
-            Process.runSync('git', ['show', hash]).stdout.toString();
+        gitShowMap[hash] = Process.runSync(
+          'git',
+          [
+            'show',
+            hash,
+          ],
+        ).stdout.toString();
       }
     }
 
-    final diffOutput =
-        'const generatedDiffOutput = <String, String>${jsonEncode(gitShowMap).replaceAll(r'$', r'\$')};';
-
-    return diffOutput;
+    return 'const gitStampDiffList = <String, String>${jsonEncode(gitShowMap).replaceAll(r'$', r'\$')};';
   }
 }
 
-class GeneratedGitStampVersion extends GitStampFile {
+class IsLiteVersion extends GitStampFile {
   final bool isLiteVersion;
 
-  GeneratedGitStampVersion(this.isLiteVersion);
+  IsLiteVersion(this.isLiteVersion);
 
   @override
-  String filename() => '${GitStampDirectory.dataFolder}/generated_version.dart';
+  String filename() => '${GitStampDirectory.dataFolder}/is_lite_version.dart';
 
   @override
-  String content() => 'const generatedIsLiteVersion = $isLiteVersion;';
+  String content() => 'const gitStampIsLiteVersion = $isLiteVersion;';
 }
 
-class ObservedFiles extends GitStampFile {
+class ObservedFilesList extends GitStampFile {
   @override
-  String filename() => '${GitStampDirectory.dataFolder}/observed_files.dart';
+  String filename() =>
+      '${GitStampDirectory.dataFolder}/observed_files_list.dart';
 
   @override
   String content() {
-    final toplevel = Process.runSync('git', ['rev-parse', '--show-toplevel'])
-        .stdout
-        .toString()
-        .trim();
-    final files = Process.runSync('git', ['-C', toplevel, 'ls-files']).stdout;
+    final toplevel = Process.runSync(
+      'git',
+      [
+        'rev-parse',
+        '--show-toplevel',
+      ],
+    ).stdout.toString().trim();
 
-    return 'const generatedObservedFiles = """$files""";';
+    final files = Process.runSync(
+      'git',
+      [
+        '-C',
+        toplevel,
+        'ls-files',
+      ],
+    ).stdout;
+
+    return 'const gitStampObservedFilesList = """$files""";';
   }
 }
