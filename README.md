@@ -7,8 +7,8 @@
 [![package publisher](https://img.shields.io/pub/publisher/git_stamp?labelColor=black&color=white)](https://pub.dev/packages/git_stamp/publisher)
 [![Latest Tag](https://img.shields.io/github/v/tag/arononak/git_stamp?labelColor=orange&color=white)](https://github.com/arononak/git_stamp/tags)
 [![Pub Package](https://img.shields.io/pub/v/git_stamp.svg?labelColor=purple&color=white)](https://pub.dev/packages/git_stamp)
-[![Commits](https://img.shields.io/github/commit-activity/m/arononak/git_stamp?labelColor=teal&color=white)](https://github.com/arononak/git_stamp/graphs/contributors)
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/arononak/git_stamp/.github%2Fworkflows%2Fpublish.yml?labelColor=silver&color=white)
+[![Commits](https://img.shields.io/github/commit-activity/m/arononak/git_stamp?labelColor=informational&color=white)](https://github.com/arononak/git_stamp/graphs/contributors)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/arononak/git_stamp/.github%2Fworkflows%2Fpublish.yml?labelColor=fuchsia&color=white)
 
 <!-- https://carbon.now.sh/ -->
 ![https://github.com/arononak/git_stamp](https://github.com/arononak/git_stamp/blob/main/usage.png?raw=true)
