@@ -138,3 +138,7 @@
 * Import refactor
 * Generator - Added ASCII logo-text
 * GitStampPage - Font refactor
+
+## 3.0.0
+
+* New customizable generator
