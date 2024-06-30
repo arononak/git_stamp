@@ -13,9 +13,6 @@
 [![Likes](https://img.shields.io/pub/likes/git_stamp?style=flat&labelColor=fuchsia&color=white)](https://pub.dev/packages/git_stamp)
 [![package publisher](https://img.shields.io/pub/publisher/git_stamp?style=flat&labelColor=fuchsia&color=white)](https://pub.dev/packages/git_stamp/publisher)
 
-<!-- https://carbon.now.sh/ -->
-![https://github.com/arononak/git_stamp](https://github.com/arononak/git_stamp/blob/main/usage.png?raw=true)
-
 ## Table of contents
   
 - [Git Stamp 🏷](#git-stamp-)
@@ -32,6 +29,9 @@
   - [📝 License](#-license)
 
 ## 🏞️ Preview
+
+<!-- https://carbon.now.sh/ -->
+![https://github.com/arononak/git_stamp](https://github.com/arononak/git_stamp/blob/main/usage.png?raw=true)
 
 |                                      Light                                      |                                      Dark                                      |
 | :-----------------------------------------------------------------------------: | :----------------------------------------------------------------------------: |
@@ -70,18 +70,10 @@ graph TD
 
 ## 🛠️ Installation
 
-```
-  dart pub add git_stamp
-```
+<!-- https://snappify.com/ -->
+![](https://github.com/arononak/git_stamp/blob/main/generating.png?raw=true)
 
-or
-
-```yaml
-dev_dependencies:
-  git_stamp: ^2.6.0
-```
-
-or
+If you use `url_launcher` generation, add the package to `pubspec.yaml`:
 
 ```yaml
 dependencies:
@@ -106,6 +98,9 @@ dev_dependencies:
 | `dart run git_stamp --build-type full --gen-url-launcher enabled` | FULL       | ENABLED                |
 | `dart run git_stamp --gen-only build-branch,build-date-time`      | CUSTOM     | DISABLED               |
 
+> [!CAUTION]
+> Generating requires the use of the `git` command-line interface (CLI).
+
 | `gen-only` parameters |
 | --------------------- |
 | `commit-list`         |
@@ -116,42 +111,6 @@ dev_dependencies:
 | `build-system-info`   |
 | `repo-path`           |
 | `observed-files-list` |
-
-![](https://github.com/arononak/git_stamp/blob/main/generating.png?raw=true)
-
-```bash
-aron@vivobook-x7400pc-ubuntu:~/git_stamp/example$ dart run git_stamp
-Building package executable... 
-Built git_stamp:git_stamp.
-
-    ┏┓•   ┏┓          ┏┓               
-    ┃┓┓╋  ┗┓╋┏┓┏┳┓┏┓  ┃┓┏┓┏┓┏┓┏┓┏┓╋┏┓┏┓
-    ┗┛┗┗  ┗┛┗┗┻┛┗┗┣┛  ┗┛┗ ┛┗┗ ┛ ┗┻┗┗┛┛ 
-                  ┛                    
-    
-Build Type: lite
-Use [url_launcher]: false
-
-Generated - 1.34 KB 	 lib/git_stamp/git_stamp.dart
-Generated - 570.00 B 	 lib/git_stamp/src/git_stamp_commit.dart
-Generated - 37.51 KB 	 lib/git_stamp/src/data/commit_list.dart
-Generated - 44.00 B 	 lib/git_stamp/src/data/diff_list.dart
-Generated - 55.00 B 	 lib/git_stamp/src/data/repo_creation_date.dart
-Generated - 35.00 B 	 lib/git_stamp/src/data/build_branch.dart
-Generated - 52.00 B 	 lib/git_stamp/src/data/build_date_time.dart
-Generated - 131.00 B 	 lib/git_stamp/src/data/build_system_info.dart
-Generated - 48.00 B 	 lib/git_stamp/src/data/repo_path.dart
-Generated - 3.68 KB 	 lib/git_stamp/src/data/observed_files_list.dart
-Generated - 35.00 B 	 lib/git_stamp/src/data/is_lite_version.dart
-Generated - 15.03 KB 	 lib/git_stamp/src/git_stamp_page.dart
-Generated - 898.00 B 	 lib/git_stamp/src/git_stamp_details_page.dart
-Generated - 1.08 KB 	 lib/git_stamp/src/git_stamp_utils.dart
-Generated - 83.00 B 	 lib/git_stamp/src/git_stamp_launcher.dart
-```
-
-
-> [!CAUTION]
-> Generating requires the use of the `git` command-line interface (CLI).
 
 > [!IMPORTANT]
 > If you use Github Action, you only get a single commit because GitHub Actions by default only retrieves the latest version (single commit) and does not include the full history of the repository. This is normal behavior to optimize the build process and improve performance, especially for large repositories. Try configuring github actions or generating Git Stamp files before `git push`.
@@ -209,8 +168,6 @@ Text('SHA: ${GitStamp.latestCommit.hash}'),
 | 🔧 Run `pana` command   | Check 160/160 points         |
 | 📸 New SS               | Create a new screenshots     |
 | 🏷️ New tag and push     | Deploy every **Wednesday !** |
-
-#### Package structure
 
 ## 📝 License
 
