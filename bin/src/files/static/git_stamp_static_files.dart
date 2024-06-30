@@ -5,15 +5,20 @@ import 'raw/raw_git_stamp_launcher.dart';
 import 'raw/raw_git_stamp_launcher_empty.dart';
 import 'raw/raw_git_stamp_page.dart';
 import 'raw/raw_git_stamp_utils.dart';
+import '../../git_stamp_build.dart';
 import '../../git_stamp_directory.dart';
 import '../../git_stamp_file.dart';
 
-class GitStampMainFile extends GitStampFile {
+class GitStampNode extends GitStampFile {
+  final GitStampBuild dataFiles;
+
+  GitStampNode(this.dataFiles);
+
   @override
   String filename() => '${GitStampDirectory.mainFolder}/git_stamp.dart';
 
   @override
-  String content() => rawGitStamp;
+  String content() => rawGitStamp(dataFiles);
 }
 
 class GitStampUtils extends GitStampFile {
