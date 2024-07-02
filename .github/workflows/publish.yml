@@ -31,7 +31,7 @@ jobs:
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add doc
           git commit -m 'DOC Update'
-          git push
+          git push origin HEAD:main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   publish:
@@ -51,6 +51,8 @@ jobs:
           java-version: "12.x"
       - name: Install dependencies
         run: flutter pub get
+      - name: Tests
+        run: make -C example integration_tests
       - name: Publish
         run: dart pub publish --force
         
