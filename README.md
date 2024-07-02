@@ -82,6 +82,15 @@ dev_dependencies:
       ref: main
 ```
 
+> [!WARNING]
+> Add badge to your `README.md`
+>
+> [![Git Stamp](https://img.shields.io/badge/i%20love%20Git%20Stamp-ffff99?style=flat)](https://github.com/arononak/git_stamp)
+>
+>```
+>[![Git Stamp](https://img.shields.io/badge/i%20love%20Git%20Stamp-ffff99?style=flat)](https://github.com/arononak/git_stamp)
+>```
+
 > [!IMPORTANT]
 > Add **git_stamp** to .gitignore.
 > 
