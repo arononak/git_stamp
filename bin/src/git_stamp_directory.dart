@@ -5,8 +5,11 @@ abstract class GitStampDirectory {
   static const srcFolder = 'lib/git_stamp/src';
   static const dataFolder = 'lib/git_stamp/src/data';
 
-  static void recreateDirectories() {
-    Directory(mainFolder).deleteSync(recursive: true);
+  static Future<void> recreateDirectories() async {
+    final mainDirectory = Directory(mainFolder);
+    if (await mainDirectory.exists()) {
+      mainDirectory.deleteSync(recursive: true);
+    }
 
     for (var e in [mainFolder, srcFolder, dataFolder]) {
       Directory(e).createSync(recursive: true);

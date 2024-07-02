@@ -8,7 +8,7 @@ import 'src/git_stamp_directory.dart';
 import 'src/files/dynamic/git_stamp_dynamic_files.dart';
 import 'src/files/static/git_stamp_static_files.dart';
 
-void main(List<String> arguments) {
+Future<void> main(List<String> arguments) async {
   final parser = ArgParser()
     ..addOption(
       'build-type',
@@ -74,7 +74,7 @@ void main(List<String> arguments) {
     print('Use [url_launcher]: ${generateUrlLauncher ? 'true' : 'false'}');
     print('');
 
-    GitStampDirectory.recreateDirectories();
+    await GitStampDirectory.recreateDirectories();
 
     /// lite & full
     if (isCustom == false) {
