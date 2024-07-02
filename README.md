@@ -89,11 +89,11 @@ dev_dependencies:
 
 ## 🏗️ Generating
 
-| CLI Command                                                       | Build type | Use ```url_launcher``` |
-| ----------------------------------------------------------------- | ---------- | ---------------------- |
-| `dart run git_stamp`                                              | LITE       | DISABLED               |
-| `dart run git_stamp --build-type full --gen-url-launcher enabled` | FULL       | ENABLED                |
-| `dart run git_stamp --gen-only build-branch,build-date-time`      | CUSTOM     | DISABLED               |
+| CLI Command                                                       | Build type | Use ```url_launcher``` | Generate Flutter UI Files |
+| ----------------------------------------------------------------- | ---------- | ---------------------- | ------------------------- |
+| `dart run git_stamp`                                              | LITE       | DISABLED               | YES                       |
+| `dart run git_stamp --build-type full --gen-url-launcher enabled` | FULL       | ENABLED                | YES                       |
+| `dart run git_stamp --gen-only build-branch,build-date-time`      | CUSTOM     | DISABLED               | NO                        |
 
 > [!CAUTION]
 > Generating requires the use of the `git` command-line interface (CLI).
