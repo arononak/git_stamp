@@ -142,3 +142,7 @@
 ## 3.0.0
 
 * New customizable generator
+
+## 3.0.1
+
+* Added empty file lib/git_stamp.dart
