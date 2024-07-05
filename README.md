@@ -13,6 +13,15 @@ Provides information about the project's Git repository and more. From simple in
 [![Likes](https://img.shields.io/pub/likes/git_stamp?style=flat&labelColor=fuchsia&color=white)](https://pub.dev/packages/git_stamp)
 [![package publisher](https://img.shields.io/pub/publisher/git_stamp?style=flat&labelColor=fuchsia&color=white)](https://pub.dev/packages/git_stamp/publisher)
 
+The motivation was **Minecraft** with information like this, which is being built for multiple platforms: PC, Android, iOS, Xbox, PlayStation and much more.
+
+```
+Version: v1.20.81
+Build: 24130126
+Branch: r/20_u8
+SHA: a9081c5429038dcf3f26269f7351d89f
+```
+
 ## Table of contents
   
 - [Git Stamp 🏷](#git-stamp-)
