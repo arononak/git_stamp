@@ -360,6 +360,7 @@ Widget _buildRepoDetailsModal(BuildContext context) {
         children: [
           Text('Build', style: _textTitle),
           const SizedBox(height: 4),
+          _buildDoubleText('App Version: ', GitStamp.appVersion + ' (' + GitStamp.appBuild + ')'),
           _buildDoubleText('Date: ', GitStamp.buildDateTime),
           _buildDoubleText('Path: ', GitStamp.repoPath),
           _buildDoubleText('Branch: ', GitStamp.buildBranch),

@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:intl/intl.dart';
+import 'package:pubspec_parse/pubspec_parse.dart';
+import 'package:pub_semver/pub_semver.dart';
 
 import '../../git_stamp_directory.dart';
 import '../../git_stamp_file.dart';
@@ -199,5 +201,23 @@ class ObservedFilesList extends GitStampFile {
     ).stdout;
 
     return 'const gitStampObservedFilesList = """$files""";';
+  }
+}
+
+class AppVersion extends GitStampFile {
+  @override
+  String filename() => '${GitStampDirectory.dataFolder}/app_version.dart';
+
+  @override
+  String content() {
+    final file = File('pubspec.yaml');
+    final content = file.readAsStringSync();
+    final pubspec = Pubspec.parse(content);
+    final version = pubspec.version ?? Version(0, 0, 0, build: '0');
+
+    return '''
+      const gitStampAppVersion = "${version.major}.${version.minor}.${version.patch}";
+      const gitStampAppBuild = "${version.build.first}";
+    ''';
   }
 }

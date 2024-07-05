@@ -7,6 +7,7 @@ class GitStampBuild {
   final bool repoCreationDate;
   final bool repoPath;
   final bool observedFilesList;
+  final bool appVersion;
   final bool generateFlutterFiles;
 
   const GitStampBuild({
@@ -18,6 +19,7 @@ class GitStampBuild {
     this.repoCreationDate = false,
     this.repoPath = false,
     this.observedFilesList = false,
+    this.appVersion = false,
     this.generateFlutterFiles = false,
   });
 
@@ -30,6 +32,7 @@ class GitStampBuild {
     this.repoCreationDate = true,
     this.repoPath = true,
     this.observedFilesList = true,
+    this.appVersion = true,
     this.generateFlutterFiles = true,
   });
 
@@ -42,5 +45,6 @@ class GitStampBuild {
         repoCreationDate = args.contains('repo-creation-date'),
         repoPath = args.contains('repo-path'),
         observedFilesList = args.contains('observed-files-list'),
+        appVersion = args.contains('app-version'),
         generateFlutterFiles = false;
 }

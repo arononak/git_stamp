@@ -19,6 +19,7 @@ ${files.buildSystemInfo.enabled} import 'src/data/build_system_info.dart';
 ${files.repoCreationDate.enabled} import 'src/data/repo_creation_date.dart';
 ${files.repoPath.enabled} import 'src/data/repo_path.dart';
 ${files.observedFilesList.enabled} import 'src/data/observed_files_list.dart';
+${files.appVersion.enabled} import 'src/data/app_version.dart';
 
 ${files.generateFlutterFiles.enabled} import 'src/data/is_lite_version.dart';
 ${files.generateFlutterFiles.enabled} export 'src/git_stamp_commit.dart';
@@ -39,6 +40,9 @@ class GitStamp {
   ${files.repoCreationDate.enabled} static const String repoCreationDate = gitStampRepoCreationDate;
   ${files.repoPath.enabled} static const String repoPath = gitStampRepoPath;
   ${files.observedFilesList.enabled} static const String observedFilesList = gitStampObservedFilesList;
+  
+  ${files.appVersion.enabled} static const String appVersion = gitStampAppVersion;
+  ${files.appVersion.enabled} static const String appBuild = gitStampAppBuild;
 
   ${files.generateFlutterFiles.enabled} static const bool isLiteVersion = gitStampIsLiteVersion;
 }

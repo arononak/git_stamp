@@ -34,6 +34,7 @@ Future<void> main(List<String> arguments) async {
         'build-system-info',
         'repo-path',
         'observed-files-list',
+        'app-version',
       ],
       defaultsTo: null,
     )
@@ -76,24 +77,17 @@ Future<void> main(List<String> arguments) async {
 
     await GitStampDirectory.recreateDirectories();
 
-    /// lite & full
-    if (isCustom == false) {
-      const files = GitStampBuild.all();
-
-      GitStampNode(files).generate();
-
-      _generateDataFiles(files, isLiteVersion);
-
-      if (isCustom == false) {
-        _generateFlutterInterface(generateUrlLauncher, isLiteVersion);
-      }
-    } else {
-      /// custom
+    /// custom
+    if (isCustom == true) {
       final files = GitStampBuild.custom(genOnly ?? []);
-
-      GitStampNode(files).generate();
       _generateDataFiles(files, isLiteVersion);
+      return;
     }
+
+    /// lite & full
+    const files = GitStampBuild.all();
+    _generateDataFiles(files, isLiteVersion);
+    _generateFlutterInterface(generateUrlLauncher, isLiteVersion);
   } on FormatException catch (e) {
     print(e.message);
     print('Usage: dart run git_stamp [options]');
@@ -102,38 +96,44 @@ Future<void> main(List<String> arguments) async {
   }
 }
 
-void _generateDataFiles(GitStampBuild dataFiles, bool isLiteVersion) {
-  if (dataFiles.commitList) {
+void _generateDataFiles(GitStampBuild files, bool isLiteVersion) {
+  GitStampNode(files).generate();
+
+  if (files.commitList) {
     GitStampCommit().generate();
     CommitList().generate();
   }
 
-  if (dataFiles.diffList) {
+  if (files.diffList) {
     DiffList(isLiteVersion).generate();
   }
 
-  if (dataFiles.repoCreationDate) {
+  if (files.repoCreationDate) {
     RepoCreationDate().generate();
   }
 
-  if (dataFiles.buildBranch) {
+  if (files.buildBranch) {
     BuildBranch().generate();
   }
 
-  if (dataFiles.buildDateTime) {
+  if (files.buildDateTime) {
     BuildDateTime().generate();
   }
 
-  if (dataFiles.buildSystemInfo) {
+  if (files.buildSystemInfo) {
     BuildSystemInfo().generate();
   }
 
-  if (dataFiles.repoPath) {
+  if (files.repoPath) {
     RepoPath().generate();
   }
 
-  if (dataFiles.observedFilesList) {
+  if (files.observedFilesList) {
     ObservedFilesList().generate();
+  }
+
+  if (files.appVersion) {
+    AppVersion().generate();
   }
 }
 

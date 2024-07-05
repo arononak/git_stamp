@@ -1,4 +1,5 @@
 name: example
+version: 1.0.0+1
 publish_to: "none"
 homepage: https://aroncode.com
 repository: https://github.com/arononak/git_stamp
