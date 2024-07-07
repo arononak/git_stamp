@@ -150,3 +150,9 @@
 ## 3.0.2
 
 * Removed empty lib/git_stamp.dart
+
+## 3.1.0
+
+* Added `app-version`
+* File structure refactor
+* pubspec.yaml - update description
