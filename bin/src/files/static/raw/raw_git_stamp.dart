@@ -9,7 +9,7 @@ library git_stamp;
 
 ${files.commitList.enabled} import 'dart:convert';
 ${files.commitList.enabled} import 'src/data/commit_list.dart';
-${files.commitList.enabled} import 'src/git_stamp_commit.dart';
+${files.commitList.enabled} import 'src/data/git_stamp_commit.dart';
 
 ${files.diffList.enabled} import 'src/data/diff_list.dart';
 
@@ -21,12 +21,12 @@ ${files.repoPath.enabled} import 'src/data/repo_path.dart';
 ${files.observedFilesList.enabled} import 'src/data/observed_files_list.dart';
 ${files.appVersion.enabled} import 'src/data/app_version.dart';
 
-${files.generateFlutterFiles.enabled} import 'src/data/is_lite_version.dart';
-${files.generateFlutterFiles.enabled} export 'src/git_stamp_commit.dart';
-${files.generateFlutterFiles.enabled} export 'src/git_stamp_details_page.dart';
-${files.generateFlutterFiles.enabled} export 'src/git_stamp_launcher.dart';
-${files.generateFlutterFiles.enabled} export 'src/git_stamp_page.dart';
-${files.generateFlutterFiles.enabled} export 'src/git_stamp_utils.dart';
+${files.generateFlutterFiles.enabled} import 'src/ui/is_lite_version.dart';
+${files.generateFlutterFiles.enabled} export 'src/data/git_stamp_commit.dart';
+${files.generateFlutterFiles.enabled} export 'src/ui/git_stamp_details_page.dart';
+${files.generateFlutterFiles.enabled} export 'src/ui/git_stamp_launcher.dart';
+${files.generateFlutterFiles.enabled} export 'src/ui/git_stamp_page.dart';
+${files.generateFlutterFiles.enabled} export 'src/ui/git_stamp_utils.dart';
 
 class GitStamp {
   ${files.commitList.enabled} static List<GitStampCommit> get commitList => json.decode(gitStampCommitList).map<GitStampCommit>((json) => GitStampCommit.fromJson(json)).toList();

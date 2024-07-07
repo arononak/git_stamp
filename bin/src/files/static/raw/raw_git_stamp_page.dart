@@ -2,7 +2,7 @@ const rawGitStampPage = '''
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 
-import '../git_stamp.dart';
+import '../../git_stamp.dart';
 
 const _text = TextStyle(fontSize: 12);
 const _textBold = TextStyle(fontSize: 12, fontWeight: FontWeight.bold);

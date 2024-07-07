@@ -2,7 +2,7 @@ const rawGitStampUtils = '''
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../git_stamp.dart';
+import '../../git_stamp.dart';
 
 void showSnackbar(BuildContext context, String message) {
   ScaffoldMessenger.of(context).showSnackBar(

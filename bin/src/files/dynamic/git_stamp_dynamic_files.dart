@@ -170,7 +170,7 @@ class IsLiteVersion extends GitStampFile {
   IsLiteVersion(this.isLiteVersion);
 
   @override
-  String filename() => '${GitStampDirectory.dataFolder}/is_lite_version.dart';
+  String filename() => '${GitStampDirectory.uiFolder}/is_lite_version.dart';
 
   @override
   String content() => 'const gitStampIsLiteVersion = $isLiteVersion;';
