@@ -16,15 +16,12 @@ Provides information about the project's Git repository and more. From simple in
 ## Table of contents
   
 - [Git Stamp 🏷](#git-stamp-)
-      - [Build-Time Git Integration in Your Flutter App](#build-time-git-history-integration-in-your-flutter-app)
   - [Table of contents](#table-of-contents)
   - [🏞️ Preview](#️-preview)
   - [🕯️ Mechanism](#️-mechanism)
   - [🛠️ Installation](#️-installation)
   - [🏗️ Generating](#️-generating)
   - [💻 Usage](#-usage)
-      - [Default usage:](#default-usage)
-      - [Advanced usage:](#advanced-usage)
   - [📝 License](#-license)
 
 ## 🏞️ Preview
@@ -99,8 +96,11 @@ dev_dependencies:
       ref: main
 ```
 
+> [!IMPORTANT]
+> If you use Github Action, you only get a single commit because GitHub Actions by default only retrieves the latest version (single commit) and does not include the full history of the repository. This is normal behavior to optimize the build process and improve performance, especially for large repositories. Try configuring github actions or generating Git Stamp files before `git push`.
+
 > [!WARNING]
-> Add badge to your `README.md`
+> Add badge to your `README.md` 😄️
 >
 > [![Git Stamp](https://img.shields.io/badge/i%20love%20Git%20Stamp-ffff99?style=flat)](https://github.com/arononak/git_stamp)
 >
@@ -112,6 +112,8 @@ dev_dependencies:
 > Add **git_stamp** to .gitignore.
 > 
 > ```echo "lib/git_stamp/" >> .gitignore```.
+> 
+> If you add a **/git_stamp** folder for the repository and use the `FULL` version, the size of the repository will grow EXPONENTIALLY.
 
 ## 🏗️ Generating
 
@@ -136,16 +138,22 @@ dev_dependencies:
 | `observed-files-list` |
 | `app-version`         |
 
-> [!IMPORTANT]
-> If you use Github Action, you only get a single commit because GitHub Actions by default only retrieves the latest version (single commit) and does not include the full history of the repository. This is normal behavior to optimize the build process and improve performance, especially for large repositories. Try configuring github actions or generating Git Stamp files before `git push`.
-
 ## 💻 Usage
 
-<!-- https://carbon.now.sh/ -->
-![https://github.com/arononak/git_stamp](https://github.com/arononak/git_stamp/blob/main/usage.png?raw=true)
+#### ListTile
 
-#### Default usage:
+```dart
+if (kDebugMode) ...[
+  ListTile(
+    title: const Text('Git Stamp'),
+    subtitle: Text(GitStamp.latestCommit.hash),
+    leading: const Icon(Icons.commit),
+    onTap: () => showGitStampPage(context: context),
+  ),
+],
+```
 
+#### IconButton
 ```dart
 if (isProd == false) ...[
   IconButton(
@@ -155,9 +163,7 @@ if (isProd == false) ...[
 ],
 ```
 
-#### Advanced usage:
-
-Central **GitStamp** node:
+Central **GitStamp** node for advanced usage:
 
 ```dart
 class GitStamp {
@@ -175,17 +181,6 @@ class GitStamp {
 
    static const bool isLiteVersion
 }
-```
-
-Example usage:
-
-```dart
-import 'git_stamp.dart';
-z
-Text('Version: v1.2.3'),
-Text('Build: 1234'),
-Text('Branch: ${GitStamp.buildBranch}'),
-Text('SHA: ${GitStamp.latestCommit.hash}'),
 ```
 
 ## 📝 License
