@@ -1,6 +1,10 @@
 # 📋 TODO list
 
-New version every Wednesday !
+| Step                    | Description                  |
+| ----------------------- | ---------------------------- |
+| 🔧 Run `pana` command   | Check 160/160 points         |
+| 📸 New SS               | Create a new screenshots     |
+| 🏷️ New tag and push     | Deploy every **Wednesday !** |
 
 - [x] Github Actions - deploy to pub.dev
 - [x] InApp - AppBar commit count right & icon
