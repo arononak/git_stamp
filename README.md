@@ -1,6 +1,6 @@
 [<img src="https://www.gov.pl/photo/f98cae42-2b90-4596-904c-752278f85606" height="100" align="right">](https://www.gov.pl/web/rolnictwo/produkt-polski1)
 
-# Git Stamp 🏷
+# [Git Stamp 🏷](./TODO.md)
 
 Provides information about the project's Git repository and more. From simple information such as `build-branch` to a screen with Flutter code with commits and change history.
 
@@ -25,7 +25,6 @@ Provides information about the project's Git repository and more. From simple in
   - [💻 Usage](#-usage)
       - [Default usage:](#default-usage)
       - [Advanced usage:](#advanced-usage)
-  - [🔧 Git Stamp - Development](#-git-stamp-development)
   - [📝 License](#-license)
 
 ## 🏞️ Preview
@@ -182,20 +181,12 @@ Example usage:
 
 ```dart
 import 'git_stamp.dart';
-
+z
 Text('Version: v1.2.3'),
 Text('Build: 1234'),
 Text('Branch: ${GitStamp.buildBranch}'),
 Text('SHA: ${GitStamp.latestCommit.hash}'),
 ```
-
-## [🔧 Git Stamp - Development](./TODO.md)
-
-| Step                    | Description                  |
-| ----------------------- | ---------------------------- |
-| 🔧 Run `pana` command   | Check 160/160 points         |
-| 📸 New SS               | Create a new screenshots     |
-| 🏷️ New tag and push     | Deploy every **Wednesday !** |
 
 ## 📝 License
 
