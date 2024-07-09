@@ -52,8 +52,8 @@
       
 <section class="desc markdown">
   <p><a href="https://www.gov.pl/web/rolnictwo/produkt-polski1"><img src="https://www.gov.pl/photo/f98cae42-2b90-4596-904c-752278f85606" height="100" align="right"></a></p>
-<h1 id="git-stamp-">Git Stamp 🏷</h1>
-<h4 id="build-time-git-integration-in-your-flutter-app">Build-Time Git Integration in Your Flutter App</h4>
+<h1 id="git-stamp-todomd"><a href="./TODO.md">Git Stamp 🏷</a></h1>
+<p>Provides information about the project's Git repository and more. From simple information such as <code>build-branch</code> to a screen with Flutter code with commits and change history.</p>
 <p><a href="https://github.com/arononak/git_stamp/tags"><img src="https://img.shields.io/github/v/tag/arononak/git_stamp?style=flat&amp;logo=github&amp;labelColor=black&amp;color=white" alt="Latest Tag"></a>
 <a href="https://github.com/arononak/git_stamp/"><img src="https://img.shields.io/github/stars/arononak/git_stamp.svg?style=flat&amp;label=Star&amp;labelColor=black&amp;color=white" alt="GitHub stars"></a>
 <a href="https://github.com/arononak/git_stamp/graphs/contributors"><img src="https://img.shields.io/github/commit-activity/m/arononak/git_stamp?style=flat&amp;labelColor=black&amp;color=white" alt="Commits"></a>
@@ -64,20 +64,13 @@
 <h2 id="table-of-contents">Table of contents</h2>
 <ul>
 <li><a href="#git-stamp-">Git Stamp 🏷</a>
-    - <a href="#build-time-git-history-integration-in-your-flutter-app">Build-Time Git Integration in Your Flutter App</a>
 <ul>
 <li><a href="#table-of-contents">Table of contents</a></li>
 <li><a href="#%EF%B8%8F-preview">🏞️ Preview</a></li>
 <li><a href="#%EF%B8%8F-mechanism">🕯️ Mechanism</a></li>
 <li><a href="#%EF%B8%8F-installation">🛠️ Installation</a></li>
 <li><a href="#%EF%B8%8F-generating">🏗️ Generating</a></li>
-<li><a href="#-usage">💻 Usage</a>
-<ul>
-<li><a href="#default-usage">Default usage:</a></li>
-<li><a href="#advanced-usage">Advanced usage:</a></li>
-</ul>
-</li>
-<li><a href="#-git-stamp-development">🔧 Git Stamp - Development</a></li>
+<li><a href="#-usage">💻 Usage</a></li>
 <li><a href="#-license">📝 License</a></li>
 </ul>
 </li>
@@ -97,6 +90,20 @@
 </tr>
 </tbody>
 </table>
+<p>The main motivation was <strong>Minecraft</strong> with information like this:</p>
+<pre class="language-dart"><code>Version: v1.20.81
+Build: 24130126
+Branch: r/20_u8
+SHA: a9081c5429038dcf3f26269f7351d89f
+</code></pre>
+<p>Git Stamp code:</p>
+<pre class="language-dart"><code class="language-dart">import 'git_stamp/git_stamp.dart';
+
+Text('Version: ${GitStamp.appVersion}'),
+Text('Build: ${GitStamp.appBuild}'),
+Text('Branch: ${GitStamp.buildBranch}'),
+Text('SHA: ${GitStamp.latestCommit.hash}'),
+</code></pre>
 <h2 id="-mechanism">🕯️ Mechanism</h2>
 <pre class="language-mermaid"><code class="language-mermaid">graph TD
     CODE((SOURCE CODE))--&gt;SYNC(flutter pub get)
@@ -137,9 +144,13 @@ dev_dependencies:
       url: https://github.com/arononak/git_stamp
       ref: main
 </code></pre>
+<div class="markdown-alert markdown-alert-important">
+<p class="markdown-alert-title">Important</p>
+<p>If you use Github Action, you only get a single commit because GitHub Actions by default only retrieves the latest version (single commit) and does not include the full history of the repository. This is normal behavior to optimize the build process and improve performance, especially for large repositories. Try configuring github actions or generating Git Stamp files before <code>git push</code>.</p>
+</div>
 <div class="markdown-alert markdown-alert-warning">
 <p class="markdown-alert-title">Warning</p>
-<p>Add badge to your <code>README.md</code></p>
+<p>Add badge to your <code>README.md</code> 😄️</p>
 <p><a href="https://github.com/arononak/git_stamp"><img src="https://img.shields.io/badge/i%20love%20Git%20Stamp-ffff99?style=flat" alt="Git Stamp"></a></p>
 <pre class="language-dart"><code>[![Git Stamp](https://img.shields.io/badge/i%20love%20Git%20Stamp-ffff99?style=flat)](https://github.com/arononak/git_stamp)
 </code></pre>
@@ -148,6 +159,7 @@ dev_dependencies:
 <p class="markdown-alert-title">Important</p>
 <p>Add <strong>git_stamp</strong> to .gitignore.</p>
 <p><code>echo "lib/git_stamp/" &gt;&gt; .gitignore</code>.</p>
+<p>If you add a <strong>/git_stamp</strong> folder for the repository and use the <code>FULL</code> version, the size of the repository will grow EXPONENTIALLY.</p>
 </div>
 <h2 id="-generating">🏗️ Generating</h2>
 <table>
@@ -215,16 +227,23 @@ dev_dependencies:
 <tr>
 <td><code>observed-files-list</code></td>
 </tr>
+<tr>
+<td><code>app-version</code></td>
+</tr>
 </tbody>
 </table>
-<div class="markdown-alert markdown-alert-important">
-<p class="markdown-alert-title">Important</p>
-<p>If you use Github Action, you only get a single commit because GitHub Actions by default only retrieves the latest version (single commit) and does not include the full history of the repository. This is normal behavior to optimize the build process and improve performance, especially for large repositories. Try configuring github actions or generating Git Stamp files before <code>git push</code>.</p>
-</div>
 <h2 id="-usage">💻 Usage</h2>
-<!-- https://carbon.now.sh/ -->
-<p><img src="https://github.com/arononak/git_stamp/blob/main/usage.png?raw=true" alt="https://github.com/arononak/git_stamp"></p>
-<h4 id="default-usage">Default usage:</h4>
+<h4 id="listtile">ListTile</h4>
+<pre class="language-dart"><code class="language-dart">if (kDebugMode) ...[
+  ListTile(
+    title: const Text('Git Stamp'),
+    subtitle: Text(GitStamp.latestCommit.hash),
+    leading: const Icon(Icons.commit),
+    onTap: () =&gt; showGitStampPage(context: context),
+  ),
+],
+</code></pre>
+<h4 id="iconbutton">IconButton</h4>
 <pre class="language-dart"><code class="language-dart">if (isProd == false) ...[
   IconButton(
     onPressed: () =&gt; showGitStampPage(context: context),
@@ -232,8 +251,7 @@ dev_dependencies:
   ),
 ],
 </code></pre>
-<h4 id="advanced-usage">Advanced usage:</h4>
-<p>Central <strong>GitStamp</strong> node:</p>
+<p>Central <strong>GitStamp</strong> node for advanced usage:</p>
 <pre class="language-dart"><code class="language-dart">class GitStamp {
    static List&lt;GitStampCommit&gt; commitList
    static GitStampCommit latestCommit
@@ -250,37 +268,6 @@ dev_dependencies:
    static const bool isLiteVersion
 }
 </code></pre>
-<p>Example usage:</p>
-<pre class="language-dart"><code class="language-dart">import 'git_stamp.dart';
-
-Text('Version: v1.2.3'),
-Text('Build: 1234'),
-Text('Branch: ${GitStamp.buildBranch}'),
-Text('SHA: ${GitStamp.latestCommit.hash}'),
-</code></pre>
-<h2 id="-git-stamp---developmenttodomd"><a href="./TODO.md">🔧 Git Stamp - Development</a></h2>
-<table>
-<thead>
-<tr>
-<th>Step</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>🔧 Run <code>pana</code> command</td>
-<td>Check 160/160 points</td>
-</tr>
-<tr>
-<td>📸 New SS</td>
-<td>Create a new screenshots</td>
-</tr>
-<tr>
-<td>🏷️ New tag and push</td>
-<td>Deploy every <strong>Wednesday !</strong></td>
-</tr>
-</tbody>
-</table>
 <h2 id="-license">📝 License</h2>
 <div class="markdown-alert markdown-alert-note">
 <p class="markdown-alert-title">Note</p>
@@ -327,7 +314,7 @@ If you have any feedback, please contact me at <a href="mailto:arononak@gmail.co
 <footer>
   <span class="no-break">
     git_stamp
-      3.0.2
+      3.1.0
   </span>
 
   
