@@ -20,6 +20,7 @@ Provides information about the project's Git repository and more. From simple in
   - [🏞️ Preview](#️-preview)
   - [🕯️ Mechanism](#️-mechanism)
   - [🛠️ Installation](#️-installation)
+  - [📦 Integration](#-integration)
   - [🏗️ Generating](#️-generating)
   - [💻 Usage](#-usage)
       - [ListTile](#listtile)
@@ -104,9 +105,6 @@ dev_dependencies:
       ref: main
 ```
 
-> [!IMPORTANT]
-> If you use Github Action, you only get a single commit because GitHub Actions by default only retrieves the latest version (single commit) and does not include the full history of the repository. This is normal behavior to optimize the build process and improve performance, especially for large repositories. Try configuring github actions or generating Git Stamp files before `git push`.
-
 > [!WARNING]
 > Add badge to your `README.md` 😄️
 >
@@ -122,6 +120,63 @@ dev_dependencies:
 > ```echo "lib/git_stamp/" >> .gitignore```.
 > 
 > If you add a **/git_stamp** folder for the repository and use the `FULL` version, the size of the repository will grow EXPONENTIALLY.
+
+
+## 📦 Integration
+
+Example GitHub Actions file:
+
+`.github/workflows/build_and_deploy.yml`
+
+```yml
+name: build_and_deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request_target:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.2'
+          channel: 'stable'
+      - run: flutter --version
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+      - run: flutter pub get
+      - run: dart run git_stamp
+      - run: flutter build web --release --web-renderer canvaskit
+      - uses: actions/upload-artifact@master
+        with:
+          name: build
+          path: build/web
+  deploy:
+    name: "Deploy"
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@master
+        with:
+          name: build
+          path: build/web
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
+          projectId: xxx
+          channelId: live
+```
+
+> [!IMPORTANT]
+> If you use Github Action, you only get a single commit because GitHub Actions by default only retrieves the latest version (single commit) and does not include the full history of the repository. This is normal behavior to optimize the build process and improve performance, especially for large repositories. Try configuring github actions or generating Git Stamp files before `git push`.
 
 ## 🏗️ Generating
 
