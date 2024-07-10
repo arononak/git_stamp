@@ -22,9 +22,17 @@ Provides information about the project's Git repository and more. From simple in
   - [🛠️ Installation](#️-installation)
   - [🏗️ Generating](#️-generating)
   - [💻 Usage](#-usage)
+      - [ListTile](#listtile)
+      - [IconButton](#iconbutton)
   - [📝 License](#-license)
 
 ## 🏞️ Preview
+
+GitStamp Icon
+
+![](https://github.com/arononak/git_stamp/blob/main/preview_icon.png?raw=true)
+
+GitStamp Page
 
 |                                      Light                                      |                                      Dark                                      |
 | :-----------------------------------------------------------------------------: | :----------------------------------------------------------------------------: |
@@ -178,6 +186,9 @@ class GitStamp {
    static const String repoCreationDate
    static const String repoPath
    static const String observedFilesList
+
+   static const String appVersion
+   static const String appBuild
 
    static const bool isLiteVersion
 }

@@ -144,6 +144,7 @@ void _generateFlutterInterface(bool useUrlLauncher, bool isLiteVersion) {
     GitStampDetailsPage(),
     GitStampUtils(),
     GitStampLauncher(useUrlLauncher),
+    GitStampIcon(),
   ];
 
   for (var element in gitStampUi) {

@@ -1,3 +1,4 @@
+import 'package:example/git_stamp/src/ui/git_stamp_icon.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -27,6 +28,7 @@ class MainPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Example App'),
         actions: [
+          GitStampIcon(),
           IconButton(
             icon: Icon(Icons.settings),
             onPressed: () {
