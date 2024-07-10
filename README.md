@@ -91,7 +91,7 @@ graph TD
 ## 🛠️ Installation
 
 <!-- https://snappify.com/ -->
-![](https://github.com/arononak/git_stamp/blob/main/generating.png?raw=true)
+![](https://github.com/arononak/git_stamp/blob/main/changelog/3.0.0.png?raw=true)
 
 If you use `url_launcher` generation, add the package to `pubspec.yaml`:
 
