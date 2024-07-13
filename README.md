@@ -117,7 +117,7 @@ dev_dependencies:
 > [!IMPORTANT]
 > Add **git_stamp** to .gitignore.
 > 
-> ```echo "lib/git_stamp/" >> .gitignore```.
+> ```echo -e "\n/lib/git_stamp/" >> .gitignore```.
 > 
 > If you add a **/git_stamp** folder for the repository and use the `FULL` version, the size of the repository will grow EXPONENTIALLY.
 
