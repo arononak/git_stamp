@@ -90,7 +90,7 @@ graph TD
 
 ## 🛠️ Installation
 
-Package `url_launcher` only for generating FULL version.
+Package `url_launcher` if you use.
 
 ```yaml
 dependencies:
