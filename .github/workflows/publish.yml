@@ -45,14 +45,13 @@ jobs:
         with:
           flutter-version: '3.22.2'
           channel: 'stable'
-      - run: flutter --version
       - uses: actions/setup-java@v1
         with:
           java-version: "12.x"
-      - name: Install dependencies
-        run: flutter pub get
-      - name: Tests
-        run: make -C example integration_tests
-      - name: Publish
-        run: dart pub publish --force
-        
+      - run: flutter --version
+      - run: flutter doctor
+      - run: flutter pub get
+      - run: dart format .
+      - run: flutter analyze .
+      - run: make -C example integration_tests
+      - run: dart pub publish --force
