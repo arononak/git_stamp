@@ -156,3 +156,7 @@
 * Added `app-version`
 * File structure refactor
 * pubspec.yaml - update description
+
+## 3.2.0
+
+* Added GitStampIcon with tip information
