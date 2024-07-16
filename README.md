@@ -2,7 +2,7 @@
 
 # [Git Stamp 🏷](./TODO.md)
 
-Provides information about the project's Git repository and more. From simple information such as `build-branch` to a screen with Flutter code with commits and change history.
+Provides advanced project information. From simple information such as `build-branch` to a screen with Flutter code with commits and change history.
 
 [![Latest Tag](https://img.shields.io/github/v/tag/arononak/git_stamp?style=flat&logo=github&labelColor=black&color=white)](https://github.com/arononak/git_stamp/tags)
 [![GitHub stars](https://img.shields.io/github/stars/arononak/git_stamp.svg?style=flat&label=Star&labelColor=black&color=white)](https://github.com/arononak/git_stamp/)
