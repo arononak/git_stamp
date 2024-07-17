@@ -70,8 +70,7 @@ class GitStampDetailsPage extends GitStampFile {
 
 class GitStampIcon extends GitStampFile {
   @override
-  String filename() =>
-      '${GitStampDirectory.uiFolder}/git_stamp_icon.dart';
+  String filename() => '${GitStampDirectory.uiFolder}/git_stamp_icon.dart';
 
   @override
   String content() => rawGitStampIcon;
