@@ -53,7 +53,7 @@
 <section class="desc markdown">
   <p><a href="https://www.gov.pl/web/rolnictwo/produkt-polski1"><img src="https://www.gov.pl/photo/f98cae42-2b90-4596-904c-752278f85606" height="100" align="right"></a></p>
 <h1 id="git-stamp-todomd"><a href="./TODO.md">Git Stamp 🏷</a></h1>
-<p>Provides information about the project's Git repository and more. From simple information such as <code>build-branch</code> to a screen with Flutter code with commits and change history.</p>
+<p>Provides advanced project information. From simple information such as <code>build-branch</code> to a screen with Flutter code with commits and change history.</p>
 <p><a href="https://github.com/arononak/git_stamp/tags"><img src="https://img.shields.io/github/v/tag/arononak/git_stamp?style=flat&amp;logo=github&amp;labelColor=black&amp;color=white" alt="Latest Tag"></a>
 <a href="https://github.com/arononak/git_stamp/"><img src="https://img.shields.io/github/stars/arononak/git_stamp.svg?style=flat&amp;label=Star&amp;labelColor=black&amp;color=white" alt="GitHub stars"></a>
 <a href="https://github.com/arononak/git_stamp/graphs/contributors"><img src="https://img.shields.io/github/commit-activity/m/arononak/git_stamp?style=flat&amp;labelColor=black&amp;color=white" alt="Commits"></a>
@@ -69,13 +69,22 @@
 <li><a href="#%EF%B8%8F-preview">🏞️ Preview</a></li>
 <li><a href="#%EF%B8%8F-mechanism">🕯️ Mechanism</a></li>
 <li><a href="#%EF%B8%8F-installation">🛠️ Installation</a></li>
+<li><a href="#-integration">📦 Integration</a></li>
 <li><a href="#%EF%B8%8F-generating">🏗️ Generating</a></li>
-<li><a href="#-usage">💻 Usage</a></li>
+<li><a href="#-usage">💻 Usage</a>
+<ul>
+<li><a href="#listtile">ListTile</a></li>
+<li><a href="#iconbutton">IconButton</a></li>
+</ul>
+</li>
 <li><a href="#-license">📝 License</a></li>
 </ul>
 </li>
 </ul>
 <h2 id="-preview">🏞️ Preview</h2>
+<p>GitStamp Icon</p>
+<p><img src="https://github.com/arononak/git_stamp/blob/main/preview_icon.png?raw=true" alt=""></p>
+<p>GitStamp Page</p>
 <table>
 <thead>
 <tr>
@@ -133,9 +142,7 @@ Text('SHA: ${GitStamp.latestCommit.hash}'),
     GENERATE--&gt;|Create ./git_stamp directory with .dart files|CODE
 </code></pre>
 <h2 id="-installation">🛠️ Installation</h2>
-<!-- https://snappify.com/ -->
-<p><img src="https://github.com/arononak/git_stamp/blob/main/generating.png?raw=true" alt=""></p>
-<p>If you use <code>url_launcher</code> generation, add the package to <code>pubspec.yaml</code>:</p>
+<p>Package <code>url_launcher</code> if you use.</p>
 <pre class="language-yaml"><code class="language-yaml">dependencies:
   url_launcher: ^6.2.3
 dev_dependencies:
@@ -144,10 +151,6 @@ dev_dependencies:
       url: https://github.com/arononak/git_stamp
       ref: main
 </code></pre>
-<div class="markdown-alert markdown-alert-important">
-<p class="markdown-alert-title">Important</p>
-<p>If you use Github Action, you only get a single commit because GitHub Actions by default only retrieves the latest version (single commit) and does not include the full history of the repository. This is normal behavior to optimize the build process and improve performance, especially for large repositories. Try configuring github actions or generating Git Stamp files before <code>git push</code>.</p>
-</div>
 <div class="markdown-alert markdown-alert-warning">
 <p class="markdown-alert-title">Warning</p>
 <p>Add badge to your <code>README.md</code> 😄️</p>
@@ -158,8 +161,60 @@ dev_dependencies:
 <div class="markdown-alert markdown-alert-important">
 <p class="markdown-alert-title">Important</p>
 <p>Add <strong>git_stamp</strong> to .gitignore.</p>
-<p><code>echo "lib/git_stamp/" &gt;&gt; .gitignore</code>.</p>
+<p><code>echo -e "\n/lib/git_stamp/" &gt;&gt; .gitignore</code>.</p>
 <p>If you add a <strong>/git_stamp</strong> folder for the repository and use the <code>FULL</code> version, the size of the repository will grow EXPONENTIALLY.</p>
+</div>
+<h2 id="-integration">📦 Integration</h2>
+<p>Example GitHub Actions file:</p>
+<p><code>.github/workflows/build_and_deploy.yml</code></p>
+<pre class="language-yml"><code class="language-yml">name: build_and_deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request_target:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.2'
+          channel: 'stable'
+      - run: flutter --version
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+      - run: flutter pub get
+      - run: dart run git_stamp
+      - run: flutter build web --release --web-renderer canvaskit
+      - uses: actions/upload-artifact@master
+        with:
+          name: build
+          path: build/web
+  deploy:
+    name: "Deploy"
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@master
+        with:
+          name: build
+          path: build/web
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
+          projectId: xxx
+          channelId: live
+</code></pre>
+<div class="markdown-alert markdown-alert-important">
+<p class="markdown-alert-title">Important</p>
+<p>If you use Github Action, you only get a single commit because GitHub Actions by default only retrieves the latest version (single commit) and does not include the full history of the repository. This is normal behavior to optimize the build process and improve performance, especially for large repositories. Try configuring github actions or generating Git Stamp files before <code>git push</code>.</p>
 </div>
 <h2 id="-generating">🏗️ Generating</h2>
 <table>
@@ -265,6 +320,9 @@ dev_dependencies:
    static const String repoPath
    static const String observedFilesList
 
+   static const String appVersion
+   static const String appBuild
+
    static const bool isLiteVersion
 }
 </code></pre>
@@ -314,7 +372,7 @@ If you have any feedback, please contact me at <a href="mailto:arononak@gmail.co
 <footer>
   <span class="no-break">
     git_stamp
-      3.1.0
+      3.2.0
   </span>
 
   
