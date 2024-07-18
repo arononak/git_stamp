@@ -160,3 +160,10 @@
 ## 3.2.0
 
 * Added GitStampIcon with tip information
+
+## 4.0.0
+
+* Added new `ICON` build-type
+* Removed configurable `url_launcher` package
+* Added `aron_gradient_line` package for `LITE` and `FULL` build-type
+* Generator adding packages to project pubpsec.yaml
