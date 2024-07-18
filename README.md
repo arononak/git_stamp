@@ -2,7 +2,7 @@
 
 # [Git Stamp 🏷](./TODO.md)
 
-Advanced project information provider. From simple information such as `build-branch` to a screen with Flutter code with commits and change history.
+Advanced project information provider. From simple information such as `build-branch` to a screen with Flutter code with commits and change history. [How it work?](./MECHANISM.md)
 
 [![Latest Tag](https://img.shields.io/github/v/tag/arononak/git_stamp?style=flat&logo=github&labelColor=black&color=white)](https://github.com/arononak/git_stamp/tags)
 [![GitHub stars](https://img.shields.io/github/stars/arononak/git_stamp.svg?style=flat&label=Star&labelColor=black&color=white)](https://github.com/arononak/git_stamp/)
@@ -18,7 +18,6 @@ Advanced project information provider. From simple information such as `build-br
 - [Git Stamp 🏷](#git-stamp-)
   - [Table of contents](#table-of-contents)
   - [🏞️ Preview](#️-preview)
-  - [🕯️ Mechanism](#️-mechanism)
   - [🛠️ Installation](#️-installation)
   - [📦 Integration](#-integration)
   - [🏗️ Generating](#️-generating)
@@ -55,37 +54,6 @@ Text('Version: ${GitStamp.appVersion}'),
 Text('Build: ${GitStamp.appBuild}'),
 Text('Branch: ${GitStamp.buildBranch}'),
 Text('SHA: ${GitStamp.latestCommit.hash}'),
-```
-
-## 🕯️ Mechanism
-
-```mermaid
-graph TD
-    CODE((SOURCE CODE))-->SYNC(flutter pub get)
-    SYNC-->BUILD(flutter build ...)
-
-    subgraph "App"
-        CODE
-        PUB
-        PUB((PACKAGES))-->CODE
-    end
-
-    subgraph "Git Stamp"
-        GIT_CLI(GIT CLI)-->GENERATOR
-        DART_CLI(DART CLI)-->GENERATOR
-        FLUTTER_CLI(FLUTTER CLI)-->GENERATOR
-    end
-
-    subgraph "Git Stamp CLI"
-        GENERATE
-        ADD
-    end
-
-    GENERATOR((GENERATOR))-->ADD(~$ dart pub add git_stamp)
-    ADD-->|Add package|PUB
-
-    GENERATOR-->GENERATE(~$ dart run git_stamp)
-    GENERATE-->|Create ./git_stamp directory with .dart files|CODE
 ```
 
 ## 🛠️ Installation
@@ -173,7 +141,7 @@ jobs:
 ```
 
 > [!IMPORTANT]
-> If you use Github Action, you only get a single commit because GitHub Actions by default only retrieves the latest version (single commit) and does not include the full history of the repository. This is normal behavior to optimize the build process and improve performance, especially for large repositories. Try configuring github actions or generating Git Stamp files before `git push`.
+> If you use Github Action, you only get a single commit. This is normal behavior to optimize the build process and improve performance, especially for large repositories. Try configuring github actions or generating Git Stamp files before `git push`.
 
 ## 🏗️ Generating
 
