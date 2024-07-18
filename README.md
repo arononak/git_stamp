@@ -28,11 +28,11 @@ Advanced project information provider. From simple information such as `build-br
 
 ## 🏞️ Preview
 
-GitStamp Icon
+#### GitStamp Icon
 
 ![](https://github.com/arononak/git_stamp/blob/main/preview_icon.png?raw=true)
 
-GitStamp Page
+##### GitStamp Page
 
 |                                      Light                                      |                                      Dark                                      |
 | :-----------------------------------------------------------------------------: | :----------------------------------------------------------------------------: |
