@@ -2,6 +2,8 @@ const rawGitStampPage = '''
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 
+import 'package:aron_gradient_line/aron_gradient_line.dart';
+
 import '../../git_stamp.dart';
 
 const _text = TextStyle(fontSize: 12);
@@ -31,6 +33,10 @@ class _GitStampPageState extends State<GitStampPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(4.0),
+          child: AronGradientLine(),
+        ),
         title: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

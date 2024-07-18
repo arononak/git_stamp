@@ -22,7 +22,6 @@
 - [ ] InApp - git ls-tree -r --name-only --full-tree origin/main
 - [ ] InApp - flutter --no-version-check --version --machine
 - [ ] InApp - flutter --no-version-check pub pub outdated --json --up-to-date --no-dev-dependencies --no-dependency-overrides
-- [ ] InApp - Write
 - [ ] InApp - Extract UI files to lib folder & Add aron_gradient_line package
 - [ ] Generator - New data files structure
 - [ ] Generator - GitStamp version compile time
@@ -41,3 +40,5 @@
 - [ ] CI - Auto deploy every 7 days ?
 - [ ] InApp - last commit tag
 - [ ] InApp - repo url - origin
+- [ ] Generator - Generation path as a parameter
+- [ ] InApp - Date by locale

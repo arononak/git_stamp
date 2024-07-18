@@ -1,29 +1,17 @@
 class GitStampBuild {
-  final bool commitList;
-  final bool diffList;
-  final bool buildBranch;
-  final bool buildDateTime;
-  final bool buildSystemInfo;
-  final bool repoCreationDate;
-  final bool repoPath;
-  final bool observedFilesList;
-  final bool appVersion;
-  final bool generateFlutterFiles;
+  bool commitList = false;
+  bool diffList = false;
+  bool buildBranch = false;
+  bool buildDateTime = false;
+  bool buildSystemInfo = false;
+  bool repoCreationDate = false;
+  bool repoPath = false;
+  bool observedFilesList = false;
+  bool appVersion = false;
+  bool generateFlutterFiles = false;
+  bool generateFlutterIcon = false;
 
-  const GitStampBuild({
-    this.commitList = false,
-    this.diffList = false,
-    this.buildBranch = false,
-    this.buildDateTime = false,
-    this.buildSystemInfo = false,
-    this.repoCreationDate = false,
-    this.repoPath = false,
-    this.observedFilesList = false,
-    this.appVersion = false,
-    this.generateFlutterFiles = false,
-  });
-
-  const GitStampBuild.all({
+  GitStampBuild.all({
     this.commitList = true,
     this.diffList = true,
     this.buildBranch = true,
@@ -34,6 +22,14 @@ class GitStampBuild {
     this.observedFilesList = true,
     this.appVersion = true,
     this.generateFlutterFiles = true,
+    this.generateFlutterIcon = true,
+  });
+
+  GitStampBuild.tooltip({
+    this.commitList = true,
+    this.buildBranch = true,
+    this.buildDateTime = true,
+    this.generateFlutterIcon = true,
   });
 
   GitStampBuild.custom(List<String> args)
@@ -46,5 +42,6 @@ class GitStampBuild {
         repoPath = args.contains('repo-path'),
         observedFilesList = args.contains('observed-files-list'),
         appVersion = args.contains('app-version'),
-        generateFlutterFiles = false;
+        generateFlutterFiles = false,
+        generateFlutterIcon = false;
 }

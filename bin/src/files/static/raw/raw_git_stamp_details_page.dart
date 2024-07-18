@@ -1,6 +1,8 @@
 const rawGitStampDetailsPage = '''
 import 'package:flutter/material.dart';
 
+import 'package:aron_gradient_line/aron_gradient_line.dart';
+
 import '../../git_stamp.dart';
 
 void showGitStampDetailsPage({
@@ -25,6 +27,10 @@ class GitStampDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(4.0),
+          child: AronGradientLine(),
+        ),
         title: Text(commitHash),
       ),
       body: SingleChildScrollView(

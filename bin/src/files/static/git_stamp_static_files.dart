@@ -2,7 +2,6 @@ import 'raw/raw_git_stamp.dart';
 import 'raw/raw_git_stamp_commit.dart';
 import 'raw/raw_git_stamp_details_page.dart';
 import 'raw/raw_git_stamp_launcher.dart';
-import 'raw/raw_git_stamp_launcher_empty.dart';
 import 'raw/raw_git_stamp_page.dart';
 import 'raw/raw_git_stamp_utils.dart';
 import 'raw/raw_git_stamp_icon.dart';
@@ -31,16 +30,11 @@ class GitStampUtils extends GitStampFile {
 }
 
 class GitStampLauncher extends GitStampFile {
-  final bool useUrlLauncher;
-
-  GitStampLauncher(this.useUrlLauncher);
-
   @override
   String filename() => '${GitStampDirectory.uiFolder}/git_stamp_launcher.dart';
 
   @override
-  String content() =>
-      useUrlLauncher ? rawGitStampLauncher : rawGitStampLauncherEmpty;
+  String content() => rawGitStampLauncher;
 }
 
 class GitStampCommit extends GitStampFile {

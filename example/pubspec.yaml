@@ -7,9 +7,10 @@ environment:
   sdk: '>=3.2.3 <4.0.0'
   flutter: ">=1.17.0"
 dependencies:
-  url_launcher: ^6.3.0
+  aron_gradient_line: ^1.0.1
   flutter:
     sdk: flutter
+  url_launcher: ^6.3.0
 dev_dependencies:
   git_stamp:
     path: ../

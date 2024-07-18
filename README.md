@@ -60,17 +60,7 @@ Text('SHA: ${GitStamp.latestCommit.hash}'),
 
 ## 🛠️ Installation
 
-Package `url_launcher` if you use.
-
-```yaml
-dependencies:
-  url_launcher: ^6.3.0
-dev_dependencies:
-  git_stamp:
-    git:
-      url: https://github.com/arononak/git_stamp
-      ref: main
-```
+```dart pub add git_stamp```
 
 > [!WARNING]
 > Add badge to your `README.md` 😄️
@@ -90,11 +80,12 @@ dev_dependencies:
 
 ## 🏗️ Generating
 
-| CLI Command                                                       | Build type | Use ```url_launcher``` | Generate Flutter UI Files |
-| ----------------------------------------------------------------- | ---------- | ---------------------- | ------------------------- |
-| `dart run git_stamp`                                              | LITE       | DISABLED               | YES                       |
-| `dart run git_stamp --build-type full --gen-url-launcher enabled` | FULL       | ENABLED                | YES                       |
-| `dart run git_stamp --gen-only build-branch,build-date-time`      | CUSTOM     | DISABLED               | NO                        |
+| CLI Command                                                  | Build type | Pure Dart                  |
+| ------------------------------------------------------------ | ---------- | -------------------------- |
+| `dart run git_stamp`                                         | LITE       | NO                         |
+| `dart run git_stamp --build-type full`                       | FULL       | NO                         |
+| `dart run git_stamp --build-type icon`                       | ICON       | NO                         |
+| `dart run git_stamp --gen-only build-branch,build-date-time` | CUSTOM     | YES                        |
 
 > [!CAUTION]
 > Generating requires the use of the `git` command-line interface (CLI).
