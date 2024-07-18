@@ -18,12 +18,14 @@ Advanced project information provider. From simple information such as `build-br
 - [Git Stamp 🏷](#git-stamp-)
   - [Table of contents](#table-of-contents)
   - [🏞️ Preview](#️-preview)
+      - [GitStamp Icon](#gitstamp-icon)
+        - [GitStamp Page](#gitstamp-page)
   - [🛠️ Installation](#️-installation)
   - [🏗️ Generating](#️-generating)
-  - [📦 Integration](#-integration)
   - [💻 Usage](#-usage)
       - [ListTile](#listtile)
       - [IconButton](#iconbutton)
+  - [📦 Integration](#-integration)
   - [📝 License](#-license)
 
 ## 🏞️ Preview
@@ -62,7 +64,7 @@ Package `url_launcher` if you use.
 
 ```yaml
 dependencies:
-  url_launcher: ^6.2.3
+  url_launcher: ^6.3.0
 dev_dependencies:
   git_stamp:
     git:
