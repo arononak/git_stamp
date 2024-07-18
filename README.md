@@ -19,8 +19,11 @@ Advanced project information provider. From simple information such as `build-br
   - [Table of contents](#table-of-contents)
   - [🏞️ Preview](#️-preview)
       - [GitStamp Icon](#gitstamp-icon)
-      - [GitStamp Page](#gitstamp-page)
+        - [GitStamp Page](#gitstamp-page)
   - [🛠️ Installation](#️-installation)
+      - [1. `pubspec.yaml`](#1-pubspecyaml)
+      - [2. `README.md`](#2-readmemd)
+      - [3. `.gitignore`](#3-gitignore)
   - [🏗️ Generating](#️-generating)
   - [💻 Usage](#-usage)
       - [ListTile](#listtile)
@@ -60,7 +63,13 @@ Text('SHA: ${GitStamp.latestCommit.hash}'),
 
 ## 🛠️ Installation
 
-```dart pub add git_stamp```
+#### 1. `pubspec.yaml`
+
+```
+dart pub add git_stamp
+```
+
+#### 2. `README.md`
 
 > [!WARNING]
 > Add badge to your `README.md` 😄️
@@ -71,6 +80,8 @@ Text('SHA: ${GitStamp.latestCommit.hash}'),
 >[![Git Stamp](https://img.shields.io/badge/i%20love%20Git%20Stamp-ffff99?style=flat)](https://github.com/arononak/git_stamp)
 >```
 
+#### 3. `.gitignore`
+
 > [!IMPORTANT]
 > Add **git_stamp** to .gitignore.
 > 
@@ -80,12 +91,12 @@ Text('SHA: ${GitStamp.latestCommit.hash}'),
 
 ## 🏗️ Generating
 
-| CLI Command                                                  | Build type | Pure Dart                  |
-| ------------------------------------------------------------ | ---------- | -------------------------- |
-| `dart run git_stamp`                                         | LITE       | NO                         |
-| `dart run git_stamp --build-type full`                       | FULL       | NO                         |
-| `dart run git_stamp --build-type icon`                       | ICON       | NO                         |
-| `dart run git_stamp --gen-only build-branch,build-date-time` | CUSTOM     | YES                        |
+| Build type | Pure Dart                  | CLI Command                                                  |
+| ---------- | -------------------------- | ------------------------------------------------------------ |
+| LITE       | NO                         | `dart run git_stamp`                                         |
+| FULL       | NO                         | `dart run git_stamp --build-type full`                       |
+| ICON       | NO                         | `dart run git_stamp --build-type icon`                       |
+| CUSTOM     | YES                        | `dart run git_stamp --gen-only build-branch,build-date-time` |
 
 > [!CAUTION]
 > Generating requires the use of the `git` command-line interface (CLI).
