@@ -19,8 +19,8 @@ Advanced project information provider. From simple information such as `build-br
   - [Table of contents](#table-of-contents)
   - [🏞️ Preview](#️-preview)
   - [🛠️ Installation](#️-installation)
-  - [📦 Integration](#-integration)
   - [🏗️ Generating](#️-generating)
+  - [📦 Integration](#-integration)
   - [💻 Usage](#-usage)
       - [ListTile](#listtile)
       - [IconButton](#iconbutton)
@@ -85,63 +85,6 @@ dev_dependencies:
 > ```echo -e "\n/lib/git_stamp/" >> .gitignore```.
 > 
 > If you add a **/git_stamp** folder for the repository and use the `FULL` version, the size of the repository will grow EXPONENTIALLY.
-
-
-## 📦 Integration
-
-Example GitHub Actions file:
-
-`.github/workflows/build_and_deploy.yml`
-
-```yml
-name: build_and_deploy
-
-on:
-  push:
-    branches: [main]
-  pull_request_target:
-    branches: [main]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.22.2'
-          channel: 'stable'
-      - run: flutter --version
-      - uses: actions/setup-java@v1
-        with:
-          java-version: "12.x"
-      - run: flutter pub get
-      - run: dart run git_stamp
-      - run: flutter build web --release --web-renderer canvaskit
-      - uses: actions/upload-artifact@master
-        with:
-          name: build
-          path: build/web
-  deploy:
-    name: "Deploy"
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/download-artifact@master
-        with:
-          name: build
-          path: build/web
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
-          projectId: xxx
-          channelId: live
-```
-
-> [!IMPORTANT]
-> If you use Github Action, you only get a single commit. This is normal behavior to optimize the build process and improve performance, especially for large repositories. Try configuring github actions or generating Git Stamp files before `git push`.
 
 ## 🏗️ Generating
 
@@ -213,6 +156,62 @@ class GitStamp {
    static const bool isLiteVersion
 }
 ```
+
+## 📦 Integration
+
+Example GitHub Actions file:
+
+`.github/workflows/build_and_deploy.yml`
+
+```yml
+name: build_and_deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request_target:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.2'
+          channel: 'stable'
+      - run: flutter --version
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+      - run: flutter pub get
+      - run: dart run git_stamp
+      - run: flutter build web --release --web-renderer canvaskit
+      - uses: actions/upload-artifact@master
+        with:
+          name: build
+          path: build/web
+  deploy:
+    name: "Deploy"
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@master
+        with:
+          name: build
+          path: build/web
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
+          projectId: xxx
+          channelId: live
+```
+
+> [!IMPORTANT]
+> If you use Github Action, you only get a single commit. This is normal behavior to optimize the build process and improve performance, especially for large repositories. Try configuring github actions or generating Git Stamp files before `git push`.
 
 ## 📝 License
 
