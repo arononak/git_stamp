@@ -19,7 +19,7 @@ Advanced project information provider. From simple information such as `build-br
   - [Table of contents](#table-of-contents)
   - [🏞️ Preview](#️-preview)
       - [GitStamp Icon](#gitstamp-icon)
-        - [GitStamp Page](#gitstamp-page)
+      - [GitStamp Page](#gitstamp-page)
   - [🛠️ Installation](#️-installation)
   - [🏗️ Generating](#️-generating)
   - [💻 Usage](#-usage)
