@@ -18,30 +18,51 @@ Advanced project information provider. From simple information such as `build-br
 - [Git Stamp 🏷](#git-stamp-)
   - [Table of contents](#table-of-contents)
   - [🏞️ Preview](#️-preview)
-      - [GitStamp Icon](#gitstamp-icon)
-        - [GitStamp Page](#gitstamp-page)
+      - [1. LITE \& FULL](#1-lite--full)
+      - [2. ICON](#2-icon)
+  - [📑️ About](#️-about)
+      - [Main motivation](#main-motivation)
   - [🛠️ Installation](#️-installation)
       - [1. `pubspec.yaml`](#1-pubspecyaml)
       - [2. `README.md`](#2-readmemd)
       - [3. `.gitignore`](#3-gitignore)
   - [🏗️ Generating](#️-generating)
+      - [1. Examples](#1-examples)
+      - [2. Tip](#2-tip)
+      - [3. Custom `gen-only` parameters](#3-custom-gen-only-parameters)
+          - [`commit-list`](#commit-list)
+          - [`diff-list`](#diff-list)
+          - [`repo-creation-date`](#repo-creation-date)
+          - [`build-branch`](#build-branch)
+          - [`build-date-time`](#build-date-time)
+          - [`build-system-info`](#build-system-info)
+          - [`repo-path`](#repo-path)
+          - [`observed-files-list`](#observed-files-list)
+          - [`app-version`](#app-version)
   - [💻 Usage](#-usage)
-      - [ListTile](#listtile)
-      - [IconButton](#iconbutton)
+      - [1. ListTile](#1-listtile)
+      - [2. IconButton](#2-iconbutton)
+      - [3. Central **GitStamp** node for advanced usage:](#3-central-gitstamp-node-for-advanced-usage)
   - [📦 Integration](#-integration)
+      - [GitHub Actions](#github-actions)
   - [📝 License](#-license)
 
 ## 🏞️ Preview
 
-#### GitStamp Icon
-
-![](https://github.com/arononak/git_stamp/blob/main/preview_icon.png?raw=true)
-
-##### GitStamp Page
+#### 1. LITE & FULL
 
 |                                      Light                                      |                                      Dark                                      |
 | :-----------------------------------------------------------------------------: | :----------------------------------------------------------------------------: |
 | ![](https://github.com/arononak/git_stamp/blob/main/preview_light.png?raw=true) | ![](https://github.com/arononak/git_stamp/blob/main/preview_dark.png?raw=true) |
+
+
+#### 2. ICON
+
+![](https://github.com/arononak/git_stamp/blob/main/preview_icon.png?raw=true)
+
+## 📑️ About
+
+#### Main motivation
 
 The main motivation was **Minecraft** with information like this:
 ```
@@ -91,6 +112,8 @@ dart pub add git_stamp
 
 ## 🏗️ Generating
 
+#### 1. Examples
+
 | Build type | Pure Dart                  | CLI Command                                                  |
 | ---------- | -------------------------- | ------------------------------------------------------------ |
 | LITE       | NO                         | `dart run git_stamp`                                         |
@@ -98,24 +121,26 @@ dart pub add git_stamp
 | ICON       | NO                         | `dart run git_stamp --build-type icon`                       |
 | CUSTOM     | YES                        | `dart run git_stamp --gen-only build-branch,build-date-time` |
 
+#### 2. Tip
+
 > [!CAUTION]
 > Generating requires the use of the `git` command-line interface (CLI).
 
-| `gen-only` parameters |
-| --------------------- |
-| `commit-list`         |
-| `diff-list`           |
-| `repo-creation-date`  |
-| `build-branch`        |
-| `build-date-time`     |
-| `build-system-info`   |
-| `repo-path`           |
-| `observed-files-list` |
-| `app-version`         |
+#### 3. Custom `gen-only` parameters 
+
+###### `commit-list`
+###### `diff-list`
+###### `repo-creation-date`
+###### `build-branch`
+###### `build-date-time`
+###### `build-system-info`
+###### `repo-path`
+###### `observed-files-list`
+###### `app-version`
 
 ## 💻 Usage
 
-#### ListTile
+#### 1. ListTile
 
 ```dart
 if (kDebugMode) ...[
@@ -128,7 +153,7 @@ if (kDebugMode) ...[
 ],
 ```
 
-#### IconButton
+#### 2. IconButton
 ```dart
 if (isProd == false) ...[
   IconButton(
@@ -138,7 +163,7 @@ if (isProd == false) ...[
 ],
 ```
 
-Central **GitStamp** node for advanced usage:
+#### 3. Central **GitStamp** node for advanced usage:
 
 ```dart
 class GitStamp {
@@ -162,6 +187,8 @@ class GitStamp {
 ```
 
 ## 📦 Integration
+
+#### GitHub Actions
 
 Example GitHub Actions file:
 
