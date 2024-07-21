@@ -83,7 +83,16 @@ Text('SHA: ${GitStamp.latestCommit.hash}'),
 dart pub add git_stamp
 ```
 
-#### 2. `README.md`
+#### 2. `.gitignore`
+
+> [!IMPORTANT]
+> Add **git_stamp** to .gitignore.
+> 
+> ```echo -e "\n/lib/git_stamp/" >> .gitignore```.
+> 
+> If you add a **/git_stamp** folder for the repository and use the `FULL` version, the size of the repository will grow EXPONENTIALLY.
+
+#### 3. `README.md`
 
 > [!WARNING]
 > Add badge to your `README.md` 😄️
@@ -93,15 +102,6 @@ dart pub add git_stamp
 >```
 >[![Git Stamp](https://img.shields.io/badge/i%20love%20Git%20Stamp-ffff99?style=flat)](https://github.com/arononak/git_stamp)
 >```
-
-#### 3. `.gitignore`
-
-> [!IMPORTANT]
-> Add **git_stamp** to .gitignore.
-> 
-> ```echo -e "\n/lib/git_stamp/" >> .gitignore```.
-> 
-> If you add a **/git_stamp** folder for the repository and use the `FULL` version, the size of the repository will grow EXPONENTIALLY.
 
 ## 🏗️ Generating
 
@@ -122,13 +122,21 @@ dart pub add git_stamp
 #### 3. Custom `gen-only` parameters 
 
 `commit-list`
+
 `diff-list`
+
 `repo-creation-date`
+
 `build-branch`
+
 `build-date-time`
+
 `build-system-info`
+
 `repo-path`
+
 `observed-files-list`
+
 `app-version`
 
 ## 💻 Usage
