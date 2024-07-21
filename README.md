@@ -13,10 +13,10 @@ Advanced project information provider. From simple information such as `build-br
 [![Likes](https://img.shields.io/pub/likes/git_stamp?style=flat&labelColor=fuchsia&color=white)](https://pub.dev/packages/git_stamp)
 [![package publisher](https://img.shields.io/pub/publisher/git_stamp?style=flat&labelColor=fuchsia&color=white)](https://pub.dev/packages/git_stamp/publisher)
 
-## Table of contents
+<details>
+<summary>Table of Contents</summary>
   
 - [Git Stamp 🏷](#git-stamp-)
-  - [Table of contents](#table-of-contents)
   - [🏞️ Preview](#️-preview)
       - [1. LITE \& FULL](#1-lite--full)
       - [2. ICON](#2-icon)
@@ -30,15 +30,6 @@ Advanced project information provider. From simple information such as `build-br
       - [1. Examples](#1-examples)
       - [2. Tip](#2-tip)
       - [3. Custom `gen-only` parameters](#3-custom-gen-only-parameters)
-          - [`commit-list`](#commit-list)
-          - [`diff-list`](#diff-list)
-          - [`repo-creation-date`](#repo-creation-date)
-          - [`build-branch`](#build-branch)
-          - [`build-date-time`](#build-date-time)
-          - [`build-system-info`](#build-system-info)
-          - [`repo-path`](#repo-path)
-          - [`observed-files-list`](#observed-files-list)
-          - [`app-version`](#app-version)
   - [💻 Usage](#-usage)
       - [1. ListTile](#1-listtile)
       - [2. IconButton](#2-iconbutton)
@@ -46,6 +37,8 @@ Advanced project information provider. From simple information such as `build-br
   - [📦 Integration](#-integration)
       - [GitHub Actions](#github-actions)
   - [📝 License](#-license)
+
+</details>
 
 ## 🏞️ Preview
 
@@ -128,15 +121,15 @@ dart pub add git_stamp
 
 #### 3. Custom `gen-only` parameters 
 
-###### `commit-list`
-###### `diff-list`
-###### `repo-creation-date`
-###### `build-branch`
-###### `build-date-time`
-###### `build-system-info`
-###### `repo-path`
-###### `observed-files-list`
-###### `app-version`
+`commit-list`
+`diff-list`
+`repo-creation-date`
+`build-branch`
+`build-date-time`
+`build-system-info`
+`repo-path`
+`observed-files-list`
+`app-version`
 
 ## 💻 Usage
 
@@ -190,9 +183,8 @@ class GitStamp {
 
 #### GitHub Actions
 
-Example GitHub Actions file:
-
-`.github/workflows/build_and_deploy.yml`
+<details>
+<summary>.github/workflows/build_and_deploy.yml</summary>
 
 ```yml
 name: build_and_deploy
@@ -240,6 +232,8 @@ jobs:
           projectId: xxx
           channelId: live
 ```
+
+</details>
 
 > [!IMPORTANT]
 > If you use Github Action, you only get a single commit. This is normal behavior to optimize the build process and improve performance, especially for large repositories. Try configuring github actions or generating Git Stamp files before `git push`.
