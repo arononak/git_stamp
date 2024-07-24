@@ -51,7 +51,7 @@ Advanced project information provider. From simple information such as `build-br
 
 #### 2. ICON
 
-![](https://github.com/arononak/git_stamp/blob/main/preview_icon.png?raw=true)
+![](https://github.com/arononak/git_stamp/blob/main/changelog/4.0.0.png?raw=true)
 
 ## 📑️ About
 
