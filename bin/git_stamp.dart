@@ -60,7 +60,8 @@ Future<void> main(List<String> arguments) async {
 
     final List<String>? genOnly = results['gen-only'];
     final isCustom = genOnly?.isNotEmpty ?? false;
-    final String buildType = isCustom ? 'custom' : results['build-type'].toLowerCase();
+    final String buildType =
+        isCustom ? 'custom' : results['build-type'].toLowerCase();
 
     print('');
     print(gitStampAscii);
@@ -164,6 +165,7 @@ void _generateFlutterIcon() {
 }
 
 void _addPackageToPubspec(String packageName) {
-  final result = Process.runSync('dart', ['pub', 'add', packageName]).exitCode == 0;
+  final result =
+      Process.runSync('dart', ['pub', 'add', packageName]).exitCode == 0;
   print('Adding package: [$packageName]: ${result ? 'Success' : 'Failed'}');
 }
