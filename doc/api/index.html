@@ -53,7 +53,7 @@
 <section class="desc markdown">
   <p><a href="https://www.gov.pl/web/rolnictwo/produkt-polski1"><img src="https://www.gov.pl/photo/f98cae42-2b90-4596-904c-752278f85606" height="100" align="right"></a></p>
 <h1 id="git-stamp-todomd"><a href="./TODO.md">Git Stamp 🏷</a></h1>
-<p>Provides advanced project information. From simple information such as <code>build-branch</code> to a screen with Flutter code with commits and change history.</p>
+<p>Advanced project information provider. From simple information such as <code>build-branch</code> to a screen with Flutter code with commits and change history. <a href="./MECHANISM.md">How it work?</a></p>
 <p><a href="https://github.com/arononak/git_stamp/tags"><img src="https://img.shields.io/github/v/tag/arononak/git_stamp?style=flat&amp;logo=github&amp;labelColor=black&amp;color=white" alt="Latest Tag"></a>
 <a href="https://github.com/arononak/git_stamp/"><img src="https://img.shields.io/github/stars/arononak/git_stamp.svg?style=flat&amp;label=Star&amp;labelColor=black&amp;color=white" alt="GitHub stars"></a>
 <a href="https://github.com/arononak/git_stamp/graphs/contributors"><img src="https://img.shields.io/github/commit-activity/m/arononak/git_stamp?style=flat&amp;labelColor=black&amp;color=white" alt="Commits"></a>
@@ -61,30 +61,55 @@
 <p><a href="https://pub.dev/packages/git_stamp"><img src="https://img.shields.io/pub/v/git_stamp.svg?style=flat&amp;logo=dart&amp;labelColor=fuchsia&amp;color=white" alt="Pub Package"></a>
 <a href="https://pub.dev/packages/git_stamp"><img src="https://img.shields.io/pub/likes/git_stamp?style=flat&amp;labelColor=fuchsia&amp;color=white" alt="Likes"></a>
 <a href="https://pub.dev/packages/git_stamp/publisher"><img src="https://img.shields.io/pub/publisher/git_stamp?style=flat&amp;labelColor=fuchsia&amp;color=white" alt="package publisher"></a></p>
-<h2 id="table-of-contents">Table of contents</h2>
+<details>
+<summary>Table of Contents</summary>
 <ul>
 <li><a href="#git-stamp-">Git Stamp 🏷</a>
 <ul>
-<li><a href="#table-of-contents">Table of contents</a></li>
-<li><a href="#%EF%B8%8F-preview">🏞️ Preview</a></li>
-<li><a href="#%EF%B8%8F-mechanism">🕯️ Mechanism</a></li>
-<li><a href="#%EF%B8%8F-installation">🛠️ Installation</a></li>
-<li><a href="#-integration">📦 Integration</a></li>
-<li><a href="#%EF%B8%8F-generating">🏗️ Generating</a></li>
+<li><a href="#%EF%B8%8F-preview">🏞️ Preview</a>
+<ul>
+<li><a href="#1-lite--full">1. LITE &amp; FULL</a></li>
+<li><a href="#2-icon">2. ICON</a></li>
+</ul>
+</li>
+<li><a href="#%EF%B8%8F-about">📑️ About</a>
+<ul>
+<li><a href="#main-motivation">Main motivation</a></li>
+</ul>
+</li>
+<li><a href="#%EF%B8%8F-installation">🛠️ Installation</a>
+<ul>
+<li><a href="#1-pubspecyaml">1. <code>pubspec.yaml</code></a></li>
+<li><a href="#2-readmemd">2. <code>README.md</code></a></li>
+<li><a href="#3-gitignore">3. <code>.gitignore</code></a></li>
+</ul>
+</li>
+<li><a href="#%EF%B8%8F-generating">🏗️ Generating</a>
+<ul>
+<li><a href="#1-examples">1. Examples</a></li>
+<li><a href="#2-tip">2. Tip</a></li>
+<li><a href="#3-custom-gen-only-parameters">3. Custom <code>gen-only</code> parameters</a></li>
+</ul>
+</li>
 <li><a href="#-usage">💻 Usage</a>
 <ul>
-<li><a href="#listtile">ListTile</a></li>
-<li><a href="#iconbutton">IconButton</a></li>
+<li><a href="#1-listtile">1. ListTile</a></li>
+<li><a href="#2-iconbutton">2. IconButton</a></li>
+<li><a href="#3-central-gitstamp-node-for-advanced-usage">3. Central <strong>GitStamp</strong> node for advanced usage:</a></li>
+</ul>
+</li>
+<li><a href="#-integration">📦 Integration</a>
+<ul>
+<li><a href="#github-actions">GitHub Actions</a></li>
 </ul>
 </li>
 <li><a href="#-license">📝 License</a></li>
 </ul>
 </li>
 </ul>
+</details>
 <h2 id="-preview">🏞️ Preview</h2>
-<p>GitStamp Icon</p>
-<p><img src="https://github.com/arononak/git_stamp/blob/main/preview_icon.png?raw=true" alt=""></p>
-<p>GitStamp Page</p>
+<h4 id="1-lite--full">1. LITE &amp; FULL</h4>
 <table>
 <thead>
 <tr>
@@ -99,6 +124,10 @@
 </tr>
 </tbody>
 </table>
+<h4 id="2-icon">2. ICON</h4>
+<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/4.0.0.png?raw=true" alt=""></p>
+<h2 id="-about">📑️ About</h2>
+<h4 id="main-motivation">Main motivation</h4>
 <p>The main motivation was <strong>Minecraft</strong> with information like this:</p>
 <pre class="language-dart"><code>Version: v1.20.81
 Build: 24130126
@@ -113,44 +142,18 @@ Text('Build: ${GitStamp.appBuild}'),
 Text('Branch: ${GitStamp.buildBranch}'),
 Text('SHA: ${GitStamp.latestCommit.hash}'),
 </code></pre>
-<h2 id="-mechanism">🕯️ Mechanism</h2>
-<pre class="language-mermaid"><code class="language-mermaid">graph TD
-    CODE((SOURCE CODE))--&gt;SYNC(flutter pub get)
-    SYNC--&gt;BUILD(flutter build ...)
-
-    subgraph "App"
-        CODE
-        PUB
-        PUB((PACKAGES))--&gt;CODE
-    end
-
-    subgraph "Git Stamp"
-        GIT_CLI(GIT CLI)--&gt;GENERATOR
-        DART_CLI(DART CLI)--&gt;GENERATOR
-        FLUTTER_CLI(FLUTTER CLI)--&gt;GENERATOR
-    end
-
-    subgraph "Git Stamp CLI"
-        GENERATE
-        ADD
-    end
-
-    GENERATOR((GENERATOR))--&gt;ADD(~$ dart pub add git_stamp)
-    ADD--&gt;|Add package|PUB
-
-    GENERATOR--&gt;GENERATE(~$ dart run git_stamp)
-    GENERATE--&gt;|Create ./git_stamp directory with .dart files|CODE
-</code></pre>
 <h2 id="-installation">🛠️ Installation</h2>
-<p>Package <code>url_launcher</code> if you use.</p>
-<pre class="language-yaml"><code class="language-yaml">dependencies:
-  url_launcher: ^6.2.3
-dev_dependencies:
-  git_stamp:
-    git:
-      url: https://github.com/arononak/git_stamp
-      ref: main
+<h4 id="1-pubspecyaml">1. <code>pubspec.yaml</code></h4>
+<pre class="language-dart"><code>dart pub add git_stamp
 </code></pre>
+<h4 id="2-gitignore">2. <code>.gitignore</code></h4>
+<div class="markdown-alert markdown-alert-important">
+<p class="markdown-alert-title">Important</p>
+<p>Add <strong>git_stamp</strong> to .gitignore.</p>
+<p><code>echo -e "\n/lib/git_stamp/" &gt;&gt; .gitignore</code>.</p>
+<p>If you add a <strong>/git_stamp</strong> folder for the repository and use the <code>FULL</code> version, the size of the repository will grow EXPONENTIALLY.</p>
+</div>
+<h4 id="3-readmemd">3. <code>README.md</code></h4>
 <div class="markdown-alert markdown-alert-warning">
 <p class="markdown-alert-title">Warning</p>
 <p>Add badge to your <code>README.md</code> 😄️</p>
@@ -158,15 +161,97 @@ dev_dependencies:
 <pre class="language-dart"><code>[![Git Stamp](https://img.shields.io/badge/i%20love%20Git%20Stamp-ffff99?style=flat)](https://github.com/arononak/git_stamp)
 </code></pre>
 </div>
-<div class="markdown-alert markdown-alert-important">
-<p class="markdown-alert-title">Important</p>
-<p>Add <strong>git_stamp</strong> to .gitignore.</p>
-<p><code>echo -e "\n/lib/git_stamp/" &gt;&gt; .gitignore</code>.</p>
-<p>If you add a <strong>/git_stamp</strong> folder for the repository and use the <code>FULL</code> version, the size of the repository will grow EXPONENTIALLY.</p>
+<h2 id="-generating">🏗️ Generating</h2>
+<h4 id="1-examples">1. Examples</h4>
+<table>
+<thead>
+<tr>
+<th>Build type</th>
+<th>Pure Dart</th>
+<th>CLI Command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LITE</td>
+<td>NO</td>
+<td><code>dart run git_stamp</code></td>
+</tr>
+<tr>
+<td>FULL</td>
+<td>NO</td>
+<td><code>dart run git_stamp --build-type full</code></td>
+</tr>
+<tr>
+<td>ICON</td>
+<td>NO</td>
+<td><code>dart run git_stamp --build-type icon</code></td>
+</tr>
+<tr>
+<td>CUSTOM</td>
+<td>YES</td>
+<td><code>dart run git_stamp --gen-only build-branch,build-date-time</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-tip">2. Tip</h4>
+<div class="markdown-alert markdown-alert-caution">
+<p class="markdown-alert-title">Caution</p>
+<p>Generating requires the use of the <code>git</code> command-line interface (CLI).</p>
 </div>
+<h4 id="3-custom-gen-only-parameters">3. Custom <code>gen-only</code> parameters</h4>
+<p><code>commit-list</code></p>
+<p><code>diff-list</code></p>
+<p><code>repo-creation-date</code></p>
+<p><code>build-branch</code></p>
+<p><code>build-date-time</code></p>
+<p><code>build-system-info</code></p>
+<p><code>repo-path</code></p>
+<p><code>observed-files-list</code></p>
+<p><code>app-version</code></p>
+<h2 id="-usage">💻 Usage</h2>
+<h4 id="1-listtile">1. ListTile</h4>
+<pre class="language-dart"><code class="language-dart">if (kDebugMode) ...[
+  ListTile(
+    title: const Text('Git Stamp'),
+    subtitle: Text(GitStamp.latestCommit.hash),
+    leading: const Icon(Icons.commit),
+    onTap: () =&gt; showGitStampPage(context: context),
+  ),
+],
+</code></pre>
+<h4 id="2-iconbutton">2. IconButton</h4>
+<pre class="language-dart"><code class="language-dart">if (isProd == false) ...[
+  IconButton(
+    onPressed: () =&gt; showGitStampPage(context: context),
+    icon: const Icon(Icons.book),
+  ),
+],
+</code></pre>
+<h4 id="3-central-gitstamp-node-for-advanced-usage">3. Central <strong>GitStamp</strong> node for advanced usage:</h4>
+<pre class="language-dart"><code class="language-dart">class GitStamp {
+   static List&lt;GitStampCommit&gt; commitList
+   static GitStampCommit latestCommit
+
+   static const Map&lt;String, String&gt; diffList
+
+   static const String buildBranch
+   static const String buildDateTime
+   static const String buildSystemInfo
+   static const String repoCreationDate
+   static const String repoPath
+   static const String observedFilesList
+
+   static const String appVersion
+   static const String appBuild
+
+   static const bool isLiteVersion
+}
+</code></pre>
 <h2 id="-integration">📦 Integration</h2>
-<p>Example GitHub Actions file:</p>
-<p><code>.github/workflows/build_and_deploy.yml</code></p>
+<h4 id="github-actions">GitHub Actions</h4>
+<details>
+<summary>.github/workflows/build_and_deploy.yml</summary>
 <pre class="language-yml"><code class="language-yml">name: build_and_deploy
 
 on:
@@ -212,120 +297,11 @@ jobs:
           projectId: xxx
           channelId: live
 </code></pre>
+</details>
 <div class="markdown-alert markdown-alert-important">
 <p class="markdown-alert-title">Important</p>
-<p>If you use Github Action, you only get a single commit because GitHub Actions by default only retrieves the latest version (single commit) and does not include the full history of the repository. This is normal behavior to optimize the build process and improve performance, especially for large repositories. Try configuring github actions or generating Git Stamp files before <code>git push</code>.</p>
+<p>If you use Github Action, you only get a single commit. This is normal behavior to optimize the build process and improve performance, especially for large repositories. Try configuring github actions or generating Git Stamp files before <code>git push</code>.</p>
 </div>
-<h2 id="-generating">🏗️ Generating</h2>
-<table>
-<thead>
-<tr>
-<th>CLI Command</th>
-<th>Build type</th>
-<th>Use <code>url_launcher</code></th>
-<th>Generate Flutter UI Files</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>dart run git_stamp</code></td>
-<td>LITE</td>
-<td>DISABLED</td>
-<td>YES</td>
-</tr>
-<tr>
-<td><code>dart run git_stamp --build-type full --gen-url-launcher enabled</code></td>
-<td>FULL</td>
-<td>ENABLED</td>
-<td>YES</td>
-</tr>
-<tr>
-<td><code>dart run git_stamp --gen-only build-branch,build-date-time</code></td>
-<td>CUSTOM</td>
-<td>DISABLED</td>
-<td>NO</td>
-</tr>
-</tbody>
-</table>
-<div class="markdown-alert markdown-alert-caution">
-<p class="markdown-alert-title">Caution</p>
-<p>Generating requires the use of the <code>git</code> command-line interface (CLI).</p>
-</div>
-<table>
-<thead>
-<tr>
-<th><code>gen-only</code> parameters</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>commit-list</code></td>
-</tr>
-<tr>
-<td><code>diff-list</code></td>
-</tr>
-<tr>
-<td><code>repo-creation-date</code></td>
-</tr>
-<tr>
-<td><code>build-branch</code></td>
-</tr>
-<tr>
-<td><code>build-date-time</code></td>
-</tr>
-<tr>
-<td><code>build-system-info</code></td>
-</tr>
-<tr>
-<td><code>repo-path</code></td>
-</tr>
-<tr>
-<td><code>observed-files-list</code></td>
-</tr>
-<tr>
-<td><code>app-version</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="-usage">💻 Usage</h2>
-<h4 id="listtile">ListTile</h4>
-<pre class="language-dart"><code class="language-dart">if (kDebugMode) ...[
-  ListTile(
-    title: const Text('Git Stamp'),
-    subtitle: Text(GitStamp.latestCommit.hash),
-    leading: const Icon(Icons.commit),
-    onTap: () =&gt; showGitStampPage(context: context),
-  ),
-],
-</code></pre>
-<h4 id="iconbutton">IconButton</h4>
-<pre class="language-dart"><code class="language-dart">if (isProd == false) ...[
-  IconButton(
-    onPressed: () =&gt; showGitStampPage(context: context),
-    icon: const Icon(Icons.book),
-  ),
-],
-</code></pre>
-<p>Central <strong>GitStamp</strong> node for advanced usage:</p>
-<pre class="language-dart"><code class="language-dart">class GitStamp {
-   static List&lt;GitStampCommit&gt; commitList
-   static GitStampCommit latestCommit
-
-   static const Map&lt;String, String&gt; diffList
-
-   static const String buildBranch
-   static const String buildDateTime
-   static const String buildSystemInfo
-   static const String repoCreationDate
-   static const String repoPath
-   static const String observedFilesList
-
-   static const String appVersion
-   static const String appBuild
-
-   static const bool isLiteVersion
-}
-</code></pre>
 <h2 id="-license">📝 License</h2>
 <div class="markdown-alert markdown-alert-note">
 <p class="markdown-alert-title">Note</p>
@@ -372,7 +348,7 @@ If you have any feedback, please contact me at <a href="mailto:arononak@gmail.co
 <footer>
   <span class="no-break">
     git_stamp
-      3.2.0
+      4.0.0
   </span>
 
   
