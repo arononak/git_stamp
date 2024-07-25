@@ -21,7 +21,8 @@ Advanced project information provider. From simple information such as `build-br
       - [1. LITE \& FULL](#1-lite--full)
       - [2. ICON](#2-icon)
   - [📑️ About](#️-about)
-      - [Main motivation](#main-motivation)
+      - [Goal](#goal)
+      - [Motivation](#motivation)
   - [🛠️ Installation](#️-installation)
       - [1. `pubspec.yaml`](#1-pubspecyaml)
       - [2. `README.md`](#2-readmemd)
@@ -55,7 +56,11 @@ Advanced project information provider. From simple information such as `build-br
 
 ## 📑️ About
 
-#### Main motivation
+#### Goal
+
+The main goal is to help locate errors in the full process of building STAGE, TEST and PROD versions.
+
+#### Motivation
 
 The main motivation was **Minecraft** with information like this:
 ```
