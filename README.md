@@ -56,7 +56,7 @@ Advanced await-less information provider. From simple information such as `build
 
 #### 3. LicensePage
 
-|                                      showLicensePage                                |                                      showGitStampLicensePage                                  |
+|                             showLicensePage(context: context)                       |                      showGitStampLicensePage(context: context)                                |
 | :---------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------: |
 | ![](https://github.com/arononak/git_stamp/blob/main/show_license_page.png?raw=true) | ![](https://github.com/arononak/git_stamp/blob/main/show_git_stamp_license_page.png?raw=true) |
 
