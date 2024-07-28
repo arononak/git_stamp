@@ -1,5 +1,5 @@
 sync:
-	dart run git_stamp --build-type full --gen-url-launcher enabled
+	dart run git_stamp --build-type full
 	dart format .
 
 run:

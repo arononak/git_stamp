@@ -2,7 +2,7 @@
 
 # [Git Stamp 🏷](./TODO.md)
 
-Advanced project information provider. From simple information such as `build-branch` to a screen with Flutter code with commits and change history. [How it work?](./MECHANISM.md)
+Advanced await-less information provider. From simple information such as `build-branch` to a screen with Flutter code with commits and change history. [How it work?](./MECHANISM.md)
 
 [![Latest Tag](https://img.shields.io/github/v/tag/arononak/git_stamp?style=flat&logo=github&labelColor=black&color=white)](https://github.com/arononak/git_stamp/tags)
 [![GitHub stars](https://img.shields.io/github/stars/arononak/git_stamp.svg?style=flat&label=Star&labelColor=black&color=white)](https://github.com/arononak/git_stamp/)
@@ -25,8 +25,8 @@ Advanced project information provider. From simple information such as `build-br
       - [Motivation](#motivation)
   - [🛠️ Installation](#️-installation)
       - [1. `pubspec.yaml`](#1-pubspecyaml)
-      - [2. `README.md`](#2-readmemd)
-      - [3. `.gitignore`](#3-gitignore)
+      - [2. `.gitignore`](#2-gitignore)
+      - [3. `README.md`](#3-readmemd)
   - [🏗️ Generating](#️-generating)
       - [1. Examples](#1-examples)
       - [2. Tip](#2-tip)
@@ -143,6 +143,8 @@ dart pub add git_stamp
 `observed-files-list`
 
 `app-version`
+
+`app-name`
 
 ## 💻 Usage
 

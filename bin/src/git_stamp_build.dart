@@ -8,6 +8,7 @@ class GitStampBuild {
   bool repoPath = false;
   bool observedFilesList = false;
   bool appVersion = false;
+  bool appName = false;
   bool generateFlutterFiles = false;
   bool generateFlutterIcon = false;
 
@@ -21,6 +22,7 @@ class GitStampBuild {
     this.repoPath = true,
     this.observedFilesList = true,
     this.appVersion = true,
+    this.appName = true,
     this.generateFlutterFiles = true,
     this.generateFlutterIcon = true,
   });
@@ -42,6 +44,7 @@ class GitStampBuild {
         repoPath = args.contains('repo-path'),
         observedFilesList = args.contains('observed-files-list'),
         appVersion = args.contains('app-version'),
+        appName = args.contains('app-name'),
         generateFlutterFiles = false,
         generateFlutterIcon = false;
 }

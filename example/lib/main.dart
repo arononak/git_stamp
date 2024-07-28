@@ -1,4 +1,5 @@
 import 'package:example/git_stamp/src/ui/git_stamp_icon.dart';
+import 'package:example/git_stamp/src/ui/git_stamp_license_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -57,23 +58,16 @@ class SettingsPage extends StatelessWidget {
           ListTile(
             title: Text('Open Source Licenses'),
             leading: const Icon(Icons.gavel),
-            onTap: () => showLicensePage(context: context),
+            onTap: () => showGitStampLicensePage(context: context),
           ),
           ListTile(
-            title: Text('Version: 1.0.0'),
-            leading: const Icon(Icons.info),
-            onTap: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('1.0.0'),
-                  duration: const Duration(seconds: 2),
-                ),
-              );
-            },
+            title: Text('Version: ${GitStamp.appVersion}'),
+            leading: const Icon(Icons.numbers),
+            onTap: () {},
           ),
           if (kDebugMode) ...[
             ListTile(
-              title: const Text('Git Stamp'),
+              title: const Text('Git Stamp Page'),
               subtitle: Text(GitStamp.latestCommit.hash),
               leading: const Icon(Icons.commit),
               onTap: () => showGitStampPage(context: context),

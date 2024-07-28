@@ -34,6 +34,7 @@ Future<void> main(List<String> arguments) async {
         'repo-path',
         'observed-files-list',
         'app-version',
+        'app-name',
       ],
       defaultsTo: null,
     )
@@ -144,6 +145,10 @@ void _generateDataFiles(
   if (files.appVersion) {
     AppVersion().generate();
   }
+
+  if (files.appName) {
+    AppName().generate();
+  }
 }
 
 void _generateFlutterInterface({bool isLiteVersion = true}) {
@@ -153,6 +158,7 @@ void _generateFlutterInterface({bool isLiteVersion = true}) {
     GitStampDetailsPage(),
     GitStampUtils(),
     GitStampLauncher(),
+    GitStampLicensePage(),
   ];
 
   for (var element in gitStampUi) {

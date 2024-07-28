@@ -221,3 +221,19 @@ class AppVersion extends GitStampFile {
     ''';
   }
 }
+
+class AppName extends GitStampFile {
+  @override
+  String filename() => '${GitStampDirectory.dataFolder}/app_name.dart';
+
+  @override
+  String content() {
+    final file = File('pubspec.yaml');
+    final content = file.readAsStringSync();
+    final pubspec = Pubspec.parse(content);
+
+    return '''
+      const gitStampAppName = '${pubspec.name}';
+    ''';
+  }
+}
