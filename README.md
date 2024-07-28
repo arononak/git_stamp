@@ -20,6 +20,7 @@ Advanced await-less information provider. From simple information such as `build
   - [🏞️ Preview](#️-preview)
       - [1. LITE \& FULL](#1-lite--full)
       - [2. ICON](#2-icon)
+      - [3. LicensePage](#3-licensepage)
   - [📑️ About](#️-about)
       - [Goal](#goal)
       - [Motivation](#motivation)
@@ -49,10 +50,15 @@ Advanced await-less information provider. From simple information such as `build
 | :-----------------------------------------------------------------------------: | :----------------------------------------------------------------------------: |
 | ![](https://github.com/arononak/git_stamp/blob/main/preview_light.png?raw=true) | ![](https://github.com/arononak/git_stamp/blob/main/preview_dark.png?raw=true) |
 
-
 #### 2. ICON
 
-![](https://github.com/arononak/git_stamp/blob/main/changelog/4.0.0.png?raw=true)
+![](https://github.com/arononak/git_stamp/blob/main/preview_icon.png?raw=true)
+
+#### 3. LicensePage
+
+|                                      showLicensePage                                |                                      showGitStampLicensePage                                  |
+| :---------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------: |
+| ![](https://github.com/arononak/git_stamp/blob/main/show_license_page.png?raw=true) | ![](https://github.com/arononak/git_stamp/blob/main/show_git_stamp_license_page.png?raw=true) |
 
 ## 📑️ About
 
