@@ -56,7 +56,7 @@ Advanced await-less information provider. From simple information such as `build
 
 #### 3. LicensePage
 
-|                             showLicensePage(context: context)                       |                      showGitStampLicensePage(context: context)                                |
+|                            showLicensePage(context: context);                       |                      showGitStampLicensePage(context: context);                               |
 | :---------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------: |
 | ![](https://github.com/arononak/git_stamp/blob/main/show_license_page.png?raw=true) | ![](https://github.com/arononak/git_stamp/blob/main/show_git_stamp_license_page.png?raw=true) |
 
@@ -195,6 +195,7 @@ class GitStamp {
 
    static const String appVersion
    static const String appBuild
+   static const String appName
 
    static const bool isLiteVersion
 }
