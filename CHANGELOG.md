@@ -167,3 +167,8 @@
 * Removed configurable `url_launcher` package
 * Added `aron_gradient_line` package for `LITE` and `FULL` build-type
 * Generator adding packages to project pubpsec.yaml
+
+## 4.1.0
+
+* Added `app-name`
+* Added showGitStampLicensePage method with `app-name` & `app-version`
