@@ -53,7 +53,7 @@
 <section class="desc markdown">
   <p><a href="https://www.gov.pl/web/rolnictwo/produkt-polski1"><img src="https://www.gov.pl/photo/f98cae42-2b90-4596-904c-752278f85606" height="100" align="right"></a></p>
 <h1 id="git-stamp-todomd"><a href="./TODO.md">Git Stamp 🏷</a></h1>
-<p>Advanced project information provider. From simple information such as <code>build-branch</code> to a screen with Flutter code with commits and change history. <a href="./MECHANISM.md">How it work?</a></p>
+<p>Advanced await-less information provider. From simple information such as <code>build-branch</code> to a screen with Flutter code with commits and change history. <a href="./MECHANISM.md">How it work?</a></p>
 <p><a href="https://github.com/arononak/git_stamp/tags"><img src="https://img.shields.io/github/v/tag/arononak/git_stamp?style=flat&amp;logo=github&amp;labelColor=black&amp;color=white" alt="Latest Tag"></a>
 <a href="https://github.com/arononak/git_stamp/"><img src="https://img.shields.io/github/stars/arononak/git_stamp.svg?style=flat&amp;label=Star&amp;labelColor=black&amp;color=white" alt="GitHub stars"></a>
 <a href="https://github.com/arononak/git_stamp/graphs/contributors"><img src="https://img.shields.io/github/commit-activity/m/arononak/git_stamp?style=flat&amp;labelColor=black&amp;color=white" alt="Commits"></a>
@@ -70,18 +70,20 @@
 <ul>
 <li><a href="#1-lite--full">1. LITE &amp; FULL</a></li>
 <li><a href="#2-icon">2. ICON</a></li>
+<li><a href="#3-licensepage">3. LicensePage</a></li>
 </ul>
 </li>
 <li><a href="#%EF%B8%8F-about">📑️ About</a>
 <ul>
-<li><a href="#main-motivation">Main motivation</a></li>
+<li><a href="#goal">Goal</a></li>
+<li><a href="#motivation">Motivation</a></li>
 </ul>
 </li>
 <li><a href="#%EF%B8%8F-installation">🛠️ Installation</a>
 <ul>
 <li><a href="#1-pubspecyaml">1. <code>pubspec.yaml</code></a></li>
-<li><a href="#2-readmemd">2. <code>README.md</code></a></li>
-<li><a href="#3-gitignore">3. <code>.gitignore</code></a></li>
+<li><a href="#2-gitignore">2. <code>.gitignore</code></a></li>
+<li><a href="#3-readmemd">3. <code>README.md</code></a></li>
 </ul>
 </li>
 <li><a href="#%EF%B8%8F-generating">🏗️ Generating</a>
@@ -125,9 +127,26 @@
 </tbody>
 </table>
 <h4 id="2-icon">2. ICON</h4>
-<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/4.0.0.png?raw=true" alt=""></p>
+<p><img src="https://github.com/arononak/git_stamp/blob/main/preview_icon.png?raw=true" alt=""></p>
+<h4 id="3-licensepage">3. LicensePage</h4>
+<table>
+<thead>
+<tr>
+<th align="center">showLicensePage</th>
+<th align="center">showGitStampLicensePage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><img src="https://github.com/arononak/git_stamp/blob/main/show_license_page.png?raw=true" alt=""></td>
+<td align="center"><img src="https://github.com/arononak/git_stamp/blob/main/show_git_stamp_license_page.png?raw=true" alt=""></td>
+</tr>
+</tbody>
+</table>
 <h2 id="-about">📑️ About</h2>
-<h4 id="main-motivation">Main motivation</h4>
+<h4 id="goal">Goal</h4>
+<p>The main goal is to help locate errors in the full process of building STAGE, TEST and PROD versions.</p>
+<h4 id="motivation">Motivation</h4>
 <p>The main motivation was <strong>Minecraft</strong> with information like this:</p>
 <pre class="language-dart"><code>Version: v1.20.81
 Build: 24130126
@@ -209,6 +228,7 @@ Text('SHA: ${GitStamp.latestCommit.hash}'),
 <p><code>repo-path</code></p>
 <p><code>observed-files-list</code></p>
 <p><code>app-version</code></p>
+<p><code>app-name</code></p>
 <h2 id="-usage">💻 Usage</h2>
 <h4 id="1-listtile">1. ListTile</h4>
 <pre class="language-dart"><code class="language-dart">if (kDebugMode) ...[
@@ -244,6 +264,7 @@ Text('SHA: ${GitStamp.latestCommit.hash}'),
 
    static const String appVersion
    static const String appBuild
+   static const String appName
 
    static const bool isLiteVersion
 }
@@ -348,7 +369,7 @@ If you have any feedback, please contact me at <a href="mailto:arononak@gmail.co
 <footer>
   <span class="no-break">
     git_stamp
-      4.0.0
+      4.1.0
   </span>
 
   
