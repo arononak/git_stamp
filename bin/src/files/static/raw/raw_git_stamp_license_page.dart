@@ -20,10 +20,11 @@ void showGitStampLicensePage({
 }
 
 class GitStampLicenseIcon extends StatelessWidget {
-  const GitStampLicenseIcon(
+  const GitStampLicenseIcon({
+    super.key,
     this.applicationIcon,
     this.applicationLegalese,
-  );
+  });
 
   final Widget? applicationIcon;
   final String? applicationLegalese;
