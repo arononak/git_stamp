@@ -172,3 +172,8 @@
 
 * Added `app-name`
 * Added showGitStampLicensePage method with `app-name` & `app-version`
+
+## 4.1.1
+
+* Modified `showGitStampLicensePage` parameters
+* Added `GitStampLicenseIcon`
