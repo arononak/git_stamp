@@ -177,3 +177,7 @@
 
 * Modified `showGitStampLicensePage` parameters
 * Added `GitStampLicenseIcon`
+
+## 4.1.2
+
+* Fixed GitStampLicenseIcon constructor
