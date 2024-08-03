@@ -191,12 +191,20 @@ class _GitStampPageState extends State<GitStampPage> {
           ),
         ),
       ),
-      body: _buildCommitList(GitStamp.commitList, _filterAuthorName),
+      body: _buildCommitList(
+        GitStamp.commitList,
+        _filterAuthorName,
+        GitStamp.isLiteVersion,
+      ),
     );
   }
 }
 
-Widget _buildCommitList(List<GitStampCommit> elements, String? filterAuthorName) {
+Widget _buildCommitList(
+  List<GitStampCommit> elements,
+  String? filterAuthorName,
+  bool isLiteVersion,
+) {
   Map<String, List<GitStampCommit>> groupedCommit = groupBy(
     elements.where((e) => filterAuthorName == null ? true : e.authorName == filterAuthorName),
     (element) {
@@ -236,50 +244,52 @@ Widget _buildCommitList(List<GitStampCommit> elements, String? filterAuthorName)
               ],
             ),
           ),
-          ...commits.map((commit) => _buildCommitElement(context, commit)).toList()
+          ...commits.map((commit) => _buildCommitElement(context, commit, isLiteVersion)).toList()
         ],
       );
     },
   );
 }
 
-Widget _buildCommitElement(context, commit) {
+Widget _buildCommitElement(context, commit, isLiteVersion) {
   return GestureDetector(
-    onTap: () {
-      showModalBottomSheet(
-        context: context,
-        builder: (BuildContext context) {
-          return Container(
-            padding: EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: _buildCommitHeader(context, commit),
+    onTap: isLiteVersion
+        ? null
+        : () {
+            showModalBottomSheet(
+              context: context,
+              builder: (BuildContext context) {
+                return Container(
+                  padding: EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: _buildCommitHeader(context, commit),
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () => showGitStampDetailsPage(context: context, commitHash: commit.hash),
+                            icon: Icon(Icons.arrow_forward),
+                          ),
+                        ],
                       ),
-                    ),
-                    IconButton(
-                      onPressed: () => showGitStampDetailsPage(context: context, commitHash: commit.hash),
-                      icon: Icon(Icons.arrow_forward),
-                    ),
-                  ],
-                ),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Text(GitStamp.diffList[commit.hash ?? ''] ?? ''),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: Text(GitStamp.diffList[commit.hash ?? ''] ?? ''),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
-          );
-        },
-      );
-    },
+                );
+              },
+            );
+          },
     child: Card(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
