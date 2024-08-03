@@ -114,7 +114,7 @@ class _GitStampPageState extends State<GitStampPage> {
                       showModalBottomSheet(
                         context: context,
                         builder: (BuildContext context) {
-                          return _buildRepoDetailsModal(context);
+                          return GitStampRepoDetailsModalContent();
                         },
                       );
                     },
@@ -191,252 +191,303 @@ class _GitStampPageState extends State<GitStampPage> {
           ),
         ),
       ),
-      body: _buildCommitList(
-        GitStamp.commitList,
-        _filterAuthorName,
-        GitStamp.isLiteVersion,
+      body: GitStampCommitList(
+        commits: GitStamp.commitList,
+        filterAuthorName: _filterAuthorName,
+        isLiteVersion: GitStamp.isLiteVersion,
       ),
     );
   }
 }
 
-Widget _buildCommitList(
-  List<GitStampCommit> elements,
-  String? filterAuthorName,
-  bool isLiteVersion,
-) {
-  Map<String, List<GitStampCommit>> groupedCommit = groupBy(
-    elements.where((e) => filterAuthorName == null ? true : e.authorName == filterAuthorName),
-    (element) {
-      DateTime date = DateTime.parse(element.date);
+class GitStampCommitList extends StatelessWidget {
+  final List<GitStampCommit> commits;
+  final String? filterAuthorName;
+  final bool isLiteVersion;
 
-      return date.year.toString() +
-          '-' +
-          date.month.toString().padLeft(2, '0') +
-          '-' +
-          date.day.toString().padLeft(2, '0');
-    },
-  );
+  const GitStampCommitList({
+    this.commits = const [],
+    this.filterAuthorName,
+    this.isLiteVersion = true,
+  });
 
-  return ListView.builder(
-    itemCount: groupedCommit.length,
-    itemBuilder: (context, index) {
-      String header = groupedCommit.keys.elementAt(index);
-      List<GitStampCommit> commits = groupedCommit[header]!;
+  @override
+  Widget build(BuildContext context) {
+    Map<String, List<GitStampCommit>> groupedCommit = groupBy(
+      commits.where((e) => filterAuthorName == null ? true : e.authorName == filterAuthorName),
+      (element) {
+        final date = DateTime.parse(element.date);
 
-      return Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            child: Row(
-              children: [
-                Icon(Icons.commit, color: Theme.of(context).colorScheme.secondary),
-                SizedBox(width: 8),
-                Text(
-                  header,
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                    fontStyle: FontStyle.italic,
+        return date.year.toString() +
+            '-' +
+            date.month.toString().padLeft(2, '0') +
+            '-' +
+            date.day.toString().padLeft(2, '0');
+      },
+    );
+
+    return ListView.builder(
+      itemCount: groupedCommit.length,
+      itemBuilder: (context, index) {
+        final header = groupedCommit.keys.elementAt(index);
+        final commits = groupedCommit[header]!;
+
+        return Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.commit,
                     color: Theme.of(context).colorScheme.secondary,
+                  ),
+                  SizedBox(width: 8),
+                  Text(
+                    header,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      fontStyle: FontStyle.italic,
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            ...commits
+                .map(
+                  (commit) => GitStampCommitListElement(
+                    commit: commit,
+                    isLiteVersion: isLiteVersion,
+                  ),
+                )
+                .toList()
+          ],
+        );
+      },
+    );
+  }
+}
+
+class GitStampCommitListElement extends StatelessWidget {
+  final GitStampCommit commit;
+  final bool isLiteVersion;
+
+  const GitStampCommitListElement({
+    required this.commit,
+    this.isLiteVersion = true,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: isLiteVersion
+          ? null
+          : () {
+              showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return Container(
+                    padding: EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: GitStampCommitListHeader(commit: commit),
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () => showGitStampDetailsPage(context: context, commitHash: commit.hash),
+                              icon: Icon(Icons.arrow_forward),
+                            ),
+                          ],
+                        ),
+                        Expanded(
+                          child: SingleChildScrollView(
+                            child: Text(GitStamp.diffList[commit.hash] ?? ''),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+            },
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: ListTile(
+            contentPadding: const EdgeInsets.all(0),
+            leading: Icon(
+              Icons.code,
+              size: 36,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            title: GitStampCommitListHeader(
+              commit: commit,
+            ),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                InkWell(
+                  onTap: () => openEmail(email: commit.authorEmail),
+                  child: Text(
+                    '\${commit.authorName} (\${commit.authorEmail})',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurface,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                ),
+                Text(
+                  commit.date,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                   ),
                 ),
               ],
             ),
-          ),
-          ...commits.map((commit) => _buildCommitElement(context, commit, isLiteVersion)).toList()
-        ],
-      );
-    },
-  );
-}
-
-Widget _buildCommitElement(context, commit, isLiteVersion) {
-  return GestureDetector(
-    onTap: isLiteVersion
-        ? null
-        : () {
-            showModalBottomSheet(
-              context: context,
-              builder: (BuildContext context) {
-                return Container(
-                  padding: EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: _buildCommitHeader(context, commit),
-                            ),
-                          ),
-                          IconButton(
-                            onPressed: () => showGitStampDetailsPage(context: context, commitHash: commit.hash),
-                            icon: Icon(Icons.arrow_forward),
-                          ),
-                        ],
-                      ),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          child: Text(GitStamp.diffList[commit.hash ?? ''] ?? ''),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
-            );
-          },
-    child: Card(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: ListTile(
-          contentPadding: const EdgeInsets.all(0),
-          leading: Icon(
-            Icons.code,
-            size: 36,
-            color: Theme.of(context).colorScheme.primary,
-          ),
-          title: _buildCommitHeader(context, commit),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              InkWell(
-                onTap: () => openEmail(email: commit.authorEmail),
-                child: Text(
-                  // ignore: prefer_interpolation_to_compose_strings
-                  commit.authorName + ' (' + commit.authorEmail + ')',
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.onSurface,
-                    fontStyle: FontStyle.italic,
-                  ),
-                ),
+            trailing: IconButton(
+              onPressed: () => copyToClipboard(context, commit.hash),
+              icon: Icon(
+                Icons.content_copy,
+                color: Theme.of(context).colorScheme.primary,
               ),
-              Text(
-                commit.date,
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
-                ),
-              ),
-            ],
-          ),
-          trailing: IconButton(
-            onPressed: () => copyToClipboard(context, commit.hash),
-            icon: Icon(
-              Icons.content_copy,
-              color: Theme.of(context).colorScheme.primary,
             ),
           ),
         ),
       ),
-    ),
-  );
+    );
+  }
 }
 
-Widget _buildCommitHeader(context, commit) {
-  return Text.rich(
-    TextSpan(
-      children: [
-        TextSpan(
-          text: commit.hash.substring(0, 7),
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.primary,
-            fontWeight: FontWeight.bold,
-            fontStyle: FontStyle.italic,
-          ),
-        ),
-        const TextSpan(text: ' - ', style: TextStyle(fontWeight: FontWeight.normal)),
-        TextSpan(text: commit.subject, style: const TextStyle(fontWeight: FontWeight.bold)),
-      ],
-    ),
-    maxLines: 1,
-    overflow: TextOverflow.ellipsis,
-  );
-}
+class GitStampCommitListHeader extends StatelessWidget {
+  final GitStampCommit commit;
 
-Widget _buildDoubleText(String left, String right) {
-  return Row(
-    children: [
-      Text(left, style: _text),
-      Text(right, style: _textBold),
-    ],
-  );
-}
+  const GitStampCommitListHeader({required this.commit});
 
-Widget _buildRepoDetailsModal(BuildContext context) {
-  return Container(
-    padding: EdgeInsets.all(16.0),
-    child: SingleChildScrollView(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
+  @override
+  Widget build(BuildContext context) {
+    return Text.rich(
+      TextSpan(
         children: [
-          Text('Build', style: _textTitle),
-          const SizedBox(height: 4),
-          _buildDoubleText('App Name: ', GitStamp.appName),
-          _buildDoubleText('App Version: ', GitStamp.appVersion + ' (' + GitStamp.appBuild + ')'),
-          _buildDoubleText('Date: ', GitStamp.buildDateTime),
-          _buildDoubleText('Path: ', GitStamp.repoPath),
-          _buildDoubleText('Branch: ', GitStamp.buildBranch),
-          Row(
-            children: [
-              Text('GitStamp build type: [', style: _text),
-              Text('LITE', style: GitStamp.isLiteVersion ? _textBold : _text),
-              Text(', ', style: _text),
-              Text('FULL', style: GitStamp.isLiteVersion ? _text : _textBold),
-              Text(']', style: _text),
-            ],
+          TextSpan(
+            text: commit.hash.substring(0, 7),
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.primary,
+              fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.italic,
+            ),
           ),
-          const SizedBox(height: 32),
-          Text('Environment', style: _textTitle),
-          const SizedBox(height: 4),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Text(
-                  parseBuildSystemInfo(GitStamp.buildSystemInfo).join(
-                    String.fromCharCode(10),
-                  ),
-                  softWrap: true,
-                  maxLines: 5,
-                  overflow: TextOverflow.ellipsis,
-                  style: _text,
-                ),
-              ),
-              IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  showSnackbar(context, GitStamp.buildSystemInfo);
-                },
-                icon: Icon(Icons.info_outline),
-              ),
-            ],
-          ),
-          const SizedBox(height: 32),
-          Text('Repository', style: _textTitle),
-          const SizedBox(height: 4),
-          _buildDoubleText('Created: ', GitStamp.repoCreationDate),
-          _buildDoubleText(
-            'Commit count: ',
-            GitStamp.commitList.length.toString(),
-          ),
-          Text('Commit stats:', style: _text),
-          ...commitCountByAuthor().entries.map(
-                (entry) => Row(
-                  children: [
-                    SizedBox(width: 16),
-                    Text(entry.key + ': ', style: _text),
-                    Text(entry.value.toString(), style: _textBold),
-                  ],
-                ),
-              ),
+          const TextSpan(text: ' - ', style: TextStyle(fontWeight: FontWeight.normal)),
+          TextSpan(text: commit.subject, style: const TextStyle(fontWeight: FontWeight.bold)),
         ],
       ),
-    ),
-  );
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+}
+
+class GitStampDoubleText extends StatelessWidget {
+  final String left;
+  final String right;
+
+  const GitStampDoubleText(this.left, this.right);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text(left, style: _text),
+        Text(right, style: _textBold),
+      ],
+    );
+  }
+}
+
+class GitStampRepoDetailsModalContent extends StatelessWidget {
+  const GitStampRepoDetailsModalContent();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(16.0),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Build', style: _textTitle),
+            const SizedBox(height: 4),
+            GitStampDoubleText('App Name: ', GitStamp.appName),
+            GitStampDoubleText('App Version: ', GitStamp.appVersion + ' (' + GitStamp.appBuild + ')'),
+            GitStampDoubleText('Date: ', GitStamp.buildDateTime),
+            GitStampDoubleText('Path: ', GitStamp.repoPath),
+            GitStampDoubleText('Branch: ', GitStamp.buildBranch),
+            Row(
+              children: [
+                Text('GitStamp build type: [', style: _text),
+                Text('LITE', style: GitStamp.isLiteVersion ? _textBold : _text),
+                Text(', ', style: _text),
+                Text('FULL', style: GitStamp.isLiteVersion ? _text : _textBold),
+                Text(']', style: _text),
+              ],
+            ),
+            const SizedBox(height: 32),
+            Text('Environment', style: _textTitle),
+            const SizedBox(height: 4),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Text(
+                    parseBuildSystemInfo(GitStamp.buildSystemInfo).join(
+                      String.fromCharCode(10),
+                    ),
+                    softWrap: true,
+                    maxLines: 5,
+                    overflow: TextOverflow.ellipsis,
+                    style: _text,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    showSnackbar(context, GitStamp.buildSystemInfo);
+                  },
+                  icon: Icon(Icons.info_outline),
+                ),
+              ],
+            ),
+            const SizedBox(height: 32),
+            Text('Repository', style: _textTitle),
+            const SizedBox(height: 4),
+            GitStampDoubleText('Created: ', GitStamp.repoCreationDate),
+            GitStampDoubleText('Commit count: ', GitStamp.commitList.length.toString()),
+            Text('Commit stats:', style: _text),
+            ...commitCountByAuthor()
+                .entries
+                .map(
+                  (entry) => Row(
+                    children: [
+                      SizedBox(width: 16),
+                      Text(entry.key + ': ', style: _text),
+                      Text(entry.value.toString(), style: _textBold),
+                    ],
+                  ),
+                )
+                .toList(),
+          ],
+        ),
+      ),
+    );
+  }
 }
 ''';
