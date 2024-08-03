@@ -19,7 +19,7 @@ class CommitList extends GitStampFile {
       [
         'log',
         '--pretty=format:{"hash":"%H","subject":"%s","date":"%ad","authorName":"%an","authorEmail":"%ae"}',
-        '--date=format-local:%Y-%m-%d %H:%M',
+        '--date=format-local:%Y-%m-%d %H:%M %z',
       ],
     ).stdout;
 
@@ -28,6 +28,42 @@ class CommitList extends GitStampFile {
         .toList();
 
     return '''const gitStampCommitList = \'\'\'\n${jsonEncode(logs)}\n\'\'\';''';
+  }
+}
+
+class DiffList extends GitStampFile {
+  bool generateEmpty;
+
+  DiffList(this.generateEmpty);
+
+  @override
+  String filename() => '${GitStampDirectory.dataFolder}/diff_list.dart';
+
+  @override
+  String content() {
+    Map<String, String> gitShowMap = {};
+
+    if (generateEmpty == false) {
+      final hashes = Process.runSync(
+        'git',
+        [
+          'rev-list',
+          '--all',
+        ],
+      ).stdout.toString().trim().split('\n');
+
+      for (var hash in hashes) {
+        gitShowMap[hash] = Process.runSync(
+          'git',
+          [
+            'show',
+            hash,
+          ],
+        ).stdout.toString();
+      }
+    }
+
+    return 'const gitStampDiffList = <String, String>${jsonEncode(gitShowMap).replaceAll(r'$', r'\$')};';
   }
 }
 
@@ -44,11 +80,13 @@ class RepoCreationDate extends GitStampFile {
         'log',
         '--reverse',
         '--pretty=format:%ad',
-        '--date=format:%Y-%m-%d %H:%M:%S',
+        '--date=format:%Y-%m-%d %H:%M:%S %z',
       ],
     ).stdout;
 
-    return 'const gitStampRepoCreationDate = "${creationDate.toString().split('\n').first.trim()}";';
+    final dates = creationDate.toString().split('\n');
+
+    return 'const gitStampRepoCreationDate = "${dates.first.trim()}";';
   }
 }
 
@@ -77,10 +115,15 @@ class BuildDateTime extends GitStampFile {
 
   @override
   String content() {
-    final buildDateTime =
-        DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
+    final now = DateTime.now();
 
-    return 'const gitStampBuildDateTime = "${buildDateTime.toString().trim()}";';
+    /// TODO Add "Z" parameter after implementing this in intl package.
+    final buildDateTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
+    final timeZoneOffset = now.timeZoneOffset.inHours;
+    final sign = timeZoneOffset >= 0 ? '+' : '-';
+    final timeZoneFormatted = timeZoneOffset.abs().toString().padLeft(2, '0');
+
+    return 'const gitStampBuildDateTime = "${buildDateTime.toString().trim()} $sign${timeZoneFormatted}00";';
   }
 }
 
@@ -125,42 +168,6 @@ class RepoPath extends GitStampFile {
     ).stdout;
 
     return 'const gitStampRepoPath = "${repoPath.toString().trim()}";';
-  }
-}
-
-class DiffList extends GitStampFile {
-  bool generateEmpty;
-
-  DiffList(this.generateEmpty);
-
-  @override
-  String filename() => '${GitStampDirectory.dataFolder}/diff_list.dart';
-
-  @override
-  String content() {
-    Map<String, String> gitShowMap = {};
-
-    if (generateEmpty == false) {
-      final hashes = Process.runSync(
-        'git',
-        [
-          'rev-list',
-          '--all',
-        ],
-      ).stdout.toString().trim().split('\n');
-
-      for (var hash in hashes) {
-        gitShowMap[hash] = Process.runSync(
-          'git',
-          [
-            'show',
-            hash,
-          ],
-        ).stdout.toString();
-      }
-    }
-
-    return 'const gitStampDiffList = <String, String>${jsonEncode(gitShowMap).replaceAll(r'$', r'\$')};';
   }
 }
 
