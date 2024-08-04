@@ -19,6 +19,7 @@ jobs:
           channel: 'stable'
       - run: flutter --version
       - run: flutter doctor
+      - run: make -C example tests
       - run: dart format bin
       - run: flutter analyze bin
       - uses: actions/setup-java@v2

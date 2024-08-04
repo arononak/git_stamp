@@ -5,6 +5,8 @@ sync:
 run:
 	flutter run -d linux
 
-integration_tests:
-	dart run git_stamp --gen-only build-branch,build-date-time
-	dart test test/branch.dart
+tests: tests_unit
+
+tests_unit:
+	dart run git_stamp --gen-only commit-list,diff-list,repo-creation-date,build-branch,build-date-time,build-system-info,repo-path,observed-files-list,app-version,app-build,app-name
+	dart test test/type_custom_tests.dart
