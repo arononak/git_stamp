@@ -92,7 +92,7 @@ Future<void> main(List<String> arguments) async {
         _generateFlutterIcon();
         return;
       case 'custom':
-        _generateDataFiles(GitStampBuild.custom(genOnly ?? []));
+        _generateDataFiles(GitStampBuild.custom(genOnly ?? []), isLiteVersion: false);
         return;
       default:
     }

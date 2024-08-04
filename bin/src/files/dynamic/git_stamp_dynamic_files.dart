@@ -44,13 +44,11 @@ class DiffList extends GitStampFile {
     Map<String, String> gitShowMap = {};
 
     if (generateEmpty == false) {
-      final hashes = Process.runSync(
-        'git',
-        [
-          'rev-list',
-          '--all',
-        ],
-      ).stdout.toString().trim().split('\n');
+      final hashes = Process.runSync('git', ['rev-list', '--all'])
+          .stdout
+          .toString()
+          .trim()
+          .split('\n');
 
       for (var hash in hashes) {
         gitShowMap[hash] = Process.runSync(
