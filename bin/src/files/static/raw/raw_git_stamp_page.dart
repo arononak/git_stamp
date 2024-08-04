@@ -194,7 +194,7 @@ class _GitStampPageState extends State<GitStampPage> {
       body: GitStampCommitList(
         commits: GitStamp.commitList,
         filterAuthorName: _filterAuthorName,
-        isLiteVersion: GitStamp.isLiteVersion,
+        isLiteVersion: isLiteVersion,
       ),
     );
   }
@@ -434,9 +434,9 @@ class GitStampRepoDetailsModalContent extends StatelessWidget {
             Row(
               children: [
                 Text('GitStamp build type: [', style: _text),
-                Text('LITE', style: GitStamp.isLiteVersion ? _textBold : _text),
+                Text('LITE', style: isLiteVersion ? _textBold : _text),
                 Text(', ', style: _text),
-                Text('FULL', style: GitStamp.isLiteVersion ? _text : _textBold),
+                Text('FULL', style: isLiteVersion ? _text : _textBold),
                 Text(']', style: _text),
               ],
             ),

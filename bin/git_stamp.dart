@@ -107,6 +107,7 @@ void _generateDataFiles(
   GitStampBuild files, {
   bool isLiteVersion = true,
 }) {
+  GitStampMainFile(files.generateFlutterFiles).generate();
   GitStampNode(files).generate();
 
   if (files.commitList) {
