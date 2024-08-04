@@ -34,6 +34,7 @@ Future<void> main(List<String> arguments) async {
         'repo-path',
         'observed-files-list',
         'app-version',
+        'app-build',
         'app-name',
       ],
       defaultsTo: null,
@@ -147,6 +148,10 @@ void _generateDataFiles(
     AppVersion().generate();
   }
 
+  if (files.appBuild) {
+    AppBuild().generate();
+  }
+
   if (files.appName) {
     AppName().generate();
   }
@@ -172,7 +177,7 @@ void _generateFlutterIcon() {
 }
 
 void _addPackageToPubspec(String packageName) {
-  final result =
-      Process.runSync('dart', ['pub', 'add', packageName]).exitCode == 0;
-  print('Adding package: [$packageName]: ${result ? 'Success' : 'Failed'}');
+  final result = Process.runSync('dart', ['pub', 'add', packageName]);
+  final success = result.exitCode == 0;
+  print('Adding package: [$packageName]: ${success ? 'Success' : 'Failed'}');
 }

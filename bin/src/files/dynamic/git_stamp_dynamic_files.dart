@@ -224,6 +224,22 @@ class AppVersion extends GitStampFile {
 
     return '''
       const gitStampAppVersion = "${version.major}.${version.minor}.${version.patch}";
+    ''';
+  }
+}
+
+class AppBuild extends GitStampFile {
+  @override
+  String filename() => '${GitStampDirectory.dataFolder}/app_build.dart';
+
+  @override
+  String content() {
+    final file = File('pubspec.yaml');
+    final content = file.readAsStringSync();
+    final pubspec = Pubspec.parse(content);
+    final version = pubspec.version ?? Version(0, 0, 0, build: '0');
+
+    return '''
       const gitStampAppBuild = "${version.build.first}";
     ''';
   }

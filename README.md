@@ -150,6 +150,8 @@ dart pub add git_stamp
 
 `app-version`
 
+`app-build`
+
 `app-name`
 
 ## 💻 Usage

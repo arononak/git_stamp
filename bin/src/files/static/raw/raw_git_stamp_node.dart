@@ -20,6 +20,7 @@ ${files.repoCreationDate.enabled} import 'src/data/repo_creation_date.dart';
 ${files.repoPath.enabled} import 'src/data/repo_path.dart';
 ${files.observedFilesList.enabled} import 'src/data/observed_files_list.dart';
 ${files.appVersion.enabled} import 'src/data/app_version.dart';
+${files.appBuild.enabled} import 'src/data/app_build.dart';
 ${files.appName.enabled} import 'src/data/app_name.dart';
 
 class GitStamp {
@@ -36,7 +37,7 @@ class GitStamp {
   ${files.observedFilesList.enabled} static const String observedFilesList = gitStampObservedFilesList;
   
   ${files.appVersion.enabled} static const String appVersion = gitStampAppVersion;
-  ${files.appVersion.enabled} static const String appBuild = gitStampAppBuild;
+  ${files.appBuild.enabled} static const String appBuild = gitStampAppBuild;
   ${files.appName.enabled} static const String appName = gitStampAppName;
 }
 ''';
