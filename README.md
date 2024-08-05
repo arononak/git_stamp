@@ -20,7 +20,6 @@ Advanced await-less information provider. From simple information such as `build
   - [🏞️ Preview](#️-preview)
       - [1. LITE \& FULL](#1-lite--full)
       - [2. ICON](#2-icon)
-      - [3. LicensePage](#3-licensepage)
   - [📑️ About](#️-about)
       - [Goal](#goal)
       - [Motivation](#motivation)
@@ -35,7 +34,8 @@ Advanced await-less information provider. From simple information such as `build
   - [💻 Usage](#-usage)
       - [1. ListTile](#1-listtile)
       - [2. IconButton](#2-iconbutton)
-      - [3. Central **GitStamp** node for advanced usage:](#3-central-gitstamp-node-for-advanced-usage)
+      - [3. showGitStampLicensePage()](#3-showgitstamplicensepage)
+      - [4. Central **GitStamp** node for advanced usage:](#4-central-gitstamp-node-for-advanced-usage)
   - [📦 Integration](#-integration)
       - [GitHub Actions](#github-actions)
   - [📝 License](#-license)
@@ -53,12 +53,6 @@ Advanced await-less information provider. From simple information such as `build
 #### 2. ICON
 
 ![](https://github.com/arononak/git_stamp/blob/main/preview_icon.png?raw=true)
-
-#### 3. LicensePage
-
-|                              showLicensePage                                        |                      showGitStampLicensePage                                                  |
-| :---------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------: |
-| ![](https://github.com/arononak/git_stamp/blob/main/show_license_page.png?raw=true) | ![](https://github.com/arononak/git_stamp/blob/main/show_git_stamp_license_page.png?raw=true) |
 
 ## 📑️ About
 
@@ -179,7 +173,11 @@ if (isProd == false) ...[
 ],
 ```
 
-#### 3. Central **GitStamp** node for advanced usage:
+#### 3. showGitStampLicensePage()
+
+> Use function `showGitStampLicensePage` instead of `showLicensePage` if you want the `name` and `version` to be added automatically.
+
+#### 4. Central **GitStamp** node for advanced usage:
 
 ```dart
 class GitStamp {
