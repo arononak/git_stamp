@@ -17,7 +17,7 @@ class GitStampLogger {
   void _print(LogRecord rec) {
     switch (rec.level.name) {
       case 'SEVERE':
-        print('\x1B[31m${rec.level.name}:\t{rec.message}\x1B[0m');
+        print('\x1B[31m${rec.level.name}:\t${rec.message}\x1B[0m');
         break;
       case 'WARNING':
         print('\x1B[90m${rec.level.name}:\t${rec.message}\x1B[0m');
