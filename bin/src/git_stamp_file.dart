@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'dart:math';
 
+import './../git_stamp_logger.dart';
+
 abstract class GitStampFile {
   String filename();
   String content();
@@ -20,7 +22,6 @@ abstract class GitStampFile {
 
   void generate() {
     File(filename()).writeAsStringSync(content());
-    // ignore: avoid_print
-    print('Generated - ${getFileSize()} \t ${filename()}');
+    GitStampLogger().logger.info('Generated - ${getFileSize()} \t ${filename()}');
   }
 }
