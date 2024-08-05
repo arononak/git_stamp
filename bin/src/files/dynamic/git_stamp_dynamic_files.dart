@@ -258,3 +258,29 @@ class AppName extends GitStampFile {
     ''';
   }
 }
+
+class GitStampVersion extends GitStampFile {
+  @override
+  String filename() =>
+      '${GitStampDirectory.mainFolder}/git_stamp_tool_version.dart';
+
+  @override
+  String content() {
+    final gitStampVersionResult = Process.runSync(
+      'dart',
+      ['run', 'git_stamp', '--version'],
+    ).stdout;
+
+    final gitStampVersion = gitStampVersionResult
+        .toString()
+        .trim()
+        .split(' ')
+        .last
+        .split('')
+        .first;
+
+    return '''
+      const gitStampToolVersion = "$gitStampVersion";
+    ''';
+  }
+}

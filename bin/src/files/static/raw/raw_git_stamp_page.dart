@@ -431,6 +431,7 @@ class GitStampRepoDetailsModalContent extends StatelessWidget {
             GitStampDoubleText('Date: ', GitStamp.buildDateTime),
             GitStampDoubleText('Path: ', GitStamp.repoPath),
             GitStampDoubleText('Branch: ', GitStamp.buildBranch),
+            GitStampDoubleText('GitStamp version: ', gitStampVersion),
             Row(
               children: [
                 Text('GitStamp build type: [', style: _text),

@@ -1,3 +1,15 @@
+## 4.2.0
+
+* Added time zones
+* Fixed diff modal for LITE version
+* GitStampPage refactor
+* Inverted CHANGELOGs positions
+* Separated GitStamp class into export GitStamp + data GitStampNode
+* Separated appVersion into appVersion + appBuild
+* Fixed generation diff-list for custom build-type
+* New logger
+* Added CLI --version flag and GitStamp tool version during build
+
 ## 4.1.2
 
 * Fixed GitStampLicenseIcon constructor

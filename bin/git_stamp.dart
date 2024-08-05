@@ -49,6 +49,11 @@ Future<void> main(List<String> arguments) async {
       defaultsTo: null,
     )
     ..addFlag(
+      'version',
+      abbr: 'v',
+      negatable: false,
+    )
+    ..addFlag(
       'help',
       abbr: 'h',
       negatable: false,
@@ -56,17 +61,26 @@ Future<void> main(List<String> arguments) async {
 
   try {
     final results = parser.parse(arguments);
+
     if (results['help']) {
       GitStampLogger().logger.config(parser.usage);
+      return;
+    } else if (results['version']) {
+      GitStampLogger().logger.config('GitStamp 4.2.0');
       return;
     }
 
     final List<String>? genOnly = results['gen-only'];
     final isCustom = genOnly?.isNotEmpty ?? false;
-    final String buildType = isCustom ? 'custom' : results['build-type'].toLowerCase();
+    final String buildType =
+        isCustom ? 'custom' : results['build-type'].toLowerCase();
 
     GitStampLogger().logger.fine('\n$gitStampAscii\n');
-    GitStampLogger().logger.config('Build Type: ${isCustom ? 'custom ($genOnly)' : buildType}\n');
+    GitStampLogger().logger.config(
+        Process.runSync('dart', ['run', 'git_stamp', '--version']).stdout);
+    GitStampLogger()
+        .logger
+        .config('Build Type: ${isCustom ? 'custom ($genOnly)' : buildType}\n');
 
     await GitStampDirectory.recreateDirectories();
 
@@ -90,13 +104,16 @@ Future<void> main(List<String> arguments) async {
         _generateFlutterIcon();
         return;
       case 'custom':
-        _generateDataFiles(GitStampBuild.custom(genOnly ?? []), isLiteVersion: false);
+        _generateDataFiles(GitStampBuild.custom(genOnly ?? []),
+            isLiteVersion: false);
         return;
       default:
     }
   } on FormatException catch (e) {
     GitStampLogger().logger.severe(e.message);
-    GitStampLogger().logger.severe('Usage: dart run git_stamp [options]\n${parser.usage}');
+    GitStampLogger()
+        .logger
+        .severe('Usage: dart run git_stamp [options]\n${parser.usage}');
     exit(1);
   }
 }
@@ -107,6 +124,7 @@ void _generateDataFiles(
 }) {
   GitStampMainFile(files.generateFlutterFiles).generate();
   GitStampNode(files).generate();
+  GitStampVersion().generate();
 
   if (files.commitList) {
     GitStampCommit().generate();

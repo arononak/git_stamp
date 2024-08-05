@@ -22,6 +22,8 @@ abstract class GitStampFile {
 
   void generate() {
     File(filename()).writeAsStringSync(content());
-    GitStampLogger().logger.info('Generated - ${getFileSize()} \t ${filename()}');
+    GitStampLogger()
+        .logger
+        .info('Generated - ${getFileSize()} \t ${filename()}');
   }
 }

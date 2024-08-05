@@ -5,7 +5,7 @@ import 'package:logging/logging.dart';
 class GitStampLogger {
   static final GitStampLogger _instance = GitStampLogger._internal();
   factory GitStampLogger() => _instance;
-  
+
   late Logger logger;
 
   GitStampLogger._internal() {
