@@ -20,6 +20,7 @@ Advanced await-less information provider. From simple information such as `build
   - [🏞️ Preview](#️-preview)
       - [1. LITE \& FULL](#1-lite--full)
       - [2. ICON](#2-icon)
+      - [3. Generator](#3-generator)
   - [📑️ About](#️-about)
       - [Goal](#goal)
       - [Motivation](#motivation)
@@ -53,6 +54,10 @@ Advanced await-less information provider. From simple information such as `build
 #### 2. ICON
 
 ![](https://github.com/arononak/git_stamp/blob/main/preview_icon.png?raw=true)
+
+#### 3. Generator
+
+![](https://github.com/arononak/git_stamp/blob/main/generator.png?raw=true)
 
 ## 📑️ About
 
