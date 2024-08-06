@@ -22,7 +22,7 @@ jobs:
       - run: make -C example tests
       - run: dart format bin
       - run: flutter analyze bin
-      - uses: actions/setup-java@v2
+      - uses: actions/setup-java@v1
         with:
           java-version: "12.x"
       - run: dart pub get
@@ -46,7 +46,7 @@ jobs:
         with:
           flutter-version: '3.22.2'
           channel: 'stable'
-      - uses: actions/setup-java@v2
+      - uses: actions/setup-java@v1
         with:
           java-version: "12.x"
       - run: flutter --version
