@@ -5,7 +5,7 @@ import 'package:example/git_stamp/git_stamp_tool_version.dart';
 import 'package:test/test.dart';
 
 void main() {
-  gitStampNodeSingleValueTests();
+  singleValueTests();
 }
 
 void runGenOnlyCommand(param, field, matcher) {
@@ -19,7 +19,7 @@ void runGenOnlyCommand(param, field, matcher) {
   expect(field, matcher);
 }
 
-void gitStampNodeSingleValueTests() {
+void singleValueTests() {
   [
     {
       'param': 'commit-list',

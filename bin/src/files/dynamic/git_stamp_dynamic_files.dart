@@ -157,13 +157,8 @@ class RepoPath extends GitStampFile {
 
   @override
   String content() {
-    final repoPath = Process.runSync(
-      'git',
-      [
-        'rev-parse',
-        '--show-toplevel',
-      ],
-    ).stdout;
+    final repoPath =
+        Process.runSync('git', ['rev-parse', '--show-toplevel']).stdout;
 
     return 'const gitStampRepoPath = "${repoPath.toString().trim()}";';
   }
