@@ -66,7 +66,7 @@ Future<void> main(List<String> arguments) async {
       GitStampLogger().logger.config(parser.usage);
       return;
     } else if (results['version']) {
-      GitStampLogger().logger.config('GitStamp 4.2.0');
+      GitStampLogger().logger.config('Version 4.2.0');
       return;
     }
 
