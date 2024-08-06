@@ -12,7 +12,6 @@ tests_unit:
 	dart test test/type_custom_tests.dart
 
 tests_integration:
-	rm -r test_project
 	flutter create test_project
 	cd test_project && sed -i '/^dev_dependencies:/a \  git_stamp:\n    path: ../../' pubspec.yaml
 	flutter pub get --directory=test_project
