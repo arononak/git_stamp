@@ -70,7 +70,7 @@
 <ul>
 <li><a href="#1-lite--full">1. LITE &amp; FULL</a></li>
 <li><a href="#2-icon">2. ICON</a></li>
-<li><a href="#3-licensepage">3. LicensePage</a></li>
+<li><a href="#3-generator">3. Generator</a></li>
 </ul>
 </li>
 <li><a href="#%EF%B8%8F-about">📑️ About</a>
@@ -97,7 +97,8 @@
 <ul>
 <li><a href="#1-listtile">1. ListTile</a></li>
 <li><a href="#2-iconbutton">2. IconButton</a></li>
-<li><a href="#3-central-gitstamp-node-for-advanced-usage">3. Central <strong>GitStamp</strong> node for advanced usage:</a></li>
+<li><a href="#3-showgitstamplicensepage">3. showGitStampLicensePage()</a></li>
+<li><a href="#4-central-gitstamp-node-for-advanced-usage">4. Central <strong>GitStamp</strong> node for advanced usage:</a></li>
 </ul>
 </li>
 <li><a href="#-integration">📦 Integration</a>
@@ -128,21 +129,8 @@
 </table>
 <h4 id="2-icon">2. ICON</h4>
 <p><img src="https://github.com/arononak/git_stamp/blob/main/preview_icon.png?raw=true" alt=""></p>
-<h4 id="3-licensepage">3. LicensePage</h4>
-<table>
-<thead>
-<tr>
-<th align="center">showLicensePage</th>
-<th align="center">showGitStampLicensePage</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center"><img src="https://github.com/arononak/git_stamp/blob/main/show_license_page.png?raw=true" alt=""></td>
-<td align="center"><img src="https://github.com/arononak/git_stamp/blob/main/show_git_stamp_license_page.png?raw=true" alt=""></td>
-</tr>
-</tbody>
-</table>
+<h4 id="3-generator">3. Generator</h4>
+<p><img src="https://github.com/arononak/git_stamp/blob/main/generator.png?raw=true" alt=""></p>
 <h2 id="-about">📑️ About</h2>
 <h4 id="goal">Goal</h4>
 <p>The main goal is to help locate errors in the full process of building STAGE, TEST and PROD versions.</p>
@@ -228,6 +216,7 @@ Text('SHA: ${GitStamp.latestCommit.hash}'),
 <p><code>repo-path</code></p>
 <p><code>observed-files-list</code></p>
 <p><code>app-version</code></p>
+<p><code>app-build</code></p>
 <p><code>app-name</code></p>
 <h2 id="-usage">💻 Usage</h2>
 <h4 id="1-listtile">1. ListTile</h4>
@@ -248,7 +237,12 @@ Text('SHA: ${GitStamp.latestCommit.hash}'),
   ),
 ],
 </code></pre>
-<h4 id="3-central-gitstamp-node-for-advanced-usage">3. Central <strong>GitStamp</strong> node for advanced usage:</h4>
+<h4 id="3-showgitstamplicensepage">3. showGitStampLicensePage()</h4>
+<div class="markdown-alert markdown-alert-note">
+<p class="markdown-alert-title">Note</p>
+<p>Use function <code>showGitStampLicensePage</code> instead of <code>showLicensePage</code> if you want the <code>name</code> and <code>version</code> to be added automatically.</p>
+</div>
+<h4 id="4-central-gitstamp-node-for-advanced-usage">4. Central <strong>GitStamp</strong> node for advanced usage:</h4>
 <pre class="language-dart"><code class="language-dart">class GitStamp {
    static List&lt;GitStampCommit&gt; commitList
    static GitStampCommit latestCommit
@@ -369,7 +363,7 @@ If you have any feedback, please contact me at <a href="mailto:arononak@gmail.co
 <footer>
   <span class="no-break">
     git_stamp
-      4.1.2
+      4.2.0
   </span>
 
   
