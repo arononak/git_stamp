@@ -1,10 +1,11 @@
 import 'dart:io';
 
 import 'package:example/git_stamp/git_stamp_node.dart';
+import 'package:example/git_stamp/git_stamp_tool_version.dart';
 import 'package:test/test.dart';
 
 void main() {
-  singleValueTests();
+  gitStampNodeSingleValueTests();
 }
 
 void runGenOnlyCommand(param, field, matcher) {
@@ -18,7 +19,7 @@ void runGenOnlyCommand(param, field, matcher) {
   expect(field, matcher);
 }
 
-void singleValueTests() {
+void gitStampNodeSingleValueTests() {
   [
     {
       'param': 'commit-list',
@@ -78,6 +79,12 @@ void singleValueTests() {
     {
       'param': 'app-name',
       'field': GitStamp.appName,
+      'matcher': isNotEmpty,
+    },
+    {
+      /* app-name only for run generate command */
+      'param': 'app-name',
+      'field': gitStampToolVersion,
       'matcher': isNotEmpty,
     },
   ].forEach(
