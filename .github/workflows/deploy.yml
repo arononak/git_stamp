@@ -53,5 +53,5 @@ jobs:
       - run: flutter doctor
       - run: flutter pub get
       - run: dart format .
-      - run: make -C example integration_tests
+      - run: make -C example tests
       - run: dart pub publish --force
