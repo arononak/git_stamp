@@ -14,7 +14,15 @@ tests_unit:
 tests_integration:
 	flutter create test_project
 	cd test_project && sed -i '/^dev_dependencies:/a \  git_stamp:\n    path: ../../' pubspec.yaml
-	flutter pub get --directory=test_project
-	cd test_project && dart run git_stamp 
+	cd test_project && flutter pub get
+	cd test_project && dart run git_stamp
+	cd test_project && flutter build web
+	cd test_project && dart run git_stamp --build-type lite
+	cd test_project && flutter build web
+	cd test_project && dart run git_stamp --build-type full
+	cd test_project && flutter build web
+	cd test_project && dart run git_stamp --build-type icon
+	cd test_project && flutter build web
+	cd test_project && dart run git_stamp --gen-only build-branch,build-date-time
 	cd test_project && flutter build web
 	rm -r test_project
