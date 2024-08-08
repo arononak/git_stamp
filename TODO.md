@@ -23,11 +23,11 @@
 - [ ] InApp - git ls-tree -r --name-only --full-tree origin/main
 - [ ] InApp - flutter --no-version-check --version --machine
 - [ ] InApp - flutter --no-version-check pub pub outdated --json --up-to-date --no-dev-dependencies --no-dependency-overrides
-- [ ] InApp - Extract UI files to lib folder & Add aron_gradient_line package
+- [x] InApp - Extract UI files to lib folder & Add aron_gradient_line package
 - [ ] Generator - New data files structure
-- [ ] Generator - GitStamp version compile time
+- [x] Generator - GitStamp version compile time
 - [ ] Generator - All code size
-- [ ] Generator - time in ms
+- [x] Generator - time in ms
 - [ ] CI - dependabot
 - [x] CI - Write tests
 - [x] InApp - Observed files

@@ -1,11 +1,12 @@
 import 'dart:io';
+import 'dart:core';
 import 'package:args/args.dart';
 
+import 'git_stamp_logger.dart';
 import 'src/git_stamp_build.dart';
 import 'src/git_stamp_directory.dart';
 import 'src/files/dynamic/git_stamp_dynamic_files.dart';
 import 'src/files/static/git_stamp_static_files.dart';
-import 'git_stamp_logger.dart';
 
 const gitStampVersion = 'Version 4.2.0';
 
@@ -72,6 +73,8 @@ Future<void> main(List<String> arguments) async {
       return;
     }
 
+    final stopwatch = Stopwatch()..start();
+
     final genOnly = results['gen-only'];
     final isCustom = genOnly?.isNotEmpty ?? false;
     final buildType = isCustom ? 'custom' : results['build-type'].toLowerCase();
@@ -90,23 +93,29 @@ Future<void> main(List<String> arguments) async {
         _generateDataFiles(GitStampBuild.all(), true);
         _generateFlutterInterface(true);
         _generateFlutterIcon();
-        return;
+        break;
       case 'full':
         _addPackageToPubspec('aron_gradient_line');
         _addPackageToPubspec('url_launcher');
         _generateDataFiles(GitStampBuild.all(), false);
         _generateFlutterInterface(false);
         _generateFlutterIcon();
-        return;
+        break;
       case 'icon':
         _generateDataFiles(GitStampBuild.tooltip(), true);
         _generateFlutterIcon();
-        return;
+        break;
       case 'custom':
         _generateDataFiles(GitStampBuild.custom(genOnly ?? []), false);
-        return;
+        break;
       default:
     }
+
+    stopwatch.stop();
+    final seconds = stopwatch.elapsed.format();
+
+    GitStampLogger().logger.config('Generation time: ${seconds}s');
+
   } on FormatException catch (e) {
     GitStampLogger().logger.severe(e.message);
     GitStampLogger().logger.severe('Usage: dart run git_stamp [options]');
@@ -192,4 +201,18 @@ void _addPackageToPubspec(String package) {
   Process.runSync('dart', ['pub', 'add', package]).exitCode == 0
       ? GitStampLogger().logger.info('Adding package: [$package]: Success')
       : GitStampLogger().logger.severe('Adding package: [$package]: Failed');
+}
+
+extension DurationExtension on Duration {
+  String format() {
+    if (inHours > 0) {
+      return toString();
+    }
+
+    if (inMinutes > 10) {
+      return inMinutes.toString();
+    }
+
+    return (inMilliseconds / 1000).toStringAsFixed(2);
+  }
 }
