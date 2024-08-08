@@ -1,10 +1,11 @@
 # 📋 TODO list
 
-| Step                    | Description                  |
-| ----------------------- | ---------------------------- |
-| 🔧 Run `pana` command   | Check 160/160 points         |
-| 📸 New SS               | Create a new screenshots     |
-| 🏷️ New tag and push     | Deploy every **Wednesday !** |
+| Step                             | Description                                                                    |
+| -------------------------------- | ------------------------------------------------------------------------------ |
+| 📸 New New screenshots           | Create a new screenshots                                                       |
+| 🔧 Run `pana` command            | Check 160/160 points                                                           |
+| 📈 Update version and changelogs | `pubspec.yaml`, `CHANGELOG.md`, `changelog/CHANGELOG.md`, `bin/git_stamp.dart` |
+| 🏷️ New tag and push              | Deploy every **Wednesday !**                                                   |
 
 - [x] Github Actions - deploy to pub.dev
 - [x] InApp - AppBar commit count right & icon
@@ -28,7 +29,7 @@
 - [ ] Generator - All code size
 - [ ] Generator - time in ms
 - [ ] CI - dependabot
-- [ ] CI - Write tests
+- [x] CI - Write tests
 - [x] InApp - Observed files
 - [x] Git - Remove example project git_stamp files
 - [ ] InApp - Arrow if git diff exists
