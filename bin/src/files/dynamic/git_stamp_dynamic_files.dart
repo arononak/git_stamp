@@ -231,9 +231,10 @@ class AppBuild extends GitStampFile {
     final content = file.readAsStringSync();
     final pubspec = Pubspec.parse(content);
     final version = pubspec.version ?? Version(0, 0, 0, build: '0');
+    final buildNumber = version.build.firstOrNull ?? 'NO BUILD NUMBER';
 
     return '''
-      const gitStampAppBuild = "${version.build.first}";
+      const gitStampAppBuild = "$buildNumber";
     ''';
   }
 }
