@@ -187,23 +187,24 @@ if (isProd == false) ...[
 
 ```dart
 class GitStamp {
-   static List<GitStampCommit> commitList
-   static GitStampCommit latestCommit
+  static List<GitStampCommit> commitList
+  static GitStampCommit? latestCommit
+  static String sha
 
-   static const Map<String, String> diffList
+  static const Map<String, String> diffList
 
-   static const String buildBranch
-   static const String buildDateTime
-   static const String buildSystemInfo
-   static const String repoCreationDate
-   static const String repoPath
-   static const String observedFilesList
+  static const String buildBranch
+  static const String buildDateTime
+  static const String buildSystemInfo
+  static const String repoCreationDate
+  static const String repoPath
+  static const String observedFilesList
 
-   static const String appVersion
-   static const String appBuild
-   static const String appName
+  static const String appVersion
+  static const String appBuild
+  static const String appName
 
-   static const bool isLiteVersion
+  static const bool isLiteVersion
 }
 ```
 

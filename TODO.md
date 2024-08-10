@@ -35,7 +35,7 @@
 - [ ] InApp - Arrow if git diff exists
 - [ ] InApp - Responsive pages
 - [x] README.md - imports mermaid.js graph
-- [ ] InApp - Advanced filder by author
+- [ ] InApp - Advanced folder by author
 - [ ] CI - dart analize & dart format
 - [ ] CI - Fix generate doc
 - [ ] CI - Auto deploy every 7 days ?

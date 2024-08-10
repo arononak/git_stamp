@@ -25,7 +25,8 @@ ${files.appName.enabled}import 'src/data/app_name.dart';
 
 class GitStamp {
   ${files.commitList.enabled}static List<GitStampCommit> get commitList => json.decode(gitStampCommitList).map<GitStampCommit>((json) => GitStampCommit.fromJson(json)).toList();
-  ${files.commitList.enabled}static GitStampCommit get latestCommit => commitList.first;
+  ${files.commitList.enabled}static GitStampCommit? get latestCommit => commitList.firstOrNull;
+  ${files.commitList.enabled}static String get sha => latestCommit?.hash ?? 'REPO WITHOUT COMMITS';
 
   ${files.diffList.enabled}static const Map<String, String> diffList = gitStampDiffList;
 

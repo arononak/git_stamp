@@ -19,7 +19,7 @@ class GitStampIcon extends StatelessWidget {
               text: ''
                   'Date: \${GitStamp.buildDateTime}\\n'
                   'Branch: \${GitStamp.buildBranch}\\n'
-                  'SHA: \${GitStamp.latestCommit.hash}',
+                  'SHA: \${GitStamp.sha}',
               style: TextStyle(fontWeight: FontWeight.normal)),
         ],
       ),

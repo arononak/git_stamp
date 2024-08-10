@@ -28,7 +28,12 @@ void singleValueTests() {
     },
     {
       'param': 'commit-list',
-      'field': GitStamp.latestCommit.hash.isNotEmpty,
+      'field': GitStamp.latestCommit?.authorName.isNotEmpty,
+      'matcher': isTrue,
+    },
+    {
+      'param': 'commit-list',
+      'field': GitStamp.sha.isNotEmpty,
       'matcher': isTrue,
     },
     {
