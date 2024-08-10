@@ -17,13 +17,13 @@ class GitStampLogger {
   void _print(LogRecord rec) {
     switch (rec.level.name) {
       case 'SEVERE':
-        print('\x1B[31m${rec.level.name}:\t${rec.message}\x1B[0m');
+        print('\x1B[31m${rec.level.name}:    ${rec.message}\x1B[0m');
         break;
       case 'WARNING':
-        print('\x1B[90m${rec.level.name}:\t${rec.message}\x1B[0m');
+        print('\x1B[90m${rec.level.name}:    ${rec.message}\x1B[0m');
         break;
       case 'INFO':
-        print('\x1B[90m${rec.level.name}:\t${rec.message}\x1B[0m');
+        print('\x1B[90m${rec.level.name}:    ${rec.message}\x1B[0m');
         break;
       case 'CONFIG':
         print('\x1B[92m${rec.message}\x1B[0m');
@@ -33,7 +33,7 @@ class GitStampLogger {
         print('\x1B[93m${rec.message}\x1B[0m');
         break;
       default:
-        print('\x1B[0m${rec.level.name}:\t${rec.message}\x1B[0m');
+        print('\x1B[0m${rec.level.name}:    ${rec.message}\x1B[0m');
     }
   }
 }
