@@ -179,7 +179,7 @@ dart pub add git_stamp
 if (kDebugMode) ...[
   ListTile(
     title: const Text('Git Stamp'),
-    subtitle: Text(GitStamp.latestCommit.hash),
+    subtitle: Text(GitStamp.sha),
     leading: const Icon(Icons.commit),
     onTap: () => showGitStampPage(context: context),
   ),
