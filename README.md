@@ -24,6 +24,8 @@ Advanced await-less information provider. From simple information such as `build
   - [📑️ About](#️-about)
       - [Goal](#goal)
       - [Motivation](#motivation)
+      - [Roadmap](#roadmap)
+        - [Changelogs](#changelogs)
   - [🛠️ Installation](#️-installation)
       - [1. `pubspec.yaml`](#1-pubspecyaml)
       - [2. `.gitignore`](#2-gitignore)
@@ -82,8 +84,24 @@ import 'git_stamp/git_stamp.dart';
 Text('Version: ${GitStamp.appVersion}'),
 Text('Build: ${GitStamp.appBuild}'),
 Text('Branch: ${GitStamp.buildBranch}'),
-Text('SHA: ${GitStamp.latestCommit.hash}'),
+Text('SHA: ${GitStamp.sha}'),
 ```
+
+#### Roadmap
+
+##### Changelogs
+
+[Text](./CHANGELOG.md)
+[Image](./changelog/CHANGELOG.md)
+
+| 🆕 **Version** | 🗓️ **Date**        |  📝 **Change Description**        |
+|----------------|--------------------|-----------------------------------|
+| Version 5      | Someday it will be | 🔐 Data encription                |
+| Version 4      | 24.07.2024         | 🌟 New `icon` build-type          |
+| Version 3      | 30.06.2024         | 🔧 New `gen-only` build-type      |
+| Version 2      | 10.04.2024         | 🛠️ Commit diff                    |
+| Version 1      | 11.12.2023         | 🚀 First version                  |
+
 
 ## 🛠️ Installation
 
