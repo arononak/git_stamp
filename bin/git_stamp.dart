@@ -64,9 +64,10 @@ Future<void> main(List<String> arguments) async {
 
   try {
     final results = parser.parse(arguments);
+    final usage = parser.usage.split('\n').map((e) => '    $e').join('\n');
 
     if (results['help']) {
-      GitStampLogger().logger.config(parser.usage);
+      GitStampLogger().logger.config(usage);
       return;
     } else if (results['version']) {
       GitStampLogger().logger.config(gitStampVersion);
@@ -118,7 +119,6 @@ Future<void> main(List<String> arguments) async {
   } on FormatException catch (e) {
     GitStampLogger().logger.severe(e.message);
     GitStampLogger().logger.severe('Usage: dart run git_stamp [options]');
-    GitStampLogger().logger.severe(parser.usage);
     exit(1);
   }
 }
@@ -197,9 +197,10 @@ void _generateFlutterIcon() {
 }
 
 void _addPackageToPubspec(String package) {
+  final formatted = package.padRight(18);
   Process.runSync('dart', ['pub', 'add', package]).exitCode == 0
-      ? GitStampLogger().logger.info('Adding package: [$package]: Success')
-      : GitStampLogger().logger.severe('Adding package: [$package]: Failed');
+      ? GitStampLogger().logger.info('Adding package  [$formatted]  Success')
+      : GitStampLogger().logger.severe('Adding package  [$formatted]  Failed');
 }
 
 extension DurationExtension on Duration {

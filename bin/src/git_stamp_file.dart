@@ -23,7 +23,7 @@ abstract class GitStampFile {
   void generate() {
     File(filename()).writeAsStringSync(content());
     
-    final text = 'Generated ${getFileSize().padLeft(12)}        ${filename()}';
+    final text = 'Generated ${getFileSize().padLeft(13)}               ${filename()}';
     GitStampLogger().logger.info(text);
   }
 }
