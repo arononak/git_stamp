@@ -57,7 +57,7 @@
 <p><a href="https://github.com/arononak/git_stamp/tags"><img src="https://img.shields.io/github/v/tag/arononak/git_stamp?style=flat&amp;logo=github&amp;labelColor=black&amp;color=white" alt="Latest Tag"></a>
 <a href="https://github.com/arononak/git_stamp/"><img src="https://img.shields.io/github/stars/arononak/git_stamp.svg?style=flat&amp;label=Star&amp;labelColor=black&amp;color=white" alt="GitHub stars"></a>
 <a href="https://github.com/arononak/git_stamp/graphs/contributors"><img src="https://img.shields.io/github/commit-activity/m/arononak/git_stamp?style=flat&amp;labelColor=black&amp;color=white" alt="Commits"></a>
-<img src="https://img.shields.io/github/actions/workflow/status/arononak/git_stamp/.github%2Fworkflows%2Fpublish.yml?style=flat&amp;labelColor=black&amp;color=white" alt="GitHub Workflow Status"></p>
+<img src="https://img.shields.io/github/actions/workflow/status/arononak/git_stamp/.github%2Fworkflows%2Fdeploy.yml?style=flat&amp;labelColor=black&amp;color=white" alt="GitHub Workflow Status"></p>
 <p><a href="https://pub.dev/packages/git_stamp"><img src="https://img.shields.io/pub/v/git_stamp.svg?style=flat&amp;logo=dart&amp;labelColor=fuchsia&amp;color=white" alt="Pub Package"></a>
 <a href="https://pub.dev/packages/git_stamp"><img src="https://img.shields.io/pub/likes/git_stamp?style=flat&amp;labelColor=fuchsia&amp;color=white" alt="Likes"></a>
 <a href="https://pub.dev/packages/git_stamp/publisher"><img src="https://img.shields.io/pub/publisher/git_stamp?style=flat&amp;labelColor=fuchsia&amp;color=white" alt="package publisher"></a></p>
@@ -77,6 +77,11 @@
 <ul>
 <li><a href="#goal">Goal</a></li>
 <li><a href="#motivation">Motivation</a></li>
+<li><a href="#roadmap">Roadmap</a>
+<ul>
+<li><a href="#changelogs">Changelogs</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#%EF%B8%8F-installation">🛠️ Installation</a>
@@ -147,8 +152,48 @@ SHA: a9081c5429038dcf3f26269f7351d89f
 Text('Version: ${GitStamp.appVersion}'),
 Text('Build: ${GitStamp.appBuild}'),
 Text('Branch: ${GitStamp.buildBranch}'),
-Text('SHA: ${GitStamp.latestCommit.hash}'),
+Text('SHA: ${GitStamp.sha}'),
 </code></pre>
+<h4 id="roadmap">Roadmap</h4>
+<h5 id="changelogs">Changelogs</h5>
+<p><a href="./CHANGELOG.md">Text</a>
+<a href="./changelog/CHANGELOG.md">Image</a></p>
+<table>
+<thead>
+<tr>
+<th>🆕 <strong>Version</strong></th>
+<th>🗓️ <strong>Date</strong></th>
+<th>📝 <strong>Change Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Version 5</td>
+<td>Someday it will be</td>
+<td>🔐 Data encription</td>
+</tr>
+<tr>
+<td>Version 4</td>
+<td>24.07.2024</td>
+<td>🌟 New <code>icon</code> build-type</td>
+</tr>
+<tr>
+<td>Version 3</td>
+<td>30.06.2024</td>
+<td>🔧 New <code>gen-only</code> build-type</td>
+</tr>
+<tr>
+<td>Version 2</td>
+<td>10.04.2024</td>
+<td>🛠️ Commit diff</td>
+</tr>
+<tr>
+<td>Version 1</td>
+<td>11.12.2023</td>
+<td>🚀 First version</td>
+</tr>
+</tbody>
+</table>
 <h2 id="-installation">🛠️ Installation</h2>
 <h4 id="1-pubspecyaml">1. <code>pubspec.yaml</code></h4>
 <pre class="language-dart"><code>dart pub add git_stamp
@@ -223,7 +268,7 @@ Text('SHA: ${GitStamp.latestCommit.hash}'),
 <pre class="language-dart"><code class="language-dart">if (kDebugMode) ...[
   ListTile(
     title: const Text('Git Stamp'),
-    subtitle: Text(GitStamp.latestCommit.hash),
+    subtitle: Text(GitStamp.sha),
     leading: const Icon(Icons.commit),
     onTap: () =&gt; showGitStampPage(context: context),
   ),
@@ -244,23 +289,24 @@ Text('SHA: ${GitStamp.latestCommit.hash}'),
 </div>
 <h4 id="4-central-gitstamp-node-for-advanced-usage">4. Central <strong>GitStamp</strong> node for advanced usage:</h4>
 <pre class="language-dart"><code class="language-dart">class GitStamp {
-   static List&lt;GitStampCommit&gt; commitList
-   static GitStampCommit latestCommit
+  static List&lt;GitStampCommit&gt; commitList
+  static GitStampCommit? latestCommit
+  static String sha
 
-   static const Map&lt;String, String&gt; diffList
+  static const Map&lt;String, String&gt; diffList
 
-   static const String buildBranch
-   static const String buildDateTime
-   static const String buildSystemInfo
-   static const String repoCreationDate
-   static const String repoPath
-   static const String observedFilesList
+  static const String buildBranch
+  static const String buildDateTime
+  static const String buildSystemInfo
+  static const String repoCreationDate
+  static const String repoPath
+  static const String observedFilesList
 
-   static const String appVersion
-   static const String appBuild
-   static const String appName
+  static const String appVersion
+  static const String appBuild
+  static const String appName
 
-   static const bool isLiteVersion
+  static const bool isLiteVersion
 }
 </code></pre>
 <h2 id="-integration">📦 Integration</h2>
@@ -363,7 +409,7 @@ If you have any feedback, please contact me at <a href="mailto:arononak@gmail.co
 <footer>
   <span class="no-break">
     git_stamp
-      4.2.0
+      4.3.0
   </span>
 
   
