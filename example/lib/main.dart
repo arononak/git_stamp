@@ -1,5 +1,4 @@
 import 'package:example/git_stamp/src/ui/git_stamp_icon.dart';
-import 'package:example/git_stamp/src/ui/git_stamp_license_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -66,7 +65,7 @@ class SettingsPage extends StatelessWidget {
                 title: Text('Open Source Licenses'),
                 subtitle: Text(snapshot.data?.toString() ?? 'Loading'),
                 leading: const Icon(Icons.gavel),
-                onTap: () => showGitStampLicensePage(context: context),
+                onTap: () => GitStamp.showLicensePage(context: context),
               );
             },
           ),

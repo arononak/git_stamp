@@ -23,6 +23,9 @@ ${files.appVersion.enabled}import 'src/data/app_version.dart';
 ${files.appBuild.enabled}import 'src/data/app_build.dart';
 ${files.appName.enabled}import 'src/data/app_name.dart';
 
+${files.generateFlutterFiles.enabled}import 'package:flutter/widgets.dart';
+${files.generateFlutterFiles.enabled}import 'src/ui/git_stamp_license_page.dart';
+
 class GitStamp {
   ${files.commitList.enabled}static List<GitStampCommit> get commitList => json.decode(gitStampCommitList).map<GitStampCommit>((json) => GitStampCommit.fromJson(json)).toList();
   ${files.commitList.enabled}static GitStampCommit? get latestCommit => commitList.firstOrNull;
@@ -40,5 +43,18 @@ class GitStamp {
   ${files.appVersion.enabled}static const String appVersion = gitStampAppVersion;
   ${files.appBuild.enabled}static const String appBuild = gitStampAppBuild;
   ${files.appName.enabled}static const String appName = gitStampAppName;
+
+  ${files.generateFlutterFiles.enabled}static showLicensePage({
+  ${files.generateFlutterFiles.enabled}  required BuildContext context,
+  ${files.generateFlutterFiles.enabled}  Widget? applicationIcon,
+  ${files.generateFlutterFiles.enabled}  String? applicationLegalese,
+  ${files.generateFlutterFiles.enabled}  bool useRootNavigator = false,
+  ${files.generateFlutterFiles.enabled}}) =>
+  ${files.generateFlutterFiles.enabled}    showGitStampLicensePage(
+  ${files.generateFlutterFiles.enabled}      context: context,
+  ${files.generateFlutterFiles.enabled}      applicationIcon: applicationIcon,
+  ${files.generateFlutterFiles.enabled}      applicationLegalese: applicationLegalese,
+  ${files.generateFlutterFiles.enabled}      useRootNavigator: useRootNavigator,
+  ${files.generateFlutterFiles.enabled}    );
 }
 ''';
