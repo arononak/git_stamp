@@ -199,7 +199,7 @@ if (isProd == false) ...[
 #### 3. showGitStampLicensePage()
 
 > [!NOTE]
-> Use function `showGitStampLicensePage` instead of `showLicensePage` if you want the `name` and `version` to be added automatically.
+> Use function `GitStamp.showLicensePage` instead of `showLicensePage` if you want the `name` and `version` to be added automatically.
 
 #### 4. Central **GitStamp** node for advanced usage:
 
@@ -222,7 +222,12 @@ class GitStamp {
   static const String appBuild
   static const String appName
 
-  static const bool isLiteVersion
+  static showLicensePage({
+    required BuildContext context,
+    Widget? applicationIcon,
+    String? applicationLegalese,
+    bool useRootNavigator = false,
+  })
 }
 ```
 
