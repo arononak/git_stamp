@@ -29,12 +29,13 @@ class MainPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Example App'),
         actions: [
-          GitStampIcon(),
           IconButton(
             icon: Icon(Icons.settings),
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => SettingsPage()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SettingsPage()),
+              );
             },
           ),
         ],
@@ -52,16 +53,26 @@ class SettingsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Settings Page'),
+        actions: [
+          GitStampIcon(),
+        ],
       ),
       body: Column(
         children: [
-          ListTile(
-            title: Text('Open Source Licenses'),
-            leading: const Icon(Icons.gavel),
-            onTap: () => showGitStampLicensePage(context: context),
+          FutureBuilder<int>(
+            future: LicenseRegistry.licenses.length,
+            builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+              return ListTile(
+                title: Text('Open Source Licenses'),
+                subtitle: Text(snapshot.data?.toString() ?? 'Loading'),
+                leading: const Icon(Icons.gavel),
+                onTap: () => showGitStampLicensePage(context: context),
+              );
+            },
           ),
           ListTile(
-            title: Text('Version: ${GitStamp.appVersion}'),
+            title: Text('Version'),
+            subtitle: Text(GitStamp.appVersion),
             leading: const Icon(Icons.numbers),
             onTap: () {},
           ),
