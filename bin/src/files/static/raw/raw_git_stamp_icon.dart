@@ -9,6 +9,10 @@ class GitStampIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Tooltip(
+      decoration: BoxDecoration(
+        color: Colors.blue,
+        borderRadius: BorderRadius.circular(8),
+      ),
       richMessage: TextSpan(
         children: <TextSpan>[
           TextSpan(
@@ -23,7 +27,10 @@ class GitStampIcon extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.normal)),
         ],
       ),
-      child: Icon(Icons.developer_board),
+      child: IconButton(
+            icon: Icon(Icons.developer_board),
+            onPressed: () {},
+          ),
     );
   }
 }
