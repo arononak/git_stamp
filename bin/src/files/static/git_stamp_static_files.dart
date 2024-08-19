@@ -17,7 +17,10 @@ class GitStampMainFile extends GitStampFile {
   GitStampMainFile(this.generateFlutterFiles);
 
   @override
-  String filename() => '${GitStampDirectory.mainFolder}/git_stamp.dart';
+  String directory() => GitStampDirectory.mainFolder;
+
+  @override
+  String filename() => 'git_stamp.dart';
 
   @override
   String content() => rawGitStamp(generateFlutterFiles);
@@ -29,7 +32,10 @@ class GitStampNode extends GitStampFile {
   GitStampNode(this.dataFiles);
 
   @override
-  String filename() => '${GitStampDirectory.mainFolder}/git_stamp_node.dart';
+  String directory() => GitStampDirectory.mainFolder;
+
+  @override
+  String filename() => 'git_stamp_node.dart';
 
   @override
   String content() => rawGitStampNode(dataFiles);
@@ -37,7 +43,10 @@ class GitStampNode extends GitStampFile {
 
 class GitStampUtils extends GitStampFile {
   @override
-  String filename() => '${GitStampDirectory.uiFolder}/git_stamp_utils.dart';
+  String directory() => GitStampDirectory.uiFolder;
+
+  @override
+  String filename() => 'git_stamp_utils.dart';
 
   @override
   String content() => rawGitStampUtils;
@@ -45,7 +54,10 @@ class GitStampUtils extends GitStampFile {
 
 class GitStampLauncher extends GitStampFile {
   @override
-  String filename() => '${GitStampDirectory.uiFolder}/git_stamp_launcher.dart';
+  String directory() => GitStampDirectory.uiFolder;
+
+  @override
+  String filename() => 'git_stamp_launcher.dart';
 
   @override
   String content() => rawGitStampLauncher;
@@ -53,7 +65,10 @@ class GitStampLauncher extends GitStampFile {
 
 class GitStampCommit extends GitStampFile {
   @override
-  String filename() => '${GitStampDirectory.dataFolder}/git_stamp_commit.dart';
+  String directory() => GitStampDirectory.dataFolder;
+
+  @override
+  String filename() => 'git_stamp_commit.dart';
 
   @override
   String content() => rawGitStampCommit;
@@ -61,7 +76,10 @@ class GitStampCommit extends GitStampFile {
 
 class GitStampPage extends GitStampFile {
   @override
-  String filename() => '${GitStampDirectory.uiFolder}/git_stamp_page.dart';
+  String directory() => GitStampDirectory.uiFolder;
+
+  @override
+  String filename() => 'git_stamp_page.dart';
 
   @override
   String content() => rawGitStampPage;
@@ -69,8 +87,10 @@ class GitStampPage extends GitStampFile {
 
 class GitStampDetailsPage extends GitStampFile {
   @override
-  String filename() =>
-      '${GitStampDirectory.uiFolder}/git_stamp_details_page.dart';
+  String directory() => GitStampDirectory.uiFolder;
+
+  @override
+  String filename() => 'git_stamp_details_page.dart';
 
   @override
   String content() => rawGitStampDetailsPage;
@@ -78,7 +98,10 @@ class GitStampDetailsPage extends GitStampFile {
 
 class GitStampIcon extends GitStampFile {
   @override
-  String filename() => '${GitStampDirectory.uiFolder}/git_stamp_icon.dart';
+  String directory() => GitStampDirectory.uiFolder;
+
+  @override
+  String filename() => 'git_stamp_icon.dart';
 
   @override
   String content() => rawGitStampIcon;
@@ -86,8 +109,10 @@ class GitStampIcon extends GitStampFile {
 
 class GitStampLicensePage extends GitStampFile {
   @override
-  String filename() =>
-      '${GitStampDirectory.uiFolder}/git_stamp_license_page.dart';
+  String directory() => GitStampDirectory.uiFolder;
+
+  @override
+  String filename() => 'git_stamp_license_page.dart';
 
   @override
   String content() => rawGitStampLicensePage;

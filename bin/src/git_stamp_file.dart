@@ -4,12 +4,15 @@ import 'dart:math';
 import './../git_stamp_logger.dart';
 
 abstract class GitStampFile {
+  String directory();
   String filename();
   String content();
 
+  String get path => '${directory()}/${filename()}'; 
+
   String getFileSize({int decimals = 1}) {
     const suffixes = ["B ", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
-    final fileSize = File(filename()).lengthSync();
+    final fileSize = File(path).lengthSync();
 
     if (fileSize <= 0) {
       return "0 B";
@@ -21,9 +24,9 @@ abstract class GitStampFile {
   }
 
   void generate() {
-    File(filename()).writeAsStringSync(content());
+    File(path).writeAsStringSync(content());
     
-    final text = 'Generated ${getFileSize().padLeft(13)}               ${filename()}';
+    final text = 'Generated ${getFileSize().padLeft(13)}               $path';
     GitStampLogger().logger.info(text);
   }
 }

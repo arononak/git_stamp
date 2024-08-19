@@ -14,7 +14,10 @@ String exec(List<String> args) {
 
 class CommitList extends GitStampFile {
   @override
-  String filename() => '${GitStampDirectory.dataFolder}/commit_list.dart';
+  String directory() => GitStampDirectory.dataFolder;
+
+  @override
+  String filename() => 'commit_list.dart';
 
   @override
   String content() {
@@ -39,7 +42,10 @@ class DiffList extends GitStampFile {
   DiffList(this.generateEmpty);
 
   @override
-  String filename() => '${GitStampDirectory.dataFolder}/diff_list.dart';
+  String directory() => GitStampDirectory.dataFolder;
+
+  @override
+  String filename() => 'diff_list.dart';
 
   @override
   String content() {
@@ -59,8 +65,10 @@ class DiffList extends GitStampFile {
 
 class RepoCreationDate extends GitStampFile {
   @override
-  String filename() =>
-      '${GitStampDirectory.dataFolder}/repo_creation_date.dart';
+  String directory() => GitStampDirectory.dataFolder;
+
+  @override
+  String filename() => 'repo_creation_date.dart';
 
   @override
   String content() {
@@ -80,7 +88,10 @@ class RepoCreationDate extends GitStampFile {
 
 class BuildBranch extends GitStampFile {
   @override
-  String filename() => '${GitStampDirectory.dataFolder}/build_branch.dart';
+  String directory() => GitStampDirectory.dataFolder;
+
+  @override
+  String filename() => 'build_branch.dart';
 
   @override
   String content() {
@@ -92,7 +103,10 @@ class BuildBranch extends GitStampFile {
 
 class BuildDateTime extends GitStampFile {
   @override
-  String filename() => '${GitStampDirectory.dataFolder}/build_date_time.dart';
+  String directory() => GitStampDirectory.dataFolder;
+
+  @override
+  String filename() => 'build_date_time.dart';
 
   @override
   String content() {
@@ -110,7 +124,10 @@ class BuildDateTime extends GitStampFile {
 
 class BuildSystemInfo extends GitStampFile {
   @override
-  String filename() => '${GitStampDirectory.dataFolder}/build_system_info.dart';
+  String directory() => GitStampDirectory.dataFolder;
+
+  @override
+  String filename() => 'build_system_info.dart';
 
   @override
   String content() {
@@ -129,7 +146,10 @@ class BuildSystemInfo extends GitStampFile {
 
 class RepoPath extends GitStampFile {
   @override
-  String filename() => '${GitStampDirectory.dataFolder}/repo_path.dart';
+  String directory() => GitStampDirectory.dataFolder;
+
+  @override
+  String filename() => 'repo_path.dart';
 
   @override
   String content() {
@@ -145,7 +165,10 @@ class IsLiteVersion extends GitStampFile {
   IsLiteVersion(this.isLiteVersion);
 
   @override
-  String filename() => '${GitStampDirectory.uiFolder}/is_lite_version.dart';
+  String directory() => GitStampDirectory.uiFolder;
+
+  @override
+  String filename() => 'is_lite_version.dart';
 
   @override
   String content() => 'const gitStampIsLiteVersion = $isLiteVersion;';
@@ -153,8 +176,10 @@ class IsLiteVersion extends GitStampFile {
 
 class ObservedFilesList extends GitStampFile {
   @override
-  String filename() =>
-      '${GitStampDirectory.dataFolder}/observed_files_list.dart';
+  String directory() => GitStampDirectory.dataFolder;
+
+  @override
+  String filename() => 'observed_files_list.dart';
 
   @override
   String content() {
@@ -167,7 +192,10 @@ class ObservedFilesList extends GitStampFile {
 
 class AppVersion extends GitStampFile {
   @override
-  String filename() => '${GitStampDirectory.dataFolder}/app_version.dart';
+  String directory() => GitStampDirectory.dataFolder;
+
+  @override
+  String filename() => 'app_version.dart';
 
   @override
   String content() {
@@ -184,7 +212,10 @@ class AppVersion extends GitStampFile {
 
 class AppBuild extends GitStampFile {
   @override
-  String filename() => '${GitStampDirectory.dataFolder}/app_build.dart';
+  String directory() => GitStampDirectory.dataFolder;
+
+  @override
+  String filename() => 'app_build.dart';
 
   @override
   String content() {
@@ -202,7 +233,10 @@ class AppBuild extends GitStampFile {
 
 class AppName extends GitStampFile {
   @override
-  String filename() => '${GitStampDirectory.dataFolder}/app_name.dart';
+  String directory() => GitStampDirectory.dataFolder;
+
+  @override
+  String filename() => 'app_name.dart';
 
   @override
   String content() {
@@ -218,8 +252,10 @@ class AppName extends GitStampFile {
 
 class GitStampVersion extends GitStampFile {
   @override
-  String filename() =>
-      '${GitStampDirectory.mainFolder}/git_stamp_tool_version.dart';
+  String directory() => GitStampDirectory.mainFolder;
+
+  @override
+  String filename() => 'git_stamp_tool_version.dart';
 
   @override
   String content() {
@@ -236,7 +272,10 @@ class GitStampVersion extends GitStampFile {
 
 class GitConfig extends GitStampFile {
   @override
-  String filename() => '${GitStampDirectory.dataFolder}/git_config.dart';
+  String directory() => GitStampDirectory.dataFolder;
+
+  @override
+  String filename() => 'git_config.dart';
 
   @override
   String content() {
