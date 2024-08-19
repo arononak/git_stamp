@@ -8,20 +8,22 @@ import 'package:pub_semver/pub_semver.dart';
 import '../../git_stamp_directory.dart';
 import '../../git_stamp_file.dart';
 
+String exec(List<String> args) {
+  return Process.runSync(args.first, args.sublist(1)).stdout;
+}
+
 class CommitList extends GitStampFile {
   @override
   String filename() => '${GitStampDirectory.dataFolder}/commit_list.dart';
 
   @override
   String content() {
-    final gitLogJson = Process.runSync(
+    final gitLogJson = exec([
       'git',
-      [
-        'log',
-        '--pretty=format:{"hash":"%H","subject":"%s","date":"%ad","authorName":"%an","authorEmail":"%ae"}',
-        '--date=format-local:%Y-%m-%d %H:%M %z',
-      ],
-    ).stdout;
+      'log',
+      '--pretty=format:{"hash":"%H","subject":"%s","date":"%ad","authorName":"%an","authorEmail":"%ae"}',
+      '--date=format-local:%Y-%m-%d %H:%M %z'
+    ]);
 
     final logs = LineSplitter.split(gitLogJson)
         .map((line) => json.decode(line))
@@ -44,20 +46,10 @@ class DiffList extends GitStampFile {
     Map<String, String> gitShowMap = {};
 
     if (generateEmpty == false) {
-      final hashes = Process.runSync('git', ['rev-list', '--all'])
-          .stdout
-          .toString()
-          .trim()
-          .split('\n');
+      final hashes = exec(['git', 'rev-list', '--all']).trim().split('\n');
 
       for (var hash in hashes) {
-        gitShowMap[hash] = Process.runSync(
-          'git',
-          [
-            'show',
-            hash,
-          ],
-        ).stdout.toString();
+        gitShowMap[hash] = exec(['git', 'show', hash]);
       }
     }
 
@@ -72,15 +64,13 @@ class RepoCreationDate extends GitStampFile {
 
   @override
   String content() {
-    final creationDate = Process.runSync(
+    final creationDate = exec([
       'git',
-      [
-        'log',
-        '--reverse',
-        '--pretty=format:%ad',
-        '--date=format:%Y-%m-%d %H:%M:%S %z',
-      ],
-    ).stdout;
+      'log',
+      '--reverse',
+      '--pretty=format:%ad',
+      '--date=format:%Y-%m-%d %H:%M:%S %z',
+    ]);
 
     final dates = creationDate.toString().split('\n');
 
@@ -94,14 +84,7 @@ class BuildBranch extends GitStampFile {
 
   @override
   String content() {
-    final currentBranch = Process.runSync(
-      'git',
-      [
-        'rev-parse',
-        '--abbrev-ref',
-        'HEAD',
-      ],
-    ).stdout;
+    final currentBranch = exec(['git', 'rev-parse', '--abbrev-ref', 'HEAD']);
 
     return 'const gitStampBuildBranch = "${currentBranch.toString().trim()}";';
   }
@@ -131,19 +114,12 @@ class BuildSystemInfo extends GitStampFile {
 
   @override
   String content() {
-    final systemInfo = Process.runSync(
-      'flutter',
-      [
-        'doctor',
-      ],
-    ).stdout;
+    final systemInfo = exec(['flutter', 'doctor']);
 
     String? systemInfoParsed = systemInfo
         .toString()
         .split('\n')
-        .where(
-          (line) => line.contains('] Flutter'),
-        )
+        .where((line) => line.contains('] Flutter'))
         .toList()
         .firstOrNull;
 
@@ -157,8 +133,7 @@ class RepoPath extends GitStampFile {
 
   @override
   String content() {
-    final repoPath =
-        Process.runSync('git', ['rev-parse', '--show-toplevel']).stdout;
+    final repoPath = exec(['git', 'rev-parse', '--show-toplevel']);
 
     return 'const gitStampRepoPath = "${repoPath.toString().trim()}";';
   }
@@ -183,22 +158,8 @@ class ObservedFilesList extends GitStampFile {
 
   @override
   String content() {
-    final toplevel = Process.runSync(
-      'git',
-      [
-        'rev-parse',
-        '--show-toplevel',
-      ],
-    ).stdout.toString().trim();
-
-    final files = Process.runSync(
-      'git',
-      [
-        '-C',
-        toplevel,
-        'ls-files',
-      ],
-    ).stdout;
+    final toplevel = exec(['git', 'rev-parse', '--show-toplevel']).trim();
+    final files = exec(['git', '-C', toplevel, 'ls-files']);
 
     return 'const gitStampObservedFilesList = """$files""";';
   }
@@ -262,18 +223,10 @@ class GitStampVersion extends GitStampFile {
 
   @override
   String content() {
-    final gitStampVersionResult = Process.runSync(
-      'dart',
-      ['run', 'git_stamp', '--version'],
-    ).stdout;
+    final versionStdout = exec(['dart', 'run', 'git_stamp', '--version']);
 
-    final gitStampVersion = gitStampVersionResult
-        .toString()
-        .trim()
-        .split(' ')
-        .last
-        .split('')
-        .first;
+    final gitStampVersion =
+        versionStdout.toString().trim().split(' ').last.split('').first;
 
     return '''
       const gitStampToolVersion = "$gitStampVersion";
@@ -287,17 +240,11 @@ class GitConfig extends GitStampFile {
 
   @override
   String content() {
-    final userName =
-        Process.runSync('git', ['config', 'user.name']).stdout;
+    final userName = exec(['git', 'config', 'user.name']);
+    final userEmail = exec(['git', 'config', 'user.email']);
 
-    final userEmail =
-        Process.runSync('git', ['config', 'user.email']).stdout;
-
-    final globalUserName =
-        Process.runSync('git', ['config', '--global', 'user.name']).stdout;
-
-    final globalUserEmail =
-        Process.runSync('git', ['config', '--global', 'user.email']).stdout;
+    final globalUserName = exec(['git', 'config', '--global', 'user.name']);
+    final globalUserEmail = exec(['git', 'config', '--global', 'user.email']);
 
     return '''
       const gitStampGitConfigGlobalUserName = "${globalUserName.trim()}";
