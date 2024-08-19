@@ -9,7 +9,7 @@ import '../../git_stamp_directory.dart';
 import '../../git_stamp_file.dart';
 
 String exec(List<String> args) {
-  return Process.runSync(args.first, args.sublist(1)).stdout;
+  return Process.runSync(args.first, args.sublist(1)).stdout.toString().trim();
 }
 
 class CommitList extends GitStampFile {
@@ -247,10 +247,10 @@ class GitConfig extends GitStampFile {
     final globalUserEmail = exec(['git', 'config', '--global', 'user.email']);
 
     return '''
-      const gitStampGitConfigGlobalUserName = "${globalUserName.trim()}";
-      const gitStampGitConfigGlobalUserEmail = "${globalUserEmail.trim()}";
-      const gitStampGitConfigUserName = "${userName.trim()}";
-      const gitStampGitConfigUserEmail = "${userEmail.trim()}";
+      const gitStampGitConfigGlobalUserName = "${globalUserName.isNotEmpty ? globalUserName : 'EMPTY USER'}";
+      const gitStampGitConfigGlobalUserEmail = "${globalUserEmail.isNotEmpty ? globalUserEmail : 'EMPTY EMAIL'}";
+      const gitStampGitConfigUserName = "${userName.isNotEmpty ? userName : 'EMPTY USER'}";
+      const gitStampGitConfigUserEmail = "${userEmail.isNotEmpty ? userEmail : 'EMPTY EMAIL'}";
     ''';
   }
 }
