@@ -280,3 +280,30 @@ class GitStampVersion extends GitStampFile {
     ''';
   }
 }
+
+class GitConfig extends GitStampFile {
+  @override
+  String filename() => '${GitStampDirectory.dataFolder}/git_config.dart';
+
+  @override
+  String content() {
+    final userName =
+        Process.runSync('git', ['config', 'user.name']).stdout;
+
+    final userEmail =
+        Process.runSync('git', ['config', 'user.email']).stdout;
+
+    final globalUserName =
+        Process.runSync('git', ['config', '--global', 'user.name']).stdout;
+
+    final globalUserEmail =
+        Process.runSync('git', ['config', '--global', 'user.email']).stdout;
+
+    return '''
+      const gitStampGitConfigGlobalUserName = "${globalUserName.trim()}";
+      const gitStampGitConfigGlobalUserEmail = "${globalUserEmail.trim()}";
+      const gitStampGitConfigUserName = "${userName.trim()}";
+      const gitStampGitConfigUserEmail = "${userEmail.trim()}";
+    ''';
+  }
+}

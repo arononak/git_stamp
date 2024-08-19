@@ -92,6 +92,26 @@ void singleValueTests() {
       'field': gitStampToolVersion,
       'matcher': isNotEmpty,
     },
+    {
+      'param': 'git-config',
+      'field': GitStamp.gitConfigGlobalUserName,
+      'matcher': isNotEmpty,
+    },
+    {
+      'param': 'git-config',
+      'field': GitStamp.gitConfigGlobalUserEmail,
+      'matcher': isNotEmpty,
+    },
+    {
+      'param': 'git-config',
+      'field': GitStamp.gitConfigUserName,
+      'matcher': isNotEmpty,
+    },
+    {
+      'param': 'git-config',
+      'field': GitStamp.gitConfigUserEmail,
+      'matcher': isNotEmpty,
+    },
   ].forEach(
     (json) {
       test('GitStamp ${json['param']} should be not empty', () {

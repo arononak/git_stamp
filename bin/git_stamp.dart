@@ -48,6 +48,7 @@ Future<void> main(List<String> arguments) async {
         'app-version',
         'app-build',
         'app-name',
+        'git-config',
       ],
       defaultsTo: null,
     )
@@ -174,6 +175,10 @@ void _generateDataFiles(
 
   if (files.appName) {
     AppName().generate();
+  }
+
+  if (files.gitConfig) {
+    GitConfig().generate();
   }
 }
 

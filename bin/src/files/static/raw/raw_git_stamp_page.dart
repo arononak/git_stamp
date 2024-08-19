@@ -444,6 +444,11 @@ class GitStampRepoDetailsModalContent extends StatelessWidget {
             const SizedBox(height: 32),
             Text('Environment', style: _textTitle),
             const SizedBox(height: 4),
+            GitStampDoubleText('Global: ',
+                '\${GitStamp.gitConfigGlobalUserName} (\${GitStamp.gitConfigGlobalUserEmail})'),
+            GitStampDoubleText('Local: ',
+                '\${GitStamp.gitConfigUserName} (\${GitStamp.gitConfigUserEmail})'),
+            const SizedBox(height: 12),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [

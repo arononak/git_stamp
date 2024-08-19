@@ -171,6 +171,8 @@ dart pub add git_stamp
 
 `app-name`
 
+`git-config`
+
 ## 💻 Usage
 
 #### 1. ListTile

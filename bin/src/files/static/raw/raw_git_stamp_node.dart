@@ -22,6 +22,7 @@ ${files.observedFilesList.enabled}import 'src/data/observed_files_list.dart';
 ${files.appVersion.enabled}import 'src/data/app_version.dart';
 ${files.appBuild.enabled}import 'src/data/app_build.dart';
 ${files.appName.enabled}import 'src/data/app_name.dart';
+${files.gitConfig.enabled}import 'src/data/git_config.dart';
 
 ${files.generateFlutterFiles.enabled}import 'package:flutter/widgets.dart';
 ${files.generateFlutterFiles.enabled}import 'src/ui/git_stamp_license_page.dart';
@@ -43,6 +44,11 @@ class GitStamp {
   ${files.appVersion.enabled}static const String appVersion = gitStampAppVersion;
   ${files.appBuild.enabled}static const String appBuild = gitStampAppBuild;
   ${files.appName.enabled}static const String appName = gitStampAppName;
+
+  ${files.gitConfig.enabled}static const String gitConfigGlobalUserName = gitStampGitConfigGlobalUserName;
+  ${files.gitConfig.enabled}static const String gitConfigGlobalUserEmail = gitStampGitConfigGlobalUserEmail;
+  ${files.gitConfig.enabled}static const String gitConfigUserName = gitStampGitConfigUserName;
+  ${files.gitConfig.enabled}static const String gitConfigUserEmail = gitStampGitConfigUserEmail;
 
   ${files.generateFlutterFiles.enabled}static showLicensePage({
   ${files.generateFlutterFiles.enabled}  required BuildContext context,
