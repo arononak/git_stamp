@@ -8,7 +8,7 @@ abstract class GitStampFile {
   String filename();
   String content();
 
-  String get path => '${directory()}/${filename()}'; 
+  String get path => '${directory()}/${filename()}';
 
   String getFileSize({int decimals = 1}) {
     const suffixes = ["B ", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
@@ -25,7 +25,7 @@ abstract class GitStampFile {
 
   void generate() {
     File(path).writeAsStringSync(content());
-    
+
     final text = 'Generated ${getFileSize().padLeft(13)}               $path';
     GitStampLogger().logger.info(text);
   }
