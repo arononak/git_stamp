@@ -1,7 +1,13 @@
+## 4.4.0
+
+* Added interpolate function `GitStamp.showLicensePage`
+* Added `git config` module
+* Refactor
+
 ## 4.3.0
 
 * New GitStampIcon style
-* Added GitStamp.sha
+* Added `GitStamp.sha`
 * Generator new logs & refactor
 * Fixed generation build version for no build number in pubspec.yaml
 

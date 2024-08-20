@@ -55,11 +55,11 @@ Advanced await-less information provider. From simple information such as `build
 
 #### 2. ICON
 
-![](https://github.com/arononak/git_stamp/blob/main/preview_icon.png?raw=true)
+![](https://github.com/arononak/git_stamp/blob/main/changelog/4.3.0.png?raw=true)
 
 #### 3. Generator
 
-![](https://github.com/arononak/git_stamp/blob/main/generator.png?raw=true)
+![](https://github.com/arononak/git_stamp/blob/main/changelog/4.2.0.png?raw=true)
 
 ## 📑️ About
 
