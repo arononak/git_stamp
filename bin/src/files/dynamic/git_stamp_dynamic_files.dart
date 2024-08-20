@@ -12,6 +12,10 @@ String exec(List<String> args) {
   return Process.runSync(args.first, args.sublist(1)).stdout.toString().trim();
 }
 
+extension StringExtension on String {
+  String valueOr(String empty) => isNotEmpty ? this : empty;
+}
+
 class CommitList extends GitStampFile {
   @override
   String directory() => GitStampDirectory.dataFolder;
@@ -286,10 +290,10 @@ class GitConfig extends GitStampFile {
     final globalUserEmail = exec(['git', 'config', '--global', 'user.email']);
 
     return '''
-      const gitStampGitConfigGlobalUserName = "${globalUserName.isNotEmpty ? globalUserName : 'EMPTY USER'}";
-      const gitStampGitConfigGlobalUserEmail = "${globalUserEmail.isNotEmpty ? globalUserEmail : 'EMPTY EMAIL'}";
-      const gitStampGitConfigUserName = "${userName.isNotEmpty ? userName : 'EMPTY USER'}";
-      const gitStampGitConfigUserEmail = "${userEmail.isNotEmpty ? userEmail : 'EMPTY EMAIL'}";
+      const gitStampGitConfigGlobalUserName = "${globalUserName.valueOr('EMPTY USER')}";
+      const gitStampGitConfigGlobalUserEmail = "${globalUserEmail.valueOr('EMPTY EMAIL')}";
+      const gitStampGitConfigUserName = "${userName.valueOr('EMPTY USER')}";
+      const gitStampGitConfigUserEmail = "${userEmail.valueOr('EMPTY EMAIL')}";
     ''';
   }
 }
