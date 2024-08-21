@@ -133,9 +133,9 @@
 </tbody>
 </table>
 <h4 id="2-icon">2. ICON</h4>
-<p><img src="https://github.com/arononak/git_stamp/blob/main/preview_icon.png?raw=true" alt=""></p>
+<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/4.3.0.png?raw=true" alt=""></p>
 <h4 id="3-generator">3. Generator</h4>
-<p><img src="https://github.com/arononak/git_stamp/blob/main/generator.png?raw=true" alt=""></p>
+<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/4.2.0.png?raw=true" alt=""></p>
 <h2 id="-about">📑️ About</h2>
 <h4 id="goal">Goal</h4>
 <p>The main goal is to help locate errors in the full process of building STAGE, TEST and PROD versions.</p>
@@ -263,6 +263,7 @@ Text('SHA: ${GitStamp.sha}'),
 <p><code>app-version</code></p>
 <p><code>app-build</code></p>
 <p><code>app-name</code></p>
+<p><code>git-config</code></p>
 <h2 id="-usage">💻 Usage</h2>
 <h4 id="1-listtile">1. ListTile</h4>
 <pre class="language-dart"><code class="language-dart">if (kDebugMode) ...[
@@ -285,7 +286,7 @@ Text('SHA: ${GitStamp.sha}'),
 <h4 id="3-showgitstamplicensepage">3. showGitStampLicensePage()</h4>
 <div class="markdown-alert markdown-alert-note">
 <p class="markdown-alert-title">Note</p>
-<p>Use function <code>showGitStampLicensePage</code> instead of <code>showLicensePage</code> if you want the <code>name</code> and <code>version</code> to be added automatically.</p>
+<p>Use function <code>GitStamp.showLicensePage</code> instead of <code>showLicensePage</code> if you want the <code>name</code> and <code>version</code> to be added automatically.</p>
 </div>
 <h4 id="4-central-gitstamp-node-for-advanced-usage">4. Central <strong>GitStamp</strong> node for advanced usage:</h4>
 <pre class="language-dart"><code class="language-dart">class GitStamp {
@@ -306,7 +307,12 @@ Text('SHA: ${GitStamp.sha}'),
   static const String appBuild
   static const String appName
 
-  static const bool isLiteVersion
+  static showLicensePage({
+    required BuildContext context,
+    Widget? applicationIcon,
+    String? applicationLegalese,
+    bool useRootNavigator = false,
+  })
 }
 </code></pre>
 <h2 id="-integration">📦 Integration</h2>
@@ -409,7 +415,7 @@ If you have any feedback, please contact me at <a href="mailto:arononak@gmail.co
 <footer>
   <span class="no-break">
     git_stamp
-      4.3.0
+      4.4.0
   </span>
 
   
