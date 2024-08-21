@@ -14,7 +14,8 @@ void showGitStampPage({
   required BuildContext context,
   bool useRootNavigator = false,
 }) {
-  Navigator.of(context, rootNavigator: useRootNavigator).push(MaterialPageRoute<void>(
+  Navigator.of(context, rootNavigator: useRootNavigator)
+      .push(MaterialPageRoute<void>(
     builder: (BuildContext context) => const GitStampPage(),
   ));
 }
@@ -67,122 +68,19 @@ class _GitStampPageState extends State<GitStampPage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   IconButton(
-                    onPressed: () {
-                      showModalBottomSheet(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Container(
-                            padding: EdgeInsets.symmetric(vertical: 16.0),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 16.0),
-                                    child: Text('Filter', style: _textTitle),
-                                  ),
-                                  SizedBox(height: 20),
-                                  Flexible(
-                                    child: ListView(
-                                      shrinkWrap: true,
-                                      children: <String?>[null, ...commitAuthors()]
-                                          .map(
-                                            (e) => ListTile(
-                                              leading: Icon(e != null ? Icons.person : Icons.close),
-                                              title: Text(e != null ? e : 'No filter', style: _textBold),
-                                              onTap: () {
-                                                Navigator.pop(context);
-                                                setState(() => _filterAuthorName = e);
-                                              },
-                                            ),
-                                          )
-                                          .toList(),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    },
+                    onPressed: () => showFilterBottomSheet(),
                     icon: const Icon(Icons.filter_list),
                   ),
                   IconButton(
-                    onPressed: () {
-                      showModalBottomSheet(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return GitStampRepoDetailsModalContent();
-                        },
-                      );
-                    },
+                    onPressed: () => showDetailsBottomSheet(),
                     icon: const Icon(Icons.tag),
                   ),
                   IconButton(
-                    onPressed: () {
-                      showModalBottomSheet(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Container(
-                            padding: EdgeInsets.all(16.0),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('Repository files', style: _textTitle),
-                                  SizedBox(height: 16.0),
-                                  Text(GitStamp.observedFilesList, style: _text),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    },
+                    onPressed: () => showRepoFilesBottomSheet(),
                     icon: const Icon(Icons.folder),
                   ),
                   IconButton(
-                    onPressed: () {
-                      showModalBottomSheet(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Container(
-                            padding: EdgeInsets.symmetric(vertical: 16.0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                                  child: Text('Git Stamp', style: _textTitle),
-                                ),
-                                SizedBox(height: 20),
-                                Flexible(
-                                  child: ListView(
-                                    shrinkWrap: true,
-                                    children: [
-                                      ListTile(
-                                        onTap: () => openEmail(email: 'arononak@gmail.com'),
-                                        title: Text('Have a great idea for Git Stamp?', style: _textBold),
-                                        leading: Icon(Icons.mail),
-                                      ),
-                                      ListTile(
-                                        onTap: () => openProjectHomepage(),
-                                        title: Text('You love Git Stamp?', style: _textBold),
-                                        leading: Icon(Icons.star),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      );
-                    },
+                    onPressed: () => showMoreBottomSheet(),
                     icon: const Icon(Icons.more_vert),
                   ),
                 ],
@@ -196,6 +94,129 @@ class _GitStampPageState extends State<GitStampPage> {
         filterAuthorName: _filterAuthorName,
         isLiteVersion: isLiteVersion,
       ),
+    );
+  }
+
+  void showFilterBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return Container(
+          padding: EdgeInsets.symmetric(vertical: 16.0),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Text('Filter', style: _textTitle),
+                ),
+                SizedBox(height: 20),
+                Flexible(
+                  child: ListView(
+                    shrinkWrap: true,
+                    children: <String?>[null, ...commitAuthors()]
+                        .map(
+                          (e) => ListTile(
+                            leading: Icon(
+                              e != null ? Icons.person : Icons.close,
+                            ),
+                            title: Text(
+                              e != null ? e : 'No filter',
+                              style: _textBold,
+                            ),
+                            onTap: () {
+                              Navigator.pop(context);
+                              setState(() => _filterAuthorName = e);
+                            },
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void showDetailsBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return GitStampRepoDetailsModalContent();
+      },
+    );
+  }
+
+  void showRepoFilesBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return Container(
+          padding: EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Repository files', style: _textTitle),
+                SizedBox(height: 16.0),
+                Text(GitStamp.observedFilesList, style: _text),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void showMoreBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return Container(
+          padding: EdgeInsets.symmetric(vertical: 16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Text('Git Stamp', style: _textTitle),
+              ),
+              SizedBox(height: 20),
+              Flexible(
+                child: ListView(
+                  shrinkWrap: true,
+                  children: [
+                    ListTile(
+                      onTap: () => openEmail(email: 'arononak@gmail.com'),
+                      title: Text(
+                        'Have a great idea for Git Stamp?',
+                        style: _textBold,
+                      ),
+                      leading: Icon(Icons.mail),
+                    ),
+                    ListTile(
+                      onTap: () => openProjectHomepage(),
+                      title: Text('You love Git Stamp?', style: _textBold),
+                      leading: Icon(Icons.star),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
@@ -214,7 +235,13 @@ class GitStampCommitList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Map<String, List<GitStampCommit>> groupedCommit = groupBy(
-      commits.where((e) => filterAuthorName == null ? true : e.authorName == filterAuthorName),
+      commits.where(
+        (e) {
+          return filterAuthorName == null
+              ? true
+              : e.authorName == filterAuthorName;
+        },
+      ),
       (element) {
         final date = DateTime.parse(element.date);
 
@@ -303,7 +330,12 @@ class GitStampCommitListElement extends StatelessWidget {
                               ),
                             ),
                             IconButton(
-                              onPressed: () => showGitStampDetailsPage(context: context, commitHash: commit.hash),
+                              onPressed: () {
+                                showGitStampDetailsPage(
+                                  context: context,
+                                  commitHash: commit.hash,
+                                );
+                              },
                               icon: Icon(Icons.arrow_forward),
                             ),
                           ],
@@ -329,16 +361,14 @@ class GitStampCommitListElement extends StatelessWidget {
               size: 36,
               color: Theme.of(context).colorScheme.primary,
             ),
-            title: GitStampCommitListHeader(
-              commit: commit,
-            ),
+            title: GitStampCommitListHeader(commit: commit),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 InkWell(
                   onTap: () => openEmail(email: commit.authorEmail),
                   child: Text(
-                    '\${commit.authorName} (\${commit.authorEmail})',
+                    commit.authorName + ' (' + commit.authorEmail + ')',
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.onSurface,
                       fontStyle: FontStyle.italic,
@@ -348,7 +378,10 @@ class GitStampCommitListElement extends StatelessWidget {
                 Text(
                   commit.date,
                   style: TextStyle(
-                    color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onSurface
+                        .withOpacity(0.6),
                   ),
                 ),
               ],
@@ -385,8 +418,14 @@ class GitStampCommitListHeader extends StatelessWidget {
               fontStyle: FontStyle.italic,
             ),
           ),
-          const TextSpan(text: ' - ', style: TextStyle(fontWeight: FontWeight.normal)),
-          TextSpan(text: commit.subject, style: const TextStyle(fontWeight: FontWeight.bold)),
+          const TextSpan(
+            text: ' - ',
+            style: TextStyle(fontWeight: FontWeight.normal),
+          ),
+          TextSpan(
+            text: commit.subject,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
         ],
       ),
       maxLines: 1,
@@ -427,7 +466,10 @@ class GitStampRepoDetailsModalContent extends StatelessWidget {
             Text('Build', style: _textTitle),
             const SizedBox(height: 4),
             GitStampDoubleText('App Name: ', GitStamp.appName),
-            GitStampDoubleText('App Version: ', GitStamp.appVersion + ' (' + GitStamp.appBuild + ')'),
+            GitStampDoubleText(
+              'App Version: ',
+              GitStamp.appVersion + ' (' + GitStamp.appBuild + ')',
+            ),
             GitStampDoubleText('Date: ', GitStamp.buildDateTime),
             GitStampDoubleText('Path: ', GitStamp.repoPath),
             GitStampDoubleText('Branch: ', GitStamp.buildBranch),
@@ -444,10 +486,14 @@ class GitStampRepoDetailsModalContent extends StatelessWidget {
             const SizedBox(height: 32),
             Text('Environment', style: _textTitle),
             const SizedBox(height: 4),
-            GitStampDoubleText('Global: ',
-                '\${GitStamp.gitConfigGlobalUserName} (\${GitStamp.gitConfigGlobalUserEmail})'),
-            GitStampDoubleText('Local: ',
-                '\${GitStamp.gitConfigUserName} (\${GitStamp.gitConfigUserEmail})'),
+            GitStampDoubleText(
+              'Global: ',
+              GitStamp.gitConfigGlobalUserName + ' (' + GitStamp.gitConfigGlobalUserEmail + ')',
+            ),
+            GitStampDoubleText(
+              'Local: ',
+              GitStamp.gitConfigUserName + ' (' + GitStamp.gitConfigUserEmail + ')',
+            ),
             const SizedBox(height: 12),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -476,7 +522,10 @@ class GitStampRepoDetailsModalContent extends StatelessWidget {
             Text('Repository', style: _textTitle),
             const SizedBox(height: 4),
             GitStampDoubleText('Created: ', GitStamp.repoCreationDate),
-            GitStampDoubleText('Commit count: ', GitStamp.commitList.length.toString()),
+            GitStampDoubleText(
+              'Commit count: ',
+              GitStamp.commitList.length.toString(),
+            ),
             Text('Commit stats:', style: _text),
             ...commitCountByAuthor()
                 .entries
@@ -496,4 +545,5 @@ class GitStampRepoDetailsModalContent extends StatelessWidget {
     );
   }
 }
+
 ''';
