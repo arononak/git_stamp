@@ -224,6 +224,11 @@ class GitStamp {
   static const String appBuild
   static const String appName
 
+  static const String gitConfigGlobalUserName
+  static const String gitConfigGlobalUserEmail
+  static const String gitConfigUserName
+  static const String gitConfigUserEmail
+
   static showLicensePage({
     required BuildContext context,
     Widget? applicationIcon,
