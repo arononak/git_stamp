@@ -8,112 +8,84 @@ import 'raw/raw_git_stamp_utils.dart';
 import 'raw/raw_git_stamp_icon.dart';
 import 'raw/raw_git_stamp_license_page.dart';
 import '../../git_stamp_build.dart';
-import '../../git_stamp_directory.dart';
 import '../../git_stamp_file.dart';
 
-class GitStampMainFile extends GitStampFile {
+class GitStampMain extends GitStampMainFile {
   final bool generateFlutterFiles;
 
-  GitStampMainFile(this.generateFlutterFiles);
+  GitStampMain(this.generateFlutterFiles);
 
   @override
-  String directory() => GitStampDirectory.mainFolder;
+  String get filename => 'git_stamp.dart';
 
   @override
-  String filename() => 'git_stamp.dart';
-
-  @override
-  String content() => rawGitStamp(generateFlutterFiles);
+  String get content => rawGitStamp(generateFlutterFiles);
 }
 
-class GitStampNode extends GitStampFile {
+class GitStampNode extends GitStampMainFile {
   final GitStampBuild dataFiles;
 
   GitStampNode(this.dataFiles);
 
   @override
-  String directory() => GitStampDirectory.mainFolder;
+  String get filename => 'git_stamp_node.dart';
 
   @override
-  String filename() => 'git_stamp_node.dart';
-
-  @override
-  String content() => rawGitStampNode(dataFiles);
+  String get content => rawGitStampNode(dataFiles);
 }
 
-class GitStampUtils extends GitStampFile {
+class GitStampUtils extends GitStampUiFile {
   @override
-  String directory() => GitStampDirectory.uiFolder;
+  String get filename => 'git_stamp_utils.dart';
 
   @override
-  String filename() => 'git_stamp_utils.dart';
-
-  @override
-  String content() => rawGitStampUtils;
+  String get content => rawGitStampUtils;
 }
 
-class GitStampLauncher extends GitStampFile {
+class GitStampLauncher extends GitStampUiFile {
   @override
-  String directory() => GitStampDirectory.uiFolder;
+  String get filename => 'git_stamp_launcher.dart';
 
   @override
-  String filename() => 'git_stamp_launcher.dart';
-
-  @override
-  String content() => rawGitStampLauncher;
+  String get content => rawGitStampLauncher;
 }
 
-class GitStampCommit extends GitStampFile {
+class GitStampCommit extends GitStampDataFile {
   @override
-  String directory() => GitStampDirectory.dataFolder;
+  String get filename => 'git_stamp_commit.dart';
 
   @override
-  String filename() => 'git_stamp_commit.dart';
-
-  @override
-  String content() => rawGitStampCommit;
+  String get content => rawGitStampCommit;
 }
 
-class GitStampPage extends GitStampFile {
+class GitStampPage extends GitStampUiFile {
   @override
-  String directory() => GitStampDirectory.uiFolder;
+  String get filename => 'git_stamp_page.dart';
 
   @override
-  String filename() => 'git_stamp_page.dart';
-
-  @override
-  String content() => rawGitStampPage;
+  String get content => rawGitStampPage;
 }
 
-class GitStampDetailsPage extends GitStampFile {
+class GitStampDetailsPage extends GitStampUiFile {
   @override
-  String directory() => GitStampDirectory.uiFolder;
+  String get filename => 'git_stamp_details_page.dart';
 
   @override
-  String filename() => 'git_stamp_details_page.dart';
-
-  @override
-  String content() => rawGitStampDetailsPage;
+  String get content => rawGitStampDetailsPage;
 }
 
-class GitStampIcon extends GitStampFile {
+class GitStampIcon extends GitStampUiFile {
   @override
-  String directory() => GitStampDirectory.uiFolder;
+  String get filename => 'git_stamp_icon.dart';
 
   @override
-  String filename() => 'git_stamp_icon.dart';
-
-  @override
-  String content() => rawGitStampIcon;
+  String get content => rawGitStampIcon;
 }
 
-class GitStampLicensePage extends GitStampFile {
+class GitStampLicensePage extends GitStampUiFile {
   @override
-  String directory() => GitStampDirectory.uiFolder;
+  String get filename => 'git_stamp_license_page.dart';
 
   @override
-  String filename() => 'git_stamp_license_page.dart';
-
-  @override
-  String content() => rawGitStampLicensePage;
+  String get content => rawGitStampLicensePage;
 }

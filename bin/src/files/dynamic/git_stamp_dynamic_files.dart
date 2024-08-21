@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:pubspec_parse/pubspec_parse.dart';
 import 'package:pub_semver/pub_semver.dart';
 
-import '../../git_stamp_directory.dart';
 import '../../git_stamp_file.dart';
 
 String exec(List<String> args) {
@@ -16,15 +15,12 @@ extension StringExtension on String {
   String valueOr(String empty) => isNotEmpty ? this : empty;
 }
 
-class CommitList extends GitStampFile {
+class CommitList extends GitStampDataFile {
   @override
-  String directory() => GitStampDirectory.dataFolder;
+  String get filename => 'commit_list.dart';
 
   @override
-  String filename() => 'commit_list.dart';
-
-  @override
-  String content() {
+  String get content {
     final gitLogJson = exec([
       'git',
       'log',
@@ -40,19 +36,16 @@ class CommitList extends GitStampFile {
   }
 }
 
-class DiffList extends GitStampFile {
+class DiffList extends GitStampDataFile {
   bool generateEmpty;
 
   DiffList(this.generateEmpty);
 
   @override
-  String directory() => GitStampDirectory.dataFolder;
+  String get filename => 'diff_list.dart';
 
   @override
-  String filename() => 'diff_list.dart';
-
-  @override
-  String content() {
+  String get content {
     Map<String, String> gitShowMap = {};
 
     if (generateEmpty == false) {
@@ -67,15 +60,12 @@ class DiffList extends GitStampFile {
   }
 }
 
-class RepoCreationDate extends GitStampFile {
+class RepoCreationDate extends GitStampDataFile {
   @override
-  String directory() => GitStampDirectory.dataFolder;
+  String get filename => 'repo_creation_date.dart';
 
   @override
-  String filename() => 'repo_creation_date.dart';
-
-  @override
-  String content() {
+  String get content {
     final creationDate = exec([
       'git',
       'log',
@@ -90,30 +80,24 @@ class RepoCreationDate extends GitStampFile {
   }
 }
 
-class BuildBranch extends GitStampFile {
+class BuildBranch extends GitStampDataFile {
   @override
-  String directory() => GitStampDirectory.dataFolder;
+  String get filename => 'build_branch.dart';
 
   @override
-  String filename() => 'build_branch.dart';
-
-  @override
-  String content() {
+  String get content {
     final currentBranch = exec(['git', 'rev-parse', '--abbrev-ref', 'HEAD']);
 
     return 'const gitStampBuildBranch = "${currentBranch.toString().trim()}";';
   }
 }
 
-class BuildDateTime extends GitStampFile {
+class BuildDateTime extends GitStampDataFile {
   @override
-  String directory() => GitStampDirectory.dataFolder;
+  String get filename => 'build_date_time.dart';
 
   @override
-  String filename() => 'build_date_time.dart';
-
-  @override
-  String content() {
+  String get content {
     final now = DateTime.now();
 
     /// TODO Add "Z" parameter after implementing this in intl package.
@@ -126,15 +110,12 @@ class BuildDateTime extends GitStampFile {
   }
 }
 
-class BuildSystemInfo extends GitStampFile {
+class BuildSystemInfo extends GitStampDataFile {
   @override
-  String directory() => GitStampDirectory.dataFolder;
+  String get filename => 'build_system_info.dart';
 
   @override
-  String filename() => 'build_system_info.dart';
-
-  @override
-  String content() {
+  String get content {
     final systemInfo = exec(['flutter', 'doctor']);
 
     String? systemInfoParsed = systemInfo
@@ -148,45 +129,36 @@ class BuildSystemInfo extends GitStampFile {
   }
 }
 
-class RepoPath extends GitStampFile {
+class RepoPath extends GitStampDataFile {
   @override
-  String directory() => GitStampDirectory.dataFolder;
+  String get filename => 'repo_path.dart';
 
   @override
-  String filename() => 'repo_path.dart';
-
-  @override
-  String content() {
+  String get content {
     final repoPath = exec(['git', 'rev-parse', '--show-toplevel']);
 
     return 'const gitStampRepoPath = "${repoPath.toString().trim()}";';
   }
 }
 
-class IsLiteVersion extends GitStampFile {
+class IsLiteVersion extends GitStampUiFile {
   final bool isLiteVersion;
 
   IsLiteVersion(this.isLiteVersion);
 
   @override
-  String directory() => GitStampDirectory.uiFolder;
+  String get filename => 'is_lite_version.dart';
 
   @override
-  String filename() => 'is_lite_version.dart';
-
-  @override
-  String content() => 'const gitStampIsLiteVersion = $isLiteVersion;';
+  String get content => 'const gitStampIsLiteVersion = $isLiteVersion;';
 }
 
-class ObservedFilesList extends GitStampFile {
+class ObservedFilesList extends GitStampDataFile {
   @override
-  String directory() => GitStampDirectory.dataFolder;
+  String get filename => 'observed_files_list.dart';
 
   @override
-  String filename() => 'observed_files_list.dart';
-
-  @override
-  String content() {
+  String get content {
     final toplevel = exec(['git', 'rev-parse', '--show-toplevel']).trim();
     final files = exec(['git', '-C', toplevel, 'ls-files']);
 
@@ -194,15 +166,12 @@ class ObservedFilesList extends GitStampFile {
   }
 }
 
-class AppVersion extends GitStampFile {
+class AppVersion extends GitStampDataFile {
   @override
-  String directory() => GitStampDirectory.dataFolder;
+  String get filename => 'app_version.dart';
 
   @override
-  String filename() => 'app_version.dart';
-
-  @override
-  String content() {
+  String get content {
     final file = File('pubspec.yaml');
     final content = file.readAsStringSync();
     final pubspec = Pubspec.parse(content);
@@ -214,15 +183,12 @@ class AppVersion extends GitStampFile {
   }
 }
 
-class AppBuild extends GitStampFile {
+class AppBuild extends GitStampDataFile {
   @override
-  String directory() => GitStampDirectory.dataFolder;
+  String get filename => 'app_build.dart';
 
   @override
-  String filename() => 'app_build.dart';
-
-  @override
-  String content() {
+  String get content {
     final file = File('pubspec.yaml');
     final content = file.readAsStringSync();
     final pubspec = Pubspec.parse(content);
@@ -235,15 +201,12 @@ class AppBuild extends GitStampFile {
   }
 }
 
-class AppName extends GitStampFile {
+class AppName extends GitStampDataFile {
   @override
-  String directory() => GitStampDirectory.dataFolder;
+  String get filename => 'app_name.dart';
 
   @override
-  String filename() => 'app_name.dart';
-
-  @override
-  String content() {
+  String get content {
     final file = File('pubspec.yaml');
     final content = file.readAsStringSync();
     final pubspec = Pubspec.parse(content);
@@ -254,15 +217,12 @@ class AppName extends GitStampFile {
   }
 }
 
-class GitStampVersion extends GitStampFile {
+class GitStampVersion extends GitStampMainFile {
   @override
-  String directory() => GitStampDirectory.mainFolder;
+  String get filename => 'git_stamp_tool_version.dart';
 
   @override
-  String filename() => 'git_stamp_tool_version.dart';
-
-  @override
-  String content() {
+  String get content {
     final versionStdout = exec(['dart', 'run', 'git_stamp', '--version']);
 
     final gitStampVersion =
@@ -274,15 +234,12 @@ class GitStampVersion extends GitStampFile {
   }
 }
 
-class GitConfig extends GitStampFile {
+class GitConfig extends GitStampDataFile {
   @override
-  String directory() => GitStampDirectory.dataFolder;
+  String get filename => 'git_config.dart';
 
   @override
-  String filename() => 'git_config.dart';
-
-  @override
-  String content() {
+  String get content {
     final userName = exec(['git', 'config', 'user.name']);
     final userEmail = exec(['git', 'config', 'user.email']);
 

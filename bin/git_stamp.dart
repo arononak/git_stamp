@@ -4,7 +4,7 @@ import 'package:args/args.dart';
 
 import 'git_stamp_logger.dart';
 import 'src/git_stamp_build.dart';
-import 'src/git_stamp_directory.dart';
+import 'src/git_stamp_file.dart';
 import 'src/files/dynamic/git_stamp_dynamic_files.dart';
 import 'src/files/static/git_stamp_static_files.dart';
 
@@ -128,7 +128,7 @@ void _generateDataFiles(
   GitStampBuild files,
   bool isLiteVersion,
 ) {
-  GitStampMainFile(files.generateFlutterFiles).generate();
+  GitStampMain(files.generateFlutterFiles).generate();
   GitStampNode(files).generate();
   GitStampVersion().generate();
 
