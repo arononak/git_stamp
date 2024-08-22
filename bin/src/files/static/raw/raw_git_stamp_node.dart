@@ -32,7 +32,7 @@ class GitStamp {
   ${files.commitList.enabled}static GitStampCommit? get latestCommit => commitList.firstOrNull;
   ${files.commitList.enabled}static String get sha => latestCommit?.hash ?? 'REPO WITHOUT COMMITS';
 
-  ${files.diffList.enabled}static const Map<String, String> diffList = gitStampDiffList;
+  ${files.diffList.enabled}static Map<String, dynamic> diffList = json.decode(gitStampDiffList.replaceAll(r"\\'", "'"));
 
   ${files.buildBranch.enabled}static const String buildBranch = gitStampBuildBranch;
   ${files.buildDateTime.enabled}static const String buildDateTime = gitStampBuildDateTime;

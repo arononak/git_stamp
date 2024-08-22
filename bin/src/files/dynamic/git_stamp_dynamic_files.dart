@@ -46,17 +46,21 @@ class DiffList extends GitStampDataFile {
 
   @override
   String get content {
-    Map<String, String> gitShowMap = {};
+    Map<String, String> map = {};
 
     if (generateEmpty == false) {
       final hashes = exec(['git', 'rev-list', '--all']).trim().split('\n');
 
       for (var hash in hashes) {
-        gitShowMap[hash] = exec(['git', 'show', hash]);
+        map[hash] = exec(['git', 'show', hash]);
       }
     }
 
-    return 'const gitStampDiffList = <String, String>${jsonEncode(gitShowMap).replaceAll(r'$', r'\$')};';
+    String jsonString = jsonEncode(map).replaceAll("'", r"\'");
+
+    return '''
+      const String gitStampDiffList = r\'\'\'$jsonString\'\'\';
+    ''';
   }
 }
 
