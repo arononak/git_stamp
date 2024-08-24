@@ -3,6 +3,38 @@ import 'dart:math';
 
 import './../git_stamp_logger.dart';
 
+String fileSize(String path, {int decimals = 1}) {
+  final size = File(path).lengthSync();
+
+  return formatSize(size, decimals: decimals);
+}
+
+String directorySize(String path, {int decimals = 1}) {
+  int size = 0;
+
+  Directory dir = Directory(path);
+
+  for (var e in dir.listSync(recursive: true, followLinks: false)) {
+    if (e is File) {
+      size += e.lengthSync();
+    }
+  }
+
+  return formatSize(size, decimals: decimals);
+}
+
+String formatSize(int size, {int decimals = 1}) {
+  const suffixes = ["B ", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+
+  if (size <= 0) {
+    return "0 B";
+  }
+
+  final i = (log(size) / log(1024)).floor();
+
+  return '${(size / pow(1024, i)).toStringAsFixed(decimals)} ${suffixes[i]}';
+}
+
 abstract class _GitStampFile {
   String get directory;
   String get filename => '';
@@ -11,16 +43,7 @@ abstract class _GitStampFile {
   String get path => '$directory/$filename';
 
   String getFileSize({int decimals = 1}) {
-    const suffixes = ["B ", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
-    final fileSize = File(path).lengthSync();
-
-    if (fileSize <= 0) {
-      return "0 B";
-    }
-
-    final i = (log(fileSize) / log(1024)).floor();
-
-    return '${(fileSize / pow(1024, i)).toStringAsFixed(decimals)} ${suffixes[i]}';
+    return fileSize(path, decimals: decimals);
   }
 
   void generate() {
