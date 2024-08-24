@@ -166,9 +166,9 @@ class _GitStampPageState extends State<GitStampPage> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Repository files', style: _textTitle),
+                Text('Repository files (\${GitStamp.observedFilesCount})', style: _textTitle),
                 SizedBox(height: 16.0),
-                Text(GitStamp.observedFilesList, style: _text),
+                Text(GitStamp.observedFiles, style: _text),
               ],
             ),
           ),

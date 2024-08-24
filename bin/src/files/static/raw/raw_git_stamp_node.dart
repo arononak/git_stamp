@@ -39,7 +39,10 @@ class GitStamp {
   ${files.buildSystemInfo.enabled}static const String buildSystemInfo = gitStampBuildSystemInfo;
   ${files.repoCreationDate.enabled}static const String repoCreationDate = gitStampRepoCreationDate;
   ${files.repoPath.enabled}static const String repoPath = gitStampRepoPath;
-  ${files.observedFilesList.enabled}static const String observedFilesList = gitStampObservedFilesList;
+  
+  ${files.observedFilesList.enabled}static String observedFiles = gitStampObservedFilesList;
+  ${files.observedFilesList.enabled}static List<String> observedFilesList = observedFiles.split(RegExp(r'\\r?\\n'));
+  ${files.observedFilesList.enabled}static int observedFilesCount = observedFilesList.length;
   
   ${files.appVersion.enabled}static const String appVersion = gitStampAppVersion;
   ${files.appBuild.enabled}static const String appBuild = gitStampAppBuild;
