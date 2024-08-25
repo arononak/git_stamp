@@ -5,6 +5,9 @@ sync:
 run:
 	flutter run -d linux
 
+build: sync
+	flutter build web --release --web-renderer canvaskit
+
 tests: tests_unit tests_integration
 
 tests_unit:

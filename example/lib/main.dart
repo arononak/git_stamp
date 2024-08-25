@@ -16,7 +16,7 @@ class ExampleApp extends StatelessWidget {
       home: MainPage(),
       theme: ThemeData(useMaterial3: true),
       darkTheme: ThemeData.dark(useMaterial3: true),
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.dark,
     );
   }
 }
@@ -75,14 +75,12 @@ class SettingsPage extends StatelessWidget {
             leading: const Icon(Icons.numbers),
             onTap: () {},
           ),
-          if (kDebugMode) ...[
-            ListTile(
-              title: const Text('Git Stamp Page'),
-              subtitle: Text(GitStamp.sha),
-              leading: const Icon(Icons.commit),
-              onTap: () => showGitStampPage(context: context),
-            ),
-          ],
+          ListTile(
+            title: const Text('Git Stamp Page'),
+            subtitle: Text(GitStamp.sha),
+            leading: const Icon(Icons.commit),
+            onTap: () => showGitStampPage(context: context),
+          ),
         ],
       ),
     );
