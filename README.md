@@ -261,6 +261,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.22.2'
@@ -295,9 +297,6 @@ jobs:
 ```
 
 </details>
-
-> [!IMPORTANT]
-> If you use Github Action, you only get a single commit. This is normal behavior to optimize the build process and improve performance, especially for large repositories. Try configuring github actions or generating Git Stamp files before `git push`.
 
 ## 📝 License
 
