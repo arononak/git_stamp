@@ -10,27 +10,34 @@ class GitStampIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Tooltip(
       decoration: BoxDecoration(
-        color: Colors.blue,
+        color: Theme.of(context).colorScheme.primary,
         borderRadius: BorderRadius.circular(8),
       ),
       richMessage: TextSpan(
         children: <TextSpan>[
           TextSpan(
             text: 'Git Stamp\\n',
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.onPrimary
+            ),
           ),
           TextSpan(
-              text: ''
-                  'Date: \${GitStamp.buildDateTime}\\n'
-                  'Branch: \${GitStamp.buildBranch}\\n'
-                  'SHA: \${GitStamp.sha}',
-              style: TextStyle(fontWeight: FontWeight.normal)),
+            text: ''
+                'Date: \${GitStamp.buildDateTime}\\n'
+                'Branch: \${GitStamp.buildBranch}\\n'
+                'SHA: \${GitStamp.sha}',
+            style: TextStyle(
+              fontWeight: FontWeight.normal,
+              color: Theme.of(context).colorScheme.onPrimary,
+            ),
+          ),
         ],
       ),
       child: IconButton(
-            icon: Icon(Icons.developer_board),
-            onPressed: () {},
-          ),
+        icon: Icon(Icons.developer_board),
+        onPressed: () {},
+      ),
     );
   }
 }
