@@ -43,21 +43,7 @@ class _GitStampPageState extends State<GitStampPage> {
           children: [
             Text('Git Stamp', style: TextStyle(fontSize: 20)),
             SizedBox(width: 8.0),
-            Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: 8.0,
-                vertical: 4.0,
-              ),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.inversePrimary,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Text(
-                GitStamp.commitCount.toString(),
-                maxLines: 1,
-                style: TextStyle(fontSize: 20),
-              ),
-            ),
+            GitStampTextLabel(text: GitStamp.commitCount.toString()),
           ],
         ),
         flexibleSpace: Center(
@@ -166,7 +152,15 @@ class _GitStampPageState extends State<GitStampPage> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Repository files (\${GitStamp.observedFilesCount})', style: _textTitle),
+                Row(
+                  children: [
+                    Text('Repository files', style: _textTitle),
+                    SizedBox(width: 8.0),
+                    GitStampTextLabel(
+                      text: GitStamp.observedFilesCount.toString(),
+                    ),
+                  ],
+                ),
                 SizedBox(height: 16.0),
                 Text(GitStamp.observedFiles, style: _text),
               ],
@@ -217,6 +211,31 @@ class _GitStampPageState extends State<GitStampPage> {
           ),
         );
       },
+    );
+  }
+}
+
+class GitStampTextLabel extends StatelessWidget {
+  final String text;
+
+  const GitStampTextLabel({super.key, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: 8.0,
+        vertical: 4.0,
+      ),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.inversePrimary,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Text(
+        text,
+        maxLines: 1,
+        style: TextStyle(fontSize: 20),
+      ),
     );
   }
 }
@@ -488,11 +507,17 @@ class GitStampRepoDetailsModalContent extends StatelessWidget {
             const SizedBox(height: 4),
             GitStampDoubleText(
               'Global: ',
-              GitStamp.gitConfigGlobalUserName + ' (' + GitStamp.gitConfigGlobalUserEmail + ')',
+              GitStamp.gitConfigGlobalUserName +
+                  ' (' +
+                  GitStamp.gitConfigGlobalUserEmail +
+                  ')',
             ),
             GitStampDoubleText(
               'Local: ',
-              GitStamp.gitConfigUserName + ' (' + GitStamp.gitConfigUserEmail + ')',
+              GitStamp.gitConfigUserName +
+                  ' (' +
+                  GitStamp.gitConfigUserEmail +
+                  ')',
             ),
             const SizedBox(height: 12),
             Row(
@@ -545,5 +570,4 @@ class GitStampRepoDetailsModalContent extends StatelessWidget {
     );
   }
 }
-
 ''';
