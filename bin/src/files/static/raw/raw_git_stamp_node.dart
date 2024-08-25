@@ -31,6 +31,7 @@ class GitStamp {
   ${files.commitList.enabled}static List<GitStampCommit> get commitList => json.decode(gitStampCommitList).map<GitStampCommit>((json) => GitStampCommit.fromJson(json)).toList();
   ${files.commitList.enabled}static GitStampCommit? get latestCommit => commitList.firstOrNull;
   ${files.commitList.enabled}static String get sha => latestCommit?.hash ?? 'REPO WITHOUT COMMITS';
+  ${files.commitList.enabled}static int get commitCount => commitList.length;
 
   ${files.diffList.enabled}static Map<String, dynamic> diffList = json.decode(gitStampDiffList.replaceAll(r"\\'", "'"));
 

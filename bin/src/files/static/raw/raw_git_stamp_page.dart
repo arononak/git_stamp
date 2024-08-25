@@ -53,7 +53,7 @@ class _GitStampPageState extends State<GitStampPage> {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
-                GitStamp.commitList.length.toString(),
+                GitStamp.commitCount.toString(),
                 maxLines: 1,
                 style: TextStyle(fontSize: 20),
               ),
