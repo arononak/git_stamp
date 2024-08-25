@@ -482,6 +482,19 @@ class GitStampRepoDetailsModalContent extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text('GitStamp', style: _textTitle),
+            const SizedBox(height: 4),
+            GitStampDoubleText('Version: ', gitStampVersion),
+            Row(
+              children: [
+                Text('Build type: [', style: _text),
+                Text('LITE', style: isLiteVersion ? _textBold : _text),
+                Text(', ', style: _text),
+                Text('FULL', style: isLiteVersion ? _text : _textBold),
+                Text(']', style: _text),
+              ],
+            ),
+            const SizedBox(height: 32),
             Text('Build', style: _textTitle),
             const SizedBox(height: 4),
             GitStampDoubleText('App Name: ', GitStamp.appName),
@@ -492,16 +505,6 @@ class GitStampRepoDetailsModalContent extends StatelessWidget {
             GitStampDoubleText('Date: ', GitStamp.buildDateTime),
             GitStampDoubleText('Path: ', GitStamp.repoPath),
             GitStampDoubleText('Branch: ', GitStamp.buildBranch),
-            GitStampDoubleText('GitStamp version: ', gitStampVersion),
-            Row(
-              children: [
-                Text('GitStamp build type: [', style: _text),
-                Text('LITE', style: isLiteVersion ? _textBold : _text),
-                Text(', ', style: _text),
-                Text('FULL', style: isLiteVersion ? _text : _textBold),
-                Text(']', style: _text),
-              ],
-            ),
             const SizedBox(height: 32),
             Text('Environment', style: _textTitle),
             const SizedBox(height: 4),
@@ -519,7 +522,6 @@ class GitStampRepoDetailsModalContent extends StatelessWidget {
                   GitStamp.gitConfigUserEmail +
                   ')',
             ),
-            const SizedBox(height: 12),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
