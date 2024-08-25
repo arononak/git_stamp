@@ -13,6 +13,8 @@ Advanced await-less information provider. From simple information such as `build
 [![Likes](https://img.shields.io/pub/likes/git_stamp?style=flat&labelColor=fuchsia&color=white)](https://pub.dev/packages/git_stamp)
 [![package publisher](https://img.shields.io/pub/publisher/git_stamp?style=flat&labelColor=fuchsia&color=white)](https://pub.dev/packages/git_stamp/publisher)
 
+**Check out the [Example](https://gitstamp.web.app) of how [Git Stamp](https://pub.dev/packages/git_stamp) is connected to [Git Stamp Repo](https://github.com/arononak/git_stamp) 🌀**
+
 <details>
 <summary>Table of Contents</summary>
   
