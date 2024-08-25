@@ -54,16 +54,16 @@ class _GitStampPageState extends State<GitStampPage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   IconButton(
-                    onPressed: () => showFilterBottomSheet(),
-                    icon: const Icon(Icons.filter_list),
-                  ),
-                  IconButton(
                     onPressed: () => showDetailsBottomSheet(),
                     icon: const Icon(Icons.tag),
                   ),
                   IconButton(
                     onPressed: () => showRepoFilesBottomSheet(),
                     icon: const Icon(Icons.folder),
+                  ),
+                  IconButton(
+                    onPressed: () => showFilterBottomSheet(),
+                    icon: const Icon(Icons.filter_list),
                   ),
                   IconButton(
                     onPressed: () => showMoreBottomSheet(),
