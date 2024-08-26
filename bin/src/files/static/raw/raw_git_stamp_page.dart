@@ -21,7 +21,14 @@ void showGitStampPage({
 }
 
 class GitStampPage extends StatefulWidget {
-  const GitStampPage({super.key});
+  const GitStampPage({
+    super.key,
+    this.showDetails = false,
+    this.showFiles = false,
+  });
+
+  final bool showDetails;
+  final bool showFiles;
 
   @override
   State<GitStampPage> createState() => _GitStampPageState();
@@ -29,6 +36,19 @@ class GitStampPage extends StatefulWidget {
 
 class _GitStampPageState extends State<GitStampPage> {
   String? _filterAuthorName;
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.showDetails) {
+      Future.delayed(Duration.zero, () => showDetailsBottomSheet());
+    }
+
+    if (widget.showFiles) {
+      Future.delayed(Duration.zero, () => showRepoFilesBottomSheet());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -143,7 +163,6 @@ class _GitStampPageState extends State<GitStampPage> {
   void showRepoFilesBottomSheet() {
     showModalBottomSheet(
       context: context,
-      isScrollControlled: true,
       builder: (BuildContext context) {
         return Container(
           padding: EdgeInsets.all(16.0),
@@ -572,4 +591,5 @@ class GitStampRepoDetailsModalContent extends StatelessWidget {
     );
   }
 }
+
 ''';

@@ -51,9 +51,9 @@ Advanced await-less information provider. From simple information such as `build
 
 #### 1. LITE & FULL
 
-|                                      Light                                      |                                      Dark                                      |
-| :-----------------------------------------------------------------------------: | :----------------------------------------------------------------------------: |
-| ![](https://github.com/arononak/git_stamp/blob/main/preview_light.png?raw=true) | ![](https://github.com/arononak/git_stamp/blob/main/preview_dark.png?raw=true) |
+|                                      Light                              |                                      Dark                                 |
+| :---------------------------------------------------------------------: | :-----------------------------------------------------------------------: |
+| ![](https://github.com/arononak/git_stamp/blob/main/files.png?raw=true) | ![](https://github.com/arononak/git_stamp/blob/main/details.png?raw=true) |
 
 #### 2. ICON
 
