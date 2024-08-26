@@ -25,6 +25,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16' 
+      - run: make -C example sync
       - run: make -C example screenshots
       - run: |
           git config --global user.name 'github-actions[bot]'
