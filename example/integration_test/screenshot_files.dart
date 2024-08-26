@@ -13,7 +13,6 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         home: GitStampPage(showFiles: true),
-        darkTheme: ThemeData(useMaterial3: true),
         themeMode: ThemeMode.light,
         debugShowCheckedModeBanner: false,
       ),
