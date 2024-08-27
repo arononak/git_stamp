@@ -293,6 +293,7 @@ class GitStampCommitList extends StatelessWidget {
 
     return ListView.builder(
       itemCount: groupedCommit.length,
+      padding: EdgeInsets.symmetric(horizontal: 4.0),
       itemBuilder: (context, index) {
         final header = groupedCommit.keys.elementAt(index);
         final commits = groupedCommit[header]!;
@@ -346,50 +347,55 @@ class GitStampCommitListElement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: isLiteVersion
-          ? null
-          : () {
-              showModalBottomSheet(
-                context: context,
-                builder: (BuildContext context) {
-                  return Container(
-                    padding: EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: GitStampCommitListHeader(commit: commit),
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: InkWell(
+        onTap: isLiteVersion
+            ? null
+            : () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Container(
+                      padding: EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child:
+                                      GitStampCommitListHeader(commit: commit),
+                                ),
                               ),
-                            ),
-                            IconButton(
-                              onPressed: () {
-                                showGitStampDetailsPage(
-                                  context: context,
-                                  commitHash: commit.hash,
-                                );
-                              },
-                              icon: Icon(Icons.arrow_forward),
-                            ),
-                          ],
-                        ),
-                        Expanded(
-                          child: SingleChildScrollView(
-                            child: Text(GitStamp.diffList[commit.hash] ?? ''),
+                              IconButton(
+                                onPressed: () {
+                                  showGitStampDetailsPage(
+                                    context: context,
+                                    commitHash: commit.hash,
+                                  );
+                                },
+                                icon: Icon(Icons.arrow_forward),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              );
-            },
-      child: Card(
+                          Expanded(
+                            child: SingleChildScrollView(
+                              child: Text(GitStamp.diffList[commit.hash] ?? ''),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                );
+              },
+        borderRadius: BorderRadius.circular(12),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: ListTile(
