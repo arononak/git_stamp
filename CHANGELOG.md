@@ -1,3 +1,17 @@
+## 4.5.0
+
+* Generator OOP refactor
+* GitStampPage refactor
+* Changed diff_list.dart type Map -> String
+* Changed GitStamp.observedFilesList into 3 fields
+* Gernerator - Added Size of generated files
+* Added GitStamp.commitCount field
+* New GitStampIcon style
+* Added observed files count label
+* RepoDetails - Added GitStamp section
+* GitStampPage - Changed AppBar icons positions
+* GitStampPage - Commit list fixes
+
 ## 4.4.0
 
 * Added interpolate function `GitStamp.showLicensePage`
