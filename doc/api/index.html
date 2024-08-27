@@ -61,6 +61,7 @@
 <p><a href="https://pub.dev/packages/git_stamp"><img src="https://img.shields.io/pub/v/git_stamp.svg?style=flat&amp;logo=dart&amp;labelColor=fuchsia&amp;color=white" alt="Pub Package"></a>
 <a href="https://pub.dev/packages/git_stamp"><img src="https://img.shields.io/pub/likes/git_stamp?style=flat&amp;labelColor=fuchsia&amp;color=white" alt="Likes"></a>
 <a href="https://pub.dev/packages/git_stamp/publisher"><img src="https://img.shields.io/pub/publisher/git_stamp?style=flat&amp;labelColor=fuchsia&amp;color=white" alt="package publisher"></a></p>
+<p><strong>Check out the <a href="https://gitstamp.web.app">Example</a> of how <a href="https://pub.dev/packages/git_stamp">Git Stamp</a> is connected to <a href="https://github.com/arononak/git_stamp">Git Stamp Repo</a> 🌀</strong></p>
 <details>
 <summary>Table of Contents</summary>
 <ul>
@@ -127,8 +128,8 @@
 </thead>
 <tbody>
 <tr>
-<td align="center"><img src="https://github.com/arononak/git_stamp/blob/main/preview_light.png?raw=true" alt=""></td>
-<td align="center"><img src="https://github.com/arononak/git_stamp/blob/main/preview_dark.png?raw=true" alt=""></td>
+<td align="center"><img src="https://github.com/arononak/git_stamp/blob/main/files.png?raw=true" alt=""></td>
+<td align="center"><img src="https://github.com/arononak/git_stamp/blob/main/details.png?raw=true" alt=""></td>
 </tr>
 </tbody>
 </table>
@@ -307,6 +308,11 @@ Text('SHA: ${GitStamp.sha}'),
   static const String appBuild
   static const String appName
 
+  static const String gitConfigGlobalUserName
+  static const String gitConfigGlobalUserEmail
+  static const String gitConfigUserName
+  static const String gitConfigUserEmail
+
   static showLicensePage({
     required BuildContext context,
     Widget? applicationIcon,
@@ -332,6 +338,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.22.2'
@@ -365,10 +373,6 @@ jobs:
           channelId: live
 </code></pre>
 </details>
-<div class="markdown-alert markdown-alert-important">
-<p class="markdown-alert-title">Important</p>
-<p>If you use Github Action, you only get a single commit. This is normal behavior to optimize the build process and improve performance, especially for large repositories. Try configuring github actions or generating Git Stamp files before <code>git push</code>.</p>
-</div>
 <h2 id="-license">📝 License</h2>
 <div class="markdown-alert markdown-alert-note">
 <p class="markdown-alert-title">Note</p>
@@ -415,7 +419,7 @@ If you have any feedback, please contact me at <a href="mailto:arononak@gmail.co
 <footer>
   <span class="no-break">
     git_stamp
-      4.4.0
+      4.5.0
   </span>
 
   
