@@ -34,12 +34,20 @@ screenshots:
 	npx @puppeteer/browsers install chromedriver@stable
 	npx chromedriver --port=4444 & echo $$! > chromedriver.pid
 	sleep 2
+	flutter drive --driver=test_driver/integration_test.dart --target=integration_test/screenshot_list.dart -d web-server
+	flutter drive --driver=test_driver/integration_test.dart --target=integration_test/screenshot_icon.dart -d web-server
 	flutter drive --driver=test_driver/integration_test.dart --target=integration_test/screenshot_files.dart -d web-server
 	flutter drive --driver=test_driver/integration_test.dart --target=integration_test/screenshot_details.dart -d web-server
+	convert screenshot_list.png -crop 500x800+0+0 list.png
+	convert screenshot_icon.png -crop 500x800+0+0 icon.png
 	convert screenshot_files.png -crop 500x800+0+0 files.png
 	convert screenshot_details.png -crop 500x800+0+0 details.png
+	rm -f screenshot_icon.png
+	rm -f screenshot_list.png
 	rm -f screenshot_files.png
 	rm -f screenshot_details.png
+	mv icon.png ../
+	mv list.png ../
 	mv files.png ../
 	mv details.png ../
 	kill $$(cat chromedriver.pid)

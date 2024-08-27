@@ -20,9 +20,6 @@ Advanced await-less information provider. From simple information such as `build
   
 - [Git Stamp 🏷](#git-stamp-)
   - [🏞️ Preview](#️-preview)
-      - [1. LITE \& FULL](#1-lite--full)
-      - [2. ICON](#2-icon)
-      - [3. Generator](#3-generator)
   - [📑️ About](#️-about)
       - [Goal](#goal)
       - [Motivation](#motivation)
@@ -49,19 +46,13 @@ Advanced await-less information provider. From simple information such as `build
 
 ## 🏞️ Preview
 
-#### 1. LITE & FULL
+|                                      List                              |                                   Icon                                 |
+| :--------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| ![](https://github.com/arononak/git_stamp/blob/main/list.png?raw=true) | ![](https://github.com/arononak/git_stamp/blob/main/icon.png?raw=true) |
 
-|                                      Light                              |                                      Dark                                 |
+|                                      Files                              |                                   Details                                 |
 | :---------------------------------------------------------------------: | :-----------------------------------------------------------------------: |
 | ![](https://github.com/arononak/git_stamp/blob/main/files.png?raw=true) | ![](https://github.com/arononak/git_stamp/blob/main/details.png?raw=true) |
-
-#### 2. ICON
-
-![](https://github.com/arononak/git_stamp/blob/main/changelog/4.3.0.png?raw=true)
-
-#### 3. Generator
-
-![](https://github.com/arononak/git_stamp/blob/main/changelog/4.2.0.png?raw=true)
 
 ## 📑️ About
 
@@ -220,7 +211,10 @@ class GitStamp {
   static const String buildSystemInfo
   static const String repoCreationDate
   static const String repoPath
-  static const String observedFilesList
+
+  static String observedFiles
+  static List<String> observedFilesList
+  static int observedFilesCount
 
   static const String appVersion
   static const String appBuild
