@@ -46,13 +46,13 @@ Advanced await-less information provider. From simple information such as `build
 
 ## 🏞️ Preview
 
-|                                      List                              |                                   Icon                                 |
-| :--------------------------------------------------------------------: | :--------------------------------------------------------------------: |
-| ![](https://github.com/arononak/git_stamp/blob/main/list.png?raw=true) | ![](https://github.com/arononak/git_stamp/blob/main/icon.png?raw=true) |
+| List          | Icon          |
+| :-----------: | :-----------: |
+| ![](list.png) | ![](icon.png) |
 
-|                                      Files                              |                                   Details                                 |
-| :---------------------------------------------------------------------: | :-----------------------------------------------------------------------: |
-| ![](https://github.com/arononak/git_stamp/blob/main/files.png?raw=true) | ![](https://github.com/arononak/git_stamp/blob/main/details.png?raw=true) |
+| Files          | Details          |
+| :------------: | :--------------: |
+| ![](files.png) | ![](details.png) |
 
 ## 📑️ About
 
