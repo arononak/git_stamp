@@ -7,7 +7,8 @@ extension BoolExtension on bool {
 String rawGitStampNode(GitStampBuild files) => '''
 library git_stamp;
 
-${files.commitList.enabled}import 'dart:convert';
+${(files.commitList || files.buildMachine).enabled}import 'dart:convert';
+
 ${files.commitList.enabled}import 'src/data/commit_list.dart';
 ${files.commitList.enabled}import 'src/data/git_stamp_commit.dart';
 
