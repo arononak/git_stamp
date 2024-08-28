@@ -16,6 +16,8 @@ ${files.diffList.enabled}import 'src/data/diff_list.dart';
 ${files.buildBranch.enabled}import 'src/data/build_branch.dart';
 ${files.buildDateTime.enabled}import 'src/data/build_date_time.dart';
 ${files.buildSystemInfo.enabled}import 'src/data/build_system_info.dart';
+${files.buildMachine.enabled}import 'src/data/git_stamp_build_machine.dart';
+${files.buildMachine.enabled}import 'src/data/build_machine.dart';
 ${files.repoCreationDate.enabled}import 'src/data/repo_creation_date.dart';
 ${files.repoPath.enabled}import 'src/data/repo_path.dart';
 ${files.observedFilesList.enabled}import 'src/data/observed_files_list.dart';
@@ -38,6 +40,7 @@ class GitStamp {
   ${files.buildBranch.enabled}static const String buildBranch = gitStampBuildBranch;
   ${files.buildDateTime.enabled}static const String buildDateTime = gitStampBuildDateTime;
   ${files.buildSystemInfo.enabled}static const String buildSystemInfo = gitStampBuildSystemInfo;
+  ${files.buildMachine.enabled}static GitStampBuildMachine get buildMachine => GitStampBuildMachine.fromJson(json.decode(gitStampBuildMachine));
   ${files.repoCreationDate.enabled}static const String repoCreationDate = gitStampRepoCreationDate;
   ${files.repoPath.enabled}static const String repoPath = gitStampRepoPath;
   

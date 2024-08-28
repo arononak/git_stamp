@@ -43,6 +43,7 @@ Future<void> main(List<String> arguments) async {
         'build-branch',
         'build-date-time',
         'build-system-info',
+        'build-machine',
         'repo-path',
         'observed-files-list',
         'app-version',
@@ -158,6 +159,11 @@ void _generateDataFiles(
 
   if (files.buildSystemInfo) {
     BuildSystemInfo().generate();
+  }
+
+  if (files.buildMachine) {
+    BuildMachine().generate();
+    GitStampBuildMachine().generate();
   }
 
   if (files.repoPath) {

@@ -38,10 +38,4 @@ List<String> commitAuthors() {
 
   return authors.toList();
 }
-
-List<String> parseBuildSystemInfo(text) {
-  List<String> elements = RegExp(r'\\((.*?)\\)').firstMatch(text)?.group(1)?.split(', ') ?? [];
-
-  return elements.isEmpty ? ["No data :/"] : elements;
-}
 ''';

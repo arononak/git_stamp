@@ -112,6 +112,57 @@ void singleValueTests() {
       'field': GitStamp.gitConfigUserEmail,
       'matcher': isNotEmpty,
     },
+    /* Build Machine */
+    {
+      'param': 'build-machine-channel',
+      'field': GitStamp.buildMachine.channel,
+      'matcher': isNotEmpty,
+    },
+        {
+      'param': 'build-machine-dartSdkVersion',
+      'field': GitStamp.buildMachine.dartSdkVersion,
+      'matcher': isNotEmpty,
+    },
+        {
+      'param': 'build-machine-devToolsVersion',
+      'field': GitStamp.buildMachine.devToolsVersion,
+      'matcher': isNotEmpty,
+    },
+        {
+      'param': 'build-machine-engineRevision',
+      'field': GitStamp.buildMachine.engineRevision,
+      'matcher': isNotEmpty,
+    },
+        {
+      'param': 'build-machine-flutterRoot',
+      'field': GitStamp.buildMachine.flutterRoot,
+      'matcher': isNotEmpty,
+    },
+        {
+      'param': 'build-machine-flutterVersion',
+      'field': GitStamp.buildMachine.flutterVersion,
+      'matcher': isNotEmpty,
+    },
+        {
+      'param': 'build-machine-frameworkCommitDate',
+      'field': GitStamp.buildMachine.frameworkCommitDate,
+      'matcher': isNotEmpty,
+    },
+        {
+      'param': 'build-machine-frameworkRevision',
+      'field': GitStamp.buildMachine.frameworkRevision,
+      'matcher': isNotEmpty,
+    },
+        {
+      'param': 'build-machine-frameworkVersion',
+      'field': GitStamp.buildMachine.frameworkVersion,
+      'matcher': isNotEmpty,
+    },
+        {
+      'param': 'build-machine-repositoryUrl',
+      'field': GitStamp.buildMachine.repositoryUrl,
+      'matcher': isNotEmpty,
+    },
   ].forEach(
     (json) {
       test('GitStamp ${json['param']} should be not empty', () {

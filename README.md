@@ -154,6 +154,8 @@ dart pub add git_stamp
 
 `build-system-info`
 
+`build-machine`
+
 `repo-path`
 
 `observed-files-list`

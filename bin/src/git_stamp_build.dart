@@ -4,6 +4,7 @@ class GitStampBuild {
   bool buildBranch = false;
   bool buildDateTime = false;
   bool buildSystemInfo = false;
+  bool buildMachine = false;
   bool repoCreationDate = false;
   bool repoPath = false;
   bool observedFilesList = false;
@@ -20,6 +21,7 @@ class GitStampBuild {
     this.buildBranch = true,
     this.buildDateTime = true,
     this.buildSystemInfo = true,
+    this.buildMachine = true,
     this.repoCreationDate = true,
     this.repoPath = true,
     this.observedFilesList = true,
@@ -44,6 +46,7 @@ class GitStampBuild {
         buildBranch = args.contains('build-branch'),
         buildDateTime = args.contains('build-date-time'),
         buildSystemInfo = args.contains('build-system-info'),
+        buildMachine = args.contains('build-machine'),
         repoCreationDate = args.contains('repo-creation-date'),
         repoPath = args.contains('repo-path'),
         observedFilesList = args.contains('observed-files-list'),

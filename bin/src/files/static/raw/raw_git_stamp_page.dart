@@ -522,17 +522,6 @@ class GitStampRepoDetailsModalContent extends StatelessWidget {
             const SizedBox(height: 32),
             Text('Build', style: _textTitle),
             const SizedBox(height: 4),
-            GitStampDoubleText('App Name: ', GitStamp.appName),
-            GitStampDoubleText(
-              'App Version: ',
-              GitStamp.appVersion + ' (' + GitStamp.appBuild + ')',
-            ),
-            GitStampDoubleText('Date: ', GitStamp.buildDateTime),
-            GitStampDoubleText('Path: ', GitStamp.repoPath),
-            GitStampDoubleText('Branch: ', GitStamp.buildBranch),
-            const SizedBox(height: 32),
-            Text('Environment', style: _textTitle),
-            const SizedBox(height: 4),
             GitStampDoubleText(
               'Global: ',
               GitStamp.gitConfigGlobalUserName +
@@ -547,18 +536,31 @@ class GitStampRepoDetailsModalContent extends StatelessWidget {
                   GitStamp.gitConfigUserEmail +
                   ')',
             ),
+            GitStampDoubleText('Date: ', GitStamp.buildDateTime),
+            GitStampDoubleText('Path: ', GitStamp.repoPath),
+            GitStampDoubleText('Branch: ', GitStamp.buildBranch),
+            GitStampDoubleText('SHA: ', GitStamp.sha),
+            const SizedBox(height: 32),
+            Text('Environment', style: _textTitle),
+            const SizedBox(height: 4),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
-                  child: Text(
-                    parseBuildSystemInfo(GitStamp.buildSystemInfo).join(
-                      String.fromCharCode(10),
-                    ),
-                    softWrap: true,
-                    maxLines: 5,
-                    overflow: TextOverflow.ellipsis,
-                    style: _text,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      GitStampDoubleText('Framework Version: ', GitStamp.buildMachine.frameworkVersion),
+                      GitStampDoubleText('Channel: ', GitStamp.buildMachine.channel),
+                      GitStampDoubleText('Repository Url: ', GitStamp.buildMachine.repositoryUrl),
+                      GitStampDoubleText('Framework Revision: ', GitStamp.buildMachine.frameworkRevision),
+                      GitStampDoubleText('Framework Commit Date: ', GitStamp.buildMachine.frameworkCommitDate),
+                      GitStampDoubleText('Engine Revision: ', GitStamp.buildMachine.engineRevision),
+                      GitStampDoubleText('Dart Sdk Version: ', GitStamp.buildMachine.dartSdkVersion),
+                      GitStampDoubleText('DevTools Version: ', GitStamp.buildMachine.devToolsVersion),
+                      GitStampDoubleText('Flutter Version: ', GitStamp.buildMachine.flutterVersion),
+                      GitStampDoubleText('Flutter Root: ', GitStamp.buildMachine.flutterRoot),
+                    ],
                   ),
                 ),
                 IconButton(
@@ -573,6 +575,8 @@ class GitStampRepoDetailsModalContent extends StatelessWidget {
             const SizedBox(height: 32),
             Text('Repository', style: _textTitle),
             const SizedBox(height: 4),
+            GitStampDoubleText('App Name: ', GitStamp.appName),
+            GitStampDoubleText('App Version: ', GitStamp.appVersion + ' (' + GitStamp.appBuild + ')'),
             GitStampDoubleText('Created: ', GitStamp.repoCreationDate),
             GitStampDoubleText(
               'Commit count: ',
@@ -597,5 +601,4 @@ class GitStampRepoDetailsModalContent extends StatelessWidget {
     );
   }
 }
-
 ''';
