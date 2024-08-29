@@ -568,7 +568,7 @@ class GitStampRepoDetailsModalContent extends StatelessWidget {
                     Navigator.pop(context);
                     showSnackbar(context, GitStamp.buildSystemInfo);
                   },
-                  icon: Icon(Icons.info_outline),
+                  icon: Icon(Icons.medical_information),
                 ),
               ],
             ),

@@ -122,14 +122,7 @@ class BuildSystemInfo extends GitStampDataFile {
   String get content {
     final systemInfo = exec(['flutter', 'doctor']);
 
-    String? systemInfoParsed = systemInfo
-        .toString()
-        .split('\n')
-        .where((line) => line.contains('] Flutter'))
-        .toList()
-        .firstOrNull;
-
-    return 'const gitStampBuildSystemInfo = "${systemInfoParsed?.toString().trim()}";';
+    return 'const gitStampBuildSystemInfo = \'\'\'${systemInfo.toString().trim()}\'\'\';';
   }
 }
 
