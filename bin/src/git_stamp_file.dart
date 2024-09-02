@@ -12,9 +12,7 @@ String fileSize(String path, {int decimals = 1}) {
 String directorySize(String path, {int decimals = 1}) {
   int size = 0;
 
-  Directory dir = Directory(path);
-
-  for (var e in dir.listSync(recursive: true, followLinks: false)) {
+  for (var e in Directory(path).listSync(recursive: true, followLinks: false)) {
     if (e is File) {
       size += e.lengthSync();
     }
