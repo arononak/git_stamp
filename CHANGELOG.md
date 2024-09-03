@@ -1,3 +1,8 @@
+## 4.6.0
+
+* Added GitStamp.buildMachine object
+* Added full flutter-doctor SnackBar
+
 ## 4.5.0
 
 * Generator OOP refactor
