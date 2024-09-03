@@ -211,6 +211,7 @@ class GitStamp {
   static const String buildBranch
   static const String buildDateTime
   static const String buildSystemInfo
+  static GitStampBuildMachine buildMachine
   static const String repoCreationDate
   static const String repoPath
 
