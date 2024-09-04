@@ -151,33 +151,22 @@ analyzer:
 
 #### 3. Custom `gen-only` parameters 
 
-`commit-list`
-
-`diff-list`
-
-`repo-creation-date`
-
-`build-branch`
-
-`build-date-time`
-
-`build-system-info`
-
-`build-machine`
-
-`repo-path`
-
-`observed-files-list`
-
-`app-version`
-
-`app-build`
-
-`app-name`
-
-`git-config`
-
-`git-remote`
+| #  | Parameter          |
+|----|--------------------|
+| 1  | commit-list        |
+| 2  | diff-list          |
+| 3  | repo-creation-date |
+| 4  | build-branch       |
+| 5  | build-date-time    |
+| 6  | build-system-info  |
+| 7  | build-machine      |
+| 8  | repo-path          |
+| 9  | observed-files-list|
+| 10 | app-version        |
+| 11 | app-build          |
+| 12 | app-name           |
+| 13 | git-config         |
+| 14 | git-remote         |
 
 ## 💻 Usage
 
