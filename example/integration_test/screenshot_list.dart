@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
+import 'physical_size.dart';
+
 void main() {
   final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   testWidgets('screenshot-list', (WidgetTester tester) async {
-    tester.view.physicalSize = const Size(500, 800);
+    tester.view.physicalSize = physicalSize;
     tester.view.devicePixelRatio = 1.0;
 
     await tester.pumpWidget(
