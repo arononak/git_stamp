@@ -408,97 +408,46 @@ class GitStampRepoDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(16.0),
+    return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
       child: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        scrollDirection: Axis.horizontal,
+        child: Container(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildGitStampSection(context),
+              const SizedBox(height: 32),
+              _buildBuildSection(context),
+              const SizedBox(height: 32),
+              _buildEnvironmentSection(context),
+              const SizedBox(height: 32),
+              _buildRepositorySection(context),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildGitStampSection(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
           children: [
             Text('GitStamp', style: _textTitle),
-            const SizedBox(height: 4),
-            GitStampDoubleText('Version: ', gitStampVersion),
+            SizedBox(width: 8),
             Row(
               children: [
-                Text('Build type: [', style: _text),
-                Text('LITE', style: isLiteVersion ? _textBold : _text),
-                Text(', ', style: _text),
-                Text('FULL', style: isLiteVersion ? _text : _textBold),
-                Text(']', style: _text),
-              ],
-            ),
-            const SizedBox(height: 32),
-            Text('Build', style: _textTitle),
-            const SizedBox(height: 4),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      GitStampDoubleText(
-                        'Global: ',
-                        GitStamp.gitConfigGlobalUserName +
-                            ' (' +
-                            GitStamp.gitConfigGlobalUserEmail +
-                            ')',
-                      ),
-                      GitStampDoubleText(
-                        'Local: ',
-                        GitStamp.gitConfigUserName +
-                            ' (' +
-                            GitStamp.gitConfigUserEmail +
-                            ')',
-                      ),
-                      GitStampDoubleText('Date: ', GitStamp.buildDateTime),
-                      GitStampDoubleText('Path: ', GitStamp.repoPath),
-                      GitStampDoubleText('Branch: ', GitStamp.buildBranch),
-                      GitStampDoubleText('SHA: ', GitStamp.sha),
-                    ],
-                  ),
-                ),
                 IconButton(
                   onPressed: () {
                     Navigator.pop(context);
                     showSnackbar(context, GitStamp.gitRemote);
                   },
                   icon: Icon(Icons.cloud),
-                ),
-              ],
-            ),
-            const SizedBox(height: 32),
-            Text('Environment', style: _textTitle),
-            const SizedBox(height: 4),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      GitStampDoubleText('Framework Version: ',
-                          GitStamp.buildMachine.frameworkVersion),
-                      GitStampDoubleText(
-                          'Channel: ', GitStamp.buildMachine.channel),
-                      GitStampDoubleText('Repository Url: ',
-                          GitStamp.buildMachine.repositoryUrl),
-                      GitStampDoubleText('Framework Revision: ',
-                          GitStamp.buildMachine.frameworkRevision),
-                      GitStampDoubleText('Framework Commit Date: ',
-                          GitStamp.buildMachine.frameworkCommitDate),
-                      GitStampDoubleText('Engine Revision: ',
-                          GitStamp.buildMachine.engineRevision),
-                      GitStampDoubleText('Dart Sdk Version: ',
-                          GitStamp.buildMachine.dartSdkVersion),
-                      GitStampDoubleText('DevTools Version: ',
-                          GitStamp.buildMachine.devToolsVersion),
-                      GitStampDoubleText('Flutter Version: ',
-                          GitStamp.buildMachine.flutterVersion),
-                      GitStampDoubleText(
-                          'Flutter Root: ', GitStamp.buildMachine.flutterRoot),
-                    ],
-                  ),
                 ),
                 IconButton(
                   onPressed: () {
@@ -509,33 +458,110 @@ class GitStampRepoDetails extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 32),
-            Text('Repository', style: _textTitle),
-            const SizedBox(height: 4),
-            GitStampDoubleText('App Name: ', GitStamp.appName),
-            GitStampDoubleText('App Version: ',
-                GitStamp.appVersion + ' (' + GitStamp.appBuild + ')'),
-            GitStampDoubleText('Created: ', GitStamp.repoCreationDate),
-            GitStampDoubleText(
-              'Commit count: ',
-              GitStamp.commitList.length.toString(),
-            ),
-            Text('Commit stats:', style: _text),
-            ...commitCountByAuthor()
-                .entries
-                .map(
-                  (entry) => Row(
-                    children: [
-                      SizedBox(width: 16),
-                      Text(entry.key + ': ', style: _text),
-                      Text(entry.value.toString(), style: _textBold),
-                    ],
-                  ),
-                )
-                .toList(),
           ],
         ),
-      ),
+        const SizedBox(height: 4),
+        GitStampDoubleText('Version: ', gitStampVersion),
+        Row(
+          children: [
+            Text('Build type: [', style: _text),
+            Text('LITE', style: isLiteVersion ? _textBold : _text),
+            Text(', ', style: _text),
+            Text('FULL', style: isLiteVersion ? _text : _textBold),
+            Text(']', style: _text),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildBuildSection(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('Build', style: _textTitle),
+        const SizedBox(height: 4),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            GitStampDoubleText(
+              'Global: ',
+              GitStamp.gitConfigGlobalUserName +
+                  ' (' +
+                  GitStamp.gitConfigGlobalUserEmail +
+                  ')',
+            ),
+            GitStampDoubleText(
+              'Local: ',
+              GitStamp.gitConfigUserName +
+                  ' (' +
+                  GitStamp.gitConfigUserEmail +
+                  ')',
+            ),
+            GitStampDoubleText('Date: ', GitStamp.buildDateTime),
+            GitStampDoubleText('Path: ', GitStamp.repoPath),
+            GitStampDoubleText('Branch: ', GitStamp.buildBranch),
+            GitStampDoubleText('SHA: ', GitStamp.sha),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildEnvironmentSection(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('Environment', style: _textTitle),
+        const SizedBox(height: 4),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: {
+            'Framework Version: ': GitStamp.buildMachine.frameworkVersion,
+            'Channel: ': GitStamp.buildMachine.channel,
+            'Repository Url: ': GitStamp.buildMachine.repositoryUrl,
+            'Framework Revision: ': GitStamp.buildMachine.frameworkRevision,
+            'Framework Commit Date: ':
+                GitStamp.buildMachine.frameworkCommitDate,
+            'Engine Revision: ': GitStamp.buildMachine.engineRevision,
+            'Dart Sdk Version: ': GitStamp.buildMachine.dartSdkVersion,
+            'DevTools Version: ': GitStamp.buildMachine.devToolsVersion,
+            'Flutter Version: ': GitStamp.buildMachine.flutterVersion,
+            'Flutter Root: ': GitStamp.buildMachine.flutterRoot,
+          }.entries.map((e) => GitStampDoubleText(e.key, e.value)).toList(),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildRepositorySection(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('Repository', style: _textTitle),
+        const SizedBox(height: 4),
+        GitStampDoubleText('App Name: ', GitStamp.appName),
+        GitStampDoubleText('App Version: ',
+            GitStamp.appVersion + ' (' + GitStamp.appBuild + ')'),
+        GitStampDoubleText('Created: ', GitStamp.repoCreationDate),
+        GitStampDoubleText(
+          'Commit count: ',
+          GitStamp.commitList.length.toString(),
+        ),
+        Text('Commit stats:', style: _text),
+        ...commitCountByAuthor()
+            .entries
+            .map(
+              (entry) => Row(
+                children: [
+                  SizedBox(width: 16),
+                  Text(entry.key + ': ', style: _text),
+                  Text(entry.value.toString(), style: _textBold),
+                ],
+              ),
+            )
+            .toList(),
+      ],
     );
   }
 }

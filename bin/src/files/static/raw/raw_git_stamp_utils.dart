@@ -7,9 +7,18 @@ import '../../git_stamp.dart';
 void showSnackbar(BuildContext context, String message) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      content: Text(message),
+      content: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Text(
+            message,
+            style: TextStyle(fontSize: 12),
+          ),
+        ),
+      ),
       showCloseIcon: true,
-      duration: Duration(seconds: 5),
+      duration: Duration(seconds: 15),
       backgroundColor: Theme.of(context).colorScheme.primary,
     ),
   );
@@ -17,7 +26,7 @@ void showSnackbar(BuildContext context, String message) {
 
 void copyToClipboard(BuildContext context, String text) {
   Clipboard.setData(ClipboardData(text: text));
-  showSnackbar(context, 'Copied to clipboard !');
+  showSnackbar(context, 'Copied to clipboard!');
 }
 
 Map<String, int> commitCountByAuthor() {
@@ -39,4 +48,5 @@ List<String> commitAuthors() {
 
   return authors.toList();
 }
+
 ''';
