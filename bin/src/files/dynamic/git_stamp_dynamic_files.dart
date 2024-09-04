@@ -120,7 +120,7 @@ class BuildSystemInfo extends GitStampDataFile {
 
   @override
   String get content {
-    final systemInfo = exec(['flutter', 'doctor']);
+    final systemInfo = exec(['flutter', 'doctor', '--verbose']);
 
     return 'const gitStampBuildSystemInfo = \'\'\'${systemInfo.toString().trim()}\'\'\';';
   }
