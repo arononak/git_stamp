@@ -28,7 +28,8 @@ Advanced await-less information provider. From simple information such as `build
   - [🛠️ Installation](#️-installation)
       - [1. `pubspec.yaml`](#1-pubspecyaml)
       - [2. `.gitignore`](#2-gitignore)
-      - [3. `README.md`](#3-readmemd)
+      - [3. `analysis_options.yaml`](#3-analysis_optionsyaml)
+      - [4. `README.md`](#4-readmemd)
   - [🏗️ Generating](#️-generating)
       - [1. Examples](#1-examples)
       - [2. Tip](#2-tip)
@@ -113,7 +114,15 @@ dart pub add git_stamp
 > 
 > If you add a **/git_stamp** folder for the repository and use the `FULL` version, the size of the repository will grow EXPONENTIALLY.
 
-#### 3. `README.md`
+#### 3. `analysis_options.yaml`
+
+```yaml
+analyzer:
+  exclude:
+    - "./git_stamp/**"
+```
+
+#### 4. `README.md`
 
 > [!WARNING]
 > Add badge to your `README.md` 😄️
