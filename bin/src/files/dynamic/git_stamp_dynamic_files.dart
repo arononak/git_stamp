@@ -132,7 +132,8 @@ class BuildMachine extends GitStampDataFile {
 
   @override
   String get content {
-    final buildMachine = exec(['flutter', '--no-version-check', '--version', '--machine']);
+    final buildMachine =
+        exec(['flutter', '--no-version-check', '--version', '--machine']);
 
     return 'const gitStampBuildMachine = \'\'\'${buildMachine.toString().trim()}\'\'\';';
   }
