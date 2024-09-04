@@ -12,6 +12,7 @@ class GitStampBuild {
   bool appBuild = false;
   bool appName = false;
   bool gitConfig = false;
+  bool gitRemote = false;
   bool generateFlutterFiles = false;
   bool generateFlutterIcon = false;
 
@@ -29,6 +30,7 @@ class GitStampBuild {
     this.appBuild = true,
     this.appName = true,
     this.gitConfig = true,
+    this.gitRemote = true,
     this.generateFlutterFiles = true,
     this.generateFlutterIcon = true,
   });
@@ -54,6 +56,7 @@ class GitStampBuild {
         appBuild = args.contains('app-build'),
         appName = args.contains('app-name'),
         gitConfig = args.contains('git-config'),
+        gitRemote = args.contains('git-remote'),
         generateFlutterFiles = false,
         generateFlutterIcon = false;
 }

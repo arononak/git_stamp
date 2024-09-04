@@ -177,6 +177,8 @@ analyzer:
 
 `git-config`
 
+`git-remote`
+
 ## 💻 Usage
 
 #### 1. ListTile

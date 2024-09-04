@@ -264,3 +264,15 @@ class GitConfig extends GitStampDataFile {
     ''';
   }
 }
+
+class GitRemote extends GitStampDataFile {
+  @override
+  String get filename => 'git_remote.dart';
+
+  @override
+  String get content {
+    final gitRemote = exec(['git', 'remote', '-v']);
+
+    return 'const gitStampGitRemoteList = """$gitRemote""";';
+  }
+}

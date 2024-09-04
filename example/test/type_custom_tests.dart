@@ -112,53 +112,58 @@ void singleValueTests() {
       'field': GitStamp.gitConfigUserEmail,
       'matcher': isNotEmpty,
     },
+    {
+      'param': 'git-remote',
+      'field': GitStamp.gitRemote,
+      'matcher': isNotEmpty,
+    },
     /* Build Machine */
     {
       'param': 'build-machine',
       'field': GitStamp.buildMachine.channel,
       'matcher': isNotEmpty,
     },
-        {
+    {
       'param': 'build-machine',
       'field': GitStamp.buildMachine.dartSdkVersion,
       'matcher': isNotEmpty,
     },
-        {
+    {
       'param': 'build-machine',
       'field': GitStamp.buildMachine.devToolsVersion,
       'matcher': isNotEmpty,
     },
-        {
+    {
       'param': 'build-machine',
       'field': GitStamp.buildMachine.engineRevision,
       'matcher': isNotEmpty,
     },
-        {
+    {
       'param': 'build-machine',
       'field': GitStamp.buildMachine.flutterRoot,
       'matcher': isNotEmpty,
     },
-        {
+    {
       'param': 'build-machine',
       'field': GitStamp.buildMachine.flutterVersion,
       'matcher': isNotEmpty,
     },
-        {
+    {
       'param': 'build-machine',
       'field': GitStamp.buildMachine.frameworkCommitDate,
       'matcher': isNotEmpty,
     },
-        {
+    {
       'param': 'build-machine',
       'field': GitStamp.buildMachine.frameworkRevision,
       'matcher': isNotEmpty,
     },
-        {
+    {
       'param': 'build-machine',
       'field': GitStamp.buildMachine.frameworkVersion,
       'matcher': isNotEmpty,
     },
-        {
+    {
       'param': 'build-machine',
       'field': GitStamp.buildMachine.repositoryUrl,
       'matcher': isNotEmpty,

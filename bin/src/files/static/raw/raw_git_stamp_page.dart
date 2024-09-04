@@ -430,24 +430,43 @@ class GitStampRepoDetails extends StatelessWidget {
             const SizedBox(height: 32),
             Text('Build', style: _textTitle),
             const SizedBox(height: 4),
-            GitStampDoubleText(
-              'Global: ',
-              GitStamp.gitConfigGlobalUserName +
-                  ' (' +
-                  GitStamp.gitConfigGlobalUserEmail +
-                  ')',
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      GitStampDoubleText(
+                        'Global: ',
+                        GitStamp.gitConfigGlobalUserName +
+                            ' (' +
+                            GitStamp.gitConfigGlobalUserEmail +
+                            ')',
+                      ),
+                      GitStampDoubleText(
+                        'Local: ',
+                        GitStamp.gitConfigUserName +
+                            ' (' +
+                            GitStamp.gitConfigUserEmail +
+                            ')',
+                      ),
+                      GitStampDoubleText('Date: ', GitStamp.buildDateTime),
+                      GitStampDoubleText('Path: ', GitStamp.repoPath),
+                      GitStampDoubleText('Branch: ', GitStamp.buildBranch),
+                      GitStampDoubleText('SHA: ', GitStamp.sha),
+                    ],
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    showSnackbar(context, GitStamp.gitRemote);
+                  },
+                  icon: Icon(Icons.cloud),
+                ),
+              ],
             ),
-            GitStampDoubleText(
-              'Local: ',
-              GitStamp.gitConfigUserName +
-                  ' (' +
-                  GitStamp.gitConfigUserEmail +
-                  ')',
-            ),
-            GitStampDoubleText('Date: ', GitStamp.buildDateTime),
-            GitStampDoubleText('Path: ', GitStamp.repoPath),
-            GitStampDoubleText('Branch: ', GitStamp.buildBranch),
-            GitStampDoubleText('SHA: ', GitStamp.sha),
             const SizedBox(height: 32),
             Text('Environment', style: _textTitle),
             const SizedBox(height: 4),

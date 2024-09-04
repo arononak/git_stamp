@@ -10,6 +10,7 @@ void showSnackbar(BuildContext context, String message) {
       content: Text(message),
       showCloseIcon: true,
       duration: Duration(seconds: 5),
+      backgroundColor: Theme.of(context).colorScheme.primary,
     ),
   );
 }
