@@ -14,6 +14,8 @@ class ExampleApp extends StatelessWidget {
     return MaterialApp(
       home: MainPage(),
       themeMode: ThemeMode.system,
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
     );
   }
