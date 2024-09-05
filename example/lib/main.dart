@@ -40,7 +40,11 @@ class MainPage extends StatelessWidget {
         ],
       ),
       body: Center(
-        child: Text('Example app'),
+        child: Text('Example app', style: Theme.of(context).textTheme.headlineMedium),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: null,
+        child: const Icon(Icons.add),
       ),
     );
   }
