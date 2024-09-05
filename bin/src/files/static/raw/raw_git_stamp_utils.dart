@@ -7,13 +7,16 @@ import '../../git_stamp.dart';
 void showSnackbar(BuildContext context, String message) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      content: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
+      content: Container(
+        constraints: BoxConstraints(maxHeight: 350),
         child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Text(
-            message,
-            style: TextStyle(fontSize: 12),
+          scrollDirection: Axis.vertical,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Text(
+              message,
+              style: TextStyle(fontSize: 12),
+            ),
           ),
         ),
       ),

@@ -42,11 +42,11 @@ class _GitStampPageState extends State<GitStampPage> {
     super.initState();
 
     if (widget.showDetails) {
-      Future.delayed(Duration.zero, () => showDetailsBottomSheet());
+      Future.delayed(Duration.zero, () => showDetailsBottomSheet(context));
     }
 
     if (widget.showFiles) {
-      Future.delayed(Duration.zero, () => showRepoFilesBottomSheet());
+      Future.delayed(Duration.zero, () => showRepoFilesBottomSheet(context));
     }
   }
 
@@ -74,20 +74,12 @@ class _GitStampPageState extends State<GitStampPage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   IconButton(
-                    onPressed: () => showDetailsBottomSheet(),
-                    icon: const Icon(Icons.tag),
-                  ),
-                  IconButton(
-                    onPressed: () => showRepoFilesBottomSheet(),
-                    icon: const Icon(Icons.folder),
-                  ),
-                  IconButton(
-                    onPressed: () => showFilterBottomSheet(),
+                    onPressed: () => showFilterBottomSheet(context),
                     icon: const Icon(Icons.filter_list),
                   ),
                   IconButton(
-                    onPressed: () => showMoreBottomSheet(),
-                    icon: const Icon(Icons.more_vert),
+                    onPressed: () => showDetailsBottomSheet(context),
+                    icon: const Icon(Icons.arrow_upward),
                   ),
                 ],
               ),
@@ -103,22 +95,7 @@ class _GitStampPageState extends State<GitStampPage> {
     );
   }
 
-  void showDetailsBottomSheet() {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (BuildContext context) => GitStampRepoDetails(),
-    );
-  }
-
-  void showRepoFilesBottomSheet() {
-    showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context) => GitStampRepoFiles(),
-    );
-  }
-
-  void showFilterBottomSheet() {
+  void showFilterBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -132,14 +109,29 @@ class _GitStampPageState extends State<GitStampPage> {
       },
     );
   }
+}
 
-  void showMoreBottomSheet() {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (BuildContext context) => GitStampMore(),
-    );
-  }
+void showDetailsBottomSheet(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    builder: (BuildContext context) => GitStampRepoDetails(),
+  );
+}
+
+void showRepoFilesBottomSheet(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    builder: (BuildContext context) => GitStampRepoFiles(),
+  );
+}
+
+void showMoreBottomSheet(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    builder: (BuildContext context) => GitStampMore(),
+  );
 }
 
 class GitStampTextLabel extends StatelessWidget {
@@ -408,27 +400,63 @@ class GitStampRepoDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Container(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return Stack(
+      children: [
+        Positioned(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Container(
+                padding: EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildGitStampSection(context),
+                    const SizedBox(height: 32),
+                    _buildBuildSection(context),
+                    const SizedBox(height: 32),
+                    _buildEnvironmentSection(context),
+                    const SizedBox(height: 32),
+                    _buildRepositorySection(context),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          right:20,
+          top: 8,
+          child: Row(
             children: [
-              _buildGitStampSection(context),
-              const SizedBox(height: 32),
-              _buildBuildSection(context),
-              const SizedBox(height: 32),
-              _buildEnvironmentSection(context),
-              const SizedBox(height: 32),
-              _buildRepositorySection(context),
+              IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  showSnackbar(context, GitStamp.gitRemote);
+                },
+                icon: Icon(Icons.cloud),
+              ),
+              IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  showSnackbar(context, GitStamp.buildSystemInfo);
+                },
+                icon: Icon(Icons.medical_information),
+              ),
+              IconButton(
+                onPressed: () => showRepoFilesBottomSheet(context),
+                icon: const Icon(Icons.folder),
+              ),
+              IconButton(
+                onPressed: () => showMoreBottomSheet(context),
+                icon: const Icon(Icons.more),
+              ),
             ],
           ),
         ),
-      ),
+      ],
     );
   }
 
@@ -436,30 +464,7 @@ class GitStampRepoDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Text('GitStamp', style: _textTitle),
-            SizedBox(width: 8),
-            Row(
-              children: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    showSnackbar(context, GitStamp.gitRemote);
-                  },
-                  icon: Icon(Icons.cloud),
-                ),
-                IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    showSnackbar(context, GitStamp.buildSystemInfo);
-                  },
-                  icon: Icon(Icons.medical_information),
-                ),
-              ],
-            ),
-          ],
-        ),
+        Text('GitStamp', style: _textTitle),
         const SizedBox(height: 4),
         GitStampDoubleText('Version: ', gitStampVersion),
         Row(
@@ -484,20 +489,6 @@ class GitStampRepoDetails extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            GitStampDoubleText(
-              'Global: ',
-              GitStamp.gitConfigGlobalUserName +
-                  ' (' +
-                  GitStamp.gitConfigGlobalUserEmail +
-                  ')',
-            ),
-            GitStampDoubleText(
-              'Local: ',
-              GitStamp.gitConfigUserName +
-                  ' (' +
-                  GitStamp.gitConfigUserEmail +
-                  ')',
-            ),
             GitStampDoubleText('Date: ', GitStamp.buildDateTime),
             GitStampDoubleText('Path: ', GitStamp.repoPath),
             GitStampDoubleText('Branch: ', GitStamp.buildBranch),
@@ -516,19 +507,35 @@ class GitStampRepoDetails extends StatelessWidget {
         const SizedBox(height: 4),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: {
-            'Framework Version: ': GitStamp.buildMachine.frameworkVersion,
-            'Channel: ': GitStamp.buildMachine.channel,
-            'Repository Url: ': GitStamp.buildMachine.repositoryUrl,
-            'Framework Revision: ': GitStamp.buildMachine.frameworkRevision,
-            'Framework Commit Date: ':
-                GitStamp.buildMachine.frameworkCommitDate,
-            'Engine Revision: ': GitStamp.buildMachine.engineRevision,
-            'Dart Sdk Version: ': GitStamp.buildMachine.dartSdkVersion,
-            'DevTools Version: ': GitStamp.buildMachine.devToolsVersion,
-            'Flutter Version: ': GitStamp.buildMachine.flutterVersion,
-            'Flutter Root: ': GitStamp.buildMachine.flutterRoot,
-          }.entries.map((e) => GitStampDoubleText(e.key, e.value)).toList(),
+          children: [
+            GitStampDoubleText(
+              'Global: ',
+              GitStamp.gitConfigGlobalUserName +
+                  ' (' +
+                  GitStamp.gitConfigGlobalUserEmail +
+                  ')',
+            ),
+            GitStampDoubleText(
+              'Local: ',
+              GitStamp.gitConfigUserName +
+                  ' (' +
+                  GitStamp.gitConfigUserEmail +
+                  ')',
+            ),
+            ...{
+              'Framework Version: ': GitStamp.buildMachine.frameworkVersion,
+              'Channel: ': GitStamp.buildMachine.channel,
+              'Repository Url: ': GitStamp.buildMachine.repositoryUrl,
+              'Framework Revision: ': GitStamp.buildMachine.frameworkRevision,
+              'Framework Commit Date: ':
+                  GitStamp.buildMachine.frameworkCommitDate,
+              'Engine Revision: ': GitStamp.buildMachine.engineRevision,
+              'Dart Sdk Version: ': GitStamp.buildMachine.dartSdkVersion,
+              'DevTools Version: ': GitStamp.buildMachine.devToolsVersion,
+              'Flutter Version: ': GitStamp.buildMachine.flutterVersion,
+              'Flutter Root: ': GitStamp.buildMachine.flutterRoot,
+            }.entries.map((e) => GitStampDoubleText(e.key, e.value)).toList(),
+          ],
         ),
       ],
     );
