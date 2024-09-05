@@ -90,6 +90,7 @@ Text('SHA: ${GitStamp.sha}'),
 
 | 🆕 **Version** | 🗓️ **Date**        |  📝 **Change Description**        |
 |----------------|--------------------|-----------------------------------|
+| Version 6      | Someday it will be | 📦 JSON data export               |
 | Version 5      | Someday it will be | 🔐 Data encription                |
 | Version 4      | 24.07.2024         | 🌟 New `icon` build-type          |
 | Version 3      | 30.06.2024         | 🔧 New `gen-only` build-type      |

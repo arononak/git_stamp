@@ -19,8 +19,7 @@
 - [x] InApp - Details - Files changes
 - [x] InApp - Git remote config informations
 - [x] InApp - git rev-parse --show-toplevel
-- [ ] InApp - git ls-tree -r --name-only --full-tree origin/main
-- [ ] InApp - flutter --no-version-check --version --machine
+- [x] InApp - flutter --no-version-check --version --machine
 - [ ] InApp - flutter --no-version-check pub pub outdated --json --up-to-date --no-dev-dependencies --no-dependency-overrides
 - [x] InApp - Extract UI files to lib folder & Add aron_gradient_line package
 - [x] Generator - New data files structure
@@ -31,14 +30,19 @@
 - [x] CI - Write tests
 - [x] InApp - Observed files
 - [x] Git - Remove example project git_stamp files
-- [ ] InApp - Arrow if git diff exists
-- [ ] InApp - Responsive pages
+- [x] InApp - Arrow if git diff exists
+- [x] InApp - Responsive pages
 - [x] README.md - imports mermaid.js graph
 - [ ] InApp - Advanced folder by author
 - [ ] CI - dart analize & dart format
 - [ ] CI - Fix generate doc
 - [ ] CI - Auto deploy every 7 days ?
 - [ ] InApp - last commit tag
-- [ ] InApp - repo url - origin
+- [x] InApp - repo url - origin
 - [ ] Generator - Generation path as a parameter
-- [ ] InApp - Date by locale
+- [x] InApp - Date by locale
+- [ ] Generator - git log --stat -1
+- [ ] InApp - Commit List - Another item design
+- [ ] InApp - AppBar - 1 icon
+- [ ] Generator - Logger refactor
+- [ ] InApp - Text file content open in app
