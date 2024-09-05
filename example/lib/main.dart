@@ -43,7 +43,7 @@ class MainPage extends StatelessWidget {
         child: Text('Example app', style: Theme.of(context).textTheme.headlineMedium),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: null,
+        onPressed: (){},
         child: const Icon(Icons.add),
       ),
     );
