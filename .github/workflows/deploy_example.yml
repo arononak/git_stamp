@@ -23,6 +23,8 @@ jobs:
         with:
           java-version: "12.x"
       - run: flutter pub get
+      - run: git config --global user.name 'github-actions[bot]'
+      - run: git config --global user.email 'github-actions[bot]@users.noreply.github.com'
       - run: make -C example build
       - uses: actions/upload-artifact@master
         with:
