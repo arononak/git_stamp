@@ -269,8 +269,9 @@ class GitStampCommitListElement extends StatelessWidget {
                               Expanded(
                                 child: SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
-                                  child:
-                                      GitStampCommitListHeader(commit: commit),
+                                  child: GitStampCommitListHeader(
+                                    commit: commit,
+                                  ),
                                 ),
                               ),
                               IconButton(
@@ -317,6 +318,7 @@ class GitStampCommitListElement extends StatelessWidget {
                       color: Theme.of(context).colorScheme.onSurface,
                       fontStyle: FontStyle.italic,
                     ),
+                    maxLines: 1,
                   ),
                 ),
                 Text(
@@ -327,6 +329,7 @@ class GitStampCommitListElement extends StatelessWidget {
                         .onSurface
                         .withOpacity(0.6),
                   ),
+                  maxLines: 1,
                 ),
               ],
             ),
