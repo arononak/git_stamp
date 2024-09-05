@@ -37,12 +37,12 @@ jobs:
           sudo apt-get install -y google-chrome-stable
       - uses: actions/setup-node@v3
         with:
-          node-version: '16' 
+          node-version: '16'
+      - run: git config --global user.name 'github-actions[bot]'
+      - run: git config --global user.email 'github-actions[bot]@users.noreply.github.com' 
       - run: make -C example sync
       - run: make -C example screenshots
       - run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add list.png icon.png files.png details.png
           git commit -m 'Screenshot update'
           git push origin HEAD:main
