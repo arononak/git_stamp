@@ -39,6 +39,7 @@ Future<void> main(List<String> arguments) async {
       allowed: [
         'commit-list',
         'diff-list',
+        'diff-stat-list',
         'repo-creation-date',
         'build-branch',
         'build-date-time',
@@ -144,6 +145,10 @@ void _generateDataFiles(
 
   if (files.diffList) {
     DiffList(isLiteVersion).generate();
+  }
+
+  if (files.diffStatList) {
+    DiffStatList(isLiteVersion).generate();
   }
 
   if (files.repoCreationDate) {

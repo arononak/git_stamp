@@ -8,7 +8,7 @@ import 'package:pub_semver/pub_semver.dart';
 import '../../git_stamp_file.dart';
 
 String exec(List<String> args) {
-  return Process.runSync(args.first, args.sublist(1)).stdout.toString().trim();
+  return Process.runSync(args.first, args.sublist(1)).stdout.toString().trimRight();
 }
 
 extension StringExtension on String {
@@ -60,6 +60,34 @@ class DiffList extends GitStampDataFile {
 
     return '''
       const String gitStampDiffList = r\'\'\'$jsonString\'\'\';
+    ''';
+  }
+}
+
+class DiffStatList extends GitStampDataFile {
+  bool generateEmpty;
+
+  DiffStatList(this.generateEmpty);
+
+  @override
+  String get filename => 'diff_stat_list.dart';
+
+  @override
+  String get content {
+    Map<String, String> map = {};
+
+    if (generateEmpty == false) {
+      final hashes = exec(['git', 'rev-list', '--all']).trim().split('\n');
+
+      for (var hash in hashes) {
+        map[hash] = exec(['git', 'diff', '--stat=160', hash]);
+      }
+    }
+
+    String jsonString = jsonEncode(map).replaceAll("'", r"\'");
+
+    return '''
+      const String gitStampDiffStatList = r\'\'\'$jsonString\'\'\';
     ''';
   }
 }

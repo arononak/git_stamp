@@ -278,7 +278,7 @@ class GitStampCommitListElement extends StatelessWidget {
                                 onPressed: () {
                                   showGitStampDetailsPage(
                                     context: context,
-                                    commitHash: commit.hash,
+                                    commit: commit,
                                   );
                                 },
                                 icon: Icon(Icons.arrow_forward),
@@ -287,7 +287,17 @@ class GitStampCommitListElement extends StatelessWidget {
                           ),
                           Expanded(
                             child: SingleChildScrollView(
-                              child: Text(GitStamp.diffList[commit.hash] ?? ''),
+                              scrollDirection: Axis.vertical,
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Text(
+                                  GitStamp.diffStatList[commit.hash] ?? '',
+                                  style: TextStyle(
+                                    fontFamily: 'CourierNew',
+                                    fontSize: 10,
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                         ],
@@ -430,7 +440,7 @@ class GitStampRepoDetails extends StatelessWidget {
           ),
         ),
         Positioned(
-          right:20,
+          right: 20,
           top: 8,
           child: Row(
             children: [

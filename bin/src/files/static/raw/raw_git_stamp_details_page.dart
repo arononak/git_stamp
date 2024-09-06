@@ -8,19 +8,19 @@ import '../../git_stamp.dart';
 void showGitStampDetailsPage({
   required BuildContext context,
   bool useRootNavigator = false,
-  required String commitHash,
+  required GitStampCommit commit,
 }) {
   Navigator.of(context, rootNavigator: useRootNavigator)
       .push(MaterialPageRoute<void>(
     builder: (BuildContext context) =>
-        GitStampDetailsPage(commitHash: commitHash),
+        GitStampDetailsPage(commit: commit),
   ));
 }
 
 class GitStampDetailsPage extends StatelessWidget {
-  final String commitHash;
+  final GitStampCommit commit;
 
-  const GitStampDetailsPage({Key? key, required this.commitHash})
+  const GitStampDetailsPage({Key? key, required this.commit})
       : super(key: key);
 
   @override
@@ -31,15 +31,26 @@ class GitStampDetailsPage extends StatelessWidget {
           preferredSize: Size.fromHeight(4.0),
           child: AronGradientLine(),
         ),
-        title: Text(commitHash),
+        title: GitStampCommitListHeader(commit: commit),
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Text(GitStamp.diffList[commitHash] ?? ''),
+        scrollDirection: Axis.vertical,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Container(
+            padding: EdgeInsets.all(16.0),
+            child: Text(
+              GitStamp.diffList[commit.hash] ?? '',
+              style: TextStyle(
+                fontFamily: 'CourierNew',
+                fontSize: 12,
+              ),
+            ),
+          ),
         ),
       ),
     );
   }
 }
+
 ''';

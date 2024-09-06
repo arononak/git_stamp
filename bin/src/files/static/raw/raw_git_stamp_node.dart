@@ -13,6 +13,7 @@ ${files.commitList.enabled}import 'src/data/commit_list.dart';
 ${files.commitList.enabled}import 'src/data/git_stamp_commit.dart';
 
 ${files.diffList.enabled}import 'src/data/diff_list.dart';
+${files.diffStatList.enabled}import 'src/data/diff_stat_list.dart';
 
 ${files.buildBranch.enabled}import 'src/data/build_branch.dart';
 ${files.buildDateTime.enabled}import 'src/data/build_date_time.dart';
@@ -38,6 +39,7 @@ class GitStamp {
   ${files.commitList.enabled}static int get commitCount => commitList.length;
 
   ${files.diffList.enabled}static Map<String, dynamic> diffList = json.decode(gitStampDiffList.replaceAll(r"\\'", "'"));
+  ${files.diffStatList.enabled}static Map<String, dynamic> diffStatList = json.decode(gitStampDiffStatList.replaceAll(r"\\'", "'"));
 
   ${files.buildBranch.enabled}static const String buildBranch = gitStampBuildBranch;
   ${files.buildDateTime.enabled}static const String buildDateTime = gitStampBuildDateTime;

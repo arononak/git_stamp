@@ -42,6 +42,11 @@ void singleValueTests() {
       'matcher': isTrue,
     },
     {
+      'param': 'diff-stat-list',
+      'field': GitStamp.diffStatList.isNotEmpty,
+      'matcher': isTrue,
+    },
+    {
       'param': 'build-branch',
       'field': GitStamp.buildBranch,
       'matcher': isNotEmpty,

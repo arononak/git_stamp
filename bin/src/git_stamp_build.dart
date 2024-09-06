@@ -1,6 +1,7 @@
 class GitStampBuild {
   bool commitList = false;
   bool diffList = false;
+  bool diffStatList = false;
   bool buildBranch = false;
   bool buildDateTime = false;
   bool buildSystemInfo = false;
@@ -19,6 +20,7 @@ class GitStampBuild {
   GitStampBuild.all({
     this.commitList = true,
     this.diffList = true,
+    this.diffStatList = true,
     this.buildBranch = true,
     this.buildDateTime = true,
     this.buildSystemInfo = true,
@@ -45,6 +47,7 @@ class GitStampBuild {
   GitStampBuild.custom(List<String> args)
       : commitList = args.contains('commit-list'),
         diffList = args.contains('diff-list'),
+        diffStatList = args.contains('diff-stat-list'),
         buildBranch = args.contains('build-branch'),
         buildDateTime = args.contains('build-date-time'),
         buildSystemInfo = args.contains('build-system-info'),
