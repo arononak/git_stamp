@@ -80,7 +80,7 @@ class DiffStatList extends GitStampDataFile {
       final hashes = exec(['git', 'rev-list', '--all']).trim().split('\n');
 
       for (var hash in hashes) {
-        map[hash] = exec(['git', 'diff', '--stat=160', hash]);
+        map[hash] = exec(['git', 'show', '--stat=160', hash]);
       }
     }
 
