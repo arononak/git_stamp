@@ -179,7 +179,7 @@ if (kDebugMode) ...[
   ListTile(
     title: const Text('Git Stamp'),
     subtitle: Text(GitStamp.sha),
-    leading: const Icon(Icons.commit),
+    leading: const Icon(Icons.commit, monospaceFontFamily: GoogleFonts.spaceMono().fontFamily),
     onTap: () => showGitStampPage(context: context),
   ),
 ],
@@ -189,7 +189,7 @@ if (kDebugMode) ...[
 ```dart
 if (isProd == false) ...[
   IconButton(
-    onPressed: () => showGitStampPage(context: context),
+    onPressed: () => showGitStampPage(context: context, monospaceFontFamily: GoogleFonts.spaceMono().fontFamily),
     icon: const Icon(Icons.book),
   ),
 ],
@@ -204,11 +204,13 @@ if (isProd == false) ...[
 
 ```dart
 class GitStamp {
-  static List<GitStampCommit> commitList
-  static GitStampCommit? latestCommit
-  static String sha
+  static List<GitStampCommit> get commitList
+  static GitStampCommit? get latestCommit
+  static String get sha
+  static int get commitCount
 
-  static const Map<String, String> diffList
+  static Map<String, dynamic> diffList
+  static Map<String, dynamic> diffStatList
 
   static const String buildBranch
   static const String buildDateTime
@@ -229,6 +231,8 @@ class GitStamp {
   static const String gitConfigGlobalUserEmail
   static const String gitConfigUserName
   static const String gitConfigUserEmail
+
+  static const String gitRemote
 
   static showLicensePage({
     required BuildContext context,

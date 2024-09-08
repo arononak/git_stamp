@@ -9,19 +9,30 @@ void showGitStampDetailsPage({
   required BuildContext context,
   bool useRootNavigator = false,
   required GitStampCommit commit,
+  String? monospaceFontFamily,
 }) {
-  Navigator.of(context, rootNavigator: useRootNavigator)
-      .push(MaterialPageRoute<void>(
-    builder: (BuildContext context) =>
-        GitStampDetailsPage(commit: commit),
+  Navigator.of(
+    context,
+    rootNavigator: useRootNavigator,
+  ).push(MaterialPageRoute<void>(
+    builder: (BuildContext context) {
+      return GitStampDetailsPage(
+        commit: commit,
+        monospaceFontFamily: monospaceFontFamily,
+      );
+    },
   ));
 }
 
 class GitStampDetailsPage extends StatelessWidget {
   final GitStampCommit commit;
+  final String? monospaceFontFamily;
 
-  const GitStampDetailsPage({Key? key, required this.commit})
-      : super(key: key);
+  const GitStampDetailsPage({
+    Key? key,
+    required this.commit,
+    this.monospaceFontFamily,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +53,7 @@ class GitStampDetailsPage extends StatelessWidget {
             child: Text(
               GitStamp.diffList[commit.hash] ?? '',
               style: TextStyle(
-                fontFamily: 'CourierNew',
+                fontFamily: monospaceFontFamily,
                 fontSize: 12,
               ),
             ),

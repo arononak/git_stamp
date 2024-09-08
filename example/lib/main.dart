@@ -1,10 +1,24 @@
 import 'package:example/git_stamp/src/ui/git_stamp_icon.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'git_stamp/git_stamp.dart';
 
+String? get monospaceFontFamily {
+  /// Don't forget about the font's open source license terms in Your App:
+  /// https://pub.dev/packages/google_fonts#licensing-fonts
+  return kIsWeb ? GoogleFonts.spaceMono().fontFamily : 'SourceCodePro';
+}
+
 void main() {
+  /// Copyright's :O
+  LicenseRegistry.addLicense(() async* {
+    final license = await rootBundle.loadString('google_fonts/OFL.txt');
+    yield LicenseEntryWithLineBreaks(['google_fonts'], license);
+  });
+
   runApp(ExampleApp());
 }
 
@@ -86,7 +100,12 @@ class SettingsPage extends StatelessWidget {
             title: const Text('Git Stamp Page'),
             subtitle: Text(GitStamp.sha),
             leading: const Icon(Icons.commit),
-            onTap: () => showGitStampPage(context: context),
+            onTap: () {
+              showGitStampPage(
+                context: context,
+                monospaceFontFamily: monospaceFontFamily,
+              );
+            },
           ),
         ],
       ),

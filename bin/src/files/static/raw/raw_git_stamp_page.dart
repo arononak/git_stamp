@@ -13,10 +13,17 @@ const _textTitle = TextStyle(fontSize: 16, fontWeight: FontWeight.bold);
 void showGitStampPage({
   required BuildContext context,
   bool useRootNavigator = false,
+  String? monospaceFontFamily,
 }) {
-  Navigator.of(context, rootNavigator: useRootNavigator)
-      .push(MaterialPageRoute<void>(
-    builder: (BuildContext context) => const GitStampPage(),
+  Navigator.of(
+    context,
+    rootNavigator: useRootNavigator,
+  ).push(MaterialPageRoute<void>(
+    builder: (BuildContext context) {
+      return GitStampPage(
+        monospaceFontFamily: monospaceFontFamily,
+      );
+    },
   ));
 }
 
@@ -25,10 +32,12 @@ class GitStampPage extends StatefulWidget {
     super.key,
     this.showDetails = false,
     this.showFiles = false,
+    this.monospaceFontFamily,
   });
 
   final bool showDetails;
   final bool showFiles;
+  final String? monospaceFontFamily;
 
   @override
   State<GitStampPage> createState() => _GitStampPageState();
@@ -91,6 +100,7 @@ class _GitStampPageState extends State<GitStampPage> {
         commits: GitStamp.commitList,
         filterAuthorName: _filterAuthorName,
         isLiteVersion: isLiteVersion,
+        monospaceFontFamily: widget.monospaceFontFamily,
       ),
     );
   }
@@ -163,11 +173,13 @@ class GitStampCommitList extends StatelessWidget {
   final List<GitStampCommit> commits;
   final String? filterAuthorName;
   final bool isLiteVersion;
+  final String? monospaceFontFamily;
 
   const GitStampCommitList({
     this.commits = const [],
     this.filterAuthorName,
     this.isLiteVersion = true,
+    this.monospaceFontFamily,
   });
 
   @override
@@ -226,6 +238,7 @@ class GitStampCommitList extends StatelessWidget {
                   (commit) => GitStampCommitListElement(
                     commit: commit,
                     isLiteVersion: isLiteVersion,
+                    monospaceFontFamily: monospaceFontFamily,
                   ),
                 )
                 .toList()
@@ -239,10 +252,12 @@ class GitStampCommitList extends StatelessWidget {
 class GitStampCommitListElement extends StatelessWidget {
   final GitStampCommit commit;
   final bool isLiteVersion;
+  final String? monospaceFontFamily;
 
   const GitStampCommitListElement({
     required this.commit,
     this.isLiteVersion = true,
+    this.monospaceFontFamily,
   });
 
   @override
@@ -279,6 +294,7 @@ class GitStampCommitListElement extends StatelessWidget {
                                   showGitStampDetailsPage(
                                     context: context,
                                     commit: commit,
+                                    monospaceFontFamily: monospaceFontFamily,
                                   );
                                 },
                                 icon: Icon(Icons.arrow_forward),
@@ -293,8 +309,8 @@ class GitStampCommitListElement extends StatelessWidget {
                                 child: Text(
                                   GitStamp.diffStatList[commit.hash] ?? '',
                                   style: TextStyle(
-                                    fontFamily: 'CourierNew',
                                     fontSize: 10,
+                                    fontFamily: monospaceFontFamily,
                                   ),
                                 ),
                               ),
