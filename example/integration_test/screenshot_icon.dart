@@ -27,7 +27,7 @@ void main() {
     final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
     await gesture.addPointer();
     await gesture.moveTo(iconButtonOffset);
-    
+
     await tester.pump(Duration(seconds: 1));
     await tester.pump(Duration(seconds: 1));
     await binding.takeScreenshot('screenshot_icon');
