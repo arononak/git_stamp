@@ -132,7 +132,7 @@ class BuildDateTime extends GitStampDataFile {
   String get content {
     final now = DateTime.now();
 
-    /// TODO Add "Z" parameter after implementing this in intl package.
+    /// TO DO Add "Z" parameter after implementing this in intl package.
     final buildDateTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
     final timeZoneOffset = now.timeZoneOffset.inHours;
     final sign = timeZoneOffset >= 0 ? '+' : '-';
