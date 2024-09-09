@@ -1,4 +1,6 @@
 const rawGitStampPage = '''
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 
@@ -27,6 +29,47 @@ void showGitStampPage({
   ));
 }
 
+void _showRepoFilesBottomSheet(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    builder: (BuildContext context) => GitStampRepoFiles(),
+  );
+}
+
+void _showMoreBottomSheet(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    builder: (BuildContext context) => GitStampMore(),
+  );
+}
+
+void _showFilterBottomSheet(
+  BuildContext context, {
+  required void Function(String? commiter) onFilterPressed,
+}) {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    builder: (BuildContext context) {
+      return GitStampFilterList(
+        onFilterPressed: onFilterPressed,
+      );
+    },
+  );
+}
+
+void _showDetailsBottomSheet(
+  BuildContext context, {
+  VoidCallback? onFinish,
+}) {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    builder: (BuildContext context) => GitStampRepoDetails(),
+  ).then((result) => onFinish?.call());
+}
+
 class GitStampPage extends StatefulWidget {
   const GitStampPage({
     super.key,
@@ -44,6 +87,7 @@ class GitStampPage extends StatefulWidget {
 }
 
 class _GitStampPageState extends State<GitStampPage> {
+  final _arrowIconKey = GlobalKey<_GitStampArrowIconState>();
   String? _filterAuthorName;
 
   @override
@@ -51,11 +95,11 @@ class _GitStampPageState extends State<GitStampPage> {
     super.initState();
 
     if (widget.showDetails) {
-      Future.delayed(Duration.zero, () => showDetailsBottomSheet(context));
+      Future.delayed(Duration.zero, () => _showDetailsBottomSheet(context));
     }
 
     if (widget.showFiles) {
-      Future.delayed(Duration.zero, () => showRepoFilesBottomSheet(context));
+      Future.delayed(Duration.zero, () => _showRepoFilesBottomSheet(context));
     }
   }
 
@@ -83,12 +127,25 @@ class _GitStampPageState extends State<GitStampPage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   IconButton(
-                    onPressed: () => showFilterBottomSheet(context),
+                    onPressed: () {
+                      _showFilterBottomSheet(
+                        context,
+                        onFilterPressed: (commiter) {
+                          Navigator.pop(context);
+                          setState(() => _filterAuthorName = commiter);
+                        },
+                      );
+                    },
                     icon: const Icon(Icons.filter_list),
                   ),
-                  IconButton(
-                    onPressed: () => showDetailsBottomSheet(context),
-                    icon: const Icon(Icons.arrow_upward),
+                  GitStampArrowIcon(
+                    key: _arrowIconKey,
+                    onPressed: () {
+                      _showDetailsBottomSheet(
+                        context,
+                        onFinish: () => _arrowIconKey.currentState?.toggle(),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -104,44 +161,6 @@ class _GitStampPageState extends State<GitStampPage> {
       ),
     );
   }
-
-  void showFilterBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (BuildContext context) {
-        return GitStampFilterList(
-          onFilterPressed: (commiter) {
-            Navigator.pop(context);
-            setState(() => _filterAuthorName = commiter);
-          },
-        );
-      },
-    );
-  }
-}
-
-void showDetailsBottomSheet(BuildContext context) {
-  showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    builder: (BuildContext context) => GitStampRepoDetails(),
-  );
-}
-
-void showRepoFilesBottomSheet(BuildContext context) {
-  showModalBottomSheet(
-    context: context,
-    builder: (BuildContext context) => GitStampRepoFiles(),
-  );
-}
-
-void showMoreBottomSheet(BuildContext context) {
-  showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    builder: (BuildContext context) => GitStampMore(),
-  );
 }
 
 class GitStampTextLabel extends StatelessWidget {
@@ -475,11 +494,11 @@ class GitStampRepoDetails extends StatelessWidget {
                 icon: Icon(Icons.medical_information),
               ),
               IconButton(
-                onPressed: () => showRepoFilesBottomSheet(context),
+                onPressed: () => _showRepoFilesBottomSheet(context),
                 icon: const Icon(Icons.folder),
               ),
               IconButton(
-                onPressed: () => showMoreBottomSheet(context),
+                onPressed: () => _showMoreBottomSheet(context),
                 icon: const Icon(Icons.more),
               ),
             ],
@@ -712,6 +731,66 @@ class GitStampMore extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class GitStampArrowIcon extends StatefulWidget {
+  final VoidCallback? onPressed;
+
+  const GitStampArrowIcon({super.key, this.onPressed});
+
+  @override
+  _GitStampArrowIconState createState() => _GitStampArrowIconState();
+}
+
+class _GitStampArrowIconState extends State<GitStampArrowIcon>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    _controller =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+    _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
+    super.initState();
+
+    _controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        widget.onPressed?.call();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void toggle() {
+    if (_controller.isCompleted) {
+      _controller.reverse();
+    } else {
+      _controller.forward();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) {
+        return Transform.rotate(
+          angle: _animation.value * pi,
+          child: child,
+        );
+      },
+      child: IconButton(
+        icon: Icon(Icons.arrow_upward),
+        onPressed: () => toggle(),
       ),
     );
   }
