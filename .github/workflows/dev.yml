@@ -69,6 +69,7 @@ jobs:
           git push origin HEAD:main
   build:
     runs-on: ubuntu-latest
+    needs: generate_screenshots
     steps:
       - uses: actions/checkout@v3
         with:
@@ -90,8 +91,7 @@ jobs:
         with:
           name: build
           path: example/build/web
-  deploy:
-    name: "Deploy"
+  firebase_deploy:
     runs-on: ubuntu-latest
     needs: build
     steps:
