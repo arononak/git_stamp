@@ -25,7 +25,7 @@ Advanced await-less information provider. From simple information such as `build
       - [Goal](#goal)
       - [Motivation](#motivation)
       - [Roadmap](#roadmap)
-        - [Changelogs](#changelogs)
+        - [Changelogs (Text) (Image)](#changelogs-text-image)
   - [🛠️ Installation](#️-installation)
       - [1. `pubspec.yaml`](#1-pubspecyaml)
       - [2. `.gitignore`](#2-gitignore)
@@ -84,10 +84,7 @@ Text('SHA: ${GitStamp.sha}'),
 
 #### Roadmap
 
-##### Changelogs
-
-[Text](./CHANGELOG.md)
-[Image](./changelog/CHANGELOG.md)
+##### Changelogs ([Text](./CHANGELOG.md)) ([Image](./changelog/CHANGELOG.md))
 
 | 🆕 **Version** | 🗓️ **Date**        |  📝 **Change Description**        |
 |----------------|--------------------|-----------------------------------|
