@@ -11,7 +11,7 @@ String exec(List<String> args) {
   return Process.runSync(
     args.first,
     args.sublist(1),
-    environment: Map<String, String>.from(Platform.environment),
+    runInShell: true,
   ).stdout.toString().trimRight();
 }
 
