@@ -1,3 +1,15 @@
+## 4.7.0
+
+* Added `GitRemote` module
+* Added `DiffStat` module
+* Update `flutter doctor` -> `flutter doctor --verbose`
+* GitStampPage - New design
+* GitStampPage - Improved responsiveness
+* GitStampPage - Changed commit list texts to single line & Example project update
+* GitStampPage - Added `monospaceFontFamily` parameter & Example project update
+* GitStampPage - Added arrow animation
+* GitStampPage - refactor
+
 ## 4.6.0
 
 * Added GitStamp.buildMachine object
