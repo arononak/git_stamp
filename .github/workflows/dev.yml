@@ -25,7 +25,7 @@ jobs:
           java-version: "12.x"
       - name: Install make on Windows
         if: runner.os == 'Windows'
-        run: choco install make
+        run: choco install -y make sed
       - run: flutter --version
       - run: flutter pub get
       - run: make -C example tests
