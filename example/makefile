@@ -16,7 +16,7 @@ tests_unit:
 
 tests_integration:
 	flutter create test_project
-	cd test_project && sed -i '/^dev_dependencies:/a \  git_stamp:\n    path: ../../' pubspec.yaml
+	cd test_project && dart pub add git_stamp
 	cd test_project && flutter pub get
 	cd test_project && dart run git_stamp
 	cd test_project && flutter build web
