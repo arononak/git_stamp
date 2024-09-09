@@ -14,9 +14,15 @@ tests_unit:
 	dart run git_stamp --gen-only commit-list,diff-list,diff-stat-list,repo-creation-date,build-branch,build-date-time,build-system-info,repo-path,observed-files-list,app-version,app-build,app-name,git-config,build-machine,git-remote,git-config-list
 	dart test test/type_custom_tests.dart
 
+ifdef WINDOWS
+    COPY = copy
+else
+    COPY = cp
+endif
+
 tests_integration:
 	flutter create test_project
-	cp test_pubspec.yaml test_project/pubspec.yaml
+	$(COPY) test_pubspec.yaml test_project/pubspec.yaml
 	cd test_project && flutter pub get
 	cd test_project && dart run git_stamp && flutter build web
 	cd test_project && dart run git_stamp --gen-only build-branch,build-date-time && flutter build web
