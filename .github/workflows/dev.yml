@@ -69,7 +69,7 @@ jobs:
           git commit -m 'Screenshot update'
           git push origin HEAD:main
   build:
-    runs-on: windows-latest
+    runs-on: macos-latest
     needs: tests
     steps:
       - uses: actions/checkout@v3
