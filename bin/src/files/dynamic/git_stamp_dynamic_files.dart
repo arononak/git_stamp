@@ -8,7 +8,11 @@ import 'package:pub_semver/pub_semver.dart';
 import '../../git_stamp_file.dart';
 
 String exec(List<String> args) {
-  return Process.runSync(args.first, args.sublist(1)).stdout.toString().trimRight();
+  return Process.runSync(
+    args.first,
+    args.sublist(1),
+    environment: Map<String, String>.from(Platform.environment),
+  ).stdout.toString().trimRight();
 }
 
 extension StringExtension on String {
