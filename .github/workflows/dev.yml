@@ -68,7 +68,7 @@ jobs:
           git commit -m 'Screenshot update'
           git push origin HEAD:main
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: generate_screenshots
     steps:
       - uses: actions/checkout@v3
@@ -87,6 +87,7 @@ jobs:
       - run: git config --global user.name 'github-actions[bot]'
       - run: git config --global user.email 'github-actions[bot]@users.noreply.github.com'
       - run: make -C example build
+      - run: make -C example sync
       - uses: actions/upload-artifact@master
         with:
           name: build
