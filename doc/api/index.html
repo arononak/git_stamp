@@ -57,30 +57,25 @@
 <p><a href="https://github.com/arononak/git_stamp/tags"><img src="https://img.shields.io/github/v/tag/arononak/git_stamp?style=flat&amp;logo=github&amp;labelColor=black&amp;color=white" alt="Latest Tag"></a>
 <a href="https://github.com/arononak/git_stamp/"><img src="https://img.shields.io/github/stars/arononak/git_stamp.svg?style=flat&amp;label=Star&amp;labelColor=black&amp;color=white" alt="GitHub stars"></a>
 <a href="https://github.com/arononak/git_stamp/graphs/contributors"><img src="https://img.shields.io/github/commit-activity/m/arononak/git_stamp?style=flat&amp;labelColor=black&amp;color=white" alt="Commits"></a>
-<img src="https://img.shields.io/github/actions/workflow/status/arononak/git_stamp/.github%2Fworkflows%2Fdeploy.yml?style=flat&amp;labelColor=black&amp;color=white" alt="GitHub Workflow Status"></p>
+<img src="https://img.shields.io/github/actions/workflow/status/arononak/git_stamp/.github%2Fworkflows%2Fdev.yml?style=flat&amp;labelColor=black&amp;color=white&amp;label=dev" alt="Dev">
+<img src="https://img.shields.io/github/actions/workflow/status/arononak/git_stamp/.github%2Fworkflows%2Fprod.yml?style=flat&amp;labelColor=black&amp;color=white&amp;label=prod" alt="Prod"></p>
 <p><a href="https://pub.dev/packages/git_stamp"><img src="https://img.shields.io/pub/v/git_stamp.svg?style=flat&amp;logo=dart&amp;labelColor=fuchsia&amp;color=white" alt="Pub Package"></a>
 <a href="https://pub.dev/packages/git_stamp"><img src="https://img.shields.io/pub/likes/git_stamp?style=flat&amp;labelColor=fuchsia&amp;color=white" alt="Likes"></a>
 <a href="https://pub.dev/packages/git_stamp/publisher"><img src="https://img.shields.io/pub/publisher/git_stamp?style=flat&amp;labelColor=fuchsia&amp;color=white" alt="package publisher"></a></p>
-<p><strong>Check out the <a href="https://gitstamp.web.app">Example</a> of how <a href="https://pub.dev/packages/git_stamp">Git Stamp</a> is connected to <a href="https://github.com/arononak/git_stamp">Git Stamp Repo</a> 🌀</strong></p>
+<p><strong>Check out the <a href="https://gitstamp.web.app">Example</a> 🌀</strong></p>
 <details>
 <summary>Table of Contents</summary>
 <ul>
 <li><a href="#git-stamp-">Git Stamp 🏷</a>
 <ul>
-<li><a href="#%EF%B8%8F-preview">🏞️ Preview</a>
-<ul>
-<li><a href="#1-lite--full">1. LITE &amp; FULL</a></li>
-<li><a href="#2-icon">2. ICON</a></li>
-<li><a href="#3-generator">3. Generator</a></li>
-</ul>
-</li>
+<li><a href="#%EF%B8%8F-preview">🏞️ Preview</a></li>
 <li><a href="#%EF%B8%8F-about">📑️ About</a>
 <ul>
 <li><a href="#goal">Goal</a></li>
 <li><a href="#motivation">Motivation</a></li>
 <li><a href="#roadmap">Roadmap</a>
 <ul>
-<li><a href="#changelogs">Changelogs</a></li>
+<li><a href="#changelogs-text-image">Changelogs (Text) (Image)</a></li>
 </ul>
 </li>
 </ul>
@@ -89,7 +84,8 @@
 <ul>
 <li><a href="#1-pubspecyaml">1. <code>pubspec.yaml</code></a></li>
 <li><a href="#2-gitignore">2. <code>.gitignore</code></a></li>
-<li><a href="#3-readmemd">3. <code>README.md</code></a></li>
+<li><a href="#3-analysis_optionsyaml">3. <code>analysis_options.yaml</code></a></li>
+<li><a href="#4-readmemd">4. <code>README.md</code></a></li>
 </ul>
 </li>
 <li><a href="#%EF%B8%8F-generating">🏗️ Generating</a>
@@ -118,25 +114,34 @@
 </ul>
 </details>
 <h2 id="-preview">🏞️ Preview</h2>
-<h4 id="1-lite--full">1. LITE &amp; FULL</h4>
 <table>
 <thead>
 <tr>
-<th align="center">Light</th>
-<th align="center">Dark</th>
+<th align="center">List</th>
+<th align="center">Icon</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="center"><img src="https://github.com/arononak/git_stamp/blob/main/files.png?raw=true" alt=""></td>
-<td align="center"><img src="https://github.com/arononak/git_stamp/blob/main/details.png?raw=true" alt=""></td>
+<td align="center"><img src="list.png" alt=""></td>
+<td align="center"><img src="icon.png" alt=""></td>
 </tr>
 </tbody>
 </table>
-<h4 id="2-icon">2. ICON</h4>
-<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/4.3.0.png?raw=true" alt=""></p>
-<h4 id="3-generator">3. Generator</h4>
-<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/4.2.0.png?raw=true" alt=""></p>
+<table>
+<thead>
+<tr>
+<th align="center">Files</th>
+<th align="center">Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><img src="files.png" alt=""></td>
+<td align="center"><img src="details.png" alt=""></td>
+</tr>
+</tbody>
+</table>
 <h2 id="-about">📑️ About</h2>
 <h4 id="goal">Goal</h4>
 <p>The main goal is to help locate errors in the full process of building STAGE, TEST and PROD versions.</p>
@@ -156,9 +161,7 @@ Text('Branch: ${GitStamp.buildBranch}'),
 Text('SHA: ${GitStamp.sha}'),
 </code></pre>
 <h4 id="roadmap">Roadmap</h4>
-<h5 id="changelogs">Changelogs</h5>
-<p><a href="./CHANGELOG.md">Text</a>
-<a href="./changelog/CHANGELOG.md">Image</a></p>
+<h5 id="changelogs-textchangelogmd-imagechangelogchangelogmd">Changelogs (<a href="./CHANGELOG.md">Text</a>) (<a href="./changelog/CHANGELOG.md">Image</a>)</h5>
 <table>
 <thead>
 <tr>
@@ -168,6 +171,11 @@ Text('SHA: ${GitStamp.sha}'),
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>Version 6</td>
+<td>Someday it will be</td>
+<td>📦 JSON data export</td>
+</tr>
 <tr>
 <td>Version 5</td>
 <td>Someday it will be</td>
@@ -206,7 +214,12 @@ Text('SHA: ${GitStamp.sha}'),
 <p><code>echo -e "\n/lib/git_stamp/" &gt;&gt; .gitignore</code>.</p>
 <p>If you add a <strong>/git_stamp</strong> folder for the repository and use the <code>FULL</code> version, the size of the repository will grow EXPONENTIALLY.</p>
 </div>
-<h4 id="3-readmemd">3. <code>README.md</code></h4>
+<h4 id="3-analysis_optionsyaml">3. <code>analysis_options.yaml</code></h4>
+<pre class="language-yaml"><code class="language-yaml">analyzer:
+  exclude:
+    - "./git_stamp/**"
+</code></pre>
+<h4 id="4-readmemd">4. <code>README.md</code></h4>
 <div class="markdown-alert markdown-alert-warning">
 <p class="markdown-alert-title">Warning</p>
 <p>Add badge to your <code>README.md</code> 😄️</p>
@@ -253,25 +266,83 @@ Text('SHA: ${GitStamp.sha}'),
 <p>Generating requires the use of the <code>git</code> command-line interface (CLI).</p>
 </div>
 <h4 id="3-custom-gen-only-parameters">3. Custom <code>gen-only</code> parameters</h4>
-<p><code>commit-list</code></p>
-<p><code>diff-list</code></p>
-<p><code>repo-creation-date</code></p>
-<p><code>build-branch</code></p>
-<p><code>build-date-time</code></p>
-<p><code>build-system-info</code></p>
-<p><code>repo-path</code></p>
-<p><code>observed-files-list</code></p>
-<p><code>app-version</code></p>
-<p><code>app-build</code></p>
-<p><code>app-name</code></p>
-<p><code>git-config</code></p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Parameter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>commit-list</td>
+</tr>
+<tr>
+<td>2</td>
+<td>diff-list</td>
+</tr>
+<tr>
+<td>3</td>
+<td>diff-stat-list</td>
+</tr>
+<tr>
+<td>4</td>
+<td>repo-creation-date</td>
+</tr>
+<tr>
+<td>5</td>
+<td>build-branch</td>
+</tr>
+<tr>
+<td>6</td>
+<td>build-date-time</td>
+</tr>
+<tr>
+<td>7</td>
+<td>build-system-info</td>
+</tr>
+<tr>
+<td>8</td>
+<td>build-machine</td>
+</tr>
+<tr>
+<td>9</td>
+<td>repo-path</td>
+</tr>
+<tr>
+<td>10</td>
+<td>observed-files-list</td>
+</tr>
+<tr>
+<td>11</td>
+<td>app-version</td>
+</tr>
+<tr>
+<td>12</td>
+<td>app-build</td>
+</tr>
+<tr>
+<td>13</td>
+<td>app-name</td>
+</tr>
+<tr>
+<td>14</td>
+<td>git-config</td>
+</tr>
+<tr>
+<td>15</td>
+<td>git-remote</td>
+</tr>
+</tbody>
+</table>
 <h2 id="-usage">💻 Usage</h2>
 <h4 id="1-listtile">1. ListTile</h4>
 <pre class="language-dart"><code class="language-dart">if (kDebugMode) ...[
   ListTile(
     title: const Text('Git Stamp'),
     subtitle: Text(GitStamp.sha),
-    leading: const Icon(Icons.commit),
+    leading: const Icon(Icons.commit, monospaceFontFamily: GoogleFonts.spaceMono().fontFamily),
     onTap: () =&gt; showGitStampPage(context: context),
   ),
 ],
@@ -279,7 +350,7 @@ Text('SHA: ${GitStamp.sha}'),
 <h4 id="2-iconbutton">2. IconButton</h4>
 <pre class="language-dart"><code class="language-dart">if (isProd == false) ...[
   IconButton(
-    onPressed: () =&gt; showGitStampPage(context: context),
+    onPressed: () =&gt; showGitStampPage(context: context, monospaceFontFamily: GoogleFonts.spaceMono().fontFamily),
     icon: const Icon(Icons.book),
   ),
 ],
@@ -291,18 +362,24 @@ Text('SHA: ${GitStamp.sha}'),
 </div>
 <h4 id="4-central-gitstamp-node-for-advanced-usage">4. Central <strong>GitStamp</strong> node for advanced usage:</h4>
 <pre class="language-dart"><code class="language-dart">class GitStamp {
-  static List&lt;GitStampCommit&gt; commitList
-  static GitStampCommit? latestCommit
-  static String sha
+  static List&lt;GitStampCommit&gt; get commitList
+  static GitStampCommit? get latestCommit
+  static String get sha
+  static int get commitCount
 
-  static const Map&lt;String, String&gt; diffList
+  static Map&lt;String, dynamic&gt; diffList
+  static Map&lt;String, dynamic&gt; diffStatList
 
   static const String buildBranch
   static const String buildDateTime
   static const String buildSystemInfo
+  static GitStampBuildMachine buildMachine
   static const String repoCreationDate
   static const String repoPath
-  static const String observedFilesList
+
+  static String observedFiles
+  static List&lt;String&gt; observedFilesList
+  static int observedFilesCount
 
   static const String appVersion
   static const String appBuild
@@ -312,6 +389,8 @@ Text('SHA: ${GitStamp.sha}'),
   static const String gitConfigGlobalUserEmail
   static const String gitConfigUserName
   static const String gitConfigUserEmail
+
+  static const String gitRemote
 
   static showLicensePage({
     required BuildContext context,
@@ -419,7 +498,7 @@ If you have any feedback, please contact me at <a href="mailto:arononak@gmail.co
 <footer>
   <span class="no-break">
     git_stamp
-      4.5.0
+      4.7.0
   </span>
 
   
