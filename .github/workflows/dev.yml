@@ -92,7 +92,7 @@ jobs:
           name: build
           path: example/build/web
   firebase_deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: build
     steps:
       - uses: actions/checkout@v3
