@@ -15,12 +15,15 @@ tests_unit:
 	dart test test/type_custom_tests.dart
 
 tests_integration:
-	flutter pub get
-	dart run git_stamp --gen-only build-branch,build-date-time
-	dart run git_stamp --build-type icon
-	dart run git_stamp && flutter build web
-	dart run git_stamp --build-type lite && flutter build web
-	dart run git_stamp --build-type full && flutter build web
+	flutter create test_project
+	cp test_pubspec.yaml test_project/pubspec.yaml
+	cd test_project && flutter pub get
+	cd test_project && dart run git_stamp && flutter build web
+	cd test_project && dart run git_stamp --gen-only build-branch,build-date-time && flutter build web
+	cd test_project && dart run git_stamp --build-type icon && flutter build web
+	cd test_project && dart run git_stamp --build-type lite && flutter build web
+	cd test_project && dart run git_stamp --build-type full && flutter build web
+	rm -f -r test_project
 
 screenshots:
 	npx @puppeteer/browsers install chromedriver@stable
@@ -45,3 +48,4 @@ screenshots:
 	mv details.png ../
 	kill $$(cat chromedriver.pid)
 	rm -f chromedriver.pid
+	rm -f -r chromedriver
