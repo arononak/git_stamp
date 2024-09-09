@@ -167,7 +167,7 @@ class BuildMachine extends GitStampDataFile {
     final buildMachine =
         exec(['flutter', '--no-version-check', '--version', '--machine']);
 
-    return 'const gitStampBuildMachine = \'\'\'${buildMachine.toString().trim()}\'\'\';';
+    return 'const gitStampBuildMachine = \'\'\'${buildMachine.toString().trim().replaceAll('\\', '\\\\')}\'\'\';';
   }
 }
 
