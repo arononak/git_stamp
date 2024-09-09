@@ -60,6 +60,7 @@ jobs:
           node-version: '16'
       - run: git config --global user.name 'github-actions[bot]'
       - run: git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+      - run: git pull
       - run: flutter pub get
       - run: make -C example sync
       - run: make -C example screenshots
