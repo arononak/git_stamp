@@ -52,6 +52,7 @@ Future<void> main(List<String> arguments) async {
         'app-name',
         'git-config',
         'git-remote',
+        'git-config-list',
       ],
       defaultsTo: null,
     )
@@ -198,6 +199,10 @@ void _generateDataFiles(
 
   if (files.gitRemote) {
     GitRemote().generate();
+  }
+
+  if (files.gitConfigList) {
+    GitConfigList().generate();
   }
 }
 

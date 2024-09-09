@@ -167,6 +167,7 @@ analyzer:
 | 13 | app-name           |
 | 14 | git-config         |
 | 15 | git-remote         |
+| 15 | git-remote-list    |
 
 ## 💻 Usage
 
