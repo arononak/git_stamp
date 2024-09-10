@@ -123,7 +123,8 @@ Future<void> main(List<String> arguments) async {
     GitStampLogger().logger.config('Generation time: ${seconds}s');
 
     final gitStampSize = directorySize('./lib/git_stamp');
-    GitStampLogger().logger.config('Size of generated files: $gitStampSize');
+    final filesCount = directoryFilesCount('./lib/git_stamp');
+    GitStampLogger().logger.config('Size of generated $filesCount files: $gitStampSize');
   } on FormatException catch (e) {
     GitStampLogger().logger.severe(e.message);
     GitStampLogger().logger.severe('Usage: dart run git_stamp [options]');

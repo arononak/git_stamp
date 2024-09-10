@@ -3,6 +3,16 @@ import 'dart:math';
 
 import './../git_stamp_logger.dart';
 
+int directoryFilesCount(String path) {
+  int size = 0;
+
+  for (var e in Directory(path).listSync(recursive: true, followLinks: false)) {
+    if (e is File) size++;
+  }
+
+  return size;
+}
+
 String fileSize(String path, {int decimals = 1}) {
   final size = File(path).lengthSync();
 
