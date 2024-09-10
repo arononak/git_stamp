@@ -329,7 +329,10 @@ String _removeTokens(String input) {
       int startIndex = authIndex + 'AUTHORIZATION:'.length;
       String prefix = line.substring(0, startIndex);
       String content = line.substring(startIndex).trim();
-      String replaced = content.split('').map((char) => char.trim().isEmpty ? char : '*').join();
+      String replaced = content
+          .split('')
+          .map((char) => char.trim().isEmpty ? char : '*')
+          .join();
       return '$prefix $replaced';
     }
     return line;
