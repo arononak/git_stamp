@@ -118,7 +118,7 @@ dart pub add git_stamp
 ```yaml
 analyzer:
   exclude:
-    - "./git_stamp/**"
+    - lib/git_stamp/**
 ```
 
 #### 4. `README.md`
