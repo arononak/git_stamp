@@ -22,7 +22,8 @@ jobs:
           channel: 'stable'
       - uses: actions/setup-java@v4
         with:
-          java-version: "21.x"
+          distribution: 'zulu'
+          java-version: '21'
       - name: Install make on Windows
         if: runner.os == 'Windows'
         run: choco install make
@@ -44,7 +45,8 @@ jobs:
       - run: flutter --version
       - uses: actions/setup-java@v4
         with:
-          java-version: "21.x"
+          distribution: 'zulu'
+          java-version: '21'
       - run: flutter pub get
       - run: git config --global user.name 'github-actions[bot]'
       - run: git config --global user.email 'github-actions[bot]@users.noreply.github.com'
@@ -103,7 +105,8 @@ jobs:
           channel: 'stable'
       - uses: actions/setup-java@v4
         with:
-          java-version: "21.x"
+          distribution: 'zulu'
+          java-version: '21'
       - run: |
           sudo apt-get update
           sudo apt-get install -y imagemagick
