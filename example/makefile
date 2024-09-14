@@ -48,10 +48,10 @@ screenshots:
 	rm -f screenshot_list.png
 	rm -f screenshot_files.png
 	rm -f screenshot_details.png
-	mv icon.png ../
-	mv list.png ../
-	mv files.png ../
-	mv details.png ../
+	mv icon.png ../screenshots
+	mv list.png ../screenshots
+	mv files.png ../screenshots
+	mv details.png ../screenshots
 	kill $$(cat chromedriver.pid)
 	rm -f chromedriver.pid
 	rm -f -r chromedriver
