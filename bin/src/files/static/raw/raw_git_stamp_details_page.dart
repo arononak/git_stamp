@@ -38,11 +38,13 @@ class GitStampDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        surfaceTintColor: Colors.transparent,
+        title: GitStampCommitListHeader(commit: commit),
         bottom: const PreferredSize(
           preferredSize: Size.fromHeight(4.0),
           child: AronGradientLine(),
         ),
-        title: GitStampCommitListHeader(commit: commit),
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,

@@ -113,6 +113,8 @@ class _GitStampPageState extends State<GitStampPage> {
           preferredSize: Size.fromHeight(4.0),
           child: AronGradientLine(),
         ),
+        backgroundColor: Colors.transparent,
+        surfaceTintColor: Colors.transparent,
         title: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
