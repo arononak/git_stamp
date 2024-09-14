@@ -1,3 +1,1 @@
-import 'dart:ui';
-
-const physicalSize = Size(500, 885);
+import 'dart:ui'; const physicalSize = Size(500, 885);
