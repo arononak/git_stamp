@@ -126,6 +126,6 @@ jobs:
       - run: make -C example sync
       - run: make -C example screenshots
       - run: |
-          git add list.png icon.png files.png details.png
+          git add .
           git commit -m 'Screenshot update'
           git push origin HEAD:main
