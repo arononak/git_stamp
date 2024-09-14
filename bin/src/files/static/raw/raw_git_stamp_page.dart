@@ -12,6 +12,8 @@ const _text = TextStyle(fontSize: 12);
 const _textBold = TextStyle(fontSize: 12, fontWeight: FontWeight.bold);
 const _textTitle = TextStyle(fontSize: 16, fontWeight: FontWeight.bold);
 
+bool isMobile(context) => MediaQuery.of(context).size.width > 600;
+
 void showGitStampPage({
   required BuildContext context,
   bool useRootNavigator = false,
@@ -286,71 +288,19 @@ class GitStampCommitListElement extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: InkWell(
-        onTap: isLiteVersion
-            ? null
-            : () {
-                showModalBottomSheet(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return Container(
-                      padding: EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: GitStampCommitListHeader(
-                                    commit: commit,
-                                  ),
-                                ),
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  showGitStampDetailsPage(
-                                    context: context,
-                                    commit: commit,
-                                    monospaceFontFamily: monospaceFontFamily,
-                                  );
-                                },
-                                icon: Icon(Icons.arrow_forward),
-                              ),
-                            ],
-                          ),
-                          Expanded(
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.vertical,
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Text(
-                                  GitStamp.diffStatList[commit.hash] ?? '',
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    fontFamily: monospaceFontFamily,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                );
-              },
+        onTap: isLiteVersion ? null : () => showGitDiffStat(context),
         borderRadius: BorderRadius.circular(12),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: ListTile(
             contentPadding: const EdgeInsets.all(0),
-            leading: Icon(
-              Icons.code,
-              size: 36,
-              color: Theme.of(context).colorScheme.primary,
-            ),
+            leading: isMobile(context)
+                ? Icon(
+                    Icons.code,
+                    size: 36,
+                    color: Theme.of(context).colorScheme.primary,
+                  )
+                : null,
             title: GitStampCommitListHeader(commit: commit),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -364,18 +314,21 @@ class GitStampCommitListElement extends StatelessWidget {
                       fontStyle: FontStyle.italic,
                     ),
                     maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                Text(
-                  commit.date,
-                  style: TextStyle(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onSurface
-                        .withOpacity(0.6),
+                if (isMobile(context)) ...[
+                  Text(
+                    commit.date,
+                    style: TextStyle(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withOpacity(0.6),
+                    ),
+                    maxLines: 1,
                   ),
-                  maxLines: 1,
-                ),
+                ],
               ],
             ),
             trailing: IconButton(
@@ -388,6 +341,60 @@ class GitStampCommitListElement extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  void showGitDiffStat(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: GitStampCommitListHeader(
+                        commit: commit,
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      showGitStampDetailsPage(
+                        context: context,
+                        commit: commit,
+                        monospaceFontFamily: monospaceFontFamily,
+                      );
+                    },
+                    icon: Icon(Icons.arrow_forward),
+                  ),
+                ],
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Text(
+                      GitStamp.diffStatList[commit.hash] ?? '',
+                      style: TextStyle(
+                        fontSize: 10,
+                        fontFamily: monospaceFontFamily,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
