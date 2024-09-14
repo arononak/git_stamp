@@ -23,4 +23,3 @@ pubspec.lock
 .flutter-plugins-dependencies
 
 example/lib/git_stamp/
-example/integration_test/physical_size.dart
