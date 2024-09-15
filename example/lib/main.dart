@@ -9,7 +9,7 @@ import 'git_stamp/git_stamp.dart';
 String? get monospaceFontFamily {
   /// Don't forget about the font's open source license terms in Your App:
   /// https://pub.dev/packages/google_fonts#licensing-fonts
-  return kIsWeb ? GoogleFonts.spaceMono().fontFamily : 'SourceCodePro';
+  return kIsWeb ? GoogleFonts.sourceCodePro().fontFamily : 'SourceCodePro';
 }
 
 void main() {
