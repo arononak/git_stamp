@@ -12,7 +12,7 @@ const _text = TextStyle(fontSize: 12);
 const _textBold = TextStyle(fontSize: 12, fontWeight: FontWeight.bold);
 const _textTitle = TextStyle(fontSize: 16, fontWeight: FontWeight.bold);
 
-bool isMobile(context) => MediaQuery.of(context).size.width > 600;
+bool isMobile(context) => MediaQuery.of(context).size.width < 600;
 
 void showGitStampPage({
   required BuildContext context,
@@ -297,12 +297,12 @@ class GitStampCommitListElement extends StatelessWidget {
           child: ListTile(
             contentPadding: const EdgeInsets.all(0),
             leading: isMobile(context)
-                ? Icon(
+                ? null
+                : Icon(
                     Icons.code,
                     size: 36,
                     color: Theme.of(context).colorScheme.primary,
-                  )
-                : null,
+                  ),
             title: GitStampCommitListHeader(commit: commit),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -319,18 +319,16 @@ class GitStampCommitListElement extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                if (isMobile(context)) ...[
-                  Text(
-                    commit.date,
-                    style: TextStyle(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onSurface
-                          .withOpacity(0.6),
-                    ),
-                    maxLines: 1,
+                Text(
+                  commit.date,
+                  style: TextStyle(
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onSurface
+                        .withOpacity(0.6),
                   ),
-                ],
+                  maxLines: 1,
+                ),
               ],
             ),
             trailing: IconButton(
