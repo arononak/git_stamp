@@ -1,3 +1,12 @@
+## 4.8.0
+
+* Added `GitConfigList` module
+* Generator - Added files count
+* Generator - Fixed logo colors
+* SnackBar's Fixes
+* GitStampPage - Fixed commit item responsiveness
+* GitStampPage & GitStampDetailsPage - Fixed background colors
+
 ## 4.7.0
 
 * Added `GitRemote` module
@@ -5,8 +14,8 @@
 * Update `flutter doctor` -> `flutter doctor --verbose`
 * GitStampPage - New design
 * GitStampPage - Improved responsiveness
-* GitStampPage - Changed commit list texts to single line & Example project update
-* GitStampPage - Added `monospaceFontFamily` parameter & Example project update
+* GitStampPage - Changed commit list texts to single line
+* GitStampPage - Added `monospaceFontFamily` parameter
 * GitStampPage - Added arrow animation
 * GitStampPage - refactor
 
