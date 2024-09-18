@@ -34,12 +34,8 @@ class _GitStampIconState extends State<GitStampIcon> {
       waitDuration: Duration(days: 1),
       showDuration: Duration(seconds: 2),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primaryContainer,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.onPrimaryContainer,
-          width: 1.0,
-        ),
+        color: Theme.of(context).colorScheme.primary,
+        borderRadius: BorderRadius.circular(12),
       ),
       richMessage: TextSpan(
         children: <TextSpan>[
@@ -48,7 +44,7 @@ class _GitStampIconState extends State<GitStampIcon> {
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 14,
-              color: Theme.of(context).colorScheme.onPrimaryContainer,
+              color: Theme.of(context).colorScheme.onPrimary,
             ),
           ),
           TextSpan(
@@ -60,7 +56,7 @@ class _GitStampIconState extends State<GitStampIcon> {
             style: TextStyle(
               fontWeight: FontWeight.normal,
               fontSize: 12,
-              color: Theme.of(context).colorScheme.onPrimaryContainer,
+              color: Theme.of(context).colorScheme.onPrimary,
             ),
           ),
         ],
