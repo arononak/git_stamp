@@ -3,7 +3,7 @@ import 'dart:core';
 import 'package:args/args.dart';
 
 import 'git_stamp_logger.dart';
-import 'src/git_stamp_build.dart';
+import 'src/git_stamp_build_model.dart';
 import 'src/git_stamp_file.dart';
 import 'src/files/dynamic/git_stamp_dynamic_files.dart';
 import 'src/files/static/git_stamp_static_files.dart';
@@ -96,25 +96,25 @@ Future<void> main(List<String> arguments) async {
 
     switch (buildType) {
       case 'lite':
-        _generateDataFiles(GitStampBuild.all(), true);
+        _generateDataFiles(GitStampBuildModel.all(), true);
         _generateFlutterInterface(true);
         _generateFlutterIcon();
         _addPackageToPubspec('aron_gradient_line');
         _addPackageToPubspec('url_launcher');
         break;
       case 'full':
-        _generateDataFiles(GitStampBuild.all(), false);
+        _generateDataFiles(GitStampBuildModel.all(), false);
         _generateFlutterInterface(false);
         _generateFlutterIcon();
         _addPackageToPubspec('aron_gradient_line');
         _addPackageToPubspec('url_launcher');
         break;
       case 'icon':
-        _generateDataFiles(GitStampBuild.tooltip(), true);
+        _generateDataFiles(GitStampBuildModel.icon(), true);
         _generateFlutterIcon();
         break;
       case 'custom':
-        _generateDataFiles(GitStampBuild.custom(genOnly ?? []), false);
+        _generateDataFiles(GitStampBuildModel.custom(genOnly ?? []), false);
         break;
       default:
     }
@@ -137,7 +137,7 @@ Future<void> main(List<String> arguments) async {
 }
 
 void _generateDataFiles(
-  GitStampBuild files,
+  GitStampBuildModel files,
   bool isLiteVersion,
 ) {
   GitStampMain(files.generateFlutterFiles).generate();

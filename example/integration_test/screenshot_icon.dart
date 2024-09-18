@@ -1,5 +1,4 @@
 import 'package:example/main.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -23,10 +22,7 @@ void main() {
     );
 
     final iconButtonFinder = find.byType(IconButton);
-    final iconButtonOffset = tester.getCenter(iconButtonFinder);
-    final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
-    await gesture.addPointer();
-    await gesture.moveTo(iconButtonOffset);
+    await tester.tap(iconButtonFinder);
 
     await tester.pump(Duration(seconds: 1));
     await tester.pump(Duration(seconds: 1));

@@ -8,7 +8,7 @@ import 'raw/raw_git_stamp_page.dart';
 import 'raw/raw_git_stamp_utils.dart';
 import 'raw/raw_git_stamp_icon.dart';
 import 'raw/raw_git_stamp_license_page.dart';
-import '../../git_stamp_build.dart';
+import '../../git_stamp_build_model.dart';
 import '../../git_stamp_file.dart';
 
 class GitStampMain extends GitStampMainFile {
@@ -24,7 +24,7 @@ class GitStampMain extends GitStampMainFile {
 }
 
 class GitStampNode extends GitStampMainFile {
-  final GitStampBuild dataFiles;
+  final GitStampBuildModel dataFiles;
 
   GitStampNode(this.dataFiles);
 

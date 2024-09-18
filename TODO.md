@@ -46,3 +46,4 @@
 - [ ] InApp - AppBar - 1 icon
 - [ ] Generator - Logger refactor
 - [ ] InApp - Text file content open in app
+- [ ] CI - Flutter from source

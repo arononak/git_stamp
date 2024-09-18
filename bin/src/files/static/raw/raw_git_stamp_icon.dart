@@ -3,42 +3,74 @@ import 'package:flutter/material.dart';
 
 import '../../git_stamp.dart';
 
-class GitStampIcon extends StatelessWidget {
+class GitStampIcon extends StatefulWidget {
   const GitStampIcon({Key? key}) : super(key: key);
+
+  @override
+  State<GitStampIcon> createState() => _GitStampIconState();
+}
+
+class _GitStampIconState extends State<GitStampIcon> {
+  final _tooltipKey = GlobalKey<TooltipState>();
+  bool _isTooltipVisible = false;
+
+  void _toggleTooltip() {
+    if (_isTooltipVisible) {
+      if (mounted) setState(() => _isTooltipVisible = false);
+    } else {
+      _tooltipKey.currentState?.ensureTooltipVisible();
+      if (mounted) setState(() => _isTooltipVisible = true);
+
+      Future.delayed(Duration(seconds: 2), () {
+        if (mounted) setState(() => _isTooltipVisible = false);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Tooltip(
+      key: _tooltipKey,
+      waitDuration: Duration(days: 1),
+      showDuration: Duration(seconds: 2),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary,
+        color: Theme.of(context).colorScheme.primaryContainer,
         borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.onPrimaryContainer,
+          width: 1.0,
+        ),
       ),
       richMessage: TextSpan(
         children: <TextSpan>[
           TextSpan(
-            text: 'Git Stamp\\n',
+            text: 'Git Stamp',
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.onPrimary
+              fontSize: 14,
+              color: Theme.of(context).colorScheme.onPrimaryContainer,
             ),
           ),
           TextSpan(
-            text: ''
+            text: '\\n'
+                'Version: \${GitStamp.appVersion} (\${GitStamp.appBuild})\\n'
                 'Date: \${GitStamp.buildDateTime}\\n'
                 'Branch: \${GitStamp.buildBranch}\\n'
                 'SHA: \${GitStamp.sha}',
             style: TextStyle(
               fontWeight: FontWeight.normal,
-              color: Theme.of(context).colorScheme.onPrimary,
+              fontSize: 12,
+              color: Theme.of(context).colorScheme.onPrimaryContainer,
             ),
           ),
         ],
       ),
       child: IconButton(
         icon: Icon(Icons.developer_board),
-        onPressed: () {},
+        onPressed: _toggleTooltip,
       ),
     );
   }
 }
+
 ''';

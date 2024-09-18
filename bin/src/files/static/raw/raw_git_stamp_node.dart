@@ -1,10 +1,10 @@
-import '../../../git_stamp_build.dart';
+import '../../../git_stamp_build_model.dart';
 
 extension BoolExtension on bool {
   String get enabled => this ? '' : '//';
 }
 
-String rawGitStampNode(GitStampBuild files) => '''
+String rawGitStampNode(GitStampBuildModel files) => '''
 library git_stamp;
 
 ${(files.commitList || files.buildMachine).enabled}import 'dart:convert';

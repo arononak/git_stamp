@@ -1,4 +1,4 @@
-class GitStampBuild {
+class GitStampBuildModel {
   bool commitList = false;
   bool diffList = false;
   bool diffStatList = false;
@@ -18,7 +18,7 @@ class GitStampBuild {
   bool generateFlutterFiles = false;
   bool generateFlutterIcon = false;
 
-  GitStampBuild.all({
+  GitStampBuildModel.all({
     this.commitList = true,
     this.diffList = true,
     this.diffStatList = true,
@@ -39,14 +39,16 @@ class GitStampBuild {
     this.generateFlutterIcon = true,
   });
 
-  GitStampBuild.tooltip({
-    this.commitList = true,
+  GitStampBuildModel.icon({
+    this.appVersion = true,
+    this.appBuild = true,
     this.buildBranch = true,
     this.buildDateTime = true,
+    this.commitList = true,
     this.generateFlutterIcon = true,
   });
 
-  GitStampBuild.custom(List<String> args)
+  GitStampBuildModel.custom(List<String> args)
       : commitList = args.contains('commit-list'),
         diffList = args.contains('diff-list'),
         diffStatList = args.contains('diff-stat-list'),
