@@ -125,8 +125,8 @@ Future<void> main(List<String> arguments) async {
     final gitStampSize = directorySize('./lib/git_stamp');
     final filesCount = directoryFilesCount('./lib/git_stamp');
     GitStampLogger.lightGreen(
-          'Size of generated $filesCount files: $gitStampSize',
-        );
+      'Size of generated $filesCount files: $gitStampSize',
+    );
   } on FormatException catch (e) {
     GitStampLogger.red(e.message);
     GitStampLogger.red('Usage: dart run git_stamp [options]');
