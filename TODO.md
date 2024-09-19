@@ -44,6 +44,10 @@
 - [ ] Generator - git log --stat -1
 - [ ] InApp - Commit List - Another item design
 - [ ] InApp - AppBar - 1 icon
-- [ ] Generator - Logger refactor
+- [x] Generator - Logger refactor
 - [ ] InApp - Text file content open in app
 - [ ] CI - Flutter from source
+- [ ] InApp - Commit types: SMALL < 5 files, NORMAL 5 - 10 files, BIG > 10 files
+- [ ] InApp - Text files content
+- [ ] InApp - Default Widgets: Text, ListTile, Icon
+- [ ] InApp - More diff types
