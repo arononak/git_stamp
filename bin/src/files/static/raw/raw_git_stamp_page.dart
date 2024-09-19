@@ -228,7 +228,6 @@ class GitStampCommitList extends StatelessWidget {
 
     return ListView.builder(
       itemCount: groupedCommit.length,
-      padding: EdgeInsets.symmetric(horizontal: 4.0),
       itemBuilder: (context, index) {
         final header = groupedCommit.keys.elementAt(index);
         final commits = groupedCommit[header]!;
@@ -276,30 +275,23 @@ class GitStampCommitListElement extends StatelessWidget {
   final GitStampCommit commit;
   final bool isLiteVersion;
   final String? monospaceFontFamily;
-  final BorderRadius? borderRadius;
 
   const GitStampCommitListElement({
     required this.commit,
     this.isLiteVersion = true,
     this.monospaceFontFamily,
-    this.borderRadius,
   });
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
-      margin: EdgeInsets.symmetric(
-        horizontal: isMobile(context) ? 4.0 : 12.0,
-        vertical: 4.0,
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: borderRadius ?? BorderRadius.circular(12),
-      ),
+      color: Theme.of(context).colorScheme.surfaceContainer,
+      margin: EdgeInsets.symmetric(horizontal: 0.0, vertical: 4.0),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0.0)),
       elevation: 0.0,
       child: InkWell(
         onTap: isLiteVersion ? null : () => showGitDiffStat(context),
-        borderRadius: borderRadius ?? BorderRadius.circular(12),
+        splashColor: Colors.orange[900],
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: ListTile(
@@ -367,9 +359,7 @@ class GitStampCommitListElement extends StatelessWidget {
                   Expanded(
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
-                      child: GitStampCommitListHeader(
-                        commit: commit,
-                      ),
+                      child: GitStampCommitListHeader(commit: commit),
                     ),
                   ),
                   IconButton(
