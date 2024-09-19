@@ -276,22 +276,30 @@ class GitStampCommitListElement extends StatelessWidget {
   final GitStampCommit commit;
   final bool isLiteVersion;
   final String? monospaceFontFamily;
+  final BorderRadius? borderRadius;
 
   const GitStampCommitListElement({
     required this.commit,
     this.isLiteVersion = true,
     this.monospaceFontFamily,
+    this.borderRadius,
   });
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+      color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+      margin: EdgeInsets.symmetric(
+        horizontal: isMobile(context) ? 4.0 : 12.0,
+        vertical: 4.0,
       ),
+      shape: RoundedRectangleBorder(
+        borderRadius: borderRadius ?? BorderRadius.circular(12),
+      ),
+      elevation: 0.0,
       child: InkWell(
         onTap: isLiteVersion ? null : () => showGitDiffStat(context),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: borderRadius ?? BorderRadius.circular(12),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: ListTile(
