@@ -1,11 +1,11 @@
 {
-    "name": "example",
-    "short_name": "example",
+    "name": "Git Stamp package example",
+    "short_name": "Git Stamp",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "WEB version of using the Git Stamp package.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
