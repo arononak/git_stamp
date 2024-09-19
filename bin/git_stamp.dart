@@ -19,8 +19,6 @@ const gitStampAscii = r'''
 ''';
 
 Future<void> main(List<String> arguments) async {
-  GitStampLogger().logger.fine('');
-
   final parser = ArgParser()
     ..addOption(
       'build-type',
@@ -72,10 +70,10 @@ Future<void> main(List<String> arguments) async {
     final usage = parser.usage.split('\n').map((e) => '    $e').join('\n');
 
     if (results['help']) {
-      GitStampLogger().logger.config(usage);
+      GitStampLogger.lightGrey(usage);
       return;
     } else if (results['version']) {
-      GitStampLogger().logger.config(gitStampVersion);
+      GitStampLogger.lightGrey(gitStampVersion);
       return;
     }
 
@@ -86,10 +84,10 @@ Future<void> main(List<String> arguments) async {
     final buildType = isCustom ? 'custom' : results['build-type'].toLowerCase();
     final type = 'Build type: ${isCustom ? 'custom ($genOnly)' : buildType}\n';
 
-    GitStampLogger().logger.config(gitStampVersion);
-    GitStampLogger().logger.config(type);
+    GitStampLogger.lightGreen(gitStampVersion);
+    GitStampLogger.lightGreen(type);
     gitStampAscii.split('\n').forEach((line) {
-      GitStampLogger().logger.fine(line);
+      GitStampLogger.lightYellow(line);
     });
 
     await GitStampDirectory.recreateDirectories();
@@ -122,16 +120,16 @@ Future<void> main(List<String> arguments) async {
     stopwatch.stop();
 
     final seconds = stopwatch.elapsed.format();
-    GitStampLogger().logger.config('Generation time: ${seconds}s');
+    GitStampLogger.lightGreen('Generation time: ${seconds}s');
 
     final gitStampSize = directorySize('./lib/git_stamp');
     final filesCount = directoryFilesCount('./lib/git_stamp');
-    GitStampLogger().logger.config(
+    GitStampLogger.lightGreen(
           'Size of generated $filesCount files: $gitStampSize',
         );
   } on FormatException catch (e) {
-    GitStampLogger().logger.severe(e.message);
-    GitStampLogger().logger.severe('Usage: dart run git_stamp [options]');
+    GitStampLogger.red(e.message);
+    GitStampLogger.red('Usage: dart run git_stamp [options]');
     exit(1);
   }
 }
@@ -233,8 +231,8 @@ void _generateFlutterIcon() {
 void _addPackageToPubspec(String package) {
   final formatted = package.padRight(18);
   Process.runSync('dart', ['pub', 'add', package]).exitCode == 0
-      ? GitStampLogger().logger.info('Adding package  [$formatted]  Success')
-      : GitStampLogger().logger.severe('Adding package  [$formatted]  Failed');
+      ? GitStampLogger.lightGrey('Adding package  [$formatted]  Success')
+      : GitStampLogger.red('Adding package  [$formatted]  Failed');
 }
 
 extension DurationExtension on Duration {

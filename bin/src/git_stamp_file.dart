@@ -58,7 +58,7 @@ abstract class _GitStampFile {
     File(path).writeAsStringSync(content);
 
     final text = 'Generated ${getFileSize().padLeft(13)}               $path';
-    GitStampLogger().logger.info(text);
+    GitStampLogger.lightGrey(text);
   }
 }
 
