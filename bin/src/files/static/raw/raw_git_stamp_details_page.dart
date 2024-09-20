@@ -34,6 +34,18 @@ class GitStampDetailsPage extends StatelessWidget {
     this.monospaceFontFamily,
   }) : super(key: key);
 
+  Color _colorByLine(BuildContext context, String line) {
+    if (line.startsWith('- ')) {
+      return Theme.of(context).colorScheme.errorContainer;
+    }
+
+    if (line.startsWith('+ ')) {
+      return Theme.of(context).colorScheme.primaryContainer;
+    }
+
+    return Colors.transparent;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,12 +64,26 @@ class GitStampDetailsPage extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           child: Container(
             padding: EdgeInsets.all(16.0),
-            child: Text(
-              GitStamp.diffList[commit.hash] ?? '',
-              style: TextStyle(
-                fontFamily: monospaceFontFamily,
-                fontSize: 12,
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ...(GitStamp.diffList[commit.hash] ?? '')
+                    .toString()
+                    .split('\n')
+                    .map(
+                      (line) => Container(
+                        color: _colorByLine(context, line),
+                        child: Text(
+                          line,
+                          style: TextStyle(
+                            fontFamily: monospaceFontFamily,
+                            fontSize: 12,
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
+                        ),
+                      ),
+                    ),
+              ],
             ),
           ),
         ),
