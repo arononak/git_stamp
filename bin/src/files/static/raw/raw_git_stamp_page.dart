@@ -487,21 +487,31 @@ class GitStampRepoDetails extends StatelessWidget {
               IconButton(
                 onPressed: () {
                   Navigator.pop(context);
-                  showSnackbar(context, GitStamp.gitConfigList);
+                  showSnackbar(
+                    context: context,
+                    message: GitStamp.gitConfigList,
+                  );
                 },
                 icon: Icon(Icons.settings),
               ),
               IconButton(
                 onPressed: () {
                   Navigator.pop(context);
-                  showSnackbar(context, GitStamp.gitRemote);
+                  showSnackbar(
+                    context: context,
+                    message: GitStamp.gitRemote,
+                    showCloseIcon: true,
+                  );
                 },
                 icon: Icon(Icons.cloud),
               ),
               IconButton(
                 onPressed: () {
                   Navigator.pop(context);
-                  showSnackbar(context, GitStamp.buildSystemInfo);
+                  showSnackbar(
+                    context: context,
+                    message: GitStamp.buildSystemInfo,
+                  );
                 },
                 icon: Icon(Icons.medical_information),
               ),

@@ -4,37 +4,50 @@ import 'package:flutter/services.dart';
 
 import '../../git_stamp.dart';
 
-void showSnackbar(BuildContext context, String message) {
+void showSnackbar({
+  required BuildContext context,
+  required String message,
+  bool showCloseIcon = false,
+}) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      content: Container(
-        constraints: BoxConstraints(
-          maxHeight: MediaQuery.of(context).size.height,
-        ),
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Text(
-              message,
-              style: TextStyle(
-                fontSize: 12,
-                color: Theme.of(context).colorScheme.onPrimary,
+      closeIconColor: Colors.white,
+      showCloseIcon: showCloseIcon,
+      duration: Duration(seconds: 15),
+      backgroundColor: Colors.orange,
+      content: Stack(
+        children: [
+          Container(
+            constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(context).size.height,
+            ),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Text(
+                  message,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ),
           ),
-        ),
+        ],
       ),
-      showCloseIcon: true,
-      duration: Duration(seconds: 15),
-      backgroundColor: Theme.of(context).colorScheme.primary,
     ),
   );
 }
 
 void copyToClipboard(BuildContext context, String text) {
   Clipboard.setData(ClipboardData(text: text));
-  showSnackbar(context, 'Copied to clipboard!');
+  showSnackbar(
+    context: context,
+    message: 'Copied to clipboard!',
+    showCloseIcon: true,
+  );
 }
 
 Map<String, int> commitCountByAuthor() {
