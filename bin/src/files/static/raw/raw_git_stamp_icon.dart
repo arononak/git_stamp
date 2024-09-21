@@ -35,7 +35,7 @@ class _GitStampIconState extends State<GitStampIcon> {
       showDuration: Duration(seconds: 2),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.primary,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(8),
       ),
       richMessage: TextSpan(
         children: <TextSpan>[
