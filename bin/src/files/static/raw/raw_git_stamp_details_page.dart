@@ -1,4 +1,5 @@
 const rawGitStampDetailsPage = '''
+import 'package:example/git_stamp/src/ui/git_stamp_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:aron_gradient_line/aron_gradient_line.dart';
@@ -34,16 +35,38 @@ class GitStampDetailsPage extends StatelessWidget {
     this.monospaceFontFamily,
   }) : super(key: key);
 
-  Color _colorByLine(BuildContext context, String line) {
-    if (line.startsWith('- ')) {
+  Color _backgroundColor(BuildContext context, String line) {
+    if (line.startsWith('diff --git ') ||
+        line.startsWith('index ') ||
+        line.startsWith('--- ') ||
+        line.startsWith('+++ ') ||
+        line.startsWith('@@ ') ||
+        line.startsWith('new file mode ')) {
+      return Theme.of(context).colorScheme.tertiaryContainer.withOpacity(0.2);
+    } else if (line.startsWith('-') && !line.startsWith('--')) {
       return Theme.of(context).colorScheme.errorContainer;
-    }
-
-    if (line.startsWith('+ ')) {
+    } else if (line.startsWith('+') && !line.startsWith('++')) {
       return Theme.of(context).colorScheme.primaryContainer;
+    } else {
+      return Colors.transparent;
     }
+  }
 
-    return Colors.transparent;
+  Color? _textColor(BuildContext context, String line) {
+    if (line.startsWith('diff --git ') ||
+        line.startsWith('index ') ||
+        line.startsWith('--- ') ||
+        line.startsWith('+++ ') ||
+        line.startsWith('@@ ') ||
+        line.startsWith('new file mode ')) {
+      return Theme.of(context).colorScheme.onTertiaryContainer.withOpacity(0.4);
+    } else if (line.startsWith('-') && !line.startsWith('--')) {
+      return Theme.of(context).colorScheme.onErrorContainer;
+    } else if (line.startsWith('+') && !line.startsWith('++')) {
+      return Theme.of(context).colorScheme.onPrimaryContainer;
+    } else {
+      return Theme.of(context).colorScheme.onSurface;
+    }
   }
 
   @override
@@ -62,28 +85,33 @@ class GitStampDetailsPage extends StatelessWidget {
         scrollDirection: Axis.vertical,
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          child: Container(
-            padding: EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ...(GitStamp.diffList[commit.hash] ?? '')
-                    .toString()
-                    .split('\\n')
-                    .map(
-                      (line) => Container(
-                        color: _colorByLine(context, line),
-                        child: Text(
-                          line,
-                          style: TextStyle(
-                            fontFamily: monospaceFontFamily,
-                            fontSize: 12,
-                            color: Theme.of(context).colorScheme.onSurface,
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              minWidth: MediaQuery.of(context).size.width,
+            ),
+            child: Container(
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ...(GitStamp.diffList[commit.hash] ?? '')
+                      .toString()
+                      .split('\\n')
+                      .map(
+                        (line) => Container(
+                          color: _backgroundColor(context, line),
+                          child: Text(
+                            line,
+                            style: TextStyle(
+                              fontFamily: monospaceFontFamily,
+                              fontSize: 12,
+                              color: _textColor(context, line),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
