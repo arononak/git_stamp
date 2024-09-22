@@ -1,9 +1,5 @@
 [<img src="https://www.gov.pl/photo/f98cae42-2b90-4596-904c-752278f85606" height="100" align="right">](https://www.gov.pl/web/rolnictwo/produkt-polski1)
 
-# [Git Stamp 🏷](./TODO.md)
-
-Advanced await-less information provider. From simple information such as `build-branch` to a screen with Flutter code with commits and change history. [How it work?](./MECHANISM.md)
-
 [![Latest Tag](https://img.shields.io/github/v/tag/arononak/git_stamp?style=flat&logo=github&labelColor=black&color=white)](https://github.com/arononak/git_stamp/tags)
 [![GitHub stars](https://img.shields.io/github/stars/arononak/git_stamp.svg?style=flat&label=Star&labelColor=black&color=white)](https://github.com/arononak/git_stamp/)
 [![Commits](https://img.shields.io/github/commit-activity/m/arononak/git_stamp?style=flat&labelColor=black&color=white)](https://github.com/arononak/git_stamp/graphs/contributors)
@@ -14,7 +10,9 @@ Advanced await-less information provider. From simple information such as `build
 [![Likes](https://img.shields.io/pub/likes/git_stamp?style=flat&labelColor=fuchsia&color=white)](https://pub.dev/packages/git_stamp)
 [![package publisher](https://img.shields.io/pub/publisher/git_stamp?style=flat&labelColor=fuchsia&color=white)](https://pub.dev/packages/git_stamp/publisher)
 
-**Check out the [Example](https://gitstamp.web.app) 🌀**
+# [Git Stamp 🏷](./TODO.md)
+
+Advanced await-less information provider and tool.
 
 <details>
 <summary>Table of Contents</summary>
@@ -22,45 +20,48 @@ Advanced await-less information provider. From simple information such as `build
 - [Git Stamp 🏷](#git-stamp-)
   - [🏞️ Preview](#️-preview)
   - [📑️ About](#️-about)
-      - [Goal](#goal)
-      - [Motivation](#motivation)
-      - [Roadmap](#roadmap)
-        - [Changelogs (Text) (Image)](#changelogs-text-image)
+    - [Why Git Stamp?](#why-git-stamp)
+    - [Motivation](#motivation)
+    - [Roadmap](#roadmap)
   - [🛠️ Installation](#️-installation)
-      - [1. `pubspec.yaml`](#1-pubspecyaml)
-      - [2. `.gitignore`](#2-gitignore)
-      - [3. `analysis_options.yaml`](#3-analysis_optionsyaml)
-      - [4. `README.md`](#4-readmemd)
+    - [1. `pubspec.yaml`](#1-pubspecyaml)
+    - [2. `.gitignore`](#2-gitignore)
+    - [3. `analysis_options.yaml`](#3-analysis_optionsyaml)
+    - [4. `README.md`](#4-readmemd)
   - [🏗️ Generating](#️-generating)
-      - [1. Examples](#1-examples)
-      - [2. Tip](#2-tip)
-      - [3. Custom `gen-only` parameters](#3-custom-gen-only-parameters)
+    - [1. Examples](#1-examples)
+    - [2. Tip](#2-tip)
+    - [3. Custom `gen-only` parameters](#3-custom-gen-only-parameters)
   - [💻 Usage](#-usage)
-      - [1. ListTile](#1-listtile)
-      - [2. IconButton](#2-iconbutton)
-      - [3. showGitStampLicensePage()](#3-showgitstamplicensepage)
-      - [4. Central **GitStamp** node for advanced usage:](#4-central-gitstamp-node-for-advanced-usage)
+    - [1. GitStampListTile](#1-gitstamplisttile)
+    - [2. GitStampIcon](#2-gitstampicon)
+    - [3. custom](#3-custom)
+    - [4. showGitStampLicensePage()](#4-showgitstamplicensepage)
+    - [5. Central **GitStamp** node for advanced usage:](#5-central-gitstamp-node-for-advanced-usage)
   - [📦 Integration](#-integration)
-      - [GitHub Actions](#github-actions)
+    - [GitHub Actions](#github-actions)
   - [📝 License](#-license)
 
 </details>
 
 ## 🏞️ Preview
 
-|                                 |                                  |
-| :-----------------------------: | :-----------------------:        |
-| ![](screenshots/list.png)       | ![](screenshots/icon.png)        |
-| ![](screenshots/files.png)      | ![](screenshots/details.png)     |
-| ![](screenshots/git_config.png) | ![](screenshots/commit_diff.png) |
+| [🌀 Example](https://gitstamp.web.app) | [How it work?](./MECHANISM.md)   |
+| :------------------------------------: | :------------------------------: |
+| ![](screenshots/list.png)              | ![](screenshots/icon.png)        |
+| ![](screenshots/files.png)             | ![](screenshots/details.png)     |
+| ![](screenshots/git_config.png)        | ![](screenshots/commit_diff.png) |
 
 ## 📑️ About
 
-#### Goal
+### Why Git Stamp?
+When working with Flutter and Git, especially in a team environment, human errors such as forgetting to run git pull can lead to issues during branch merges. Git Stamp helps address these problems by offering:
+- **Build Date, SHA & Branch Information** - Git Stamp allows you to precisely determine which version of the application was deployed. This is especially useful during debugging or verifying issues, as application versions and build numbers are not always updated correctly.
+- **Debugging and Troubleshooting** - Knowing the build date and exact code version (SHA) makes it much easier for the development team to identify the problematic code when users report bugs.
+- **Avoiding Lost Changes in Teamwork** - It allows you to quickly see which commits made it into the final version of the application, helping to prevent missing changes due to overlooked git pull commands.
+- **Caching Issues in the Web Version** - Even if the latest version is deployed, users may still see an older version due to caching. Git Stamp helps identify whether the deployed version or an outdated one was loaded.
 
-The main goal is to help locate errors in the full process of building STAGE, TEST and PROD versions.
-
-#### Motivation
+### Motivation
 
 The main motivation was **Minecraft** with information like this:
 ```
@@ -80,9 +81,9 @@ Text('Branch: ${GitStamp.buildBranch}'),
 Text('SHA: ${GitStamp.sha}'),
 ```
 
-#### Roadmap
+### Roadmap
 
-##### Changelogs ([Text](./CHANGELOG.md)) ([Image](./changelog/CHANGELOG.md))
+Changelogs ([Text](./CHANGELOG.md)) ([Image](./changelog/CHANGELOG.md))
 
 | 🆕 **Version** | 🗓️ **Date**        |  📝 **Change Description**        |
 |----------------|--------------------|-----------------------------------|
@@ -96,13 +97,13 @@ Text('SHA: ${GitStamp.sha}'),
 
 ## 🛠️ Installation
 
-#### 1. `pubspec.yaml`
+### 1. `pubspec.yaml`
 
 ```
 dart pub add git_stamp
 ```
 
-#### 2. `.gitignore`
+### 2. `.gitignore`
 
 > [!IMPORTANT]
 > Add **git_stamp** to .gitignore.
@@ -111,7 +112,7 @@ dart pub add git_stamp
 > 
 > If you add a **/git_stamp** folder for the repository and use the `FULL` version, the size of the repository will grow EXPONENTIALLY.
 
-#### 3. `analysis_options.yaml`
+### 3. `analysis_options.yaml`
 
 ```yaml
 analyzer:
@@ -119,7 +120,7 @@ analyzer:
     - lib/git_stamp/**
 ```
 
-#### 4. `README.md`
+### 4. `README.md`
 
 > [!WARNING]
 > Add badge to your `README.md` 😄️
@@ -132,7 +133,7 @@ analyzer:
 
 ## 🏗️ Generating
 
-#### 1. Examples
+### 1. Examples
 
 | Build type | Pure Dart                  | CLI Command                                                  |
 | ---------- | -------------------------- | ------------------------------------------------------------ |
@@ -141,12 +142,12 @@ analyzer:
 | ICON       | NO                         | `dart run git_stamp --build-type icon`                       |
 | CUSTOM     | YES                        | `dart run git_stamp --gen-only build-branch,build-date-time` |
 
-#### 2. Tip
+### 2. Tip
 
 > [!CAUTION]
 > Generating requires the use of the `git` command-line interface (CLI).
 
-#### 3. Custom `gen-only` parameters 
+### 3. Custom `gen-only` parameters 
 
 | #  | Parameter          |
 |----|--------------------|
@@ -169,20 +170,22 @@ analyzer:
 
 ## 💻 Usage
 
-#### 1. ListTile
+### 1. GitStampListTile
 
 ```dart
 if (kDebugMode) ...[
-  ListTile(
-    title: const Text('Git Stamp'),
-    subtitle: Text(GitStamp.sha),
-    leading: const Icon(Icons.commit, monospaceFontFamily: GoogleFonts.spaceMono().fontFamily),
-    onTap: () => showGitStampPage(context: context),
-  ),
+  GitStampListTile(monospaceFontFamily: GoogleFonts.spaceMono().fontFamily),
 ],
 ```
 
-#### 2. IconButton
+### 2. GitStampIcon
+```dart
+if (isProd == false) ...[
+  GitStampIcon(),
+],
+```
+
+### 3. custom
 ```dart
 if (isProd == false) ...[
   IconButton(
@@ -192,12 +195,12 @@ if (isProd == false) ...[
 ],
 ```
 
-#### 3. showGitStampLicensePage()
+### 4. showGitStampLicensePage()
 
 > [!NOTE]
 > Use function `GitStamp.showLicensePage` instead of `showLicensePage` if you want the `name` and `version` to be added automatically.
 
-#### 4. Central **GitStamp** node for advanced usage:
+### 5. Central **GitStamp** node for advanced usage:
 
 ```dart
 class GitStamp {
@@ -242,7 +245,7 @@ class GitStamp {
 
 ## 📦 Integration
 
-#### GitHub Actions
+### GitHub Actions
 
 <details>
 <summary>.github/workflows/build_and_deploy.yml</summary>
