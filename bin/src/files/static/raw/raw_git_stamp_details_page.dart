@@ -43,9 +43,9 @@ class GitStampDetailsPage extends StatelessWidget {
         line.startsWith('@@ ') ||
         line.startsWith('new file mode ')) {
       return Theme.of(context).colorScheme.tertiaryContainer.withOpacity(0.2);
-    } else if (line.startsWith('-') && !line.startsWith('--')) {
+    } else if (line.startsWith('-') && !line.startsWith('--- ')) {
       return Theme.of(context).colorScheme.errorContainer;
-    } else if (line.startsWith('+') && !line.startsWith('++')) {
+    } else if (line.startsWith('+') && !line.startsWith('+++ ')) {
       return Theme.of(context).colorScheme.primaryContainer;
     } else {
       return Colors.transparent;
@@ -60,9 +60,9 @@ class GitStampDetailsPage extends StatelessWidget {
         line.startsWith('@@ ') ||
         line.startsWith('new file mode ')) {
       return Theme.of(context).colorScheme.onTertiaryContainer.withOpacity(0.4);
-    } else if (line.startsWith('-') && !line.startsWith('--')) {
+    } else if (line.startsWith('-') && !line.startsWith('--- ')) {
       return Theme.of(context).colorScheme.onErrorContainer;
-    } else if (line.startsWith('+') && !line.startsWith('++')) {
+    } else if (line.startsWith('+') && !line.startsWith('+++ ')) {
       return Theme.of(context).colorScheme.onPrimaryContainer;
     } else {
       return Theme.of(context).colorScheme.onSurface;
