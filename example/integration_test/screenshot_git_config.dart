@@ -25,6 +25,6 @@ void main() {
     await tester.tap(iconButtonFinder);
     await tester.pump(Duration(seconds: 1));
     await tester.pump(Duration(seconds: 1));
-    await binding.takeScreenshot('git_config');
+    await binding.takeScreenshot('screenshot_git_config');
   });
 }

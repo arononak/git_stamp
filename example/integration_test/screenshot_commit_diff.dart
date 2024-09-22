@@ -27,6 +27,6 @@ void main() {
     await tester.tap(iconButtonFinder);
     await tester.pump(Duration(seconds: 1));
     await tester.pump(Duration(seconds: 1));
-    await binding.takeScreenshot('commit_diff');
+    await binding.takeScreenshot('screenshot_commit_diff');
   });
 }
