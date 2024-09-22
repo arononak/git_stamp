@@ -1,7 +1,7 @@
-import 'package:example/git_stamp/src/ui/git_stamp_icon.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 
 import 'git_stamp/git_stamp.dart';
@@ -96,17 +96,7 @@ class SettingsPage extends StatelessWidget {
             leading: const Icon(Icons.numbers),
             onTap: () {},
           ),
-          ListTile(
-            title: const Text('Git Stamp Page'),
-            subtitle: Text(GitStamp.sha),
-            leading: const Icon(Icons.commit),
-            onTap: () {
-              showGitStampPage(
-                context: context,
-                monospaceFontFamily: monospaceFontFamily,
-              );
-            },
-          ),
+          GitStampListTile(monospaceFontFamily: monospaceFontFamily),
         ],
       ),
     );

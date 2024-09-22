@@ -7,6 +7,7 @@ import 'raw/raw_git_stamp_launcher.dart';
 import 'raw/raw_git_stamp_page.dart';
 import 'raw/raw_git_stamp_utils.dart';
 import 'raw/raw_git_stamp_icon.dart';
+import 'raw/raw_git_stamp_list_tile.dart';
 import 'raw/raw_git_stamp_license_page.dart';
 import '../../git_stamp_build_model.dart';
 import '../../git_stamp_file.dart';
@@ -89,6 +90,14 @@ class GitStampIcon extends GitStampUiFile {
 
   @override
   String get content => rawGitStampIcon;
+}
+
+class GitStampListTile extends GitStampUiFile {
+  @override
+  String get filename => 'git_stamp_list_tile.dart';
+
+  @override
+  String get content => rawGitStampListTile;
 }
 
 class GitStampLicensePage extends GitStampUiFile {

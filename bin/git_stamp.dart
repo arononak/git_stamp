@@ -217,6 +217,7 @@ void _generateFlutterInterface(bool isLiteVersion) {
     GitStampUtils(),
     GitStampLauncher(),
     GitStampLicensePage(),
+    GitStampListTile(),
   ];
 
   for (var element in gitStampUi) {
