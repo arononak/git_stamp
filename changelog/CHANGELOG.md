@@ -1,3 +1,7 @@
+## 4.9.0
+
+![](https://github.com/arononak/git_stamp/blob/main/changelog/4.9.0.png?raw=true)
+
 ## 4.8.0
 
 ![](https://github.com/arononak/git_stamp/blob/main/changelog/4.8.0.png?raw=true)

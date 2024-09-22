@@ -1,3 +1,11 @@
+## 4.9.0
+
+* New GitStampIcon
+* New GitStampLogger
+* New orange SnackBar
+* GitStampPage - Fixed commit item style
+* GitStampDetailsPage - Added diff line colors
+
 ## 4.8.0
 
 * Added `GitConfigList` module
