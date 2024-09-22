@@ -48,13 +48,11 @@ Advanced await-less information provider. From simple information such as `build
 
 ## 🏞️ Preview
 
-| List                      | Icon                      |
-| :-----------------------: | :-----------------------: |
-| ![](screenshots/list.png) | ![](screenshots/icon.png) |
-
-| Files                      | Details                      |
-| :------------------------: | :--------------------------: |
-| ![](screenshots/files.png) | ![](screenshots/details.png) |
+|                                 |                                  |
+| :-----------------------------: | :-----------------------:        |
+| ![](screenshots/list.png)       | ![](screenshots/icon.png)        |
+| ![](screenshots/files.png)      | ![](screenshots/details.png)     |
+| ![](screenshots/git_config.png) | ![](screenshots/commit_diff.png) |
 
 ## 📑️ About
 

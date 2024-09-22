@@ -36,22 +36,30 @@ screenshots:
 	npx chromedriver --port=4444 & echo $$! > chromedriver.pid
 	sleep 2
 	echo "import 'dart:ui'; const physicalSize = Size(610, 885);" > integration_test/physical_size.dart
-	flutter drive --driver=test_driver/integration_test.dart --target=integration_test/screenshot_list.dart -d web-server
-	flutter drive --driver=test_driver/integration_test.dart --target=integration_test/screenshot_icon.dart -d web-server
-	flutter drive --driver=test_driver/integration_test.dart --target=integration_test/screenshot_files.dart -d web-server
+	flutter drive --driver=test_driver/integration_test.dart --target=integration_test/screenshot_commit_diff.dart -d web-server
+	flutter drive --driver=test_driver/integration_test.dart --target=integration_test/screenshot_git_config.dart -d web-server
 	flutter drive --driver=test_driver/integration_test.dart --target=integration_test/screenshot_details.dart -d web-server
-	convert screenshot_list.png -crop 610x885+0+0 list.png
-	convert screenshot_icon.png -crop 610x885+0+0 icon.png
-	convert screenshot_files.png -crop 610x885+0+0 files.png
+	flutter drive --driver=test_driver/integration_test.dart --target=integration_test/screenshot_files.dart -d web-server
+	flutter drive --driver=test_driver/integration_test.dart --target=integration_test/screenshot_icon.dart -d web-server
+	flutter drive --driver=test_driver/integration_test.dart --target=integration_test/screenshot_list.dart -d web-server
+	convert screenshot_commit_diff.png -crop 610x885+0+0 commit_diff.png
+	convert screenshot_git_config.png -crop 610x885+0+0 git_config.png
 	convert screenshot_details.png -crop 610x885+0+0 details.png
+	convert screenshot_files.png -crop 610x885+0+0 files.png
+	convert screenshot_icon.png -crop 610x885+0+0 icon.png
+	convert screenshot_list.png -crop 610x885+0+0 list.png
+	rm -f screenshot_commit_diff.png
+	rm -f screenshot_git_config.png
+	rm -f screenshot_details.png
+	rm -f screenshot_files.png
 	rm -f screenshot_icon.png
 	rm -f screenshot_list.png
-	rm -f screenshot_files.png
-	rm -f screenshot_details.png
+	mv commit_diff.png ../screenshots
+	mv git_config.png ../screenshots
+	mv details.png ../screenshots
+	mv files.png ../screenshots
 	mv icon.png ../screenshots
 	mv list.png ../screenshots
-	mv files.png ../screenshots
-	mv details.png ../screenshots
 	kill $$(cat chromedriver.pid)
 	rm -f chromedriver.pid
 	rm -f -r chromedriver
