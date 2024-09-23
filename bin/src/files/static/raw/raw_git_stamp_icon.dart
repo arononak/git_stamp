@@ -48,10 +48,10 @@ class _GitStampIconState extends State<GitStampIcon> {
             ),
           ),
           TextSpan(
-            text: '\\n'
-                'Version: \${GitStamp.appVersion} (\${GitStamp.appBuild})\\n'
-                'Date: \${GitStamp.buildDateTime}\\n'
-                'Branch: \${GitStamp.buildBranch}\\n'
+            text: '\$newLine'
+                'Version: \${GitStamp.appVersion} (\${GitStamp.appBuild})' '\$newLine'
+                'Date: \${GitStamp.buildDateTime}' '\$newLine'
+                'Branch: \${GitStamp.buildBranch}' '\$newLine'
                 'SHA: \${GitStamp.sha}',
             style: TextStyle(
               fontWeight: FontWeight.normal,
