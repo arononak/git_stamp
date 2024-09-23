@@ -115,13 +115,9 @@ class _GitStampPageState extends State<GitStampPage> {
         ),
         backgroundColor: Colors.transparent,
         surfaceTintColor: Colors.transparent,
-        title: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text('Git Stamp', style: TextStyle(fontSize: 20)),
-            SizedBox(width: 8.0),
-            GitStampTextLabel(text: GitStamp.commitCount.toString()),
-          ],
+        title: GitStampLabel(
+          first: 'Git Stamp',
+          second: GitStamp.commitCount.toString(),
         ),
         flexibleSpace: Center(
           child: SafeArea(
@@ -653,14 +649,9 @@ class GitStampRepoFiles extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                Text('Repository files', style: _textTitle),
-                SizedBox(width: 8.0),
-                GitStampTextLabel(
-                  text: GitStamp.observedFilesCount.toString(),
-                ),
-              ],
+            GitStampLabel(
+              first: 'Repository files',
+              second: GitStamp.observedFilesCount.toString(),
             ),
             SizedBox(height: 16.0),
             Text(GitStamp.observedFiles, style: _text),
@@ -754,6 +745,25 @@ class GitStampMore extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class GitStampLabel extends StatelessWidget {
+  final String first;
+  final String second;
+
+  const GitStampLabel({super.key, required this.first, required this.second});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(first, style: TextStyle(fontSize: 20)),
+        SizedBox(width: 8.0),
+        GitStampTextLabel(text: second),
+      ],
     );
   }
 }

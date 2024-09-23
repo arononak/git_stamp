@@ -99,7 +99,7 @@ class GitStampDetailsPage extends StatelessWidget {
                 children: [
                   ...(GitStamp.diffList[commit.hash] ?? '')
                       .toString()
-                      .split('\n')
+                      .split('\\n')
                       .map(
                         (line) => Container(
                           color: _backgroundColor(context, line),
