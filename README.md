@@ -14,6 +14,8 @@
 
 Advanced await-less information provider and development tool.
 
+[How it work?](./MECHANISM.md)
+
 <details>
 <summary>Table of Contents</summary>
   
@@ -46,11 +48,13 @@ Advanced await-less information provider and development tool.
 
 ## 🏞️ Preview
 
-| [🌀 Example](https://gitstamp.web.app) | [How it work?](./MECHANISM.md)   |
-| :------------------------------------: | :------------------------------: |
-| ![](screenshots/list.png)              | ![](screenshots/icon.png)        |
-| ![](screenshots/files.png)             | ![](screenshots/details.png)     |
-| ![](screenshots/git_config.png)        | ![](screenshots/commit_diff.png) |
+[🌀 Example](https://gitstamp.web.app)
+
+|                                 |                                  |
+| :-----------------------------: | :------------------------------: |
+| ![](screenshots/list.png)       | ![](screenshots/icon.png)        |
+| ![](screenshots/files.png)      | ![](screenshots/details.png)     |
+| ![](screenshots/git_config.png) | ![](screenshots/commit_diff.png) |
 
 ## 📑️ About
 
