@@ -18,6 +18,7 @@ ${generateFlutterFiles.enabled}export 'src/ui/git_stamp_list_tile.dart';
 ${generateFlutterFiles.enabled}import 'src/ui/is_lite_version.dart';
 import './git_stamp_tool_version.dart';
 
+const newLine = '\\n';
 ${generateFlutterFiles.enabled}const bool isLiteVersion = gitStampIsLiteVersion;
 const String gitStampVersion = gitStampToolVersion;
 ''';

@@ -1,5 +1,4 @@
 const rawGitStampDetailsPage = '''
-import 'package:example/git_stamp/src/ui/git_stamp_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:aron_gradient_line/aron_gradient_line.dart';
@@ -25,7 +24,7 @@ void showGitStampDetailsPage({
   ));
 }
 
-class GitStampDetailsPage extends StatelessWidget {
+class GitStampDetailsPage extends StatefulWidget {
   final GitStampCommit commit;
   final String? monospaceFontFamily;
 
@@ -34,6 +33,103 @@ class GitStampDetailsPage extends StatelessWidget {
     required this.commit,
     this.monospaceFontFamily,
   }) : super(key: key);
+
+  @override
+  State<GitStampDetailsPage> createState() => _GitStampDetailsPageState();
+}
+
+class _GitStampDetailsPageState extends State<GitStampDetailsPage> {
+  var _fontSize = 12.0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        surfaceTintColor: Colors.transparent,
+        title: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: GitStampCommitListHeader(commit: widget.commit),
+        ),
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(4.0),
+          child: AronGradientLine(),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () => setState(() => _fontSize -= 1.0),
+            icon: Icon(Icons.remove_circle),
+          ),
+          IconButton(
+            onPressed: () => setState(() => _fontSize += 1.0),
+            icon: Icon(Icons.add_circle),
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              minWidth: MediaQuery.of(context).size.width,
+            ),
+            child: Container(
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  GitStampDetailsPageText(
+                    diffList: GitStamp.diffList[widget.commit.hash] ?? '',
+                    monospaceFontFamily: widget.monospaceFontFamily,
+                    fontSize: _fontSize,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class GitStampDetailsPageText extends StatelessWidget {
+  final String diffList;
+  final double fontSize;
+  final String? monospaceFontFamily;
+
+  const GitStampDetailsPageText({
+    super.key,
+    required this.diffList,
+    required this.fontSize,
+    this.monospaceFontFamily,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SelectableText.rich(
+      TextSpan(
+        children: [
+          ...diffList.split(newLine).map(
+            (line) {
+              return TextSpan(
+                text: line + newLine,
+                style: TextStyle(
+                  color: _textColor(context, line),
+                  backgroundColor: _backgroundColor(context, line),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+      style: TextStyle(
+        fontSize: fontSize,
+        fontFamily: monospaceFontFamily,
+      ),
+    );
+  }
 
   Color _backgroundColor(BuildContext context, String line) {
     if (line.startsWith('diff --git ') ||
@@ -44,9 +140,9 @@ class GitStampDetailsPage extends StatelessWidget {
         line.startsWith('new file mode ')) {
       return Theme.of(context).colorScheme.tertiaryContainer.withOpacity(0.2);
     } else if (line.startsWith('-') && !line.startsWith('--- ')) {
-      return Theme.of(context).colorScheme.errorContainer;
+      return Theme.of(context).colorScheme.errorContainer.withOpacity(0.8);
     } else if (line.startsWith('+') && !line.startsWith('+++ ')) {
-      return Theme.of(context).colorScheme.primaryContainer;
+      return Theme.of(context).colorScheme.primaryContainer.withOpacity(0.8);
     } else {
       return Colors.transparent;
     }
@@ -67,59 +163,6 @@ class GitStampDetailsPage extends StatelessWidget {
     } else {
       return Theme.of(context).colorScheme.onSurface;
     }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        surfaceTintColor: Colors.transparent,
-        title: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: GitStampCommitListHeader(commit: commit),
-        ),
-        bottom: const PreferredSize(
-          preferredSize: Size.fromHeight(4.0),
-          child: AronGradientLine(),
-        ),
-      ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              minWidth: MediaQuery.of(context).size.width,
-            ),
-            child: Container(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ...(GitStamp.diffList[commit.hash] ?? '')
-                      .toString()
-                      .split('\\n')
-                      .map(
-                        (line) => Container(
-                          color: _backgroundColor(context, line),
-                          child: Text(
-                            line,
-                            style: TextStyle(
-                              fontFamily: monospaceFontFamily,
-                              fontSize: 12,
-                              color: _textColor(context, line),
-                            ),
-                          ),
-                        ),
-                      ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
   }
 }
 
