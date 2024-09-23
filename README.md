@@ -12,7 +12,7 @@
 
 # [Git Stamp 🏷](./TODO.md)
 
-Advanced await-less information provider and tool.
+Advanced await-less information provider and development tool.
 
 <details>
 <summary>Table of Contents</summary>

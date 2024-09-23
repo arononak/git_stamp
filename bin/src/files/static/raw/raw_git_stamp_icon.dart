@@ -63,6 +63,7 @@ class _GitStampIconState extends State<GitStampIcon> {
       ),
       child: IconButton(
         icon: Icon(Icons.developer_board),
+        highlightColor: Colors.orange[900],
         onPressed: _toggleTooltip,
       ),
     );
