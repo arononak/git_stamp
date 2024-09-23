@@ -51,3 +51,7 @@
 - [ ] InApp - Text files content
 - [ ] InApp - Default Widgets: Text, ListTile, Icon
 - [ ] InApp - More diff types
+- [ ] InApp - Router to web
+- [ ] CI - pana
+- [ ] Generator - Disable --add-pub=disable
+- [ ] InApp - GitStampDetailsPage - integration test load GoogleFont
