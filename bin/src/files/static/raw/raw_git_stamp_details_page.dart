@@ -41,6 +41,8 @@ class GitStampDetailsPage extends StatefulWidget {
 class _GitStampDetailsPageState extends State<GitStampDetailsPage> {
   var _fontSize = 12.0;
 
+  String get diffList => GitStamp.diffList[widget.commit.hash] ?? '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,6 +58,10 @@ class _GitStampDetailsPageState extends State<GitStampDetailsPage> {
           child: AronGradientLine(),
         ),
         actions: [
+          IconButton(
+            onPressed: () => copyToClipboard(context, diffList),
+            icon: Icon(Icons.copy),
+          ),
           IconButton(
             onPressed: () => setState(() => _fontSize -= 1.0),
             icon: Icon(Icons.remove_circle),
@@ -80,7 +86,7 @@ class _GitStampDetailsPageState extends State<GitStampDetailsPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   GitStampDetailsPageText(
-                    diffList: GitStamp.diffList[widget.commit.hash] ?? '',
+                    diffList: diffList,
                     monospaceFontFamily: widget.monospaceFontFamily,
                     fontSize: _fontSize,
                   ),
