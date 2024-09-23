@@ -1,14 +1,14 @@
 [<img src="https://www.gov.pl/photo/f98cae42-2b90-4596-904c-752278f85606" height="100" align="right">](https://www.gov.pl/web/rolnictwo/produkt-polski1)
 
 [![Latest Tag](https://img.shields.io/github/v/tag/arononak/git_stamp?style=flat&logo=github&labelColor=black&color=white)](https://github.com/arononak/git_stamp/tags)
-[![GitHub stars](https://img.shields.io/github/stars/arononak/git_stamp.svg?style=flat&label=Star&labelColor=black&color=white)](https://github.com/arononak/git_stamp/)
-[![Commits](https://img.shields.io/github/commit-activity/m/arononak/git_stamp?style=flat&labelColor=black&color=white)](https://github.com/arononak/git_stamp/graphs/contributors)
-![Dev](https://img.shields.io/github/actions/workflow/status/arononak/git_stamp/.github%2Fworkflows%2Fdev.yml?style=flat&labelColor=black&color=white&label=dev)
-![Prod](https://img.shields.io/github/actions/workflow/status/arononak/git_stamp/.github%2Fworkflows%2Fprod.yml?style=flat&labelColor=black&color=white&label=prod)
+[![GitHub stars](https://img.shields.io/github/stars/arononak/git_stamp.svg?style=flat&logo=github&label=Star&labelColor=black&color=white)](https://github.com/arononak/git_stamp/)
+[![Commits](https://img.shields.io/github/commit-activity/m/arononak/git_stamp?style=flat&logo=github&labelColor=black&color=white)](https://github.com/arononak/git_stamp/graphs/contributors)
+![Dev](https://img.shields.io/github/actions/workflow/status/arononak/git_stamp/.github%2Fworkflows%2Fdev.yml?style=flat&logo=github&labelColor=black&color=white&label=dev)
+![Prod](https://img.shields.io/github/actions/workflow/status/arononak/git_stamp/.github%2Fworkflows%2Fprod.yml?style=flat&logo=github&labelColor=black&color=white&label=prod)
 
-[![Pub Package](https://img.shields.io/pub/v/git_stamp.svg?style=flat&logo=dart&labelColor=fuchsia&color=white)](https://pub.dev/packages/git_stamp)
-[![Likes](https://img.shields.io/pub/likes/git_stamp?style=flat&labelColor=fuchsia&color=white)](https://pub.dev/packages/git_stamp)
-[![package publisher](https://img.shields.io/pub/publisher/git_stamp?style=flat&labelColor=fuchsia&color=white)](https://pub.dev/packages/git_stamp/publisher)
+[![Pub Package](https://img.shields.io/pub/v/git_stamp.svg?style=flat&logo=dart&labelColor=289ACF&color=white)](https://pub.dev/packages/git_stamp)
+[![Likes](https://img.shields.io/pub/likes/git_stamp?style=flat&logo=dart&labelColor=289ACF&color=white)](https://pub.dev/packages/git_stamp)
+[![package publisher](https://img.shields.io/pub/publisher/git_stamp?style=flat&logo=dart&labelColor=289ACF&color=white)](https://pub.dev/packages/git_stamp/publisher)
 
 # [Git Stamp 🏷](./TODO.md)
 
