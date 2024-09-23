@@ -75,7 +75,10 @@ class GitStampDetailsPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         surfaceTintColor: Colors.transparent,
-        title: GitStampCommitListHeader(commit: commit),
+        title: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: GitStampCommitListHeader(commit: commit),
+        ),
         bottom: const PreferredSize(
           preferredSize: Size.fromHeight(4.0),
           child: AronGradientLine(),
@@ -96,7 +99,7 @@ class GitStampDetailsPage extends StatelessWidget {
                 children: [
                   ...(GitStamp.diffList[commit.hash] ?? '')
                       .toString()
-                      .split('\\n')
+                      .split('\n')
                       .map(
                         (line) => Container(
                           color: _backgroundColor(context, line),
