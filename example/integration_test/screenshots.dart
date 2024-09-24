@@ -2,6 +2,7 @@ import 'package:example/git_stamp/git_stamp.dart';
 import 'package:example/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'physical_size.dart';
@@ -103,7 +104,9 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
-        home: GitStampPage(),
+        home: GitStampPage(
+          monospaceFontFamily: GoogleFonts.sourceCodePro().fontFamily,
+        ),
         themeMode: ThemeMode.dark,
         darkTheme: ThemeData.dark(useMaterial3: true),
         debugShowCheckedModeBanner: false,
