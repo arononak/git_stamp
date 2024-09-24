@@ -115,6 +115,7 @@ void main() {
     final firstItemFinder = find.byType(GitStampCommitListElement).first;
     await tester.tap(firstItemFinder);
     await tester.pump(Duration(seconds: 1));
+    await tester.pump(Duration(seconds: 1));
     final iconButtonFinder = find.byIcon(Icons.arrow_forward);
     await tester.tap(iconButtonFinder);
     await tester.pump(Duration(seconds: 1));
