@@ -7,14 +7,16 @@ import '../../git_stamp.dart';
 void showSnackbar({
   required BuildContext context,
   required String message,
+  bool floating = true,
   bool showCloseIcon = false,
 }) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       closeIconColor: Colors.white,
       showCloseIcon: showCloseIcon,
-      duration: Duration(seconds: 15),
-      backgroundColor: Colors.orange,
+      behavior: floating ? SnackBarBehavior.floating : SnackBarBehavior.fixed,
+      duration: floating ? Duration(seconds: 3) : Duration(seconds: 15),
+      backgroundColor: Colors.orange.withOpacity(0.9),
       content: Stack(
         children: [
           Container(

@@ -486,6 +486,7 @@ class GitStampRepoDetails extends StatelessWidget {
                   showSnackbar(
                     context: context,
                     message: GitStamp.gitConfigList,
+                    floating: false,
                   );
                 },
                 icon: Icon(Icons.settings),
@@ -507,6 +508,7 @@ class GitStampRepoDetails extends StatelessWidget {
                   showSnackbar(
                     context: context,
                     message: GitStamp.buildSystemInfo,
+                    floating: false,
                   );
                 },
                 icon: Icon(Icons.medical_information),
