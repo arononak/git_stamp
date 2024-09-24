@@ -59,10 +59,6 @@ class _GitStampDetailsPageState extends State<GitStampDetailsPage> {
         ),
         actions: [
           IconButton(
-            onPressed: () => copyToClipboard(context, diffList),
-            icon: Icon(Icons.copy),
-          ),
-          IconButton(
             onPressed: () => setState(() => _fontSize -= 1.0),
             icon: Icon(Icons.remove_circle),
           ),
@@ -95,6 +91,10 @@ class _GitStampDetailsPageState extends State<GitStampDetailsPage> {
             ),
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton.small(
+        onPressed: () => copyToClipboard(context, diffList),
+        child: Icon(Icons.copy),
       ),
     );
   }
