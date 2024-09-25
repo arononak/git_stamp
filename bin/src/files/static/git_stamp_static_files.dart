@@ -14,14 +14,15 @@ import '../../git_stamp_file.dart';
 
 class GitStampMain extends GitStampMainFile {
   final bool generateFlutterFiles;
+  final bool generateFlutterIcon;
 
-  GitStampMain(this.generateFlutterFiles);
+  GitStampMain(this.generateFlutterFiles, this.generateFlutterIcon);
 
   @override
   String get filename => 'git_stamp.dart';
 
   @override
-  String get content => rawGitStamp(generateFlutterFiles);
+  String get content => rawGitStamp(generateFlutterFiles, generateFlutterIcon);
 }
 
 class GitStampNode extends GitStampMainFile {
