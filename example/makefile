@@ -36,6 +36,7 @@ screenshots:
 	npx chromedriver --port=4444 & echo $$! > chromedriver.pid
 	sleep 2
 	echo "import 'dart:ui'; const physicalSize = Size(610, 885);" > integration_test/physical_size.dart
+	dart run git_stamp --build-type full
 	flutter drive --driver=test_driver/integration_test.dart --target=integration_test/screenshots.dart -d web-server
 	convert screenshot_commit_diff.png -crop 610x885+0+0 commit_diff.png
 	convert screenshot_git_config.png -crop 610x885+0+0 git_config.png
