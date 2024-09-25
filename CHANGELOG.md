@@ -1,4 +1,12 @@
-## 4.9.0
+## 4.10.0
+
+* **Fixed icon build type**
+* New GitStampDetailsPage
+* New transparent SnackBars
+* GitStampPage - refactor
+* GitStampIcon - refactor
+
+## 4.9.0 (Not working)
 
 * New GitStampIcon
 * New GitStampLogger
