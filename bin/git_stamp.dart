@@ -138,7 +138,8 @@ void _generateDataFiles(
   GitStampBuildModel files,
   bool isLiteVersion,
 ) {
-  GitStampMain(files.generateFlutterFiles, files.generateFlutterIcon).generate();
+  GitStampMain(files.generateFlutterFiles, files.generateFlutterIcon)
+      .generate();
   GitStampNode(files).generate();
   GitStampVersion().generate();
 
