@@ -75,9 +75,9 @@
 <li><a href="#%EF%B8%8F-about">📑️ About</a>
 <ul>
 <li><a href="#1-why-git-stamp">1. Why Git Stamp?</a></li>
-<li><a href="#2-how-it-work">2. How it work?</a></li>
+<li><a href="#2-%EF%B8%8F-mechanism">2. 🕯️ Mechanism</a></li>
 <li><a href="#3-motivation">3. Motivation</a></li>
-<li><a href="#4-roadmap">4. Roadmap</a></li>
+<li><a href="#4-roadmap-changelog">4. Roadmap (Changelog)</a></li>
 <li><a href="#5-sponsor">5. Sponsor</a></li>
 </ul>
 </li>
@@ -100,7 +100,7 @@
 <ul>
 <li><a href="#1-gitstamplisttile">1. GitStampListTile</a></li>
 <li><a href="#2-gitstampicon">2. GitStampIcon</a></li>
-<li><a href="#3-custom">3. custom</a></li>
+<li><a href="#3-custom">3. Custom</a></li>
 <li><a href="#4-showgitstamplicensepage">4. showGitStampLicensePage()</a></li>
 <li><a href="#5-central-gitstamp-node-for-advanced-usage">5. Central <strong>GitStamp</strong> node for advanced usage:</a></li>
 </ul>
@@ -149,7 +149,34 @@
 <li><strong>Avoiding Lost Changes in Teamwork</strong> - It allows you to quickly see which commits made it into the final version of the application, helping to prevent missing changes due to overlooked <code>git pull</code> commands.</li>
 <li><strong>Caching Issues in the Web Version</strong> - Even if the latest version is deployed, users may still see an older version due to caching. Git Stamp helps identify whether the deployed version or an outdated one was loaded.</li>
 </ul>
-<h3 id="2-how-it-workmechanismmd">2. <a href="./MECHANISM.md">How it work?</a></h3>
+<h3 id="2--mechanism">2. 🕯️ Mechanism</h3>
+<pre class="language-mermaid"><code class="language-mermaid">graph TD
+    CODE((SOURCE CODE))--&gt;SYNC(flutter pub get)
+    SYNC--&gt;BUILD(flutter build ...)
+
+    subgraph "App"
+        CODE
+        PUB
+        PUB((PACKAGES))--&gt;CODE
+    end
+
+    subgraph "Git Stamp"
+        GIT_CLI(GIT CLI)--&gt;GENERATOR
+        DART_CLI(DART CLI)--&gt;GENERATOR
+        FLUTTER_CLI(FLUTTER CLI)--&gt;GENERATOR
+    end
+
+    subgraph "Git Stamp CLI"
+        GENERATE
+        ADD
+    end
+
+    GENERATOR((GENERATOR))--&gt;ADD(~$ dart pub add git_stamp)
+    ADD--&gt;|Add package|PUB
+
+    GENERATOR--&gt;GENERATE(~$ dart run git_stamp)
+    GENERATE--&gt;|Create ./git_stamp directory with .dart files|CODE
+</code></pre>
 <h3 id="3-motivation">3. Motivation</h3>
 <p>The main motivation was <strong>Minecraft</strong> with information like this:</p>
 <pre class="language-dart"><code>Version: v1.20.81
@@ -165,8 +192,7 @@ Text('Build: ${GitStamp.appBuild}'),
 Text('Branch: ${GitStamp.buildBranch}'),
 Text('SHA: ${GitStamp.sha}'),
 </code></pre>
-<h3 id="4-roadmap">4. Roadmap</h3>
-<p>Changelogs (<a href="./CHANGELOG.md">Text</a>) (<a href="./changelog/CHANGELOG.md">Image</a>)</p>
+<h3 id="4-roadmap-changelogchangelogmd">4. Roadmap (<a href="./CHANGELOG.md">Changelog</a>)</h3>
 <table>
 <thead>
 <tr>
@@ -353,7 +379,7 @@ Text('SHA: ${GitStamp.sha}'),
 <td>git-remote</td>
 </tr>
 <tr>
-<td>15</td>
+<td>16</td>
 <td>git-remote-list</td>
 </tr>
 </tbody>
@@ -369,7 +395,7 @@ Text('SHA: ${GitStamp.sha}'),
   GitStampIcon(),
 ],
 </code></pre>
-<h3 id="3-custom">3. custom</h3>
+<h3 id="3-custom">3. Custom</h3>
 <pre class="language-dart"><code class="language-dart">if (isProd == false) ...[
   IconButton(
     onPressed: () =&gt; showGitStampPage(context: context, monospaceFontFamily: GoogleFonts.spaceMono().fontFamily),
