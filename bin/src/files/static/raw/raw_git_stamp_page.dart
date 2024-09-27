@@ -90,6 +90,7 @@ class GitStampPage extends StatefulWidget {
 
 class _GitStampPageState extends State<GitStampPage> {
   final _arrowIconKey = GlobalKey<_GitStampArrowIconState>();
+  bool itemLargeType = true;
   String? _filterAuthorName;
 
   @override
@@ -128,6 +129,16 @@ class _GitStampPageState extends State<GitStampPage> {
                 children: [
                   IconButton(
                     onPressed: () {
+                      setState(() => this.itemLargeType = !this.itemLargeType);
+                    },
+                    icon: Icon(
+                      itemLargeType
+                          ? Icons.format_list_bulleted
+                          : Icons.list,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
                       _showFilterBottomSheet(
                         context,
                         onFilterPressed: (commiter) {
@@ -157,6 +168,7 @@ class _GitStampPageState extends State<GitStampPage> {
         commits: GitStamp.commitList,
         filterAuthorName: _filterAuthorName,
         isLiteVersion: isLiteVersion,
+        itemLargeType: itemLargeType,
         monospaceFontFamily: widget.monospaceFontFamily,
       ),
     );
@@ -192,12 +204,14 @@ class GitStampCommitList extends StatelessWidget {
   final List<GitStampCommit> commits;
   final String? filterAuthorName;
   final bool isLiteVersion;
+  final bool itemLargeType;
   final String? monospaceFontFamily;
 
   const GitStampCommitList({
     this.commits = const [],
     this.filterAuthorName,
     this.isLiteVersion = true,
+    this.itemLargeType = true,
     this.monospaceFontFamily,
   });
 
@@ -256,6 +270,7 @@ class GitStampCommitList extends StatelessWidget {
                   (commit) => GitStampCommitListElement(
                     commit: commit,
                     isLiteVersion: isLiteVersion,
+                    itemLargeType: itemLargeType,
                     monospaceFontFamily: monospaceFontFamily,
                   ),
                 )
@@ -270,11 +285,13 @@ class GitStampCommitList extends StatelessWidget {
 class GitStampCommitListElement extends StatelessWidget {
   final GitStampCommit commit;
   final bool isLiteVersion;
+  final bool itemLargeType;
   final String? monospaceFontFamily;
 
   const GitStampCommitListElement({
     required this.commit,
     this.isLiteVersion = true,
+    required this.itemLargeType,
     this.monospaceFontFamily,
   });
 
@@ -282,51 +299,60 @@ class GitStampCommitListElement extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: Theme.of(context).colorScheme.surfaceContainer,
-      margin: EdgeInsets.symmetric(horizontal: 0.0, vertical: 4.0),
+      margin: EdgeInsets.symmetric(
+        horizontal: 0.0,
+        vertical: itemLargeType == false ? 0.0 : 4.0,
+      ),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0.0)),
       elevation: 0.0,
       child: InkWell(
         onTap: isLiteVersion ? null : () => showGitDiffStat(context),
         splashColor: Colors.orange[900],
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: EdgeInsets.symmetric(
+            horizontal: itemLargeType == false ? 8.0 : 16,
+          ),
           child: ListTile(
             contentPadding: const EdgeInsets.all(0),
-            leading: isMobile(context)
+            leading: itemLargeType == false
                 ? null
-                : Icon(
-                    Icons.code,
-                    size: 36,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
+                : isMobile(context)
+                    ? null
+                    : Icon(
+                        Icons.code,
+                        size: 36,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
             title: GitStampCommitListHeader(commit: commit),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                InkWell(
-                  onTap: () => openEmail(email: commit.authorEmail),
-                  child: Text(
-                    commit.authorName + ' (' + commit.authorEmail + ')',
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.onSurface,
-                      fontStyle: FontStyle.italic,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+            subtitle: itemLargeType == false
+                ? null
+                : Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      InkWell(
+                        onTap: () => openEmail(email: commit.authorEmail),
+                        child: Text(
+                          commit.authorName + ' (' + commit.authorEmail + ')',
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.onSurface,
+                            fontStyle: FontStyle.italic,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      Text(
+                        commit.date,
+                        style: TextStyle(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSurface
+                              .withOpacity(0.6),
+                        ),
+                        maxLines: 1,
+                      ),
+                    ],
                   ),
-                ),
-                Text(
-                  commit.date,
-                  style: TextStyle(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onSurface
-                        .withOpacity(0.6),
-                  ),
-                  maxLines: 1,
-                ),
-              ],
-            ),
             trailing: IconButton(
               onPressed: () => copyToClipboard(context, commit.hash),
               icon: Icon(
