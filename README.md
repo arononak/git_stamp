@@ -21,9 +21,9 @@ Advanced await-less information provider and development tool.
     - [2. Screenshots](#2-screenshots)
   - [📑️ About](#️-about)
     - [1. Why Git Stamp?](#1-why-git-stamp)
-    - [2. How it work?](#2-how-it-work)
+    - [2. 🕯️ Mechanism](#2-️-mechanism)
     - [3. Motivation](#3-motivation)
-    - [4. Roadmap](#4-roadmap)
+    - [4. Roadmap (Changelog)](#4-roadmap-changelog)
     - [5. Sponsor](#5-sponsor)
   - [🛠️ Installation](#️-installation)
     - [1. `pubspec.yaml`](#1-pubspecyaml)
@@ -37,7 +37,7 @@ Advanced await-less information provider and development tool.
   - [💻 Usage](#-usage)
     - [1. GitStampListTile](#1-gitstamplisttile)
     - [2. GitStampIcon](#2-gitstampicon)
-    - [3. custom](#3-custom)
+    - [3. Custom](#3-custom)
     - [4. showGitStampLicensePage()](#4-showgitstamplicensepage)
     - [5. Central **GitStamp** node for advanced usage:](#5-central-gitstamp-node-for-advanced-usage)
   - [📦 Integration](#-integration)
@@ -68,7 +68,36 @@ When working with **Flutter** and **Git**, especially in a team environment, hum
 - **Avoiding Lost Changes in Teamwork** - It allows you to quickly see which commits made it into the final version of the application, helping to prevent missing changes due to overlooked `git pull` commands.
 - **Caching Issues in the Web Version** - Even if the latest version is deployed, users may still see an older version due to caching. Git Stamp helps identify whether the deployed version or an outdated one was loaded.
 
-### 2. [How it work?](./MECHANISM.md)
+### 2. 🕯️ Mechanism
+
+```mermaid
+graph TD
+    CODE((SOURCE CODE))-->SYNC(flutter pub get)
+    SYNC-->BUILD(flutter build ...)
+
+    subgraph "App"
+        CODE
+        PUB
+        PUB((PACKAGES))-->CODE
+    end
+
+    subgraph "Git Stamp"
+        GIT_CLI(GIT CLI)-->GENERATOR
+        DART_CLI(DART CLI)-->GENERATOR
+        FLUTTER_CLI(FLUTTER CLI)-->GENERATOR
+    end
+
+    subgraph "Git Stamp CLI"
+        GENERATE
+        ADD
+    end
+
+    GENERATOR((GENERATOR))-->ADD(~$ dart pub add git_stamp)
+    ADD-->|Add package|PUB
+
+    GENERATOR-->GENERATE(~$ dart run git_stamp)
+    GENERATE-->|Create ./git_stamp directory with .dart files|CODE
+```
 
 ### 3. Motivation
 
@@ -90,9 +119,7 @@ Text('Branch: ${GitStamp.buildBranch}'),
 Text('SHA: ${GitStamp.sha}'),
 ```
 
-### 4. Roadmap
-
-Changelogs ([Text](./CHANGELOG.md)) ([Image](./changelog/CHANGELOG.md))
+### 4. Roadmap ([Changelog](./CHANGELOG.md))
 
 | 🆕 **Version** | 🗓️ **Date**         | 📝 **Change Description**    |
 | ------------- | ------------------ | --------------------------- |
@@ -180,7 +207,7 @@ analyzer:
 | 13  | app-name            |
 | 14  | git-config          |
 | 15  | git-remote          |
-| 15  | git-remote-list     |
+| 16  | git-remote-list     |
 
 ## 💻 Usage
 
@@ -199,7 +226,7 @@ if (isProd == false) ...[
 ],
 ```
 
-### 3. custom
+### 3. Custom
 ```dart
 if (isProd == false) ...[
   IconButton(
