@@ -512,6 +512,7 @@ class GitStampRepoDetails extends StatelessWidget {
                   showSnackbar(
                     context: context,
                     message: GitStamp.gitConfigList,
+                    showCloseIcon: true,
                     floating: false,
                   );
                 },
@@ -534,6 +535,7 @@ class GitStampRepoDetails extends StatelessWidget {
                   showSnackbar(
                     context: context,
                     message: GitStamp.buildSystemInfo,
+                    showCloseIcon: true,
                     floating: false,
                   );
                 },
