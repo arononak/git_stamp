@@ -39,7 +39,7 @@ class GitStampDetailsPage extends StatefulWidget {
 }
 
 class _GitStampDetailsPageState extends State<GitStampDetailsPage> {
-  var _fontSize = 12.0;
+  var _fontSize = 12;
 
   String get diffList => GitStamp.diffList[widget.commit.hash] ?? '';
 
@@ -59,11 +59,12 @@ class _GitStampDetailsPageState extends State<GitStampDetailsPage> {
         ),
         actions: [
           IconButton(
-            onPressed: () => setState(() => _fontSize -= 1.0),
+            onPressed: () => setState(() => _fontSize -= _fontSize <= 1 ? 0 : 1),
             icon: Icon(Icons.remove_circle),
           ),
+          Text(_fontSize.toString().padLeft(2, ' ')),
           IconButton(
-            onPressed: () => setState(() => _fontSize += 1.0),
+            onPressed: () => setState(() => _fontSize += 1),
             icon: Icon(Icons.add_circle),
           ),
         ],
@@ -84,7 +85,7 @@ class _GitStampDetailsPageState extends State<GitStampDetailsPage> {
                   GitStampDetailsPageText(
                     diffList: diffList,
                     monospaceFontFamily: widget.monospaceFontFamily,
-                    fontSize: _fontSize,
+                    fontSize: _fontSize.toDouble(),
                   ),
                 ],
               ),
