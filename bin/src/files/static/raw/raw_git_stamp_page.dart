@@ -48,6 +48,7 @@ void _showMoreBottomSheet(BuildContext context) {
 
 void _showFilterBottomSheet(
   BuildContext context, {
+  required String? selectedUser,
   required void Function(String? commiter) onFilterPressed,
 }) {
   showModalBottomSheet(
@@ -55,6 +56,7 @@ void _showFilterBottomSheet(
     isScrollControlled: true,
     builder: (BuildContext context) {
       return GitStampFilterList(
+        selectedUser: selectedUser,
         onFilterPressed: onFilterPressed,
       );
     },
@@ -132,15 +134,14 @@ class _GitStampPageState extends State<GitStampPage> {
                       setState(() => this.itemLargeType = !this.itemLargeType);
                     },
                     icon: Icon(
-                      itemLargeType
-                          ? Icons.format_list_bulleted
-                          : Icons.list,
+                      itemLargeType ? Icons.format_list_bulleted : Icons.list,
                     ),
                   ),
                   IconButton(
                     onPressed: () {
                       _showFilterBottomSheet(
                         context,
+                        selectedUser: _filterAuthorName,
                         onFilterPressed: (commiter) {
                           Navigator.pop(context);
                           setState(() => _filterAuthorName = commiter);
@@ -693,12 +694,20 @@ class GitStampRepoFiles extends StatelessWidget {
 }
 
 class GitStampFilterList extends StatelessWidget {
+  final String? selectedUser;
   final void Function(String? commiter) onFilterPressed;
 
-  const GitStampFilterList({super.key, required this.onFilterPressed});
+  const GitStampFilterList({
+    super.key,
+    required this.selectedUser,
+    required this.onFilterPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final commitCount = commitCountByAuthor();
+    final users = <String?>[null, ...commitAuthors()]; // null -> no filter
+
     return Container(
       padding: EdgeInsets.symmetric(vertical: 16.0),
       child: SingleChildScrollView(
@@ -714,22 +723,19 @@ class GitStampFilterList extends StatelessWidget {
             Flexible(
               child: ListView(
                 shrinkWrap: true,
-                children: <String?>[null, ...commitAuthors()]
-                    .map(
-                      (e) => ListTile(
-                        leading: Icon(
-                          e != null ? Icons.person : Icons.close,
-                        ),
-                        title: Text(
-                          e != null ? e : 'No filter',
-                          style: _textBold,
-                        ),
-                        onTap: () {
-                          onFilterPressed(e);
-                        },
-                      ),
-                    )
-                    .toList(),
+                children: users.map(
+                  (e) {
+                    final count = commitCount[e];
+
+                    return ListTile(
+                      leading: Icon(e != null ? Icons.person : Icons.close),
+                      title: Text(e ?? 'No filter', style: _textBold),
+                      subtitle: count == null ? null : Text(count.toString()),
+                      trailing: e != selectedUser ? null : Icon(Icons.check),
+                      onTap: () => onFilterPressed(e),
+                    );
+                  },
+                ).toList(),
               ),
             ),
           ],
