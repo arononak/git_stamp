@@ -32,8 +32,9 @@ Advanced await-less information provider and development tool.
     - [4. `README.md`](#4-readmemd)
   - [🏗️ Generating](#️-generating)
     - [1. Examples](#1-examples)
-    - [2. Tip](#2-tip)
-    - [3. Custom `gen-only` parameters](#3-custom-gen-only-parameters)
+    - [2. Benchmarks (Repo 582 Commits)](#2-benchmarks-repo-582-commits)
+    - [3. Tip](#3-tip)
+    - [4. Custom `gen-only` parameters](#4-custom-gen-only-parameters)
   - [💻 Usage](#-usage)
     - [1. GitStampListTile](#1-gitstamplisttile)
     - [2. GitStampIcon](#2-gitstampicon)
@@ -183,12 +184,20 @@ analyzer:
 | ICON       | NO        | `dart run git_stamp --build-type icon`                       |
 | CUSTOM     | YES       | `dart run git_stamp --gen-only build-branch,build-date-time` |
 
-### 2. Tip
+### 2. Benchmarks (Repo 582 Commits)
+
+| Build type | Generating time | Number of dart files generated | Size of generated dart files |
+| ---------- | --------------- | ------------------------------ | ---------------------------- |
+| LITE       | 0.84s           | 10                             | 6.5 KB                       |
+| FULL       | 12.94s          | 29                             | 2.1MB                        |
+| ICON       | 6.90s           | 29                             | 156.6 KB                     |
+
+### 3. Tip
 
 > [!CAUTION]
 > Generating requires the use of the `git` command-line interface (CLI).
 
-### 3. Custom `gen-only` parameters 
+### 4. Custom `gen-only` parameters 
 
 | #   | Parameter           |
 | --- | ------------------- |
