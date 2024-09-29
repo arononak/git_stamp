@@ -21,7 +21,8 @@ class GitStampMain extends GitStampMainFile {
   String get filename => 'git_stamp.dart';
 
   @override
-  String get content => rawGitStamp(model.generateFlutterFiles, model.generateFlutterIcon);
+  String get content =>
+      rawGitStamp(model.generateFlutterFiles, model.generateFlutterIcon);
 }
 
 class GitStampNode extends GitStampMainFile {
