@@ -528,6 +528,18 @@ class GitStampRepoDetails extends StatelessWidget {
                   Navigator.pop(context);
                   showSnackbar(
                     context: context,
+                    message: GitStamp.gitCountObjects,
+                    showCloseIcon: true,
+                    floating: false,
+                  );
+                },
+                icon: Icon(Icons.storage),
+              ),
+              IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  showSnackbar(
+                    context: context,
                     message: GitStamp.gitConfigList,
                     showCloseIcon: true,
                     floating: false,
