@@ -252,6 +252,9 @@ if (isProd == false) ...[
 
 ### 5. Central **GitStamp** node for advanced usage:
 
+<details>
+<summary>git_stamp_node.dart</summary>
+
 ```dart
 class GitStamp {
   static List<GitStampCommit> get commitList
@@ -281,8 +284,9 @@ class GitStamp {
   static const String gitConfigGlobalUserEmail
   static const String gitConfigUserName
   static const String gitConfigUserEmail
-
   static const String gitRemote
+  static const String gitConfigList
+  static const String gitCountObjects
 
   static showLicensePage({
     required BuildContext context,
@@ -292,6 +296,8 @@ class GitStamp {
   })
 }
 ```
+
+</details>
 
 ## 📦 Integration
 
