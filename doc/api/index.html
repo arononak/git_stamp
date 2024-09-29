@@ -318,9 +318,9 @@ Text('SHA: ${GitStamp.sha}'),
 <tbody>
 <tr>
 <td>LITE</td>
-<td>0.84s</td>
-<td>10</td>
-<td>6.5 KB</td>
+<td>6.90s</td>
+<td>29</td>
+<td>156.6 KB</td>
 </tr>
 <tr>
 <td>FULL</td>
@@ -330,9 +330,9 @@ Text('SHA: ${GitStamp.sha}'),
 </tr>
 <tr>
 <td>ICON</td>
-<td>6.90s</td>
-<td>29</td>
-<td>156.6 KB</td>
+<td>0.84s</td>
+<td>10</td>
+<td>6.5 KB</td>
 </tr>
 </tbody>
 </table>
@@ -441,6 +441,8 @@ Text('SHA: ${GitStamp.sha}'),
 <p>Use function <code>GitStamp.showLicensePage</code> instead of <code>showLicensePage</code> if you want the <code>name</code> and <code>version</code> to be added automatically.</p>
 </div>
 <h3 id="5-central-gitstamp-node-for-advanced-usage">5. Central <strong>GitStamp</strong> node for advanced usage:</h3>
+<details>
+<summary>git_stamp_node.dart</summary>
 <pre class="language-dart"><code class="language-dart">class GitStamp {
   static List&lt;GitStampCommit&gt; get commitList
   static GitStampCommit? get latestCommit
@@ -469,8 +471,9 @@ Text('SHA: ${GitStamp.sha}'),
   static const String gitConfigGlobalUserEmail
   static const String gitConfigUserName
   static const String gitConfigUserEmail
-
   static const String gitRemote
+  static const String gitConfigList
+  static const String gitCountObjects
 
   static showLicensePage({
     required BuildContext context,
@@ -480,6 +483,7 @@ Text('SHA: ${GitStamp.sha}'),
   })
 }
 </code></pre>
+</details>
 <h2 id="-integration">📦 Integration</h2>
 <h3 id="github-actions">GitHub Actions</h3>
 <details>
