@@ -220,10 +220,10 @@ class GitStampCommitList extends StatelessWidget {
   Widget build(BuildContext context) {
     Map<String, List<GitStampCommit>> groupedCommit = groupBy(
       commits.where(
-        (e) {
+        (element) {
           return filterAuthorName == null
               ? true
-              : e.authorName == filterAuthorName;
+              : element.authorName == filterAuthorName;
         },
       ),
       (element) {
@@ -237,48 +237,64 @@ class GitStampCommitList extends StatelessWidget {
       },
     );
 
-    return ListView.builder(
-      itemCount: groupedCommit.length,
-      itemBuilder: (context, index) {
-        final header = groupedCommit.keys.elementAt(index);
-        final commits = groupedCommit[header]!;
+    List<dynamic> listElement = [];
+    groupedCommit.forEach((key, commits) {
+      listElement.add(key);
+      listElement.addAll(commits);
+    });
 
-        return Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.commit,
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                  SizedBox(width: 8),
-                  Text(
-                    header,
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      fontStyle: FontStyle.italic,
-                      color: Theme.of(context).colorScheme.secondary,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            ...commits
-                .map(
-                  (commit) => GitStampCommitListElement(
-                    commit: commit,
-                    isLiteVersion: isLiteVersion,
-                    itemLargeType: itemLargeType,
-                    monospaceFontFamily: monospaceFontFamily,
-                  ),
-                )
-                .toList()
-          ],
-        );
+    return ListView.builder(
+      itemCount: listElement.length,
+      itemBuilder: (context, index) {
+        final element = listElement[index];
+
+        switch (element) {
+          case String():
+            return GitStampDateListElement(
+              date: element,
+            );
+          case GitStampCommit():
+            return GitStampCommitListElement(
+              commit: element,
+              isLiteVersion: isLiteVersion,
+              itemLargeType: itemLargeType,
+              monospaceFontFamily: monospaceFontFamily,
+            );
+          default:
+            return SizedBox();
+        }
       },
+    );
+  }
+}
+
+class GitStampDateListElement extends StatelessWidget {
+  final String date;
+
+  const GitStampDateListElement({super.key, required this.date});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      child: Row(
+        children: [
+          Icon(
+            Icons.commit,
+            color: Theme.of(context).colorScheme.secondary,
+          ),
+          SizedBox(width: 8),
+          Text(
+            date,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              fontStyle: FontStyle.italic,
+              color: Theme.of(context).colorScheme.secondary,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
