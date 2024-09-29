@@ -188,9 +188,9 @@ analyzer:
 
 | Build type | Generating time | Number of dart files generated | Size of generated dart files |
 | ---------- | --------------- | ------------------------------ | ---------------------------- |
-| LITE       | 0.84s           | 10                             | 6.5 KB                       |
+| LITE       | 6.90s           | 29                             | 156.6 KB                     |
 | FULL       | 12.94s          | 29                             | 2.1MB                        |
-| ICON       | 6.90s           | 29                             | 156.6 KB                     |
+| ICON       | 0.84s           | 10                             | 6.5 KB                       |
 
 ### 3. Tip
 
