@@ -34,24 +34,28 @@
 - [x] InApp - Responsive pages
 - [x] README.md - imports mermaid.js graph
 - [ ] InApp - Advanced folder by author
-- [ ] CI - dart analize & dart format
-- [ ] CI - Fix generate doc
-- [ ] CI - Auto deploy every 7 days ?
-- [ ] InApp - last commit tag
+- [x] CI - dart analize & dart format
+- [x] CI - Fix generate doc
+- [x] InApp - last commit tag
 - [x] InApp - repo url - origin
 - [ ] Generator - Generation path as a parameter
 - [x] InApp - Date by locale
 - [ ] Generator - git log --stat -1
-- [ ] InApp - Commit List - Another item design
-- [ ] InApp - AppBar - 1 icon
+- [x] InApp - Commit List - Another item design
+- [x] InApp - AppBar - 1 icon
 - [x] Generator - Logger refactor
 - [ ] InApp - Text file content open in app
 - [ ] CI - Flutter from source
 - [ ] InApp - Commit types: SMALL < 5 files, NORMAL 5 - 10 files, BIG > 10 files
-- [ ] InApp - Text files content
-- [ ] InApp - Default Widgets: Text, ListTile, Icon
+- [x] InApp - Default Widgets: Text, ListTile, Icon
 - [ ] InApp - More diff types
 - [ ] InApp - Router to web
 - [ ] CI - pana
 - [ ] Generator - Disable --add-pub=disable
-- [ ] InApp - GitStampDetailsPage - integration test load GoogleFont
+- [x] InApp - GitStampDetailsPage - integration test load GoogleFont
+- [ ] CI - Generate benchmark reports LITE, FULL, ICON
+- [ ] InApp - git reflog
+- [ ] InApp - GitStampDetailsPage - fix mobile horizontal scroll
+- [ ] InApp - Icon - fix mobile padding left
+- [ ] CI - Chromedriver from image
+- [ ] CI - Generate custom flags file
