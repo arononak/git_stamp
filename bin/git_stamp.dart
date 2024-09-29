@@ -145,7 +145,7 @@ void _generateDataFiles(
 
   if (files.commitList) {
     GitStampCommit().generate();
-    CommitList().generate();
+    CommitList(count: files.isIcon ? 1 : null).generate();
   }
 
   if (files.diffList) {

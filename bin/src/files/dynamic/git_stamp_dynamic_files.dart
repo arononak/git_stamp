@@ -20,6 +20,10 @@ extension StringExtension on String {
 }
 
 class CommitList extends GitStampDataFile {
+  int? count;
+
+  CommitList({this.count});
+
   @override
   String get filename => 'commit_list.dart';
 
@@ -28,6 +32,7 @@ class CommitList extends GitStampDataFile {
     final gitLogJson = exec([
       'git',
       'log',
+      if (count != null) ...['-n $count'],
       '--pretty=format:{"hash":"%H","subject":"%s","date":"%ad","authorName":"%an","authorEmail":"%ae"}',
       '--date=format-local:%Y-%m-%d %H:%M %z'
     ]);

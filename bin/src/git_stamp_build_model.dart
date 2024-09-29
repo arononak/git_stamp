@@ -67,4 +67,24 @@ class GitStampBuildModel {
         gitConfigList = args.contains('git-config-list'),
         generateFlutterFiles = false,
         generateFlutterIcon = false;
+
+  bool get isIcon =>
+      commitList == true &&
+      diffList == false &&
+      diffStatList == false &&
+      buildBranch == true &&
+      buildDateTime == true &&
+      buildSystemInfo == false &&
+      buildMachine == false &&
+      repoCreationDate == false &&
+      repoPath == false &&
+      observedFilesList == false &&
+      appVersion == true &&
+      appBuild == true &&
+      appName == false &&
+      gitConfig == false &&
+      gitRemote == false &&
+      gitConfigList == false &&
+      generateFlutterFiles == false &&
+      generateFlutterIcon == true;
 }
