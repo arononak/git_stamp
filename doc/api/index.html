@@ -92,8 +92,9 @@
 <li><a href="#%EF%B8%8F-generating">🏗️ Generating</a>
 <ul>
 <li><a href="#1-examples">1. Examples</a></li>
-<li><a href="#2-tip">2. Tip</a></li>
-<li><a href="#3-custom-gen-only-parameters">3. Custom <code>gen-only</code> parameters</a></li>
+<li><a href="#2-benchmarks-repo-582-commits">2. Benchmarks (Repo 582 Commits)</a></li>
+<li><a href="#3-tip">3. Tip</a></li>
+<li><a href="#4-custom-gen-only-parameters">4. Custom <code>gen-only</code> parameters</a></li>
 </ul>
 </li>
 <li><a href="#-usage">💻 Usage</a>
@@ -304,12 +305,43 @@ Text('SHA: ${GitStamp.sha}'),
 </tr>
 </tbody>
 </table>
-<h3 id="2-tip">2. Tip</h3>
+<h3 id="2-benchmarks-repo-582-commits">2. Benchmarks (Repo 582 Commits)</h3>
+<table>
+<thead>
+<tr>
+<th>Build type</th>
+<th>Generating time</th>
+<th>Number of dart files generated</th>
+<th>Size of generated dart files</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LITE</td>
+<td>0.84s</td>
+<td>10</td>
+<td>6.5 KB</td>
+</tr>
+<tr>
+<td>FULL</td>
+<td>12.94s</td>
+<td>29</td>
+<td>2.1MB</td>
+</tr>
+<tr>
+<td>ICON</td>
+<td>6.90s</td>
+<td>29</td>
+<td>156.6 KB</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-tip">3. Tip</h3>
 <div class="markdown-alert markdown-alert-caution">
 <p class="markdown-alert-title">Caution</p>
 <p>Generating requires the use of the <code>git</code> command-line interface (CLI).</p>
 </div>
-<h3 id="3-custom-gen-only-parameters">3. Custom <code>gen-only</code> parameters</h3>
+<h3 id="4-custom-gen-only-parameters">4. Custom <code>gen-only</code> parameters</h3>
 <table>
 <thead>
 <tr>
