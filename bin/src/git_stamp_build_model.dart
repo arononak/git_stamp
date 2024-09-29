@@ -15,6 +15,7 @@ class GitStampBuildModel {
   bool gitConfig = false;
   bool gitRemote = false;
   bool gitConfigList = false;
+  bool gitCountObjects = false;
   bool generateFlutterFiles = false;
   bool generateFlutterIcon = false;
 
@@ -35,6 +36,7 @@ class GitStampBuildModel {
     this.gitConfig = true,
     this.gitRemote = true,
     this.gitConfigList = true,
+    this.gitCountObjects = true,
     this.generateFlutterFiles = true,
     this.generateFlutterIcon = true,
   });
@@ -65,6 +67,7 @@ class GitStampBuildModel {
         gitConfig = args.contains('git-config'),
         gitRemote = args.contains('git-remote'),
         gitConfigList = args.contains('git-config-list'),
+        gitCountObjects = args.contains('git-count-objects'),
         generateFlutterFiles = false,
         generateFlutterIcon = false;
 
@@ -85,6 +88,7 @@ class GitStampBuildModel {
       gitConfig == false &&
       gitRemote == false &&
       gitConfigList == false &&
+      gitCountObjects == false &&
       generateFlutterFiles == false &&
       generateFlutterIcon == true;
 }

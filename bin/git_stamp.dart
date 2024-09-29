@@ -51,6 +51,7 @@ Future<void> main(List<String> arguments) async {
         'git-config',
         'git-remote',
         'git-config-list',
+        'git-count-objects',
       ],
       defaultsTo: null,
     )
@@ -138,8 +139,7 @@ void _generateDataFiles(
   GitStampBuildModel files,
   bool isLiteVersion,
 ) {
-  GitStampMain(files.generateFlutterFiles, files.generateFlutterIcon)
-      .generate();
+  GitStampMain(files).generate();
   GitStampNode(files).generate();
   GitStampVersion().generate();
 
@@ -207,6 +207,10 @@ void _generateDataFiles(
 
   if (files.gitConfigList) {
     GitConfigList().generate();
+  }
+
+  if (files.gitCountObjects) {
+    GitCountObjects().generate();
   }
 }
 

@@ -13,28 +13,27 @@ import '../../git_stamp_build_model.dart';
 import '../../git_stamp_file.dart';
 
 class GitStampMain extends GitStampMainFile {
-  final bool generateFlutterFiles;
-  final bool generateFlutterIcon;
+  final GitStampBuildModel model;
 
-  GitStampMain(this.generateFlutterFiles, this.generateFlutterIcon);
+  GitStampMain(this.model);
 
   @override
   String get filename => 'git_stamp.dart';
 
   @override
-  String get content => rawGitStamp(generateFlutterFiles, generateFlutterIcon);
+  String get content => rawGitStamp(model.generateFlutterFiles, model.generateFlutterIcon);
 }
 
 class GitStampNode extends GitStampMainFile {
-  final GitStampBuildModel dataFiles;
+  final GitStampBuildModel model;
 
-  GitStampNode(this.dataFiles);
+  GitStampNode(this.model);
 
   @override
   String get filename => 'git_stamp_node.dart';
 
   @override
-  String get content => rawGitStampNode(dataFiles);
+  String get content => rawGitStampNode(model);
 }
 
 class GitStampUtils extends GitStampUiFile {

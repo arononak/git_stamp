@@ -343,3 +343,15 @@ String _removeTokens(String input) {
     return line;
   }).join('\n');
 }
+
+class GitCountObjects extends GitStampDataFile {
+  @override
+  String get filename => 'git_count_objects.dart';
+
+  @override
+  String get content {
+    final gitCountObjects = exec(['git', 'count-objects', '-vH']);
+
+    return 'const gitStampGitCountObjects = """$gitCountObjects""";';
+  }
+}

@@ -122,6 +122,17 @@ void singleValueTests() {
       'field': GitStamp.gitRemote,
       'matcher': isNotEmpty,
     },
+    {
+      'param': 'git-config-list',
+      'field': GitStamp.gitConfigList,
+      'matcher': isNotEmpty,
+    },
+    {
+      'param': 'git-count-objects',
+      'field': GitStamp.gitCountObjects,
+      'matcher': isNotEmpty,
+    },
+
     /* Build Machine */
     {
       'param': 'build-machine',

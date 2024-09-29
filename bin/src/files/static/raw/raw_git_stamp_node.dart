@@ -29,6 +29,7 @@ ${files.appName.enabled}import 'src/data/app_name.dart';
 ${files.gitConfig.enabled}import 'src/data/git_config.dart';
 ${files.gitRemote.enabled}import 'src/data/git_remote.dart';
 ${files.gitConfigList.enabled}import 'src/data/git_config_list.dart';
+${files.gitCountObjects.enabled}import 'src/data/git_count_objects.dart';
 
 ${files.generateFlutterFiles.enabled}import 'package:flutter/widgets.dart';
 ${files.generateFlutterFiles.enabled}import 'src/ui/git_stamp_license_page.dart';
@@ -61,10 +62,9 @@ class GitStamp {
   ${files.gitConfig.enabled}static const String gitConfigGlobalUserEmail = gitStampGitConfigGlobalUserEmail;
   ${files.gitConfig.enabled}static const String gitConfigUserName = gitStampGitConfigUserName;
   ${files.gitConfig.enabled}static const String gitConfigUserEmail = gitStampGitConfigUserEmail;
-
   ${files.gitRemote.enabled}static const String gitRemote = gitStampGitRemoteList;
-
   ${files.gitConfigList.enabled}static const String gitConfigList = gitStampGitConfigList;
+  ${files.gitCountObjects.enabled}static const String gitCountObjects = gitStampGitCountObjects;
 
   ${files.generateFlutterFiles.enabled}static showLicensePage({
   ${files.generateFlutterFiles.enabled}  required BuildContext context,
