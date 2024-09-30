@@ -1,3 +1,13 @@
+## 4.11.0
+
+* Added GitCountObjects module
+* Icon build type optimization
+* Fixed SnackBars
+* GitStampPage - Commit List Optimization
+* GitStampPage - Filter - Added commit count & current selection
+* GitStampPage - Added 2 commit item types
+* GitStampDetailsPage - AppBar - Added text size
+
 ## 4.10.0
 
 * **Fixed icon build type**
@@ -264,6 +274,10 @@
 * First version
 
 
+
+# 4.11.0
+
+![](https://github.com/arononak/git_stamp/blob/main/changelog/4.11.0.png?raw=true)
 
 # 4.10.0
 
