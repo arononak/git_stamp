@@ -22,12 +22,12 @@ Advanced await-less information provider and development tool.
     - [2. 🕯️ Mechanism](#2-️-mechanism)
     - [3. Motivation](#3-motivation)
     - [4. Roadmap (Changelog)](#4-roadmap-changelog)
-    - [5. Sponsor](#5-sponsor)
   - [🛠️ Installation](#️-installation)
     - [1. `pubspec.yaml`](#1-pubspecyaml)
     - [2. `.gitignore`](#2-gitignore)
     - [3. `analysis_options.yaml`](#3-analysis_optionsyaml)
     - [4. `README.md`](#4-readmemd)
+    - [5. 📦 Integration - GitHub Actions](#5--integration---github-actions)
   - [🏗️ Generating](#️-generating)
     - [1. Examples](#1-examples)
     - [2. Benchmarks (Repo 582 Commits)](#2-benchmarks-repo-582-commits)
@@ -39,8 +39,7 @@ Advanced await-less information provider and development tool.
     - [3. Custom](#3-custom)
     - [4. showGitStampLicensePage()](#4-showgitstamplicensepage)
     - [5. Central **GitStamp** node for advanced usage:](#5-central-gitstamp-node-for-advanced-usage)
-  - [📦 Integration](#-integration)
-    - [GitHub Actions](#github-actions)
+  - [💰 Sponsors](#-sponsors)
   - [📝 License](#-license)
 
 ## [🏞️ Preview](https://gitstamp.web.app)
@@ -126,12 +125,6 @@ Text('SHA: ${GitStamp.sha}'),
 | Version 2     | 10.04.2024         | 🛠️ Commit diff               |
 | Version 1     | 11.12.2023         | 🚀 First version             |
 
-### 5. Sponsor
-
-| [Aron Code](https://aroncode.com) |
-| :-------------------------------: |
-|         ![](aroncode.png)         |
-
 ## 🛠️ Installation
 
 ### 1. `pubspec.yaml`
@@ -168,14 +161,70 @@ analyzer:
 >[![Git Stamp](https://img.shields.io/badge/i%20love%20Git%20Stamp-ffff99?style=flat)](https://github.com/arononak/git_stamp)
 >```
 
+### 5. 📦 Integration - GitHub Actions
+
+<details>
+<summary>.github/workflows/build_and_deploy.yml</summary>
+
+```yml
+name: build_and_deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request_target:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.2'
+          channel: 'stable'
+      - run: flutter --version
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+      - run: flutter pub get
+      - run: dart run git_stamp
+      - run: flutter build web --release --web-renderer canvaskit
+      - uses: actions/upload-artifact@master
+        with:
+          name: build
+          path: build/web
+  deploy:
+    name: "Deploy"
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@master
+        with:
+          name: build
+          path: build/web
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
+          projectId: xxx
+          channelId: live
+```
+
+</details>
+
 ## 🏗️ Generating
 
 ### 1. Examples
 
 | Build type | Pure Dart | Can encrypt | CLI Command                                                  |
 | ---------- | --------- | ----------- | ------------------------------------------------------------ |
+| FULL       | NO        | YES         | `dart run git_stamp --build-type full --encrypt`             |
 | LITE       | NO        | YES         | `dart run git_stamp`                                         |
-| FULL       | NO        | YES         | `dart run git_stamp --build-type full`                       |
 | ICON       | NO        | NO          | `dart run git_stamp --build-type icon`                       |
 | CUSTOM     | YES       | NO          | `dart run git_stamp --gen-only build-branch,build-date-time` |
 
@@ -183,8 +232,8 @@ analyzer:
 
 | Build type | Generating time | Number of dart files generated | Size of generated dart files |
 | ---------- | --------------- | ------------------------------ | ---------------------------- |
-| LITE       | 6.90s           | 33                             | 156.6 KB                     |
 | FULL       | 12.94s          | 33                             | 2.1MB                        |
+| LITE       | 6.90s           | 33                             | 156.6 KB                     |
 | ICON       | 0.84s           | 10                             | 6.5 KB                       |
 
 ### 3. Tip
@@ -299,63 +348,11 @@ abstract class GitStampNode {
 
 </details>
 
-## 📦 Integration
+## 💰 Sponsors
 
-### GitHub Actions
-
-<details>
-<summary>.github/workflows/build_and_deploy.yml</summary>
-
-```yml
-name: build_and_deploy
-
-on:
-  push:
-    branches: [main]
-  pull_request_target:
-    branches: [main]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.22.2'
-          channel: 'stable'
-      - run: flutter --version
-      - uses: actions/setup-java@v1
-        with:
-          java-version: "12.x"
-      - run: flutter pub get
-      - run: dart run git_stamp
-      - run: flutter build web --release --web-renderer canvaskit
-      - uses: actions/upload-artifact@master
-        with:
-          name: build
-          path: build/web
-  deploy:
-    name: "Deploy"
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/download-artifact@master
-        with:
-          name: build
-          path: build/web
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
-          projectId: xxx
-          channelId: live
-```
-
-</details>
+| [Aron Code](https://aroncode.com) |
+| :-------------------------------: |
+|         ![](aroncode.png)         |
 
 ## 📝 License
 
