@@ -132,5 +132,7 @@ class GitStampDecryptBottomSheet extends GitStampUiFile {
   String get filename => 'git_stamp_decrypt_bottom_sheet.dart';
 
   @override
-  String get content => isStub ? rawGitStampDecryptBottomSheetStub : rawGitStampDecryptBottomSheet;
+  String get content => isStub
+      ? rawGitStampDecryptBottomSheetStub
+      : rawGitStampDecryptBottomSheet;
 }

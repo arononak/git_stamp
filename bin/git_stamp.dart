@@ -252,8 +252,10 @@ void _generateDataFiles(
         : (data) => GitStampEncrypt.encrypt(data, key, iv);
   }
 
-  const decryptedTestText = 'Aron Aron uber alles, a napewno ponad mojego wspaniałego i cudownego Łukaszka i jego przyjaciela cwaniaka misiora z żółtymi zębami jak koń. Po wyroku sądu dopisze tu jego przeklęte nazwisko xd';
-  final encryptedTestText = model.encrypt ? encrypt?.call(decryptedTestText) : null;
+  const decryptedTestText =
+      'Aron Aron uber alles, a napewno ponad mojego wspaniałego i cudownego Łukaszka i jego przyjaciela cwaniaka misiora z żółtymi zębami jak koń. Po wyroku sądu dopisze tu jego przeklęte nazwisko xd';
+  final encryptedTestText =
+      model.encrypt ? encrypt?.call(decryptedTestText) : null;
 
   GitStampMain(model).generate();
   GitStampNode(model, decryptedTestText, encryptedTestText).generate();
