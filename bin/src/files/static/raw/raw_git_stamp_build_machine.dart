@@ -25,16 +25,16 @@ class GitStampBuildMachine {
   });
 
   factory GitStampBuildMachine.fromJson(Map<String, dynamic> json) => GitStampBuildMachine(
-        frameworkVersion: json['frameworkVersion'],
-        channel: json['channel'],
-        repositoryUrl: json['repositoryUrl'],
-        frameworkRevision: json['frameworkRevision'],
-        frameworkCommitDate: json['frameworkCommitDate'],
-        engineRevision: json['engineRevision'],
-        dartSdkVersion: json['dartSdkVersion'],
-        devToolsVersion: json['devToolsVersion'],
-        flutterVersion: json['flutterVersion'],
-        flutterRoot: json['flutterRoot'],
+        frameworkVersion: json['frameworkVersion'] ?? 'null',
+        channel: json['channel'] ?? 'null',
+        repositoryUrl: json['repositoryUrl'] ?? 'null',
+        frameworkRevision: json['frameworkRevision'] ?? 'null',
+        frameworkCommitDate: json['frameworkCommitDate'] ?? 'null',
+        engineRevision: json['engineRevision'] ?? 'null',
+        dartSdkVersion: json['dartSdkVersion'] ?? 'null',
+        devToolsVersion: json['devToolsVersion'] ?? 'null',
+        flutterVersion: json['flutterVersion'] ?? 'null',
+        flutterRoot: json['flutterRoot'] ?? 'null',
       );
 }
 ''';

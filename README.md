@@ -177,19 +177,19 @@ analyzer:
 
 ### 1. Examples
 
-| Build type | Pure Dart | CLI Command                                                  |
-| ---------- | --------- | ------------------------------------------------------------ |
-| LITE       | NO        | `dart run git_stamp`                                         |
-| FULL       | NO        | `dart run git_stamp --build-type full`                       |
-| ICON       | NO        | `dart run git_stamp --build-type icon`                       |
-| CUSTOM     | YES       | `dart run git_stamp --gen-only build-branch,build-date-time` |
+| Build type | Pure Dart | Can encrypt | CLI Command                                                  |
+| ---------- | --------- | ----------- | ------------------------------------------------------------ |
+| LITE       | NO        | YES         | `dart run git_stamp`                                         |
+| FULL       | NO        | YES         | `dart run git_stamp --build-type full`                       |
+| ICON       | NO        | NO          | `dart run git_stamp --build-type icon`                       |
+| CUSTOM     | YES       | NO          | `dart run git_stamp --gen-only build-branch,build-date-time` |
 
 ### 2. Benchmarks (Repo 582 Commits)
 
 | Build type | Generating time | Number of dart files generated | Size of generated dart files |
 | ---------- | --------------- | ------------------------------ | ---------------------------- |
-| LITE       | 6.90s           | 29                             | 156.6 KB                     |
-| FULL       | 12.94s          | 29                             | 2.1MB                        |
+| LITE       | 6.90s           | 33                             | 156.6 KB                     |
+| FULL       | 12.94s          | 33                             | 2.1MB                        |
 | ICON       | 0.84s           | 10                             | 6.5 KB                       |
 
 ### 3. Tip
@@ -256,44 +256,49 @@ if (isProd == false) ...[
 <summary>git_stamp_node.dart</summary>
 
 ```dart
-class GitStamp {
-  static List<GitStampCommit> get commitList
-  static GitStampCommit? get latestCommit
-  static String get sha
-  static int get commitCount
+abstract class GitStampNode {
+  String get commitListString;
+  List<GitStampCommit> get commitList;
+  GitStampCommit? get latestCommit;
+  String get sha;
+  int get commitCount;
 
-  static Map<String, dynamic> diffList
-  static Map<String, dynamic> diffStatList
+  String get diffListString;
+  Map<String, dynamic> get diffList;
+  String get diffStatListString;
+  Map<String, dynamic> get diffStatList;
 
-  static const String buildBranch
-  static const String buildDateTime
-  static const String buildSystemInfo
-  static GitStampBuildMachine buildMachine
-  static const String repoCreationDate
-  static const String repoPath
+  String get buildMachineString;
+  GitStampBuildMachine get buildMachine;
 
-  static String observedFiles
-  static List<String> observedFilesList
-  static int observedFilesCount
+  String get buildBranch;
+  String get buildDateTime;
+  String get buildSystemInfo;
+  String get repoCreationDate;
+  String get repoPath;
+  
+  String get observedFiles;
+  List<String> get observedFilesList;
+  int get observedFilesCount;
+  
+  String get appVersion;
+  String get appBuild;
+  String get appName;
 
-  static const String appVersion
-  static const String appBuild
-  static const String appName
+  String get gitConfigGlobalUserName;
+  String get gitConfigGlobalUserEmail;
+  String get gitConfigUserName;
+  String get gitConfigUserEmail;
+  String get gitRemote;
+  String get gitConfigList;
+  String get gitCountObjects;
 
-  static const String gitConfigGlobalUserName
-  static const String gitConfigGlobalUserEmail
-  static const String gitConfigUserName
-  static const String gitConfigUserEmail
-  static const String gitRemote
-  static const String gitConfigList
-  static const String gitCountObjects
-
-  static showLicensePage({
+  void showLicensePage({
     required BuildContext context,
     Widget? applicationIcon,
     String? applicationLegalese,
     bool useRootNavigator = false,
-  })
+  });
 }
 ```
 

@@ -15,11 +15,12 @@ class GitStampCommit {
   });
 
   factory GitStampCommit.fromJson(Map<String, dynamic> json) => GitStampCommit(
-        hash: json['hash'],
-        subject: json['subject'],
-        date: json['date'],
-        authorName: json['authorName'],
-        authorEmail: json['authorEmail'],
+        hash: json['hash'] ?? 'null',
+        subject: json['subject'] ?? 'null',
+        date: json['date'] ?? 'null',
+        authorName: json['authorName'] ?? 'null',
+        authorEmail: json['authorEmail'] ?? 'null',
       );
 }
+
 ''';

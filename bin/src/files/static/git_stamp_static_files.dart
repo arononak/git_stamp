@@ -9,8 +9,10 @@ import 'raw/raw_git_stamp_utils.dart';
 import 'raw/raw_git_stamp_icon.dart';
 import 'raw/raw_git_stamp_list_tile.dart';
 import 'raw/raw_git_stamp_license_page.dart';
-import '../../git_stamp_build_model.dart';
+import 'raw/raw_git_stamp_decrypt_bottom_sheet.dart';
+import 'raw/raw_git_stamp_decrypt_bottom_sheet_stub.dart';
 import '../../git_stamp_file.dart';
+import '../../../git_stamp.dart';
 
 class GitStampMain extends GitStampMainFile {
   final GitStampBuildModel model;
@@ -21,20 +23,28 @@ class GitStampMain extends GitStampMainFile {
   String get filename => 'git_stamp.dart';
 
   @override
-  String get content =>
-      rawGitStamp(model.generateFlutterFiles, model.generateFlutterIcon);
+  String get content => rawGitStamp(
+        model.generateFlutterFiles,
+        model.generateFlutterIcon,
+      );
 }
 
 class GitStampNode extends GitStampMainFile {
   final GitStampBuildModel model;
+  final String decryptedTestText;
+  final dynamic encryptedTestText;
 
-  GitStampNode(this.model);
+  GitStampNode(this.model, this.decryptedTestText, this.encryptedTestText);
 
   @override
   String get filename => 'git_stamp_node.dart';
 
   @override
-  String get content => rawGitStampNode(model);
+  String get content => rawGitStampNode(
+        model,
+        decryptedTestText,
+        encryptedTestText,
+      );
 }
 
 class GitStampUtils extends GitStampUiFile {
@@ -54,6 +64,8 @@ class GitStampLauncher extends GitStampUiFile {
 }
 
 class GitStampCommit extends GitStampDataFile {
+  GitStampCommit() : super(null);
+
   @override
   String get filename => 'git_stamp_commit.dart';
 
@@ -62,6 +74,8 @@ class GitStampCommit extends GitStampDataFile {
 }
 
 class GitStampBuildMachine extends GitStampDataFile {
+  GitStampBuildMachine() : super(null);
+
   @override
   String get filename => 'git_stamp_build_machine.dart';
 
@@ -107,4 +121,16 @@ class GitStampLicensePage extends GitStampUiFile {
 
   @override
   String get content => rawGitStampLicensePage;
+}
+
+class GitStampDecryptBottomSheet extends GitStampUiFile {
+  bool isStub;
+
+  GitStampDecryptBottomSheet(this.isStub);
+
+  @override
+  String get filename => 'git_stamp_decrypt_bottom_sheet.dart';
+
+  @override
+  String get content => isStub ? rawGitStampDecryptBottomSheetStub : rawGitStampDecryptBottomSheet;
 }

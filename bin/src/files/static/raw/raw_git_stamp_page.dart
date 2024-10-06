@@ -7,10 +7,11 @@ import 'package:collection/collection.dart';
 import 'package:aron_gradient_line/aron_gradient_line.dart';
 
 import '../../git_stamp.dart';
+import 'git_stamp_decrypt_bottom_sheet.dart';
 
-const _text = TextStyle(fontSize: 12);
-const _textBold = TextStyle(fontSize: 12, fontWeight: FontWeight.bold);
-const _textTitle = TextStyle(fontSize: 16, fontWeight: FontWeight.bold);
+const textDefault = TextStyle(fontSize: 12);
+const textBold = TextStyle(fontSize: 12, fontWeight: FontWeight.bold);
+const textTitle = TextStyle(fontSize: 16, fontWeight: FontWeight.bold);
 
 bool isMobile(context) => MediaQuery.of(context).size.width < 600;
 
@@ -165,13 +166,25 @@ class _GitStampPageState extends State<GitStampPage> {
           ),
         ),
       ),
-      body: GitStampCommitList(
-        commits: GitStamp.commitList,
-        filterAuthorName: _filterAuthorName,
-        isLiteVersion: isLiteVersion,
-        itemLargeType: itemLargeType,
-        monospaceFontFamily: widget.monospaceFontFamily,
-      ),
+      body: GitStamp.isEncrypted
+          ? Center(
+              child: IconButton(
+                onPressed: () {
+                  showDecryptBottomSheet(
+                    context: context,
+                    onSuccess: () => setState(() {}),
+                  );
+                },
+                icon: Icon(Icons.lock_open, size: 60),
+              ),
+            )
+          : GitStampCommitList(
+              commits: GitStamp.commitList,
+              filterAuthorName: _filterAuthorName,
+              isLiteVersion: isLiteVersion,
+              itemLargeType: itemLargeType,
+              monospaceFontFamily: widget.monospaceFontFamily,
+            ),
     );
   }
 }
@@ -480,8 +493,8 @@ class GitStampDoubleText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(left, style: _text),
-        Text(right, style: _textBold),
+        Text(left, style: textDefault),
+        Text(right, style: textBold),
       ],
     );
   }
@@ -492,96 +505,99 @@ class GitStampRepoDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Positioned(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
+    return Container(
+      constraints: BoxConstraints(minWidth: 400),
+      child: Stack(
+        children: [
+          Positioned(
             child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Container(
-                padding: EdgeInsets.all(16.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildGitStampSection(context),
-                    const SizedBox(height: 32),
-                    _buildBuildSection(context),
-                    const SizedBox(height: 32),
-                    _buildEnvironmentSection(context),
-                    const SizedBox(height: 32),
-                    _buildRepositorySection(context),
-                  ],
+              scrollDirection: Axis.vertical,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Container(
+                  padding: EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildGitStampSection(context),
+                      const SizedBox(height: 32),
+                      _buildBuildSection(context),
+                      const SizedBox(height: 32),
+                      _buildEnvironmentSection(context),
+                      const SizedBox(height: 32),
+                      _buildRepositorySection(context),
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        Positioned(
-          right: 20,
-          top: 8,
-          child: Row(
-            children: [
-              IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  showSnackbar(
-                    context: context,
-                    message: GitStamp.gitCountObjects,
-                    showCloseIcon: true,
-                    floating: false,
-                  );
-                },
-                icon: Icon(Icons.storage),
-              ),
-              IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  showSnackbar(
-                    context: context,
-                    message: GitStamp.gitConfigList,
-                    showCloseIcon: true,
-                    floating: false,
-                  );
-                },
-                icon: Icon(Icons.settings),
-              ),
-              IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  showSnackbar(
-                    context: context,
-                    message: GitStamp.gitRemote,
-                    showCloseIcon: true,
-                  );
-                },
-                icon: Icon(Icons.cloud),
-              ),
-              IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  showSnackbar(
-                    context: context,
-                    message: GitStamp.buildSystemInfo,
-                    showCloseIcon: true,
-                    floating: false,
-                  );
-                },
-                icon: Icon(Icons.medical_information),
-              ),
-              IconButton(
-                onPressed: () => _showRepoFilesBottomSheet(context),
-                icon: const Icon(Icons.folder),
-              ),
-              IconButton(
-                onPressed: () => _showMoreBottomSheet(context),
-                icon: const Icon(Icons.more),
-              ),
-            ],
+          Positioned(
+            right: 20,
+            top: 8,
+            child: Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    showSnackbar(
+                      context: context,
+                      message: GitStamp.gitCountObjects,
+                      showCloseIcon: true,
+                      floating: false,
+                    );
+                  },
+                  icon: Icon(Icons.storage),
+                ),
+                IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    showSnackbar(
+                      context: context,
+                      message: GitStamp.gitConfigList,
+                      showCloseIcon: true,
+                      floating: false,
+                    );
+                  },
+                  icon: Icon(Icons.settings),
+                ),
+                IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    showSnackbar(
+                      context: context,
+                      message: GitStamp.gitRemote,
+                      showCloseIcon: true,
+                    );
+                  },
+                  icon: Icon(Icons.cloud),
+                ),
+                IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    showSnackbar(
+                      context: context,
+                      message: GitStamp.buildSystemInfo,
+                      showCloseIcon: true,
+                      floating: false,
+                    );
+                  },
+                  icon: Icon(Icons.medical_information),
+                ),
+                IconButton(
+                  onPressed: () => _showRepoFilesBottomSheet(context),
+                  icon: const Icon(Icons.folder),
+                ),
+                IconButton(
+                  onPressed: () => _showMoreBottomSheet(context),
+                  icon: const Icon(Icons.more),
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -589,16 +605,16 @@ class GitStampRepoDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('GitStamp', style: _textTitle),
+        Text('GitStamp', style: textTitle),
         const SizedBox(height: 4),
         GitStampDoubleText('Version: ', gitStampVersion),
         Row(
           children: [
-            Text('Build type: [', style: _text),
-            Text('LITE', style: isLiteVersion ? _textBold : _text),
-            Text(', ', style: _text),
-            Text('FULL', style: isLiteVersion ? _text : _textBold),
-            Text(']', style: _text),
+            Text('Build type: [', style: textDefault),
+            Text('LITE', style: isLiteVersion ? textBold : textDefault),
+            Text(', ', style: textDefault),
+            Text('FULL', style: isLiteVersion ? textDefault : textBold),
+            Text(']', style: textDefault),
           ],
         ),
       ],
@@ -609,7 +625,7 @@ class GitStampRepoDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Build', style: _textTitle),
+        Text('Build', style: textTitle),
         const SizedBox(height: 4),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -628,7 +644,7 @@ class GitStampRepoDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Environment', style: _textTitle),
+        Text('Environment', style: textTitle),
         const SizedBox(height: 4),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -670,7 +686,7 @@ class GitStampRepoDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Repository', style: _textTitle),
+        Text('Repository', style: textTitle),
         const SizedBox(height: 4),
         GitStampDoubleText('App Name: ', GitStamp.appName),
         GitStampDoubleText('App Version: ',
@@ -680,15 +696,15 @@ class GitStampRepoDetails extends StatelessWidget {
           'Commit count: ',
           GitStamp.commitList.length.toString(),
         ),
-        Text('Commit stats:', style: _text),
+        Text('Commit stats:', style: textDefault),
         ...commitCountByAuthor()
             .entries
             .map(
               (entry) => Row(
                 children: [
                   SizedBox(width: 16),
-                  Text(entry.key + ': ', style: _text),
-                  Text(entry.value.toString(), style: _textBold),
+                  Text(entry.key + ': ', style: textDefault),
+                  Text(entry.value.toString(), style: textBold),
                 ],
               ),
             )
@@ -713,7 +729,7 @@ class GitStampRepoFiles extends StatelessWidget {
               second: GitStamp.observedFilesCount.toString(),
             ),
             SizedBox(height: 16.0),
-            Text(GitStamp.observedFiles, style: _text),
+            Text(GitStamp.observedFiles, style: textDefault),
           ],
         ),
       ),
@@ -745,7 +761,7 @@ class GitStampFilterList extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text('Filter', style: _textTitle),
+              child: Text('Filter', style: textTitle),
             ),
             SizedBox(height: 20),
             Flexible(
@@ -757,7 +773,7 @@ class GitStampFilterList extends StatelessWidget {
 
                     return ListTile(
                       leading: Icon(e != null ? Icons.person : Icons.close),
-                      title: Text(e ?? 'No filter', style: _textBold),
+                      title: Text(e ?? 'No filter', style: textBold),
                       subtitle: count == null ? null : Text(count.toString()),
                       trailing: e != selectedUser ? null : Icon(Icons.check),
                       onTap: () => onFilterPressed(e),
@@ -784,7 +800,7 @@ class GitStampMore extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text('Git Stamp', style: _textTitle),
+            child: Text('Git Stamp', style: textTitle),
           ),
           SizedBox(height: 20),
           Flexible(
@@ -795,13 +811,13 @@ class GitStampMore extends StatelessWidget {
                   onTap: () => openEmail(email: 'arononak@gmail.com'),
                   title: Text(
                     'Have a great idea for Git Stamp?',
-                    style: _textBold,
+                    style: textBold,
                   ),
                   leading: Icon(Icons.mail),
                 ),
                 ListTile(
                   onTap: () => openProjectHomepage(),
-                  title: Text('You love Git Stamp?', style: _textBold),
+                  title: Text('You love Git Stamp?', style: textBold),
                   leading: Icon(Icons.star),
                 ),
               ],
