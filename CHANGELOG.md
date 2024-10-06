@@ -5,7 +5,7 @@
 <details>
 <summary>Image</summary>
 <!-- https://snappify.com/ -->
-![](https://github.com/arononak/git_stamp/blob/main/changelog/5.0.0.png?raw=true)
+<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/5.0.0.png?raw=true" alt="Image"></p>
 </details>
 
 ## 4.11.0
@@ -20,7 +20,7 @@
 
 <details>
 <summary>Image</summary>
-![](https://github.com/arononak/git_stamp/blob/main/changelog/4.11.0.png?raw=true)
+<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/4.11.0.png?raw=true" alt="Image"></p>
 </details>
 
 ## 4.10.0
@@ -33,7 +33,7 @@
 
 <details>
 <summary>Image</summary>
-![](https://github.com/arononak/git_stamp/blob/main/changelog/4.10.0.png?raw=true)
+<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/4.10.0.png?raw=true" alt="Image"></p>
 </details>
 
 ## 4.9.0 (Not working)
@@ -46,7 +46,7 @@
 
 <details>
 <summary>Image</summary>
-![](https://github.com/arononak/git_stamp/blob/main/changelog/4.9.0.png?raw=true)
+<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/4.9.0.png?raw=true" alt="Image"></p>
 </details>
 
 ## 4.8.0
@@ -60,7 +60,7 @@
 
 <details>
 <summary>Image</summary>
-![](https://github.com/arononak/git_stamp/blob/main/changelog/4.8.0.png?raw=true)
+<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/4.8.0.png?raw=true" alt="Image"></p>
 </details>
 
 ## 4.7.0
@@ -77,7 +77,7 @@
 
 <details>
 <summary>Image</summary>
-![](https://github.com/arononak/git_stamp/blob/main/changelog/4.7.0.png?raw=true)
+<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/4.7.0.png?raw=true" alt="Image"></p>
 </details>
 
 ## 4.6.0
@@ -87,7 +87,7 @@
 
 <details>
 <summary>Image</summary>
-![](https://github.com/arononak/git_stamp/blob/main/changelog/4.6.0.png?raw=true)
+<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/4.6.0.png?raw=true" alt="Image"></p>
 </details>
 
 ## 4.5.0
@@ -106,7 +106,7 @@
 
 <details>
 <summary>Image</summary>
-![](https://github.com/arononak/git_stamp/blob/main/changelog/4.5.0.png?raw=true)
+<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/4.5.0.png?raw=true" alt="Image"></p>
 </details>
 
 ## 4.4.0
@@ -117,7 +117,7 @@
 
 <details>
 <summary>Image</summary>
-![](https://github.com/arononak/git_stamp/blob/main/changelog/4.4.0.png?raw=true)
+<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/4.4.0.png?raw=true" alt="Image"></p>
 </details>
 
 ## 4.3.0
@@ -129,7 +129,7 @@
 
 <details>
 <summary>Image</summary>
-![](https://github.com/arononak/git_stamp/blob/main/changelog/4.3.0.png?raw=true)
+<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/4.3.0.png?raw=true" alt="Image"></p>
 </details>
 
 ## 4.2.0
@@ -146,7 +146,7 @@
 
 <details>
 <summary>Image</summary>
-![](https://github.com/arononak/git_stamp/blob/main/changelog/4.2.0.png?raw=true)
+<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/4.2.0.png?raw=true" alt="Image"></p>
 </details>
 
 ## 4.1.2
@@ -165,7 +165,7 @@
 
 <details>
 <summary>Image</summary>
-![](https://github.com/arononak/git_stamp/blob/main/changelog/4.1.0.png?raw=true)
+<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/4.1.0.png?raw=true" alt="Image"></p>
 </details>
 
 ## 4.0.0
@@ -177,7 +177,7 @@
 
 <details>
 <summary>Image</summary>
-![](https://github.com/arononak/git_stamp/blob/main/changelog/4.0.0.png?raw=true)
+<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/4.0.0.png?raw=true" alt="Image"></p>
 </details>
 
 ## 3.2.0
@@ -186,7 +186,7 @@
 
 <details>
 <summary>Image</summary>
-![](https://github.com/arononak/git_stamp/blob/main/changelog/3.2.0.png?raw=true)
+<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/3.2.0.png?raw=true" alt="Image"></p>
 </details>
 
 ## 3.1.0
@@ -198,7 +198,7 @@
 <details>
 <summary>Image</summary>
 <!-- https://snappify.com/ -->
-![](https://github.com/arononak/git_stamp/blob/main/changelog/3.1.0.png?raw=true)
+<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/3.1.0.png?raw=true" alt="Image"></p>
 </details>
 
 ## 3.0.2
@@ -216,7 +216,7 @@
 <details>
 <summary>Image</summary>
 <!-- https://snappify.com/ -->
-![](https://github.com/arononak/git_stamp/blob/main/changelog/3.0.0.png?raw=true)
+<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/3.0.0.png?raw=true" alt="Image"></p>
 </details>
 
 ## 2.11.0
