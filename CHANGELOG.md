@@ -2,6 +2,12 @@
 
 * Added encryption module
 
+<details>
+<summary>Image</summary>
+<!-- https://snappify.com/ -->
+![](https://github.com/arononak/git_stamp/blob/main/changelog/5.0.0.png?raw=true)
+</details>
+
 ## 4.11.0
 
 * Added GitCountObjects module
@@ -12,6 +18,11 @@
 * GitStampPage - Added 2 commit item types
 * GitStampDetailsPage - AppBar - Added text size
 
+<details>
+<summary>Image</summary>
+![](https://github.com/arononak/git_stamp/blob/main/changelog/4.11.0.png?raw=true)
+</details>
+
 ## 4.10.0
 
 * **Fixed icon build type**
@@ -19,6 +30,11 @@
 * New transparent SnackBars
 * GitStampPage - refactor
 * GitStampIcon - refactor
+
+<details>
+<summary>Image</summary>
+![](https://github.com/arononak/git_stamp/blob/main/changelog/4.10.0.png?raw=true)
+</details>
 
 ## 4.9.0 (Not working)
 
@@ -28,6 +44,11 @@
 * GitStampPage - Fixed commit item style
 * GitStampDetailsPage - Added diff line colors
 
+<details>
+<summary>Image</summary>
+![](https://github.com/arononak/git_stamp/blob/main/changelog/4.9.0.png?raw=true)
+</details>
+
 ## 4.8.0
 
 * Added `GitConfigList` module
@@ -36,6 +57,11 @@
 * SnackBar's Fixes
 * GitStampPage - Fixed commit item responsiveness
 * GitStampPage & GitStampDetailsPage - Fixed background colors
+
+<details>
+<summary>Image</summary>
+![](https://github.com/arononak/git_stamp/blob/main/changelog/4.8.0.png?raw=true)
+</details>
 
 ## 4.7.0
 
@@ -49,10 +75,20 @@
 * GitStampPage - Added arrow animation
 * GitStampPage - refactor
 
+<details>
+<summary>Image</summary>
+![](https://github.com/arononak/git_stamp/blob/main/changelog/4.7.0.png?raw=true)
+</details>
+
 ## 4.6.0
 
 * Added GitStamp.buildMachine object
 * Added full flutter-doctor SnackBar
+
+<details>
+<summary>Image</summary>
+![](https://github.com/arononak/git_stamp/blob/main/changelog/4.6.0.png?raw=true)
+</details>
 
 ## 4.5.0
 
@@ -68,11 +104,21 @@
 * GitStampPage - Changed AppBar icons positions
 * GitStampPage - Commit list fixes
 
+<details>
+<summary>Image</summary>
+![](https://github.com/arononak/git_stamp/blob/main/changelog/4.5.0.png?raw=true)
+</details>
+
 ## 4.4.0
 
 * Added interpolate function `GitStamp.showLicensePage`
 * Added `git config` module
 * Refactor
+
+<details>
+<summary>Image</summary>
+![](https://github.com/arononak/git_stamp/blob/main/changelog/4.4.0.png?raw=true)
+</details>
 
 ## 4.3.0
 
@@ -80,6 +126,11 @@
 * Added `GitStamp.sha`
 * Generator new logs & refactor
 * Fixed generation build version for no build number in pubspec.yaml
+
+<details>
+<summary>Image</summary>
+![](https://github.com/arononak/git_stamp/blob/main/changelog/4.3.0.png?raw=true)
+</details>
 
 ## 4.2.0
 
@@ -92,6 +143,11 @@
 * Fixed generation diff-list for custom build-type
 * New logger
 * Added CLI --version flag and GitStamp tool version during build
+
+<details>
+<summary>Image</summary>
+![](https://github.com/arononak/git_stamp/blob/main/changelog/4.2.0.png?raw=true)
+</details>
 
 ## 4.1.2
 
@@ -107,6 +163,11 @@
 * Added `app-name`
 * Added showGitStampLicensePage method with `app-name` & `app-version`
 
+<details>
+<summary>Image</summary>
+![](https://github.com/arononak/git_stamp/blob/main/changelog/4.1.0.png?raw=true)
+</details>
+
 ## 4.0.0
 
 * Added new `ICON` build-type
@@ -114,15 +175,31 @@
 * Added `aron_gradient_line` package for `LITE` and `FULL` build-type
 * Generator adding packages to project pubpsec.yaml
 
+<details>
+<summary>Image</summary>
+![](https://github.com/arononak/git_stamp/blob/main/changelog/4.0.0.png?raw=true)
+</details>
+
 ## 3.2.0
 
 * Added GitStampIcon with tip information
+
+<details>
+<summary>Image</summary>
+![](https://github.com/arononak/git_stamp/blob/main/changelog/3.2.0.png?raw=true)
+</details>
 
 ## 3.1.0
 
 * Added `app-version`
 * File structure refactor
 * pubspec.yaml - update description
+
+<details>
+<summary>Image</summary>
+<!-- https://snappify.com/ -->
+![](https://github.com/arononak/git_stamp/blob/main/changelog/3.1.0.png?raw=true)
+</details>
 
 ## 3.0.2
 
@@ -135,6 +212,12 @@
 ## 3.0.0
 
 * New customizable generator
+
+<details>
+<summary>Image</summary>
+<!-- https://snappify.com/ -->
+![](https://github.com/arononak/git_stamp/blob/main/changelog/3.0.0.png?raw=true)
+</details>
 
 ## 2.11.0
 
@@ -276,72 +359,3 @@
 ## 1.0.0
 
 * First version
-
-
-
-# 5.0.0
-
-<!-- https://snappify.com/ -->
-![](https://github.com/arononak/git_stamp/blob/main/changelog/5.0.0.png?raw=true)
-
-# 4.11.0
-
-![](https://github.com/arononak/git_stamp/blob/main/changelog/4.11.0.png?raw=true)
-
-# 4.10.0
-
-![](https://github.com/arononak/git_stamp/blob/main/changelog/4.10.0.png?raw=true)
-
-## 4.9.0
-
-![](https://github.com/arononak/git_stamp/blob/main/changelog/4.9.0.png?raw=true)
-
-## 4.8.0
-
-![](https://github.com/arononak/git_stamp/blob/main/changelog/4.8.0.png?raw=true)
-
-## 4.7.0
-
-![](https://github.com/arononak/git_stamp/blob/main/changelog/4.7.0.png?raw=true)
-
-## 4.6.0
-
-![](https://github.com/arononak/git_stamp/blob/main/changelog/4.6.0.png?raw=true)
-
-## 4.5.0
-
-![](https://github.com/arononak/git_stamp/blob/main/changelog/4.5.0.png?raw=true)
-
-## 4.4.0
-
-![](https://github.com/arononak/git_stamp/blob/main/changelog/4.4.0.png?raw=true)
-
-## 4.3.0
-
-![](https://github.com/arononak/git_stamp/blob/main/changelog/4.3.0.png?raw=true)
-
-## 4.2.0
-
-![](https://github.com/arononak/git_stamp/blob/main/changelog/4.2.0.png?raw=true)
-
-## 4.1.0
-
-![](https://github.com/arononak/git_stamp/blob/main/changelog/4.1.0.png?raw=true)
-
-## 4.0.0
-
-![](https://github.com/arononak/git_stamp/blob/main/changelog/4.0.0.png?raw=true)
-
-## 3.2.0
-
-![](https://github.com/arononak/git_stamp/blob/main/changelog/3.2.0.png?raw=true)
-
-## 3.1.0
-
-<!-- https://snappify.com/ -->
-![](https://github.com/arononak/git_stamp/blob/main/changelog/3.1.0.png?raw=true)
-
-## 3.0.0
-
-<!-- https://snappify.com/ -->
-![](https://github.com/arononak/git_stamp/blob/main/changelog/3.0.0.png?raw=true)
