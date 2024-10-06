@@ -138,6 +138,10 @@
 <td align="center"><img src="screenshots/git_config.png" alt=""></td>
 <td align="center"><img src="screenshots/commit_diff.png" alt=""></td>
 </tr>
+<tr>
+<td align="center"><img src="screenshots/details_encrypted.png" alt=""></td>
+<td align="center"><img src="screenshots/decrypt.png" alt=""></td>
+</tr>
 </tbody>
 </table>
 <h2 id="-about">📑️ About</h2>
@@ -210,7 +214,7 @@ Text('SHA: ${GitStamp.sha}'),
 </tr>
 <tr>
 <td>Version 5</td>
-<td>Someday it will be</td>
+<td>07.10.2024</td>
 <td>🔐 Data encription</td>
 </tr>
 <tr>
@@ -279,6 +283,7 @@ Text('SHA: ${GitStamp.sha}'),
 <tr>
 <th>Build type</th>
 <th>Pure Dart</th>
+<th>Can encrypt</th>
 <th>CLI Command</th>
 </tr>
 </thead>
@@ -286,21 +291,25 @@ Text('SHA: ${GitStamp.sha}'),
 <tr>
 <td>LITE</td>
 <td>NO</td>
+<td>YES</td>
 <td><code>dart run git_stamp</code></td>
 </tr>
 <tr>
 <td>FULL</td>
 <td>NO</td>
+<td>YES</td>
 <td><code>dart run git_stamp --build-type full</code></td>
 </tr>
 <tr>
 <td>ICON</td>
+<td>NO</td>
 <td>NO</td>
 <td><code>dart run git_stamp --build-type icon</code></td>
 </tr>
 <tr>
 <td>CUSTOM</td>
 <td>YES</td>
+<td>NO</td>
 <td><code>dart run git_stamp --gen-only build-branch,build-date-time</code></td>
 </tr>
 </tbody>
@@ -319,13 +328,13 @@ Text('SHA: ${GitStamp.sha}'),
 <tr>
 <td>LITE</td>
 <td>6.90s</td>
-<td>29</td>
+<td>33</td>
 <td>156.6 KB</td>
 </tr>
 <tr>
 <td>FULL</td>
 <td>12.94s</td>
-<td>29</td>
+<td>33</td>
 <td>2.1MB</td>
 </tr>
 <tr>
@@ -443,44 +452,49 @@ Text('SHA: ${GitStamp.sha}'),
 <h3 id="5-central-gitstamp-node-for-advanced-usage">5. Central <strong>GitStamp</strong> node for advanced usage:</h3>
 <details>
 <summary>git_stamp_node.dart</summary>
-<pre class="language-dart"><code class="language-dart">class GitStamp {
-  static List&lt;GitStampCommit&gt; get commitList
-  static GitStampCommit? get latestCommit
-  static String get sha
-  static int get commitCount
+<pre class="language-dart"><code class="language-dart">abstract class GitStampNode {
+  String get commitListString;
+  List&lt;GitStampCommit&gt; get commitList;
+  GitStampCommit? get latestCommit;
+  String get sha;
+  int get commitCount;
 
-  static Map&lt;String, dynamic&gt; diffList
-  static Map&lt;String, dynamic&gt; diffStatList
+  String get diffListString;
+  Map&lt;String, dynamic&gt; get diffList;
+  String get diffStatListString;
+  Map&lt;String, dynamic&gt; get diffStatList;
 
-  static const String buildBranch
-  static const String buildDateTime
-  static const String buildSystemInfo
-  static GitStampBuildMachine buildMachine
-  static const String repoCreationDate
-  static const String repoPath
+  String get buildMachineString;
+  GitStampBuildMachine get buildMachine;
 
-  static String observedFiles
-  static List&lt;String&gt; observedFilesList
-  static int observedFilesCount
+  String get buildBranch;
+  String get buildDateTime;
+  String get buildSystemInfo;
+  String get repoCreationDate;
+  String get repoPath;
+  
+  String get observedFiles;
+  List&lt;String&gt; get observedFilesList;
+  int get observedFilesCount;
+  
+  String get appVersion;
+  String get appBuild;
+  String get appName;
 
-  static const String appVersion
-  static const String appBuild
-  static const String appName
+  String get gitConfigGlobalUserName;
+  String get gitConfigGlobalUserEmail;
+  String get gitConfigUserName;
+  String get gitConfigUserEmail;
+  String get gitRemote;
+  String get gitConfigList;
+  String get gitCountObjects;
 
-  static const String gitConfigGlobalUserName
-  static const String gitConfigGlobalUserEmail
-  static const String gitConfigUserName
-  static const String gitConfigUserEmail
-  static const String gitRemote
-  static const String gitConfigList
-  static const String gitCountObjects
-
-  static showLicensePage({
+  void showLicensePage({
     required BuildContext context,
     Widget? applicationIcon,
     String? applicationLegalese,
     bool useRootNavigator = false,
-  })
+  });
 }
 </code></pre>
 </details>
@@ -582,7 +596,7 @@ If you have any feedback, please contact me at <a href="mailto:arononak@gmail.co
 <footer>
   <span class="no-break">
     git_stamp
-      4.11.0
+      5.0.0
   </span>
 
   
