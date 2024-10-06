@@ -1,3 +1,7 @@
+## 5.0.0
+
+* Added encryption module
+
 ## 4.11.0
 
 * Added GitCountObjects module
@@ -274,6 +278,11 @@
 * First version
 
 
+
+# 5.0.0
+
+<!-- https://snappify.com/ -->
+![](https://github.com/arononak/git_stamp/blob/main/changelog/5.0.0.png?raw=true)
 
 # 4.11.0
 

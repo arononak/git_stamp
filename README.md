@@ -51,11 +51,13 @@ Advanced await-less information provider and development tool.
 
 ### 2. Screenshots
 
-|                                 |                                  |
-| :-----------------------------: | :------------------------------: |
-|    ![](screenshots/list.png)    |    ![](screenshots/icon.png)     |
-|   ![](screenshots/files.png)    |   ![](screenshots/details.png)   |
-| ![](screenshots/git_config.png) | ![](screenshots/commit_diff.png) |
+|                                        |                                  |
+| :------------------------------------: | :------------------------------: |
+|       ![](screenshots/list.png)        |    ![](screenshots/icon.png)     |
+|       ![](screenshots/files.png)       |   ![](screenshots/details.png)   |
+|    ![](screenshots/git_config.png)     | ![](screenshots/commit_diff.png) |
+| ![](screenshots/details_encrypted.png) |   ![](screenshots/decrypt.png)   |
+
 
 ## 📑️ About
 
@@ -125,7 +127,7 @@ Text('SHA: ${GitStamp.sha}'),
 | 🆕 **Version** | 🗓️ **Date**         | 📝 **Change Description**    |
 | ------------- | ------------------ | --------------------------- |
 | Version 6     | Someday it will be | 📦 JSON data export          |
-| Version 5     | Someday it will be | 🔐 Data encription           |
+| Version 5     | 07.10.2024         | 🔐 Data encription           |
 | Version 4     | 24.07.2024         | 🌟 New `icon` build-type     |
 | Version 3     | 30.06.2024         | 🔧 New `gen-only` build-type |
 | Version 2     | 10.04.2024         | 🛠️ Commit diff               |

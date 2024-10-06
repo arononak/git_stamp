@@ -29,6 +29,8 @@ tests_integration:
 	cd test_project && dart run git_stamp --build-type icon && flutter build web
 	cd test_project && dart run git_stamp --build-type lite && flutter build web
 	cd test_project && dart run git_stamp --build-type full && flutter build web
+	cd test_project && dart run git_stamp --build-type lite --encrypt && flutter build web
+	cd test_project && dart run git_stamp --build-type full --encrypt && flutter build web
 	rm -f -r test_project
 
 screenshots:
@@ -38,24 +40,32 @@ screenshots:
 	echo "import 'dart:ui'; const physicalSize = Size(610, 885);" > integration_test/physical_size.dart
 	dart run git_stamp --build-type full
 	flutter drive --driver=test_driver/integration_test.dart --target=integration_test/screenshots.dart -d web-server
+	dart run git_stamp --build-type full --encrypt
+	flutter drive --driver=test_driver/integration_test.dart --target=integration_test/screenshots_encrypted.dart -d web-server
 	convert screenshot_commit_diff.png -crop 610x885+0+0 commit_diff.png
 	convert screenshot_git_config.png -crop 610x885+0+0 git_config.png
 	convert screenshot_details.png -crop 610x885+0+0 details.png
 	convert screenshot_files.png -crop 610x885+0+0 files.png
 	convert screenshot_icon.png -crop 610x885+0+0 icon.png
 	convert screenshot_list.png -crop 610x885+0+0 list.png
+	convert screenshot_details_encrypted.png -crop 610x885+0+0 details_encrypted.png
+	convert screenshot_decrypt.png -crop 610x885+0+0 decrypt.png
 	rm -f screenshot_commit_diff.png
 	rm -f screenshot_git_config.png
 	rm -f screenshot_details.png
 	rm -f screenshot_files.png
 	rm -f screenshot_icon.png
 	rm -f screenshot_list.png
+	rm -f screenshot_details_encrypted.png
+	rm -f screenshot_decrypt.png
 	mv commit_diff.png ../screenshots
 	mv git_config.png ../screenshots
 	mv details.png ../screenshots
 	mv files.png ../screenshots
 	mv icon.png ../screenshots
 	mv list.png ../screenshots
+	mv details_encrypted.png ../screenshots
+	mv decrypt.png ../screenshots
 	kill $$(cat chromedriver.pid)
 	rm -f chromedriver.pid
 	rm -f -r chromedriver
