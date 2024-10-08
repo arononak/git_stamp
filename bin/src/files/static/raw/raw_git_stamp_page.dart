@@ -25,9 +25,7 @@ void showGitStampPage({
     rootNavigator: useRootNavigator,
   ).push(MaterialPageRoute<void>(
     builder: (BuildContext context) {
-      return GitStampPage(
-        monospaceFontFamily: monospaceFontFamily,
-      );
+      return GitStampPage(monospaceFontFamily: monospaceFontFamily);
     },
   ));
 }
@@ -214,6 +212,16 @@ class GitStampTextLabel extends StatelessWidget {
   }
 }
 
+class GitStampCommitHeader {
+  final String date;
+  final int count;
+
+  const GitStampCommitHeader({
+    required this.date,
+    required this.count,
+  });
+}
+
 class GitStampCommitList extends StatelessWidget {
   final List<GitStampCommit> commits;
   final String? filterAuthorName;
@@ -252,7 +260,7 @@ class GitStampCommitList extends StatelessWidget {
 
     List<dynamic> listElement = [];
     groupedCommit.forEach((key, commits) {
-      listElement.add(key);
+      listElement.add(GitStampCommitHeader(date: key, count: commits.length));
       listElement.addAll(commits);
     });
 
@@ -262,9 +270,10 @@ class GitStampCommitList extends StatelessWidget {
         final element = listElement[index];
 
         switch (element) {
-          case String():
+          case GitStampCommitHeader():
             return GitStampDateListElement(
-              date: element,
+              date: element.date,
+              count: element.count,
             );
           case GitStampCommit():
             return GitStampCommitListElement(
@@ -283,27 +292,56 @@ class GitStampCommitList extends StatelessWidget {
 
 class GitStampDateListElement extends StatelessWidget {
   final String date;
+  final int count;
 
-  const GitStampDateListElement({super.key, required this.date});
+  const GitStampDateListElement({
+    super.key,
+    required this.date,
+    required this.count,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Icon(
-            Icons.commit,
-            color: Theme.of(context).colorScheme.secondary,
+          Row(
+            children: [
+              Icon(
+                Icons.commit,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+              SizedBox(width: 8),
+              Text(
+                date,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  fontStyle: FontStyle.italic,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+              ),
+            ],
           ),
-          SizedBox(width: 8),
-          Text(
-            date,
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-              fontStyle: FontStyle.italic,
-              color: Theme.of(context).colorScheme.secondary,
+          Container(
+            constraints: BoxConstraints(
+              minHeight: 40,
+              minWidth: 40,
+            ),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Theme.of(context).colorScheme.surfaceContainer,
+            ),
+            alignment: Alignment.center,
+            child: Text(
+              count.toString(),
+              maxLines: 1,
+              style: TextStyle(
+                fontSize: 20,
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
             ),
           ),
         ],
