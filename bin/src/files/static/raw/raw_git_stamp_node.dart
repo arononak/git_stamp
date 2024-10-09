@@ -75,14 +75,19 @@ abstract class GitStampNode {
   ${model.observedFilesList.enabled}List<String> get observedFilesList;
   ${model.observedFilesList.enabled}int get observedFilesCount;
   
+  ${(model.appVersion || model.appBuild).enabled}String get appVersionFull => appVersion + ' (' + appBuild + ')';
   ${model.appVersion.enabled}String get appVersion;
   ${model.appBuild.enabled}String get appBuild;
   ${model.appName.enabled}String get appName;
 
+  ${model.gitConfig.enabled}String get gitConfigGlobalUser => gitConfigGlobalUserName + ' (' + gitConfigGlobalUserEmail + ')';
   ${model.gitConfig.enabled}String get gitConfigGlobalUserName;
   ${model.gitConfig.enabled}String get gitConfigGlobalUserEmail;
+
+  ${model.gitConfig.enabled}String get gitConfigUser => gitConfigUserName + ' (' + gitConfigUserEmail + ')';
   ${model.gitConfig.enabled}String get gitConfigUserName;
   ${model.gitConfig.enabled}String get gitConfigUserEmail;
+  
   ${model.gitRemote.enabled}String get gitRemote;
   ${model.gitConfigList.enabled}String get gitConfigList;
   ${model.gitCountObjects.enabled}String get gitCountObjects;
@@ -94,10 +99,11 @@ abstract class GitStampNode {
   ${model.generateFlutterFiles.enabled}  bool useRootNavigator = false,
   ${model.generateFlutterFiles.enabled}});
 }
+
 ''';
 
 String _decryptedImpl(GitStampBuildModel model) => '''
-class DecryptedGitStampNode implements GitStampNode {
+class DecryptedGitStampNode extends GitStampNode {
   bool get isEncrypted => false;
 
   ${model.commitList.enabled}@override String get commitListString => gitStampCommitList;
@@ -124,14 +130,17 @@ class DecryptedGitStampNode implements GitStampNode {
   ${model.observedFilesList.enabled}@override List<String> get observedFilesList => observedFiles.split(RegExp(r'\\r?\\n'));
   ${model.observedFilesList.enabled}@override int get observedFilesCount => observedFilesList.length;
   
+  ${(model.appVersion || model.appBuild).enabled}@override String get appVersionFull => !isEncrypted ? super.appVersionFull : 'ENCRYPTED';
   ${model.appVersion.enabled}@override String get appVersion => gitStampAppVersion;
   ${model.appBuild.enabled}@override String get appBuild => gitStampAppBuild;
   ${model.appName.enabled}@override String get appName => gitStampAppName;
-
+  
   ${model.gitConfig.enabled}@override String get gitConfigGlobalUserName => gitStampGitConfigGlobalUserName;
   ${model.gitConfig.enabled}@override String get gitConfigGlobalUserEmail => gitStampGitConfigGlobalUserEmail;
+
   ${model.gitConfig.enabled}@override String get gitConfigUserName => gitStampGitConfigUserName;
   ${model.gitConfig.enabled}@override String get gitConfigUserEmail => gitStampGitConfigUserEmail;
+  
   ${model.gitRemote.enabled}@override String get gitRemote => gitStampGitRemoteList;
   ${model.gitConfigList.enabled}@override String get gitConfigList => gitStampGitConfigList;
   ${model.gitCountObjects.enabled}@override String get gitCountObjects => gitStampGitCountObjects;
@@ -154,7 +163,7 @@ String _encryptedImpl(
   Uint8List encryptedTestText,
 ) =>
     '''
-class EncryptedGitStampNode implements GitStampNode {
+class EncryptedGitStampNode extends GitStampNode {
   static Uint8List? key;
   static Uint8List? iv;
 
@@ -216,14 +225,19 @@ class EncryptedGitStampNode implements GitStampNode {
   @override List<String> get observedFilesList => observedFiles.split(RegExp(r'\\r?\\n'));
   @override int get observedFilesCount => observedFilesList.length;
   
+  @override String get appVersionFull => !isEncrypted ? super.appVersionFull : 'ENCRYPTED';
   @override String get appVersion => _decrypt(gitStampAppVersion) ?? 'ECRYPTED';
   @override String get appBuild => _decrypt(gitStampAppBuild) ?? 'ECRYPTED';
   @override String get appName => _decrypt(gitStampAppName) ?? 'ECRYPTED';
 
+  @override String get gitConfigGlobalUser => !isEncrypted ? super.gitConfigGlobalUser : 'ENCRYPTED';
   @override String get gitConfigGlobalUserName => _decrypt(gitStampGitConfigGlobalUserName) ?? 'ECRYPTED';
   @override String get gitConfigGlobalUserEmail => _decrypt(gitStampGitConfigGlobalUserEmail) ?? 'ECRYPTED';
+
+  @override String get gitConfigUser => !isEncrypted ? super.gitConfigUser : 'ENCRYPTED';
   @override String get gitConfigUserName => _decrypt(gitStampGitConfigUserName) ?? 'ECRYPTED';
   @override String get gitConfigUserEmail => _decrypt(gitStampGitConfigUserEmail) ?? 'ECRYPTED';
+  
   @override String get gitRemote => _decrypt(gitStampGitRemoteList) ?? 'ECRYPTED';
   @override String get gitConfigList => _decrypt(gitStampGitConfigList) ?? 'ECRYPTED';
   @override String get gitCountObjects => _decrypt(gitStampGitCountObjects) ?? 'ECRYPTED';

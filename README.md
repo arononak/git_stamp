@@ -325,14 +325,19 @@ abstract class GitStampNode {
   List<String> get observedFilesList;
   int get observedFilesCount;
   
+  String get appVersionFull => appVersion + ' (' + appBuild + ')';
   String get appVersion;
   String get appBuild;
   String get appName;
 
+  String get gitConfigGlobalUser => gitConfigGlobalUserName + ' (' + gitConfigGlobalUserEmail + ')';
   String get gitConfigGlobalUserName;
   String get gitConfigGlobalUserEmail;
+
+  String get gitConfigUser => gitConfigUserName + ' (' + gitConfigUserEmail + ')';
   String get gitConfigUserName;
   String get gitConfigUserEmail;
+  
   String get gitRemote;
   String get gitConfigList;
   String get gitCountObjects;

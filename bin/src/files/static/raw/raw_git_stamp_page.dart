@@ -687,20 +687,8 @@ class GitStampRepoDetails extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            GitStampDoubleText(
-              'Global: ',
-              GitStamp.gitConfigGlobalUserName +
-                  ' (' +
-                  GitStamp.gitConfigGlobalUserEmail +
-                  ')',
-            ),
-            GitStampDoubleText(
-              'Local: ',
-              GitStamp.gitConfigUserName +
-                  ' (' +
-                  GitStamp.gitConfigUserEmail +
-                  ')',
-            ),
+            GitStampDoubleText('Global: ', GitStamp.gitConfigGlobalUser),
+            GitStampDoubleText('Local: ', GitStamp.gitConfigUser),
             ...{
               'Framework Version: ': GitStamp.buildMachine.frameworkVersion,
               'Channel: ': GitStamp.buildMachine.channel,
@@ -727,8 +715,7 @@ class GitStampRepoDetails extends StatelessWidget {
         Text('Repository', style: textTitle),
         const SizedBox(height: 4),
         GitStampDoubleText('App Name: ', GitStamp.appName),
-        GitStampDoubleText('App Version: ',
-            GitStamp.appVersion + ' (' + GitStamp.appBuild + ')'),
+        GitStampDoubleText('App Version: ', GitStamp.appVersionFull),
         GitStampDoubleText('Created: ', GitStamp.repoCreationDate),
         GitStampDoubleText(
           'Commit count: ',
@@ -764,10 +751,10 @@ class GitStampRepoFiles extends StatelessWidget {
           children: [
             GitStampLabel(
               first: 'Repository files',
-              second: GitStamp.observedFilesCount.toString(),
+              second: !GitStamp.isEncrypted ? GitStamp.observedFilesCount.toString() : 'ENCRYPTED',
             ),
             SizedBox(height: 16.0),
-            Text(GitStamp.observedFiles, style: textDefault),
+            if (!GitStamp.isEncrypted ) ...[Text(GitStamp.observedFiles, style: textDefault)],
           ],
         ),
       ),
