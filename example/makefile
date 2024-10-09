@@ -1,5 +1,5 @@
 sync:
-	dart run git_stamp --build-type full
+	dart run git_stamp --build-type full --adding-packages disabled
 	dart format .
 
 run:

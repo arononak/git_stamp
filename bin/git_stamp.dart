@@ -35,6 +35,15 @@ Future<void> main(List<String> arguments) async {
       ],
       defaultsTo: 'lite',
     )
+    ..addOption(
+      'adding-packages',
+      abbr: 'a',
+      allowed: [
+        'enabled',
+        'disabled',
+      ],
+      defaultsTo: 'enabled',
+    )
     ..addMultiOption(
       'gen-only',
       abbr: 'o',
@@ -78,10 +87,14 @@ Future<void> main(List<String> arguments) async {
     final genOnly = results['gen-only'];
     final isCustom = genOnly?.isNotEmpty ?? false;
     final buildType = isCustom ? 'custom' : results['build-type'].toLowerCase();
-    final type = 'Build type: ${isCustom ? 'custom ($genOnly)' : buildType}\n';
+    final type = 'Build type: ${isCustom ? 'custom ($genOnly)' : buildType}';
+    final addingPackageEnabled = results['adding-packages'] == 'enabled';
 
     GitStampLogger.lightGreen(gitStampVersion);
     GitStampLogger.lightGreen(type);
+    GitStampLogger.lightGreen('Adding packages: ${results['adding-packages']}');
+
+    GitStampLogger.lightGreen('');
     gitStampAscii.split('\n').forEach((line) {
       GitStampLogger.lightYellow(line);
     });
@@ -95,10 +108,12 @@ Future<void> main(List<String> arguments) async {
         _generateFlutterInterface(true, encryptEnabled);
         _generateFlutterIcon();
 
-        _addPackageToPubspec('aron_gradient_line');
-        _addPackageToPubspec('url_launcher');
-        if (encryptEnabled) {
-          _addPackageToPubspec('encrypt');
+        if (addingPackageEnabled) {
+          _addPackageToPubspec('aron_gradient_line');
+          _addPackageToPubspec('url_launcher');
+          if (encryptEnabled) {
+            _addPackageToPubspec('encrypt');
+          }
         }
 
         break;
@@ -108,20 +123,21 @@ Future<void> main(List<String> arguments) async {
         _generateFlutterInterface(false, encryptEnabled);
         _generateFlutterIcon();
 
-        _addPackageToPubspec('aron_gradient_line');
-        _addPackageToPubspec('url_launcher');
-        if (encryptEnabled) {
-          _addPackageToPubspec('encrypt');
+        if (addingPackageEnabled) {
+          _addPackageToPubspec('aron_gradient_line');
+          _addPackageToPubspec('url_launcher');
+          if (encryptEnabled) {
+            _addPackageToPubspec('encrypt');
+          }
         }
+
         break;
       case 'icon':
         _generateDataFiles(const GitStampBuildModel.icon(), true);
         _generateFlutterIcon();
-
         break;
       case 'custom':
         _generateDataFiles(GitStampBuildModel.custom(genOnly ?? []), false);
-
         break;
       default:
     }

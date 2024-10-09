@@ -221,12 +221,15 @@ jobs:
 
 ### 1. Examples
 
-| Build type | Pure Dart | Can encrypt | CLI Command                                                  |
-| ---------- | --------- | ----------- | ------------------------------------------------------------ |
-| FULL       | NO        | YES         | `dart run git_stamp --build-type full --encrypt`             |
-| LITE       | NO        | YES         | `dart run git_stamp`                                         |
-| ICON       | NO        | NO          | `dart run git_stamp --build-type icon`                       |
-| CUSTOM     | YES       | NO          | `dart run git_stamp --gen-only build-branch,build-date-time` |
+| Build type | Pure Dart | Can encrypt | CLI Command                                                                 |
+| ---------- | --------- | ----------- | --------------------------------------------------------------------------- |
+| FULL       | NO        | YES         | `dart run git_stamp --build-type full --adding-packages disabled --encrypt` |
+| LITE       | NO        | YES         | `dart run git_stamp`                                                        |
+| ICON       | NO        | NO          | `dart run git_stamp --build-type icon`                                      |
+| CUSTOM     | YES       | NO          | `dart run git_stamp --gen-only build-branch,build-date-time`                |
+
+> [!NOTE]
+> To optimize the generation you can disable adding packages to the project for LITE & FULL versions by adding a flag in CLI `--adding-packages disabled` .
 
 ### 2. Benchmarks (Repo 582 Commits)
 
