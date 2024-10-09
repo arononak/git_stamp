@@ -1,24 +1,30 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:meta/meta.dart';
+
 import './../git_stamp_logger.dart';
 
-abstract class _GitStampFile {
+sealed class _GitStampFile {
+  @protected
   String get directory;
+
+  @protected
   String get filename => '';
+
+  @protected
   String get content => '';
 
+  @protected
   String get path => '$directory/$filename';
 
-  String getFileSize({int decimals = 1}) {
-    return fileSize(path, decimals: decimals);
-  }
-
+  @mustCallSuper
   void generate() {
     File(path).writeAsStringSync(content);
 
-    final text = 'Generated ${getFileSize().padLeft(13)}               $path';
-    GitStampLogger.lightGrey(text);
+    GitStampLogger.lightGrey(
+      'Generated ${fileSize(path, decimals: 1).padLeft(13)}               $path',
+    );
   }
 }
 
@@ -32,6 +38,11 @@ class GitStampSrcFile extends _GitStampFile {
   String get directory => 'lib/git_stamp/src';
 }
 
+class GitStampUiFile extends _GitStampFile {
+  @override
+  String get directory => 'lib/git_stamp/src/ui';
+}
+
 typedef EncryptFunction = dynamic Function(String data);
 
 class GitStampDataFile extends _GitStampFile {
@@ -39,11 +50,12 @@ class GitStampDataFile extends _GitStampFile {
 
   GitStampDataFile([this.encrypt]);
 
-  String get variableName => '';
-  String get variableContent => '';
-
   @override
   String get directory => 'lib/git_stamp/src/data';
+
+  String get variableName => '';
+
+  String get variableContent => '';
 
   @override
   String get content {
@@ -51,11 +63,6 @@ class GitStampDataFile extends _GitStampFile {
         ? '''const $variableName = r\'\'\'$variableContent\'\'\';'''
         : '''import 'dart:typed_data'; var $variableName = Uint8List.fromList(${encrypt?.call(variableContent)});''';
   }
-}
-
-class GitStampUiFile extends _GitStampFile {
-  @override
-  String get directory => 'lib/git_stamp/src/ui';
 }
 
 abstract class GitStampDirectory {
@@ -89,12 +96,6 @@ int directoryFilesCount(String path) {
   return size;
 }
 
-String fileSize(String path, {int decimals = 1}) {
-  final size = File(path).lengthSync();
-
-  return formatSize(size, decimals: decimals);
-}
-
 String directorySize(String path, {int decimals = 1}) {
   int size = 0;
 
@@ -117,4 +118,10 @@ String formatSize(int size, {int decimals = 1}) {
   final i = (log(size) / log(1024)).floor();
 
   return '${(size / pow(1024, i)).toStringAsFixed(decimals)} ${suffixes[i]}';
+}
+
+String fileSize(String path, {int decimals = 1}) {
+  final size = File(path).lengthSync();
+
+  return formatSize(size, decimals: decimals);
 }

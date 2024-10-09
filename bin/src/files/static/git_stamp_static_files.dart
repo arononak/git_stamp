@@ -12,7 +12,7 @@ import 'raw/raw_git_stamp_license_page.dart';
 import 'raw/raw_git_stamp_decrypt_bottom_sheet.dart';
 import 'raw/raw_git_stamp_decrypt_bottom_sheet_stub.dart';
 import '../../git_stamp_file.dart';
-import '../../../git_stamp.dart';
+import '../../../git_stamp_build_model.dart';
 
 class GitStampMain extends GitStampMainFile {
   final GitStampBuildModel model;
