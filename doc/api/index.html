@@ -73,7 +73,6 @@
 <li><a href="#2-%EF%B8%8F-mechanism">2. 🕯️ Mechanism</a></li>
 <li><a href="#3-motivation">3. Motivation</a></li>
 <li><a href="#4-roadmap-changelog">4. Roadmap (Changelog)</a></li>
-<li><a href="#5-sponsor">5. Sponsor</a></li>
 </ul>
 </li>
 <li><a href="#%EF%B8%8F-installation">🛠️ Installation</a>
@@ -82,6 +81,7 @@
 <li><a href="#2-gitignore">2. <code>.gitignore</code></a></li>
 <li><a href="#3-analysis_optionsyaml">3. <code>analysis_options.yaml</code></a></li>
 <li><a href="#4-readmemd">4. <code>README.md</code></a></li>
+<li><a href="#5--integration---github-actions">5. 📦 Integration - GitHub Actions</a></li>
 </ul>
 </li>
 <li><a href="#%EF%B8%8F-generating">🏗️ Generating</a>
@@ -101,11 +101,7 @@
 <li><a href="#5-central-gitstamp-node-for-advanced-usage">5. Central <strong>GitStamp</strong> node for advanced usage:</a></li>
 </ul>
 </li>
-<li><a href="#-integration">📦 Integration</a>
-<ul>
-<li><a href="#github-actions">GitHub Actions</a></li>
-</ul>
-</li>
+<li><a href="#-sponsors">💰 Sponsors</a></li>
 <li><a href="#-license">📝 License</a></li>
 </ul>
 </li>
@@ -232,19 +228,6 @@ Text('SHA: ${GitStamp.sha}'),
 </tr>
 </tbody>
 </table>
-<h3 id="5-sponsor">5. Sponsor</h3>
-<table>
-<thead>
-<tr>
-<th align="center"><a href="https://aroncode.com">Aron Code</a></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center"><img src="aroncode.png" alt=""></td>
-</tr>
-</tbody>
-</table>
 <h2 id="-installation">🛠️ Installation</h2>
 <h3 id="1-pubspecyaml">1. <code>pubspec.yaml</code></h3>
 <pre class="language-dart"><code>dart pub add git_stamp
@@ -269,6 +252,57 @@ Text('SHA: ${GitStamp.sha}'),
 <pre class="language-dart"><code>[![Git Stamp](https://img.shields.io/badge/i%20love%20Git%20Stamp-ffff99?style=flat)](https://github.com/arononak/git_stamp)
 </code></pre>
 </div>
+<h3 id="5--integration---github-actions">5. 📦 Integration - GitHub Actions</h3>
+<details>
+<summary>.github/workflows/build_and_deploy.yml</summary>
+<pre class="language-yml"><code class="language-yml">name: build_and_deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request_target:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.2'
+          channel: 'stable'
+      - run: flutter --version
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+      - run: flutter pub get
+      - run: dart run git_stamp
+      - run: flutter build web --release --web-renderer canvaskit
+      - uses: actions/upload-artifact@master
+        with:
+          name: build
+          path: build/web
+  deploy:
+    name: "Deploy"
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@master
+        with:
+          name: build
+          path: build/web
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
+          projectId: xxx
+          channelId: live
+</code></pre>
+</details>
 <h2 id="-generating">🏗️ Generating</h2>
 <h3 id="1-examples">1. Examples</h3>
 <table>
@@ -282,16 +316,16 @@ Text('SHA: ${GitStamp.sha}'),
 </thead>
 <tbody>
 <tr>
+<td>FULL</td>
+<td>NO</td>
+<td>YES</td>
+<td><code>dart run git_stamp --build-type full --encrypt</code></td>
+</tr>
+<tr>
 <td>LITE</td>
 <td>NO</td>
 <td>YES</td>
 <td><code>dart run git_stamp</code></td>
-</tr>
-<tr>
-<td>FULL</td>
-<td>NO</td>
-<td>YES</td>
-<td><code>dart run git_stamp --build-type full</code></td>
 </tr>
 <tr>
 <td>ICON</td>
@@ -319,16 +353,16 @@ Text('SHA: ${GitStamp.sha}'),
 </thead>
 <tbody>
 <tr>
-<td>LITE</td>
-<td>6.90s</td>
-<td>33</td>
-<td>156.6 KB</td>
-</tr>
-<tr>
 <td>FULL</td>
 <td>12.94s</td>
 <td>33</td>
 <td>2.1MB</td>
+</tr>
+<tr>
+<td>LITE</td>
+<td>6.90s</td>
+<td>33</td>
+<td>156.6 KB</td>
 </tr>
 <tr>
 <td>ICON</td>
@@ -470,14 +504,19 @@ Text('SHA: ${GitStamp.sha}'),
   List&lt;String&gt; get observedFilesList;
   int get observedFilesCount;
   
+  String get appVersionFull =&gt; appVersion + ' (' + appBuild + ')';
   String get appVersion;
   String get appBuild;
   String get appName;
 
+  String get gitConfigGlobalUser =&gt; gitConfigGlobalUserName + ' (' + gitConfigGlobalUserEmail + ')';
   String get gitConfigGlobalUserName;
   String get gitConfigGlobalUserEmail;
+
+  String get gitConfigUser =&gt; gitConfigUserName + ' (' + gitConfigUserEmail + ')';
   String get gitConfigUserName;
   String get gitConfigUserEmail;
+  
   String get gitRemote;
   String get gitConfigList;
   String get gitCountObjects;
@@ -491,58 +530,19 @@ Text('SHA: ${GitStamp.sha}'),
 }
 </code></pre>
 </details>
-<h2 id="-integration">📦 Integration</h2>
-<h3 id="github-actions">GitHub Actions</h3>
-<details>
-<summary>.github/workflows/build_and_deploy.yml</summary>
-<pre class="language-yml"><code class="language-yml">name: build_and_deploy
-
-on:
-  push:
-    branches: [main]
-  pull_request_target:
-    branches: [main]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.22.2'
-          channel: 'stable'
-      - run: flutter --version
-      - uses: actions/setup-java@v1
-        with:
-          java-version: "12.x"
-      - run: flutter pub get
-      - run: dart run git_stamp
-      - run: flutter build web --release --web-renderer canvaskit
-      - uses: actions/upload-artifact@master
-        with:
-          name: build
-          path: build/web
-  deploy:
-    name: "Deploy"
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/download-artifact@master
-        with:
-          name: build
-          path: build/web
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
-          projectId: xxx
-          channelId: live
-</code></pre>
-</details>
+<h2 id="-sponsors">💰 Sponsors</h2>
+<table>
+<thead>
+<tr>
+<th align="center"><a href="https://aroncode.com">Aron Code</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><img src="aroncode.png" alt=""></td>
+</tr>
+</tbody>
+</table>
 <h2 id="-license">📝 License</h2>
 <div class="markdown-alert markdown-alert-note">
 <p class="markdown-alert-title">Note</p>
