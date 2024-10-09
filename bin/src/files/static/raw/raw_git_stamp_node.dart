@@ -213,7 +213,7 @@ class EncryptedGitStampNode extends GitStampNode {
   @override Map<String, dynamic> get diffStatList => json.decode(diffStatListString.replaceAll(r"\\'", "'"));
 
   @override String get buildMachineString => _decrypt(gitStampBuildMachine) ?? '{}';
-  @override GitStampBuildMachine get buildMachine => GitStampBuildMachine.fromJson(json.decode(buildMachineString));
+  @override GitStampBuildMachine get buildMachine => isEncrypted ? GitStampBuildMachine.all('ENCRYPTED') : GitStampBuildMachine.fromJson(json.decode(buildMachineString));
   
   @override String get buildBranch => _decrypt(gitStampBuildBranch) ?? 'ECRYPTED';
   @override String get buildDateTime => _decrypt(gitStampBuildDateTime) ?? 'ECRYPTED';

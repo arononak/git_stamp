@@ -718,10 +718,8 @@ class GitStampRepoDetails extends StatelessWidget {
         GitStampDoubleText('App Version: ', GitStamp.appVersionFull),
         GitStampDoubleText('Created: ', GitStamp.repoCreationDate),
         GitStampDoubleText(
-          'Commit count: ',
-          GitStamp.commitList.length.toString(),
+          'Commit count: ', GitStamp.isEncrypted ? 'ENCRYPTED' : GitStamp.commitCount.toString(),
         ),
-        Text('Commit stats:', style: textDefault),
         ...commitCountByAuthor()
             .entries
             .map(
