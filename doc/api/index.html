@@ -72,7 +72,7 @@
 <li><a href="#1-why-git-stamp">1. Why Git Stamp?</a></li>
 <li><a href="#2-%EF%B8%8F-mechanism">2. 🕯️ Mechanism</a></li>
 <li><a href="#3-motivation">3. Motivation</a></li>
-<li><a href="#4-roadmap-changelog">4. Roadmap (Changelog)</a></li>
+<li><a href="#4-changelog">4. Changelog</a></li>
 </ul>
 </li>
 <li><a href="#%EF%B8%8F-installation">🛠️ Installation</a>
@@ -87,7 +87,7 @@
 <li><a href="#%EF%B8%8F-generating">🏗️ Generating</a>
 <ul>
 <li><a href="#1-examples">1. Examples</a></li>
-<li><a href="#2-benchmarks-repo-582-commits">2. Benchmarks (Repo 582 Commits)</a></li>
+<li><a href="#2-benchmarks-repo-615-commits">2. Benchmarks (Repo 615 Commits)</a></li>
 <li><a href="#3-tip">3. Tip</a></li>
 <li><a href="#4-custom-gen-only-parameters">4. Custom <code>gen-only</code> parameters</a></li>
 </ul>
@@ -186,7 +186,7 @@ Text('Build: ${GitStamp.appBuild}'),
 Text('Branch: ${GitStamp.buildBranch}'),
 Text('SHA: ${GitStamp.sha}'),
 </code></pre>
-<h3 id="4-roadmap-changelogchangelogmd">4. Roadmap (<a href="./CHANGELOG.md">Changelog</a>)</h3>
+<h3 id="4-changelogchangelogmd">4. <a href="./CHANGELOG.md">Changelog</a></h3>
 <table>
 <thead>
 <tr>
@@ -319,7 +319,7 @@ jobs:
 <td>FULL</td>
 <td>NO</td>
 <td>YES</td>
-<td><code>dart run git_stamp --build-type full --encrypt</code></td>
+<td><code>dart run git_stamp --build-type full --adding-packages disabled --encrypt</code></td>
 </tr>
 <tr>
 <td>LITE</td>
@@ -341,7 +341,11 @@ jobs:
 </tr>
 </tbody>
 </table>
-<h3 id="2-benchmarks-repo-582-commits">2. Benchmarks (Repo 582 Commits)</h3>
+<div class="markdown-alert markdown-alert-note">
+<p class="markdown-alert-title">Note</p>
+<p>To optimize the generation you can disable adding packages to the project for LITE &amp; FULL versions by adding a flag in CLI <code>--adding-packages disabled</code> .</p>
+</div>
+<h3 id="2-benchmarks-repo-615-commits">2. Benchmarks (Repo 615 Commits)</h3>
 <table>
 <thead>
 <tr>
@@ -354,21 +358,21 @@ jobs:
 <tbody>
 <tr>
 <td>FULL</td>
-<td>12.94s</td>
+<td>10.16s</td>
 <td>33</td>
-<td>2.1MB</td>
+<td>2.3MB</td>
 </tr>
 <tr>
 <td>LITE</td>
-<td>6.90s</td>
+<td>3.73s</td>
 <td>33</td>
-<td>156.6 KB</td>
+<td>167.9 KB</td>
 </tr>
 <tr>
 <td>ICON</td>
-<td>0.84s</td>
+<td>1.26s</td>
 <td>10</td>
-<td>6.5 KB</td>
+<td>8.8 KB</td>
 </tr>
 </tbody>
 </table>
