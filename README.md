@@ -21,7 +21,7 @@ Advanced await-less information provider and development tool.
     - [1. Why Git Stamp?](#1-why-git-stamp)
     - [2. 🕯️ Mechanism](#2-️-mechanism)
     - [3. Motivation](#3-motivation)
-    - [4. Roadmap (Changelog)](#4-roadmap-changelog)
+    - [4. Changelog](#4-changelog)
   - [🛠️ Installation](#️-installation)
     - [1. `pubspec.yaml`](#1-pubspecyaml)
     - [2. `.gitignore`](#2-gitignore)
@@ -30,7 +30,7 @@ Advanced await-less information provider and development tool.
     - [5. 📦 Integration - GitHub Actions](#5--integration---github-actions)
   - [🏗️ Generating](#️-generating)
     - [1. Examples](#1-examples)
-    - [2. Benchmarks (Repo 582 Commits)](#2-benchmarks-repo-582-commits)
+    - [2. Benchmarks (Repo 615 Commits)](#2-benchmarks-repo-615-commits)
     - [3. Tip](#3-tip)
     - [4. Custom `gen-only` parameters](#4-custom-gen-only-parameters)
   - [💻 Usage](#-usage)
@@ -114,7 +114,7 @@ Text('Branch: ${GitStamp.buildBranch}'),
 Text('SHA: ${GitStamp.sha}'),
 ```
 
-### 4. Roadmap ([Changelog](./CHANGELOG.md))
+### 4. [Changelog](./CHANGELOG.md)
 
 | 🆕 **Version** | 🗓️ **Date**         | 📝 **Change Description**    |
 | ------------- | ------------------ | --------------------------- |
@@ -231,13 +231,13 @@ jobs:
 > [!NOTE]
 > To optimize the generation you can disable adding packages to the project for LITE & FULL versions by adding a flag in CLI `--adding-packages disabled` .
 
-### 2. Benchmarks (Repo 582 Commits)
+### 2. Benchmarks (Repo 615 Commits)
 
 | Build type | Generating time | Number of dart files generated | Size of generated dart files |
 | ---------- | --------------- | ------------------------------ | ---------------------------- |
-| FULL       | 12.94s          | 33                             | 2.1MB                        |
-| LITE       | 6.90s           | 33                             | 156.6 KB                     |
-| ICON       | 0.84s           | 10                             | 6.5 KB                       |
+| FULL       | 10.16s          | 33                             | 2.3MB                        |
+| LITE       | 3.73s           | 33                             | 167.9 KB                     |
+| ICON       | 1.26s           | 10                             | 8.8 KB                       |
 
 ### 3. Tip
 
