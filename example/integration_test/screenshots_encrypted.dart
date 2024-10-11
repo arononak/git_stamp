@@ -18,8 +18,8 @@ void main() {
         debugShowCheckedModeBanner: false,
       ),
     );
-    await tester.pump(Duration(seconds: 1));
-    await tester.pump(Duration(seconds: 1));
+    await tester.pump(Duration(seconds: 2));
+    await tester.pump(Duration(seconds: 2));
     await binding.takeScreenshot('screenshot_details_encrypted');
   });
 
@@ -35,10 +35,9 @@ void main() {
         debugShowCheckedModeBanner: false,
       ),
     );
-    final iconButtonFinder = find.byIcon(Icons.lock_open);
-    await tester.tap(iconButtonFinder);
-    await tester.pump(Duration(seconds: 1));
-    await tester.pump(Duration(seconds: 1));
+    await tester.tap(find.byIcon(Icons.lock_open));
+    await tester.pump(Duration(seconds: 2));
+    await tester.pump(Duration(seconds: 2));
     await binding.takeScreenshot('screenshot_decrypt');
   });
 }

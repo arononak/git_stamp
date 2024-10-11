@@ -39,7 +39,7 @@ screenshots:
 	sleep 2
 	echo "import 'dart:ui'; const physicalSize = Size(610, 885);" > integration_test/physical_size.dart
 	dart run git_stamp --build-type full
-	flutter drive --driver=test_driver/integration_test.dart --target=integration_test/screenshots.dart -d web-server
+	flutter drive --driver=test_driver/integration_test.dart --target=integration_test/screenshots_decrypted.dart -d web-server
 	dart run git_stamp --build-type full --encrypt
 	flutter drive --driver=test_driver/integration_test.dart --target=integration_test/screenshots_encrypted.dart -d web-server
 	convert screenshot_commit_diff.png -crop 610x885+0+0 commit_diff.png

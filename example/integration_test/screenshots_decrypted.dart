@@ -21,8 +21,8 @@ void main() {
         debugShowCheckedModeBanner: false,
       ),
     );
-    await tester.pump(Duration(seconds: 1));
-    await tester.pump(Duration(seconds: 1));
+    await tester.pump(Duration(seconds: 2));
+    await tester.pump(Duration(seconds: 2));
     await binding.takeScreenshot('screenshot_list');
   });
 
@@ -38,10 +38,9 @@ void main() {
         debugShowCheckedModeBanner: false,
       ),
     );
-    final iconButtonFinder = find.byType(IconButton);
-    await tester.tap(iconButtonFinder);
-    await tester.pump(Duration(seconds: 1));
-    await tester.pump(Duration(seconds: 1));
+    await tester.tap(find.byType(IconButton));
+    await tester.pump(Duration(seconds: 2));
+    await tester.pump(Duration(seconds: 2));
     await binding.takeScreenshot('screenshot_icon');
   });
 
@@ -56,8 +55,8 @@ void main() {
         debugShowCheckedModeBanner: false,
       ),
     );
-    await tester.pump(Duration(seconds: 1));
-    await tester.pump(Duration(seconds: 1));
+    await tester.pump(Duration(seconds: 2));
+    await tester.pump(Duration(seconds: 2));
     await binding.takeScreenshot('screenshot_files');
   });
 
@@ -73,8 +72,8 @@ void main() {
         debugShowCheckedModeBanner: false,
       ),
     );
-    await tester.pump(Duration(seconds: 1));
-    await tester.pump(Duration(seconds: 1));
+    await tester.pump(Duration(seconds: 2));
+    await tester.pump(Duration(seconds: 2));
     await binding.takeScreenshot('screenshot_details');
   });
 
@@ -89,12 +88,11 @@ void main() {
         debugShowCheckedModeBanner: false,
       ),
     );
-    await tester.pump(Duration(seconds: 1));
-    await tester.pump(Duration(seconds: 1));
-    final iconButtonFinder = find.byIcon(Icons.settings);
-    await tester.tap(iconButtonFinder);
-    await tester.pump(Duration(seconds: 1));
-    await tester.pump(Duration(seconds: 1));
+    await tester.pump(Duration(seconds: 2));
+    await tester.pump(Duration(seconds: 2));
+    await tester.tap(find.byIcon(Icons.settings));
+    await tester.pump(Duration(seconds: 2));
+    await tester.pump(Duration(seconds: 2));
     await binding.takeScreenshot('screenshot_git_config');
   });
 
@@ -112,14 +110,12 @@ void main() {
         debugShowCheckedModeBanner: false,
       ),
     );
-    final firstItemFinder = find.byType(GitStampCommitListElement).first;
-    await tester.tap(firstItemFinder);
-    await tester.pump(Duration(seconds: 1));
-    await tester.pump(Duration(seconds: 1));
-    final iconButtonFinder = find.byIcon(Icons.arrow_forward);
-    await tester.tap(iconButtonFinder);
-    await tester.pump(Duration(seconds: 1));
-    await tester.pump(Duration(seconds: 1));
+    await tester.tap(find.byType(GitStampCommitListElement).first);
+    await tester.pump(Duration(seconds: 2));
+    await tester.pump(Duration(seconds: 2));
+    await tester.tap(find.byIcon(Icons.arrow_forward));
+    await tester.pump(Duration(seconds: 2));
+    await tester.pump(Duration(seconds: 2));
     await binding.takeScreenshot('screenshot_commit_diff');
   });
 }
