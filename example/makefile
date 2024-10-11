@@ -11,7 +11,7 @@ build: sync
 tests: tests_unit tests_integration
 
 tests_unit:
-	dart run git_stamp --gen-only commit-list,diff-list,diff-stat-list,repo-creation-date,build-branch,build-date-time,build-system-info,repo-path,observed-files-list,app-version,app-build,app-name,git-config,build-machine,git-remote,git-config-list,git-count-objects,git-tag-list
+	dart run git_stamp --gen-only-all
 	dart test test/type_custom_tests.dart
 
 ifdef WINDOWS

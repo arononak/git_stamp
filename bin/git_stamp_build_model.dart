@@ -119,6 +119,27 @@ class GitStampBuildModel {
         generateFlutterFiles = false,
         generateFlutterIcon = false;
 
+  static Iterable<String> get genOnlyOptions => [
+        'commit-list',
+        'diff-list',
+        'diff-stat-list',
+        'repo-creation-date',
+        'build-branch',
+        'build-date-time',
+        'build-system-info',
+        'build-machine',
+        'repo-path',
+        'observed-files-list',
+        'app-version',
+        'app-build',
+        'app-name',
+        'git-config',
+        'git-remote',
+        'git-config-list',
+        'git-count-objects',
+        'git-tag-list',
+      ];
+
   bool get isIcon =>
       commitList == true &&
       diffList == false &&
