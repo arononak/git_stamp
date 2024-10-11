@@ -456,5 +456,12 @@ class GitTagList extends GitStampDataFile {
   String get variableName => 'gitStampGitTagList';
 
   @override
-  String get variableContent => exec(['git', 'for-each-ref', '--sort=-creatordate', '--format', '%(refname:short)', 'refs/tags']);
+  String get variableContent => exec([
+        'git',
+        'for-each-ref',
+        '--sort=-creatordate',
+        '--format',
+        '%(refname:short)',
+        'refs/tags'
+      ]);
 }
