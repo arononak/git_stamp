@@ -65,6 +65,7 @@ Future<void> main(List<String> arguments) async {
         'git-remote',
         'git-config-list',
         'git-count-objects',
+        'git-tag-list',
       ],
       defaultsTo: null,
     );
@@ -256,6 +257,10 @@ void _generateDataFiles(
 
   if (model.gitCountObjects) {
     GitCountObjects(encrypt).generate();
+  }
+
+  if (model.gitTagList) {
+    GitTagList(encrypt).generate();
   }
 }
 

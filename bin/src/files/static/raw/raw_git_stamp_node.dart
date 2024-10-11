@@ -46,6 +46,7 @@ ${model.gitConfig.enabled}import 'src/data/git_config_user_email.dart';
 ${model.gitRemote.enabled}import 'src/data/git_remote.dart';
 ${model.gitConfigList.enabled}import 'src/data/git_config_list.dart';
 ${model.gitCountObjects.enabled}import 'src/data/git_count_objects.dart';
+${model.gitTagList.enabled}import 'src/data/git_tag_list.dart';
 
 ${model.encrypt.enabled}import 'dart:typed_data';
 ${model.encrypt.enabled}import 'package:encrypt/encrypt.dart' as crypto;
@@ -74,6 +75,10 @@ abstract class GitStampNode {
   ${model.observedFilesList.enabled}String get observedFiles;
   ${model.observedFilesList.enabled}List<String> get observedFilesList;
   ${model.observedFilesList.enabled}int get observedFilesCount;
+
+  ${model.gitTagList.enabled}String get tagListString;
+  ${model.gitTagList.enabled}List<String> get tagList;
+  ${model.gitTagList.enabled}int get tagListCount;
   
   ${(model.appVersion || model.appBuild).enabled}String get appVersionFull => appVersion + ' (' + appBuild + ')';
   ${model.appVersion.enabled}String get appVersion;
@@ -129,6 +134,10 @@ class DecryptedGitStampNode extends GitStampNode {
   ${model.observedFilesList.enabled}@override String get observedFiles => gitStampObservedFilesList;
   ${model.observedFilesList.enabled}@override List<String> get observedFilesList => observedFiles.split(RegExp(r'\\r?\\n'));
   ${model.observedFilesList.enabled}@override int get observedFilesCount => observedFilesList.length;
+
+  ${model.gitTagList.enabled}@override String get tagListString => gitStampGitTagList;
+  ${model.gitTagList.enabled}@override List<String> get tagList => tagListString.split(RegExp(r'\\r?\\n'));
+  ${model.gitTagList.enabled}@override int get tagListCount => tagListString.length;
   
   ${(model.appVersion || model.appBuild).enabled}@override String get appVersionFull => !isEncrypted ? super.appVersionFull : 'ENCRYPTED';
   ${model.appVersion.enabled}@override String get appVersion => gitStampAppVersion;
@@ -224,6 +233,10 @@ class EncryptedGitStampNode extends GitStampNode {
   @override String get observedFiles => _decrypt(gitStampObservedFilesList) ?? 'ECRYPTED';
   @override List<String> get observedFilesList => observedFiles.split(RegExp(r'\\r?\\n'));
   @override int get observedFilesCount => observedFilesList.length;
+
+  @override String get tagListString => _decrypt(gitStampGitTagList) ?? 'ENCRYPTED';
+  @override List<String> get tagList => tagListString.split(RegExp(r'\\r?\\n'));
+  @override int get tagListCount => tagList.length;
   
   @override String get appVersionFull => !isEncrypted ? super.appVersionFull : 'ENCRYPTED';
   @override String get appVersion => _decrypt(gitStampAppVersion) ?? 'ECRYPTED';

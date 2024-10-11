@@ -132,6 +132,11 @@ void singleValueTests() {
       'field': GitStamp.gitCountObjects,
       'matcher': isNotEmpty,
     },
+    {
+      'param': 'git-tag-list',
+      'field': GitStamp.tagList,
+      'matcher': isNotEmpty,
+    },
 
     /* Build Machine */
     {

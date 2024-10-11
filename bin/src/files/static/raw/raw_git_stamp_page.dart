@@ -37,6 +37,13 @@ void _showRepoFilesBottomSheet(BuildContext context) {
   );
 }
 
+void _showRepoTagsBottomSheet(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    builder: (BuildContext context) => GitStampRepoTags(),
+  );
+}
+
 void _showMoreBottomSheet(BuildContext context) {
   showModalBottomSheet(
     context: context,
@@ -628,6 +635,10 @@ class GitStampRepoDetails extends StatelessWidget {
                   icon: const Icon(Icons.folder),
                 ),
                 IconButton(
+                  onPressed: () => _showRepoTagsBottomSheet(context),
+                  icon: const Icon(Icons.tag),
+                ),
+                IconButton(
                   onPressed: () => _showMoreBottomSheet(context),
                   icon: const Icon(Icons.more),
                 ),
@@ -671,6 +682,7 @@ class GitStampRepoDetails extends StatelessWidget {
             GitStampDoubleText('Date: ', GitStamp.buildDateTime),
             GitStampDoubleText('Path: ', GitStamp.repoPath),
             GitStampDoubleText('Branch: ', GitStamp.buildBranch),
+            GitStampDoubleText('Tag: ', GitStamp.tagList.first),
             GitStampDoubleText('SHA: ', GitStamp.sha),
           ],
         ),
@@ -718,7 +730,8 @@ class GitStampRepoDetails extends StatelessWidget {
         GitStampDoubleText('App Version: ', GitStamp.appVersionFull),
         GitStampDoubleText('Created: ', GitStamp.repoCreationDate),
         GitStampDoubleText(
-          'Commit count: ', GitStamp.isEncrypted ? 'ENCRYPTED' : GitStamp.commitCount.toString(),
+          'Commit count: ',
+          GitStamp.isEncrypted ? 'ENCRYPTED' : GitStamp.commitCount.toString(),
         ),
         ...commitCountByAuthor()
             .entries
@@ -749,10 +762,41 @@ class GitStampRepoFiles extends StatelessWidget {
           children: [
             GitStampLabel(
               first: 'Repository files',
-              second: !GitStamp.isEncrypted ? GitStamp.observedFilesCount.toString() : 'ENCRYPTED',
+              second: !GitStamp.isEncrypted
+                  ? GitStamp.observedFilesCount.toString()
+                  : 'ENCRYPTED',
             ),
             SizedBox(height: 16.0),
-            if (!GitStamp.isEncrypted ) ...[Text(GitStamp.observedFiles, style: textDefault)],
+            if (!GitStamp.isEncrypted) ...[
+              Text(GitStamp.observedFiles, style: textDefault)
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class GitStampRepoTags extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(16.0),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            GitStampLabel(
+              first: 'Repository tags',
+              second: !GitStamp.isEncrypted
+                  ? GitStamp.tagListCount.toString()
+                  : 'ENCRYPTED',
+            ),
+            SizedBox(height: 16.0),
+            if (!GitStamp.isEncrypted) ...[
+              Text(GitStamp.tagListString, style: textDefault)
+            ],
           ],
         ),
       ),

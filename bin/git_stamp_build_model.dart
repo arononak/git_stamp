@@ -20,6 +20,7 @@ class GitStampBuildModel {
   final bool gitRemote;
   final bool gitConfigList;
   final bool gitCountObjects;
+  final bool gitTagList;
   final bool generateFlutterFiles;
   final bool generateFlutterIcon;
 
@@ -42,6 +43,7 @@ class GitStampBuildModel {
     this.gitRemote = false,
     this.gitConfigList = false,
     this.gitCountObjects = false,
+    this.gitTagList = false,
     this.generateFlutterFiles = false,
     this.generateFlutterIcon = false,
   });
@@ -65,6 +67,7 @@ class GitStampBuildModel {
     this.gitRemote = true,
     this.gitConfigList = true,
     this.gitCountObjects = true,
+    this.gitTagList = true,
     this.generateFlutterFiles = true,
     this.generateFlutterIcon = true,
   });
@@ -88,6 +91,7 @@ class GitStampBuildModel {
     this.gitRemote = false,
     this.gitConfigList = false,
     this.gitCountObjects = false,
+    this.gitTagList = false,
     this.generateFlutterFiles = false,
     this.generateFlutterIcon = true,
   });
@@ -111,6 +115,7 @@ class GitStampBuildModel {
         gitRemote = args.contains('git-remote'),
         gitConfigList = args.contains('git-config-list'),
         gitCountObjects = args.contains('git-count-objects'),
+        gitTagList = args.contains('git-tag-list'),
         generateFlutterFiles = false,
         generateFlutterIcon = false;
 
@@ -132,6 +137,7 @@ class GitStampBuildModel {
       gitRemote == false &&
       gitConfigList == false &&
       gitCountObjects == false &&
+      gitTagList == false &&
       generateFlutterFiles == false &&
       generateFlutterIcon == true;
 }

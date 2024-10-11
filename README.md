@@ -264,6 +264,7 @@ jobs:
 | 14  | git-config          |
 | 15  | git-remote          |
 | 16  | git-remote-list     |
+| 17  | git-tag-list        |
 
 ## 💻 Usage
 

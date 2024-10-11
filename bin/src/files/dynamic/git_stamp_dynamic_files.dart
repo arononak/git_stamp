@@ -445,3 +445,16 @@ class GitCountObjects extends GitStampDataFile {
   @override
   String get variableContent => exec(['git', 'count-objects', '-vH']);
 }
+
+class GitTagList extends GitStampDataFile {
+  GitTagList(super.encrypt);
+
+  @override
+  String get filename => 'git_tag_list.dart';
+
+  @override
+  String get variableName => 'gitStampGitTagList';
+
+  @override
+  String get variableContent => exec(['git', 'for-each-ref', '--sort=-creatordate', '--format', '%(refname:short)', 'refs/tags']);
+}
