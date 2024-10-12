@@ -1,20 +1,26 @@
 {
-  "hosting": {
-    "public": "build/web",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "/encrypted/**",
-        "destination": "/web_encrypted/index.html"
-      },
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-  }
+  "hosting": [
+    {
+      "target": "decrypted",
+      "public": "build/web",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "rewrites": [
+        {
+          "source": "/**",  
+          "destination": "/index.html"
+        }
+      ]
+    },
+    {
+      "target": "encrypted",
+      "public": "build/web/encrypted",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "rewrites": [
+        {
+          "source": "/encrypted/**",
+          "destination": "/web_encrypted/index.html"
+        }
+      ]
+    }
+  ]
 }
