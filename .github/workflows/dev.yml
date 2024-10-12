@@ -50,11 +50,11 @@ jobs:
       - run: git config --global user.name 'github-actions[bot]'
       - run: git config --global user.email 'github-actions[bot]@users.noreply.github.com'
       - run: make -C example build_firebase_web
-      - uses: actions/upload-artifact@master
+      - uses: actions/upload-artifact@v2
         with:
           name: build-web
           path: example/build/web
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v2
         with:
           name: build-web-encrypted
           path: example/build/web_encrypted
@@ -63,11 +63,11 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/download-artifact@master
+      - uses: actions/download-artifact@v2
         with:
           name: build-web
           path: example/build/web
-      - uses: actions/download-artifact@master
+      - uses: actions/download-artifact@v2
         with:
           name: build-web-encrypted
           path: example/build/web_encrypted
