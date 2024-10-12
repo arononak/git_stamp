@@ -58,14 +58,14 @@ screenshots:
 	rm -f screenshot_list.png
 	rm -f screenshot_details_encrypted.png
 	rm -f screenshot_decrypt.png
-	mv commit_diff.png ../screenshots
-	mv git_config.png ../screenshots
-	mv details.png ../screenshots
-	mv files.png ../screenshots
-	mv icon.png ../screenshots
-	mv list.png ../screenshots
-	mv details_encrypted.png ../screenshots
-	mv decrypt.png ../screenshots
+	mv commit_diff.png ../images
+	mv git_config.png ../images
+	mv details.png ../images
+	mv files.png ../images
+	mv icon.png ../images
+	mv list.png ../images
+	mv details_encrypted.png ../images
+	mv decrypt.png ../images
 	kill $$(cat chromedriver.pid)
 	rm -f chromedriver.pid
 	rm -f -r chromedriver

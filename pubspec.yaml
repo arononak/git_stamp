@@ -38,4 +38,4 @@ flutter:
 
 screenshots:
   - description: The git_stamp package logo.
-    path: screenshots/logo.png
+    path: images/aroncode.png
