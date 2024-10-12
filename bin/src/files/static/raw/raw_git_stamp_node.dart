@@ -137,7 +137,7 @@ class DecryptedGitStampNode extends GitStampNode {
 
   ${model.gitTagList.enabled}@override String get tagListString => gitStampGitTagList;
   ${model.gitTagList.enabled}@override List<String> get tagList => tagListString.split(RegExp(r'\\r?\\n'));
-  ${model.gitTagList.enabled}@override int get tagListCount => tagListString.length;
+  ${model.gitTagList.enabled}@override int get tagListCount => tagList.length;
   
   ${(model.appVersion || model.appBuild).enabled}@override String get appVersionFull => !isEncrypted ? super.appVersionFull : 'ENCRYPTED';
   ${model.appVersion.enabled}@override String get appVersion => gitStampAppVersion;
