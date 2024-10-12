@@ -73,6 +73,16 @@ jobs:
           path: example/build/web_encrypted
       - run: |
           mkdir -p ./example/build/deploy
+          mkdir -p ./example/build/deploy/encrypted
+          
+          if [ -f "./example/build/deploy/encrypted" ]; then
+            rm ./example/build/deploy/encrypted
+          fi
+          
+          if [ -d "./example/build/deploy/encrypted" ]; then
+            rm -rf ./example/build/deploy/encrypted/*
+          fi
+          
           cp -r ./example/build/web/* ./example/build/deploy/
           cp -r ./example/build/web_encrypted/* ./example/build/deploy/encrypted/
       - uses: FirebaseExtended/action-hosting-deploy@v0
