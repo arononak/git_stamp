@@ -581,66 +581,79 @@ class GitStampRepoDetails extends StatelessWidget {
           Positioned(
             right: 20,
             top: 8,
-            child: Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    showSnackbar(
-                      context: context,
-                      message: GitStamp.gitCountObjects,
-                      showCloseIcon: true,
-                      floating: false,
-                    );
-                  },
-                  icon: Icon(Icons.storage),
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        showSnackbar(
+                          context: context,
+                          message: GitStamp.gitRemote,
+                          showCloseIcon: true,
+                        );
+                      },
+                      icon: Icon(Icons.cloud),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        showSnackbar(
+                          context: context,
+                          message: GitStamp.gitCountObjects,
+                          showCloseIcon: true,
+                          floating: false,
+                        );
+                      },
+                      icon: Icon(Icons.storage),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        showSnackbar(
+                          context: context,
+                          message: GitStamp.buildSystemInfo,
+                          showCloseIcon: true,
+                          floating: false,
+                        );
+                      },
+                      icon: Icon(Icons.medical_information),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        showSnackbar(
+                          context: context,
+                          message: GitStamp.gitConfigList,
+                          showCloseIcon: true,
+                          floating: false,
+                        );
+                      },
+                      icon: Icon(Icons.settings),
+                    ),
+                  ],
                 ),
-                IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    showSnackbar(
-                      context: context,
-                      message: GitStamp.gitConfigList,
-                      showCloseIcon: true,
-                      floating: false,
-                    );
-                  },
-                  icon: Icon(Icons.settings),
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: () => _showRepoTagsBottomSheet(context),
+                      icon: const Icon(Icons.tag),
+                    ),
+                    IconButton(
+                      onPressed: () => _showRepoFilesBottomSheet(context),
+                      icon: const Icon(Icons.folder),
+                    ),
+                  ],
                 ),
-                IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    showSnackbar(
-                      context: context,
-                      message: GitStamp.gitRemote,
-                      showCloseIcon: true,
-                    );
-                  },
-                  icon: Icon(Icons.cloud),
-                ),
-                IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    showSnackbar(
-                      context: context,
-                      message: GitStamp.buildSystemInfo,
-                      showCloseIcon: true,
-                      floating: false,
-                    );
-                  },
-                  icon: Icon(Icons.medical_information),
-                ),
-                IconButton(
-                  onPressed: () => _showRepoFilesBottomSheet(context),
-                  icon: const Icon(Icons.folder),
-                ),
-                IconButton(
-                  onPressed: () => _showRepoTagsBottomSheet(context),
-                  icon: const Icon(Icons.tag),
-                ),
-                IconButton(
-                  onPressed: () => _showMoreBottomSheet(context),
-                  icon: const Icon(Icons.more),
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: () => _showMoreBottomSheet(context),
+                      icon: const Icon(Icons.more),
+                    ),
+                  ],
                 ),
               ],
             ),
