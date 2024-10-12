@@ -54,10 +54,6 @@ jobs:
         with:
           name: build-web
           path: example/build/web
-      - uses: actions/upload-artifact@master
-        with:
-          name: build-web-encrypted
-          path: example/build/web_encrypted
   firebase_deploy:
     runs-on: ubuntu-latest
     needs: build
@@ -67,20 +63,6 @@ jobs:
         with:
           name: build-web
           path: example/build/web
-      - uses: actions/download-artifact@master
-        with:
-          name: build-web-encrypted
-          path: example/build/web_encrypted
-      - run: |
-          mkdir -p ./example/build/deploy
-          mkdir -p ./example/build/deploy/encrypted
-          
-          if [ -d "./example/build/deploy/encrypted" ]; then
-            rm -rf ./example/build/deploy/encrypted/*
-          fi
-          
-          cp -r ./example/build/web/* ./example/build/deploy/
-          cp -r ./example/build/web_encrypted/* ./example/build/deploy/encrypted/
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
