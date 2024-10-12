@@ -1,5 +1,19 @@
 {
   "projects": {
     "default": "gitstamp"
-  }
+  },
+  "targets": {
+    "gitstamp": {
+      "hosting": {
+        "decrypted": [
+          "build/web"
+        ],
+        "encrypted": [
+          "build/web/encrypted"
+        ]
+      }
+    }
+  },
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
 }
