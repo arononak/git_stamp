@@ -52,8 +52,12 @@ jobs:
       - run: make -C example build_firebase_web
       - uses: actions/upload-artifact@master
         with:
-          name: build
+          name: build-web
           path: example/build/web
+      - uses: actions/upload-artifact@v3
+        with:
+          name: build-web-encrypted
+          path: example/build/web_encrypted
   firebase_deploy:
     runs-on: windows-latest
     needs: build
@@ -61,15 +65,23 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@master
         with:
-          name: build
+          name: build-web
           path: example/build/web
+      - uses: actions/download-artifact@master
+        with:
+          name: build-web-encrypted
+          path: example/build/web_encrypted
+      - run: |
+          mkdir -p ./example/build/deploy
+          cp -r ./example/build/web/* ./example/build/deploy/
+          cp -r ./example/build/web_encrypted/* ./example/build/deploy/encrypted/
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_GITSTAMP }}"
           projectId: gitstamp
           channelId: live
-          entryPoint: ./example
+          entryPoint: ./example/build/deploy
   format_code:
     permissions:
       contents: write
