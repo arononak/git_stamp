@@ -8,6 +8,10 @@
     ],
     "rewrites": [
       {
+        "source": "/encrypted/**",
+        "destination": "/web_encrypted/index.html"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }

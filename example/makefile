@@ -8,6 +8,11 @@ run:
 build: sync
 	flutter build web --release --web-renderer canvaskit
 
+build_firebase_web: sync
+	flutter build web --release --web-renderer canvaskit --encrypt
+	cp -r build/web/* build/web_encrypted/
+	flutter build web --release --web-renderer canvaskit
+
 tests: tests_unit tests_integration
 
 tests_unit:

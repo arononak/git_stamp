@@ -49,7 +49,7 @@ jobs:
       - run: flutter pub get
       - run: git config --global user.name 'github-actions[bot]'
       - run: git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-      - run: make -C example build
+      - run: make -C example build_firebase_web
       - uses: actions/upload-artifact@master
         with:
           name: build
