@@ -41,7 +41,11 @@ Advanced await-less information provider and development tool.
   - [💰 Sponsors](#-sponsors)
   - [📝 License](#-license)
 
-## [🏞️ Preview](https://gitstamp.web.app)
+## 🏞️ Preview
+  
+- [🔒 https://gitstamp-encrypted.web.app](https://gitstamp-encrypted.web.app)  
+- [🔓 https://gitstamp.web.app](https://gitstamp.web.app)
+
 |                                   |                             |
 | :-------------------------------: | :-------------------------: |
 |       ![](images/list.png)        |    ![](images/icon.png)     |

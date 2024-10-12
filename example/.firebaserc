@@ -6,14 +6,13 @@
     "gitstamp": {
       "hosting": {
         "decrypted": [
-          "build/web"
+          "gitstamp"
         ],
         "encrypted": [
-          "build/web/encrypted"
+          "gitstamp-encrypted"
         ]
       }
     }
   },
-  "etags": {},
-  "dataconnectEmulatorConfig": {}
+  "etags": {}
 }
