@@ -59,7 +59,7 @@ jobs:
           name: build-web-encrypted
           path: example/build/web_encrypted
   firebase_deploy:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     needs: build
     steps:
       - uses: actions/checkout@v4
@@ -74,10 +74,6 @@ jobs:
       - run: |
           mkdir -p ./example/build/deploy
           mkdir -p ./example/build/deploy/encrypted
-          
-          if [ -f "./example/build/deploy/encrypted" ]; then
-            rm ./example/build/deploy/encrypted
-          fi
           
           if [ -d "./example/build/deploy/encrypted" ]; then
             rm -rf ./example/build/deploy/encrypted/*
