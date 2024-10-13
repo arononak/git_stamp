@@ -43,8 +43,11 @@ Advanced await-less information provider and development tool.
 
 ## 🏞️ Preview
   
-- [🔒 https://gitstamp-encrypted.web.app](https://gitstamp-encrypted.web.app)  
-- [🔓 https://gitstamp.web.app](https://gitstamp.web.app)
+| Status      | Link                                                             |
+| ----------- | ---------------------------------------------------------------- |
+| 📂 Decrypted | [gitstamp.web.app](https://gitstamp.web.app)                     |
+| 🔒 Encrypted | [gitstamp-encrypted.web.app](https://gitstamp-encrypted.web.app) |
+
 
 |                                   |                             |
 | :-------------------------------: | :-------------------------: |
@@ -364,7 +367,7 @@ abstract class GitStampNode {
 
 | [Aron Code](https://aroncode.com) |
 | :-------------------------------: |
-|         ![](images/aroncode.png)         |
+|     ![](images/aroncode.png)      |
 
 ## 📝 License
 
