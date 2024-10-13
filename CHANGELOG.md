@@ -1,6 +1,21 @@
+## 5.1.0
+
+* Added **tag module**
+* Added meta package & refactor
+* Added CLI flags `--adding-packages disabled`, `--gen-only-options`, `--gen-only-all`
+* GitStampPage - Added commit count per day
+* GitStampPage - new details icons positions
+* Fixed encrypted stubs
+* New logo
+
+<details>
+<summary>Image</summary>
+<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/5.1.0.png?raw=true" alt="Image"></p>
+</details>
+
 ## 5.0.0
 
-* Added encryption module
+* Added **encryption module**
 
 <details>
 <summary>Image</summary>
@@ -10,7 +25,7 @@
 
 ## 4.11.0
 
-* Added GitCountObjects module
+* Added **GitCountObjects module**
 * Icon build type optimization
 * Fixed SnackBars
 * GitStampPage - Commit List Optimization
@@ -51,7 +66,7 @@
 
 ## 4.8.0
 
-* Added `GitConfigList` module
+* Added **`GitConfigList` module**
 * Generator - Added files count
 * Generator - Fixed logo colors
 * SnackBar's Fixes
@@ -65,8 +80,8 @@
 
 ## 4.7.0
 
-* Added `GitRemote` module
-* Added `DiffStat` module
+* Added **`GitRemote` module**
+* Added **`DiffStat` module**
 * Update `flutter doctor` -> `flutter doctor --verbose`
 * GitStampPage - New design
 * GitStampPage - Improved responsiveness
@@ -112,7 +127,7 @@
 ## 4.4.0
 
 * Added interpolate function `GitStamp.showLicensePage`
-* Added `git config` module
+* Added **`git config` module**
 * Refactor
 
 <details>

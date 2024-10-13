@@ -9,7 +9,7 @@ import 'src/git_stamp_file.dart';
 import 'src/files/dynamic/git_stamp_dynamic_files.dart';
 import 'src/files/static/git_stamp_static_files.dart';
 
-const gitStampVersion = 'Version 5.0.0';
+const gitStampVersion = 'Version 5.1.0';
 
 final parser = ArgParser()
   ..addFlag('help', abbr: 'h', negatable: false)
