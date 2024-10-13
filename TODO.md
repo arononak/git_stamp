@@ -26,7 +26,7 @@
 - [x] Generator - GitStamp version compile time
 - [x] Generator - All code size
 - [x] Generator - time in ms
-- [ ] CI - dependabot
+- [x] CI - dependabot
 - [x] CI - Write tests
 - [x] InApp - Observed files
 - [x] Git - Remove example project git_stamp files
@@ -59,3 +59,15 @@
 - [ ] InApp - Icon - fix mobile padding left
 - [ ] CI - Chromedriver from image
 - [ ] CI - Generate custom flags file
+- [ ] InApp - Branch module
+- [ ] InApp - Tag module - Add date
+- [ ] Generator - collection package to tag module and commit stats as json
+- [ ] InApp - Encrypted model optimization
+- [ ] InApp - Reflog module
+- [ ] Generator - Commit limit like last 100
+- [ ] Generator - BuildRunner integration?
+- [ ] Refactor - To 3 modules GIT|DART|FLUTTER
+- [ ] InApp - Benchmark and return json with result
+- [ ] InApp - GitStampIcon - 2 types of view
+- [ ] InApp - GitStampIcon - fix margin on mobile
+- [ ] InApp - Hidden developer mode vibrate or something similar - Android developer mode
