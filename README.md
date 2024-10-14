@@ -271,6 +271,7 @@ jobs:
 | 15  | git-remote          |
 | 16  | git-remote-list     |
 | 17  | git-tag-list        |
+| 18  | git-branch-list     |
 
 ## 💻 Usage
 
@@ -330,11 +331,19 @@ abstract class GitStampNode {
   String get buildSystemInfo;
   String get repoCreationDate;
   String get repoPath;
-  
+
   String get observedFiles;
   List<String> get observedFilesList;
   int get observedFilesCount;
-  
+
+  String get tagListString;
+  List<String> get tagList;
+  int get tagListCount;
+
+  String get branchListString;
+  List<String> get branchList;
+  int get branchListCount;
+
   String get appVersionFull => appVersion + ' (' + appBuild + ')';
   String get appVersion;
   String get appBuild;
@@ -347,7 +356,7 @@ abstract class GitStampNode {
   String get gitConfigUser => gitConfigUserName + ' (' + gitConfigUserEmail + ')';
   String get gitConfigUserName;
   String get gitConfigUserEmail;
-  
+
   String get gitRemote;
   String get gitConfigList;
   String get gitCountObjects;

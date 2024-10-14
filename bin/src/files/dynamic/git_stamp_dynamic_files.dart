@@ -465,3 +465,16 @@ class GitTagList extends GitStampDataFile {
         'refs/tags'
       ]);
 }
+
+class GitBranchList extends GitStampDataFile {
+  GitBranchList(super.encrypt);
+
+  @override
+  String get filename => 'git_branch_list.dart';
+
+  @override
+  String get variableName => 'gitStampGitBranchList';
+
+  @override
+  String get variableContent => exec(['git', 'branch', '-a']);
+}

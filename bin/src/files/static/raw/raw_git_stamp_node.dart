@@ -47,6 +47,7 @@ ${model.gitRemote.enabled}import 'src/data/git_remote.dart';
 ${model.gitConfigList.enabled}import 'src/data/git_config_list.dart';
 ${model.gitCountObjects.enabled}import 'src/data/git_count_objects.dart';
 ${model.gitTagList.enabled}import 'src/data/git_tag_list.dart';
+${model.gitBranchList.enabled}import 'src/data/git_branch_list.dart';
 
 ${model.encrypt.enabled}import 'dart:typed_data';
 ${model.encrypt.enabled}import 'package:encrypt/encrypt.dart' as crypto;
@@ -79,6 +80,10 @@ abstract class GitStampNode {
   ${model.gitTagList.enabled}String get tagListString;
   ${model.gitTagList.enabled}List<String> get tagList;
   ${model.gitTagList.enabled}int get tagListCount;
+
+  ${model.gitBranchList.enabled}String get branchListString;
+  ${model.gitBranchList.enabled}List<String> get branchList;
+  ${model.gitBranchList.enabled}int get branchListCount;
   
   ${(model.appVersion || model.appBuild).enabled}String get appVersionFull => appVersion + ' (' + appBuild + ')';
   ${model.appVersion.enabled}String get appVersion;
@@ -138,6 +143,10 @@ class DecryptedGitStampNode extends GitStampNode {
   ${model.gitTagList.enabled}@override String get tagListString => gitStampGitTagList;
   ${model.gitTagList.enabled}@override List<String> get tagList => tagListString.split(RegExp(r'\\r?\\n'));
   ${model.gitTagList.enabled}@override int get tagListCount => tagList.length;
+
+  ${model.gitBranchList.enabled}@override String get branchListString => gitStampGitBranchList;
+  ${model.gitBranchList.enabled}@override List<String> get branchList => branchListString.split(RegExp(r'\\r?\\n'));
+  ${model.gitBranchList.enabled}@override int get branchListCount => branchList.length;
   
   ${(model.appVersion || model.appBuild).enabled}@override String get appVersionFull => !isEncrypted ? super.appVersionFull : 'ENCRYPTED';
   ${model.appVersion.enabled}@override String get appVersion => gitStampAppVersion;
@@ -237,7 +246,11 @@ class EncryptedGitStampNode extends GitStampNode {
   @override String get tagListString => _decrypt(gitStampGitTagList) ?? 'ENCRYPTED';
   @override List<String> get tagList => tagListString.split(RegExp(r'\\r?\\n'));
   @override int get tagListCount => tagList.length;
-  
+
+  @override String get branchListString => _decrypt(gitStampGitBranchList) ?? 'ENCRYPTED';
+  @override List<String> get branchList => branchListString.split(RegExp(r'\\r?\\n'));
+  @override int get branchListCount => branchList.length;
+
   @override String get appVersionFull => !isEncrypted ? super.appVersionFull : 'ENCRYPTED';
   @override String get appVersion => _decrypt(gitStampAppVersion) ?? 'ECRYPTED';
   @override String get appBuild => _decrypt(gitStampAppBuild) ?? 'ECRYPTED';

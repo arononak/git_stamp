@@ -137,6 +137,11 @@ void singleValueTests() {
       'field': GitStamp.tagList,
       'matcher': isNotEmpty,
     },
+    {
+      'param': 'git-branch-list',
+      'field': GitStamp.branchList,
+      'matcher': isNotEmpty,
+    },
 
     /* Build Machine */
     {

@@ -247,6 +247,10 @@ void _generateDataFiles(
   if (model.gitTagList) {
     GitTagList(encrypt).generate();
   }
+
+  if (model.gitBranchList) {
+    GitBranchList(encrypt).generate();
+  }
 }
 
 void _generateFlutterInterface(bool isLiteVersion, bool encryptEnabled) {

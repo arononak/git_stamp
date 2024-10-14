@@ -21,6 +21,7 @@ class GitStampBuildModel {
   final bool gitConfigList;
   final bool gitCountObjects;
   final bool gitTagList;
+  final bool gitBranchList;
   final bool generateFlutterFiles;
   final bool generateFlutterIcon;
 
@@ -44,6 +45,7 @@ class GitStampBuildModel {
     this.gitConfigList = false,
     this.gitCountObjects = false,
     this.gitTagList = false,
+    this.gitBranchList = false,
     this.generateFlutterFiles = false,
     this.generateFlutterIcon = false,
   });
@@ -68,6 +70,7 @@ class GitStampBuildModel {
     this.gitConfigList = true,
     this.gitCountObjects = true,
     this.gitTagList = true,
+    this.gitBranchList = true,
     this.generateFlutterFiles = true,
     this.generateFlutterIcon = true,
   });
@@ -92,6 +95,7 @@ class GitStampBuildModel {
     this.gitConfigList = false,
     this.gitCountObjects = false,
     this.gitTagList = false,
+    this.gitBranchList = false,
     this.generateFlutterFiles = false,
     this.generateFlutterIcon = true,
   });
@@ -116,6 +120,7 @@ class GitStampBuildModel {
         gitConfigList = args.contains('git-config-list'),
         gitCountObjects = args.contains('git-count-objects'),
         gitTagList = args.contains('git-tag-list'),
+        gitBranchList = args.contains('git-branch-list'),
         generateFlutterFiles = false,
         generateFlutterIcon = false;
 
@@ -138,6 +143,7 @@ class GitStampBuildModel {
         'git-config-list',
         'git-count-objects',
         'git-tag-list',
+        'git-branch-list',
       ];
 
   bool get isIcon =>
@@ -159,6 +165,7 @@ class GitStampBuildModel {
       gitConfigList == false &&
       gitCountObjects == false &&
       gitTagList == false &&
+      gitBranchList == false &&
       generateFlutterFiles == false &&
       generateFlutterIcon == true;
 }

@@ -44,6 +44,13 @@ void _showRepoTagsBottomSheet(BuildContext context) {
   );
 }
 
+void _showRepoBranchesBottomSheet(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    builder: (BuildContext context) => GitStampRepoBranches(),
+  );
+}
+
 void _showMoreBottomSheet(BuildContext context) {
   showModalBottomSheet(
     context: context,
@@ -638,6 +645,10 @@ class GitStampRepoDetails extends StatelessWidget {
                 Row(
                   children: [
                     IconButton(
+                      onPressed: () => _showRepoBranchesBottomSheet(context),
+                      icon: const Icon(Icons.call_split),
+                    ),
+                    IconButton(
                       onPressed: () => _showRepoTagsBottomSheet(context),
                       icon: const Icon(Icons.tag),
                     ),
@@ -817,6 +828,33 @@ class GitStampRepoTags extends StatelessWidget {
   }
 }
 
+class GitStampRepoBranches extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(16.0),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            GitStampLabel(
+              first: 'Repository branches',
+              second: !GitStamp.isEncrypted
+                  ? GitStamp.branchListCount.toString()
+                  : 'ENCRYPTED',
+            ),
+            SizedBox(height: 16.0),
+            if (!GitStamp.isEncrypted) ...[
+              Text(GitStamp.branchListString, style: textDefault)
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class GitStampFilterList extends StatelessWidget {
   final String? selectedUser;
   final void Function(String? commiter) onFilterPressed;
@@ -987,5 +1025,4 @@ class _GitStampArrowIconState extends State<GitStampArrowIcon>
     );
   }
 }
-
 ''';
