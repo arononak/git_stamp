@@ -109,7 +109,7 @@
 <table>
 <thead>
 <tr>
-<th>Status</th>
+<th>Type</th>
 <th>Link</th>
 </tr>
 </thead>
@@ -248,6 +248,9 @@ Text('SHA: ${GitStamp.sha}'),
 <h2 id="-installation">🛠️ Installation</h2>
 <h3 id="1-pubspecyaml">1. <code>pubspec.yaml</code></h3>
 <pre class="language-dart"><code>dart pub add git_stamp
+</code></pre>
+<pre class="language-dart"><code class="language-dart">dependency_overrides:
+  meta: ^1.1.5
 </code></pre>
 <h3 id="2-gitignore">2. <code>.gitignore</code></h3>
 <div class="markdown-alert markdown-alert-important">
@@ -475,6 +478,10 @@ jobs:
 <td>17</td>
 <td>git-tag-list</td>
 </tr>
+<tr>
+<td>18</td>
+<td>git-branch-list</td>
+</tr>
 </tbody>
 </table>
 <h2 id="-usage">💻 Usage</h2>
@@ -524,11 +531,19 @@ jobs:
   String get buildSystemInfo;
   String get repoCreationDate;
   String get repoPath;
-  
+
   String get observedFiles;
   List&lt;String&gt; get observedFilesList;
   int get observedFilesCount;
-  
+
+  String get tagListString;
+  List&lt;String&gt; get tagList;
+  int get tagListCount;
+
+  String get branchListString;
+  List&lt;String&gt; get branchList;
+  int get branchListCount;
+
   String get appVersionFull =&gt; appVersion + ' (' + appBuild + ')';
   String get appVersion;
   String get appBuild;
@@ -541,7 +556,7 @@ jobs:
   String get gitConfigUser =&gt; gitConfigUserName + ' (' + gitConfigUserEmail + ')';
   String get gitConfigUserName;
   String get gitConfigUserEmail;
-  
+
   String get gitRemote;
   String get gitConfigList;
   String get gitCountObjects;
