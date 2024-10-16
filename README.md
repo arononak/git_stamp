@@ -135,11 +135,9 @@ Text('SHA: ${GitStamp.sha}'),
 
 ### 1. `pubspec.yaml`
 
-```
-dart pub add git_stamp
-```
-
-```dart
+```yml
+dependencies:
+  git_stamp: ^5.2.0
 dependency_overrides:
   meta: ^1.1.5
 ```
