@@ -6,10 +6,9 @@ import 'git_stamp_build_model.dart';
 import 'git_stamp_logger.dart';
 import 'git_stamp_encrypt.dart';
 import 'git_stamp_files.dart';
+import 'git_stamp_version.dart';
 import 'files/dynamic/git_stamp_dynamic_files.dart';
 import 'files/static/git_stamp_static_files.dart';
-
-const gitStampVersion = 'Version 5.1.0';
 
 final parser = ArgParser()
   ..addFlag('help', abbr: 'h', negatable: false)
@@ -17,6 +16,7 @@ final parser = ArgParser()
   ..addFlag('encrypt', abbr: 'e', negatable: false)
   ..addFlag('gen-only-options', negatable: false)
   ..addFlag('gen-only-all', negatable: false)
+  ..addFlag('debug-compile-key', negatable: false)
   ..addOption(
     'build-type',
     abbr: 'b',
