@@ -44,12 +44,7 @@ class MainPage extends StatelessWidget {
         actions: [
           IconButton(
             icon: Icon(Icons.settings),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SettingsPage()),
-              );
-            },
+            onPressed: () => navigateToSettings(context)
           ),
         ],
       ),
@@ -60,9 +55,16 @@ class MainPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => navigateToSettings(context),
         child: const Icon(Icons.add),
       ),
+    );
+  }
+
+  static void navigateToSettings(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SettingsPage()),
     );
   }
 }
