@@ -111,8 +111,8 @@ void main() {
       ),
     );
     await tester.tap(find.byType(GitStampCommitListElement).first);
-    await tester.pump(Duration(seconds: 2));
-    await tester.pump(Duration(seconds: 2));
+    await tester.pump(Duration(seconds: 10));
+    await tester.pump(Duration(seconds: 10));
     await tester.tap(find.byIcon(Icons.arrow_forward));
     await tester.pump(Duration(seconds: 2));
     await tester.pump(Duration(seconds: 2));
