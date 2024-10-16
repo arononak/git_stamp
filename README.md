@@ -43,8 +43,8 @@ Advanced await-less information provider and development tool.
 
 ## 🏞️ Preview
   
-| Status      | Link                                                             |
-| ----------- | ---------------------------------------------------------------- |
+| Type         | Link                                                             |
+| ------------ | ---------------------------------------------------------------- |
 | 📂 Decrypted | [gitstamp.web.app](https://gitstamp.web.app)                     |
 | 🔒 Encrypted | [gitstamp-encrypted.web.app](https://gitstamp-encrypted.web.app) |
 
@@ -137,6 +137,11 @@ Text('SHA: ${GitStamp.sha}'),
 
 ```
 dart pub add git_stamp
+```
+
+```dart
+dependency_overrides:
+  meta: ^1.1.5
 ```
 
 ### 2. `.gitignore`
