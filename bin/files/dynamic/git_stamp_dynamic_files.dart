@@ -66,6 +66,24 @@ class GitStampVersion extends GitStampMainFile {
   }
 }
 
+class EncryptDebugKey extends GitStampMainFile {
+  final String? key;
+  final String? iv;
+
+  EncryptDebugKey(this.key, this.iv);
+
+  @override
+  String get filename => 'encrypt_debug_key.dart';
+
+  @override
+  String get content => '''
+    class GitStampEncryptDebugKey {
+      static String? key = ${key == null ? 'null' : "'$key'"};
+      static String? iv = ${iv == null ? 'null' : "'$iv'"};
+    }
+  ''';
+}
+
 /* DATA FILES */
 
 class CommitList extends GitStampDataFile {

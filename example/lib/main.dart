@@ -44,7 +44,7 @@ class MainPage extends StatelessWidget {
         actions: [
           IconButton(
             icon: Icon(Icons.settings),
-            onPressed: () => navigateToSettings(context)
+            onPressed: () => navigateToSettings(context),
           ),
         ],
       ),

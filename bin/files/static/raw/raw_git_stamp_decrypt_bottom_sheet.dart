@@ -1,9 +1,10 @@
 const rawGitStampDecryptBottomSheet = '''
-import 'package:example/git_stamp/git_stamp_node.dart';
-import 'package:example/git_stamp/src/ui/git_stamp_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../git_stamp/git_stamp_node.dart';
+import '../../../git_stamp/src/ui/git_stamp_utils.dart';
+import '../../encrypt_debug_key.dart';
 import 'git_stamp_page.dart';
 
 void showDecryptBottomSheet({
@@ -37,8 +38,8 @@ class _GitStampDecryptForm extends StatefulWidget {
 }
 
 class _GitStampDecryptFormState extends State<_GitStampDecryptForm> {
-  final _keyController = TextEditingController();
-  final _ivController = TextEditingController();
+  final _keyController = TextEditingController(text: GitStampEncryptDebugKey.key);
+  final _ivController = TextEditingController(text: GitStampEncryptDebugKey.iv);
 
   @override
   Widget build(BuildContext context) {

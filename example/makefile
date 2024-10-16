@@ -9,7 +9,7 @@ build: sync
 	flutter build web --release --web-renderer canvaskit
 
 build_firebase_web:
-	dart run git_stamp --build-type full --adding-packages disabled --encrypt
+	dart run git_stamp --build-type full --adding-packages disabled --encrypt --debug-compile-key
 	flutter build web --release --web-renderer canvaskit
 	mkdir -p build/encrypted
 	cp -r build/web/* build/encrypted/

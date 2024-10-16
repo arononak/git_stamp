@@ -52,14 +52,15 @@ Future<void> main(List<String> arguments) async {
       return;
     } else if (results['gen-only-all']) {
       _generate(
-        encryptEnabled: false,
         buildType: 'custom',
+        encryptEnabled: false,
         genOnly: GitStampBuildModel.genOnlyOptions.toList(),
       );
       return;
     }
 
     final encryptEnabled = results['encrypt'];
+    final debugCompileKey = results['debug-compile-key'];
     final genOnly = results['gen-only'];
     final addingPackageEnabled = results['adding-packages'] == 'enabled';
 
@@ -67,8 +68,9 @@ Future<void> main(List<String> arguments) async {
     final buildType = isCustom ? 'custom' : results['build-type'].toLowerCase();
 
     _generate(
-      encryptEnabled: encryptEnabled,
       buildType: buildType,
+      encryptEnabled: encryptEnabled,
+      debugCompileKey: debugCompileKey,
       addingPackageEnabled: addingPackageEnabled,
     );
   } on FormatException catch (e) {
@@ -81,6 +83,7 @@ Future<void> main(List<String> arguments) async {
 Future<void> _generate({
   required String buildType,
   required bool encryptEnabled,
+  bool debugCompileKey = false,
   bool addingPackageEnabled = false,
   List<String>? genOnly,
 }) async {
@@ -97,7 +100,12 @@ Future<void> _generate({
 
   switch (buildType) {
     case 'lite':
-      _generateDataFiles(GitStampBuildModel.all(encrypt: encryptEnabled), true);
+      _generateDataFiles(
+        model: GitStampBuildModel.all(encrypt: encryptEnabled),
+        isLiteVersion: true,
+        debugCompileKey: debugCompileKey,
+      );
+
       _generateFlutterInterface(true, encryptEnabled);
       _generateFlutterIcon();
 
@@ -112,7 +120,11 @@ Future<void> _generate({
       break;
     case 'full':
       _generateDataFiles(
-          GitStampBuildModel.all(encrypt: encryptEnabled), false);
+        model: GitStampBuildModel.all(encrypt: encryptEnabled),
+        isLiteVersion: false,
+        debugCompileKey: debugCompileKey,
+      );
+
       _generateFlutterInterface(false, encryptEnabled);
       _generateFlutterIcon();
 
@@ -126,11 +138,17 @@ Future<void> _generate({
 
       break;
     case 'icon':
-      _generateDataFiles(const GitStampBuildModel.icon(), true);
       _generateFlutterIcon();
+      _generateDataFiles(
+        model: const GitStampBuildModel.icon(),
+        isLiteVersion: true,
+      );
       break;
     case 'custom':
-      _generateDataFiles(GitStampBuildModel.custom(genOnly ?? []), false);
+      _generateDataFiles(
+        model: GitStampBuildModel.custom(genOnly ?? []),
+        isLiteVersion: false,
+      );
       break;
     default:
   }
@@ -145,10 +163,11 @@ Future<void> _generate({
   GitStampLogger.lightGreen('Size of generated $filesCount files: $filesSize');
 }
 
-void _generateDataFiles(
-  GitStampBuildModel model,
-  bool isLiteVersion,
-) {
+void _generateDataFiles({
+  required GitStampBuildModel model,
+  required bool isLiteVersion,
+  bool debugCompileKey = false,
+}) {
   EncryptFunction? encrypt;
 
   if (model.encrypt) {
@@ -156,6 +175,11 @@ void _generateDataFiles(
     final iv = GitStampEncrypt.generateIv();
 
     GitStampEncrypt.printKeyAndIv(key, iv);
+
+    EncryptDebugKey(
+      debugCompileKey == false ? null : key.bytes.asHex.join(''),
+      debugCompileKey == false ? null : iv.bytes.asHex.join(''),
+    ).generate();
 
     encrypt = model.encrypt == false
         ? null
