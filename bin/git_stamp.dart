@@ -5,9 +5,9 @@ import 'package:args/args.dart';
 import 'git_stamp_build_model.dart';
 import 'git_stamp_logger.dart';
 import 'git_stamp_encrypt.dart';
-import 'src/git_stamp_file.dart';
-import 'src/files/dynamic/git_stamp_dynamic_files.dart';
-import 'src/files/static/git_stamp_static_files.dart';
+import 'git_stamp_files.dart';
+import 'files/dynamic/git_stamp_dynamic_files.dart';
+import 'files/static/git_stamp_static_files.dart';
 
 const gitStampVersion = 'Version 5.1.0';
 

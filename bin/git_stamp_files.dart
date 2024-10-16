@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:meta/meta.dart';
 
-import './../git_stamp_logger.dart';
+import 'git_stamp_logger.dart';
 
 sealed class _GitStampFile {
   @protected
