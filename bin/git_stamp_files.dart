@@ -5,7 +5,9 @@ import 'package:meta/meta.dart';
 
 import 'git_stamp_logger.dart';
 
-sealed class _GitStampFile {
+sealed class GitStampFile {
+  static var loggingEnabled = true;
+
   @protected
   String get directory;
 
@@ -22,30 +24,32 @@ sealed class _GitStampFile {
   void generate() {
     File(path).writeAsStringSync(content);
 
-    GitStampLogger.lightGrey(
-      'Generated ${fileSize(path, decimals: 1).padLeft(13)}               $path',
-    );
+    if (loggingEnabled) {
+      GitStampLogger.lightGrey(
+        'Generated ${fileSize(path, decimals: 1).padLeft(13)}               $path',
+      );
+    }
   }
 }
 
-class GitStampMainFile extends _GitStampFile {
+class GitStampMainFile extends GitStampFile {
   @override
   String get directory => 'lib/git_stamp';
 }
 
-class GitStampSrcFile extends _GitStampFile {
+class GitStampSrcFile extends GitStampFile {
   @override
   String get directory => 'lib/git_stamp/src';
 }
 
-class GitStampUiFile extends _GitStampFile {
+class GitStampUiFile extends GitStampFile {
   @override
   String get directory => 'lib/git_stamp/src/ui';
 }
 
 typedef EncryptFunction = dynamic Function(String data);
 
-class GitStampDataFile extends _GitStampFile {
+class GitStampDataFile extends GitStampFile {
   EncryptFunction? encrypt;
 
   GitStampDataFile([this.encrypt]);

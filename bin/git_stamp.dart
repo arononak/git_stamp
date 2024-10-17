@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:core';
 import 'package:args/args.dart';
@@ -10,13 +11,14 @@ import 'git_stamp_version.dart';
 import 'files/dynamic/git_stamp_dynamic_files.dart';
 import 'files/static/git_stamp_static_files.dart';
 
-final parser = ArgParser()
+final _parser = ArgParser()
   ..addFlag('help', abbr: 'h', negatable: false)
   ..addFlag('version', abbr: 'v', negatable: false)
   ..addFlag('encrypt', abbr: 'e', negatable: false)
   ..addFlag('gen-only-options', negatable: false)
   ..addFlag('gen-only-all', negatable: false)
   ..addFlag('debug-compile-key', negatable: false)
+  ..addFlag('benchmark', negatable: false)
   ..addOption(
     'build-type',
     abbr: 'b',
@@ -36,12 +38,56 @@ final parser = ArgParser()
     defaultsTo: null,
   );
 
+class _GenerationResult {
+  String generationTimeSeconds;
+  String filesSize;
+  int filesCount;
+
+  _GenerationResult({
+    required this.generationTimeSeconds,
+    required this.filesSize,
+    required this.filesCount,
+  });
+
+  void print() {
+    GitStampLogger.lightGreen('Generation time: ${generationTimeSeconds}s');
+    GitStampLogger.lightGreen(
+        'Size of generated $filesCount files: $filesSize');
+  }
+
+  Map<String, dynamic> get asMap => {
+        'generationTimeSeconds': generationTimeSeconds,
+        'filesSize': filesSize,
+        'filesCount': filesCount,
+      };
+
+  static String benchmark(full, lite, icon) => jsonEncode({
+        'full': full.asMap,
+        'lite': lite.asMap,
+        'icon': icon.asMap,
+      });
+}
+
+extension DurationExtension on Duration {
+  String format() {
+    if (inHours > 0) {
+      return toString();
+    }
+
+    if (inMinutes > 10) {
+      return inMinutes.toString();
+    }
+
+    return (inMilliseconds / 1000).toStringAsFixed(2);
+  }
+}
+
 Future<void> main(List<String> arguments) async {
   try {
-    final results = parser.parse(arguments);
-    final usage = parser.usage.split('\n').map((e) => '    $e').join('\n');
+    final results = _parser.parse(arguments);
 
     if (results['help']) {
+      final usage = _parser.usage.split('\n').map((e) => '    $e').join('\n');
       GitStampLogger.lightGrey(usage);
       return;
     } else if (results['version']) {
@@ -50,12 +96,22 @@ Future<void> main(List<String> arguments) async {
     } else if (results['gen-only-options']) {
       GitStampLogger.lightGrey(GitStampBuildModel.genOnlyOptions.toString());
       return;
+    } else if (results['benchmark']) {
+      GitStampFile.loggingEnabled = false;
+      final full = await _generate(buildType: 'full', encryptEnabled: false);
+      final lite = await _generate(buildType: 'lite', encryptEnabled: false);
+      final icon = await _generate(buildType: 'icon', encryptEnabled: false);
+      final json = _GenerationResult.benchmark(full, lite, icon);
+      File('./benchmark.json').writeAsStringSync(json);
+      GitStampLogger.lightGreen('File `benchmark.json` was saved!');
+      return;
     } else if (results['gen-only-all']) {
-      _generate(
+      final result = await _generate(
         buildType: 'custom',
         encryptEnabled: false,
         genOnly: GitStampBuildModel.genOnlyOptions.toList(),
       );
+      result.print();
       return;
     }
 
@@ -63,16 +119,16 @@ Future<void> main(List<String> arguments) async {
     final debugCompileKey = results['debug-compile-key'];
     final genOnly = results['gen-only'];
     final addingPackageEnabled = results['adding-packages'] == 'enabled';
-
     final isCustom = genOnly?.isNotEmpty ?? false;
     final buildType = isCustom ? 'custom' : results['build-type'].toLowerCase();
 
-    _generate(
+    final result = await _generate(
       buildType: buildType,
       encryptEnabled: encryptEnabled,
       debugCompileKey: debugCompileKey,
       addingPackageEnabled: addingPackageEnabled,
     );
+    result.print();
   } on FormatException catch (e) {
     GitStampLogger.red(e.message);
     GitStampLogger.red('Usage: dart run git_stamp [options]');
@@ -80,19 +136,22 @@ Future<void> main(List<String> arguments) async {
   }
 }
 
-Future<void> _generate({
+Future<_GenerationResult> _generate({
   required String buildType,
   required bool encryptEnabled,
   bool debugCompileKey = false,
   bool addingPackageEnabled = false,
   List<String>? genOnly,
 }) async {
-  GitStampLogger.lightGreen(gitStampVersion);
-  GitStampLogger.lightGreen(
-      'Build type: ${buildType == 'custom' ? 'custom ($genOnly)' : buildType}');
-  GitStampLogger.lightGreen('Adding packages: $addingPackageEnabled');
-  GitStampLogger.lightGreen('');
-  GitStampLogger.logo();
+  if (GitStampFile.loggingEnabled) {
+    GitStampLogger.lightGreen(gitStampVersion);
+    GitStampLogger.lightGreen(
+      'Build type: ${buildType == 'custom' ? 'custom ($genOnly)' : buildType}',
+    );
+    GitStampLogger.lightGreen('Adding packages: $addingPackageEnabled');
+    GitStampLogger.lightGreen('');
+    GitStampLogger.logo();
+  }
 
   final stopwatch = Stopwatch()..start();
 
@@ -156,11 +215,14 @@ Future<void> _generate({
   stopwatch.stop();
 
   final seconds = stopwatch.elapsed.format();
-  GitStampLogger.lightGreen('Generation time: ${seconds}s');
-
   final filesSize = directorySize('./lib/git_stamp');
   final filesCount = directoryFilesCount('./lib/git_stamp');
-  GitStampLogger.lightGreen('Size of generated $filesCount files: $filesSize');
+
+  return _GenerationResult(
+    generationTimeSeconds: seconds,
+    filesSize: filesSize,
+    filesCount: filesCount,
+  );
 }
 
 void _generateDataFiles({
@@ -303,18 +365,4 @@ void _addPackageToPubspec(String package) {
   Process.runSync('dart', ['pub', 'add', package]).exitCode == 0
       ? GitStampLogger.lightGrey('Adding package  [$formatted]  Success')
       : GitStampLogger.red('Adding package  [$formatted]  Failed');
-}
-
-extension DurationExtension on Duration {
-  String format() {
-    if (inHours > 0) {
-      return toString();
-    }
-
-    if (inMinutes > 10) {
-      return inMinutes.toString();
-    }
-
-    return (inMilliseconds / 1000).toStringAsFixed(2);
-  }
 }

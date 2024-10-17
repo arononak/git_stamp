@@ -242,6 +242,10 @@ jobs:
 
 ### 2. Benchmarks (Repo 615 Commits)
 
+> [!NOTE]
+> ```dart run git_stamp --benchmark```
+> Returns `benchmark.json` file.
+
 | Build type | Generating time | Number of dart files generated | Size of generated dart files |
 | ---------- | --------------- | ------------------------------ | ---------------------------- |
 | FULL       | 10.16s          | 33                             | 2.3MB                        |
