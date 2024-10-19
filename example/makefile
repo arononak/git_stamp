@@ -79,7 +79,7 @@ screenshots:
 	rm -f chromedriver.pid
 	rm -f -r chromedriver
 
-benchmark:
+benchmarks:
 	dart run git_stamp --benchmark
 	rm -f ../BENCHMARK.md
 	@echo "| Build type | Generating time | Number of dart files generated | Size of generated dart files |" > temp_table.md
