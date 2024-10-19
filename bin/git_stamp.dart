@@ -61,10 +61,11 @@ class _GenerationResult {
         'filesCount': filesCount,
       };
 
-  static String benchmark(full, lite, icon) => jsonEncode({
+  static String benchmark(full, lite, icon, commitCount) => jsonEncode({
         'full': full.asMap,
         'lite': lite.asMap,
         'icon': icon.asMap,
+        'commitCount': commitCount,
       });
 }
 
@@ -101,7 +102,8 @@ Future<void> main(List<String> arguments) async {
       final full = await _generate(buildType: 'full', encryptEnabled: false);
       final lite = await _generate(buildType: 'lite', encryptEnabled: false);
       final icon = await _generate(buildType: 'icon', encryptEnabled: false);
-      final json = _GenerationResult.benchmark(full, lite, icon);
+      final commitCount = exec(['git', 'rev-list', '--count', 'HEAD']);
+      final json = _GenerationResult.benchmark(full, lite, icon, commitCount);
       File('./benchmark.json').writeAsStringSync(json);
       GitStampLogger.lightGreen('File `benchmark.json` was saved!');
       return;
