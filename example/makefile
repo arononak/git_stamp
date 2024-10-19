@@ -78,3 +78,25 @@ screenshots:
 	kill $$(cat chromedriver.pid)
 	rm -f chromedriver.pid
 	rm -f -r chromedriver
+
+benchmark:
+	dart run git_stamp --benchmark
+	rm -f ../BENCHMARK.md
+	@echo "| Build type | Generating time | Number of dart files generated | Size of generated dart files |" > temp_table.md
+	@echo "|------------|-----------------|-------------------------------|------------------------------|" >> temp_table.md
+	FULL_TIME=$$(jq -r '.full.generationTimeSeconds' benchmark.json); \
+	FULL_COUNT=$$(jq -r '.full.filesCount' benchmark.json); \
+	FULL_SIZE=$$(jq -r '.full.filesSize' benchmark.json); \
+	echo "| FULL | $$FULL_TIME | $$FULL_COUNT | $$FULL_SIZE |" >> temp_table.md
+	LITE_TIME=$$(jq -r '.lite.generationTimeSeconds' benchmark.json); \
+	LITE_COUNT=$$(jq -r '.lite.filesCount' benchmark.json); \
+	LITE_SIZE=$$(jq -r '.lite.filesSize' benchmark.json); \
+	echo "| LITE | $$LITE_TIME | $$LITE_COUNT | $$LITE_SIZE |" >> temp_table.md
+	ICON_TIME=$$(jq -r '.icon.generationTimeSeconds' benchmark.json); \
+	ICON_COUNT=$$(jq -r '.icon.filesCount' benchmark.json); \
+	ICON_SIZE=$$(jq -r '.icon.filesSize' benchmark.json); \
+	echo "| ICON | $$ICON_TIME | $$ICON_COUNT | $$ICON_SIZE |" >> temp_table.md
+	cat temp_table.md >> ../BENCHMARK.md
+	rm -f temp_table.md
+	rm -f benchmark.json
+	@echo "BENCHMARK.md updated."

@@ -29,7 +29,7 @@ Advanced await-less information provider and development tool.
     - [5. 📦 Integration - GitHub Actions](#5--integration---github-actions)
   - [🏗️ Generating](#️-generating)
     - [1. Examples](#1-examples)
-    - [2. Benchmarks (Repo 615 Commits)](#2-benchmarks-repo-615-commits)
+    - [2. Benchmarks](#2-benchmarks)
     - [3. Tip](#3-tip)
     - [4. Custom `gen-only` parameters](#4-custom-gen-only-parameters)
   - [💻 Usage](#-usage)
@@ -240,17 +240,9 @@ jobs:
 > [!NOTE]
 > To optimize the generation you can disable adding packages to the project for LITE & FULL versions by adding a flag in CLI `--adding-packages disabled` .
 
-### 2. Benchmarks (Repo 615 Commits)
+### 2. [Benchmarks](./BENCHMARK.md)
 
-> [!NOTE]
-> ```dart run git_stamp --benchmark```
-> Returns `benchmark.json` file.
-
-| Build type | Generating time | Number of dart files generated | Size of generated dart files |
-| ---------- | --------------- | ------------------------------ | ---------------------------- |
-| FULL       | 10.16s          | 33                             | 2.3MB                        |
-| LITE       | 3.73s           | 33                             | 167.9 KB                     |
-| ICON       | 1.26s           | 10                             | 8.8 KB                       |
+```dart run git_stamp --benchmark```
 
 ### 3. Tip
 
