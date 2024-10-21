@@ -48,6 +48,7 @@ ${model.gitConfigList.enabled}import 'src/data/git_config_list.dart';
 ${model.gitCountObjects.enabled}import 'src/data/git_count_objects.dart';
 ${model.gitTagList.enabled}import 'src/data/git_tag_list.dart';
 ${model.gitBranchList.enabled}import 'src/data/git_branch_list.dart';
+${model.gitReflog.enabled}import 'src/data/git_reflog.dart';
 
 ${model.encrypt.enabled}import 'dart:typed_data';
 ${model.encrypt.enabled}import 'package:encrypt/encrypt.dart' as crypto;
@@ -101,6 +102,7 @@ abstract class GitStampNode {
   ${model.gitRemote.enabled}String get gitRemote;
   ${model.gitConfigList.enabled}String get gitConfigList;
   ${model.gitCountObjects.enabled}String get gitCountObjects;
+  ${model.gitReflog.enabled}String get gitReflog;
 
   ${model.generateFlutterFiles.enabled}void showLicensePage({
   ${model.generateFlutterFiles.enabled}  required BuildContext context,
@@ -162,6 +164,7 @@ class DecryptedGitStampNode extends GitStampNode {
   ${model.gitRemote.enabled}@override String get gitRemote => gitStampGitRemoteList;
   ${model.gitConfigList.enabled}@override String get gitConfigList => gitStampGitConfigList;
   ${model.gitCountObjects.enabled}@override String get gitCountObjects => gitStampGitCountObjects;
+  ${model.gitReflog.enabled}@override String get gitReflog => gitStampGitReflog;
 
   ${model.generateFlutterFiles.enabled}@override void showLicensePage({required BuildContext context, Widget? applicationIcon, String? applicationLegalese, bool useRootNavigator = false}) {
   ${model.generateFlutterFiles.enabled}  showGitStampLicensePage(
@@ -267,6 +270,7 @@ class EncryptedGitStampNode extends GitStampNode {
   @override String get gitRemote => _decrypt(gitStampGitRemoteList) ?? 'ECRYPTED';
   @override String get gitConfigList => _decrypt(gitStampGitConfigList) ?? 'ECRYPTED';
   @override String get gitCountObjects => _decrypt(gitStampGitCountObjects) ?? 'ECRYPTED';
+  @override String get gitReflog => _decrypt(gitStampGitReflog) ?? 'ECRYPTED';
 
   @override void showLicensePage({required BuildContext context, Widget? applicationIcon, String? applicationLegalese, bool useRootNavigator = false}) {
     showGitStampLicensePage(

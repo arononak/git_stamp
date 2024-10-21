@@ -142,6 +142,11 @@ void singleValueTests() {
       'field': GitStamp.branchList,
       'matcher': isNotEmpty,
     },
+    {
+      'param': 'git-reflog',
+      'field': GitStamp.gitReflog,
+      'matcher': isNotEmpty,
+    },
 
     /* Build Machine */
     {

@@ -496,3 +496,16 @@ class GitBranchList extends GitStampDataFile {
   @override
   String get variableContent => exec(['git', 'branch', '-a']);
 }
+
+class GitReflog extends GitStampDataFile {
+  GitReflog(super.encrypt);
+
+  @override
+  String get filename => 'git_reflog.dart';
+
+  @override
+  String get variableName => 'gitStampGitReflog';
+
+  @override
+  String get variableContent => exec(['git', 'reflog']);
+}

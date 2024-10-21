@@ -44,6 +44,13 @@ void _showRepoTagsBottomSheet(BuildContext context) {
   );
 }
 
+void _showRepoReflogBottomSheet(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    builder: (BuildContext context) => GitStampRepoReflog(),
+  );
+}
+
 void _showRepoBranchesBottomSheet(BuildContext context) {
   showModalBottomSheet(
     context: context,
@@ -645,6 +652,10 @@ class GitStampRepoDetails extends StatelessWidget {
                 Row(
                   children: [
                     IconButton(
+                      onPressed: () => _showRepoReflogBottomSheet(context),
+                      icon: const Icon(Icons.history),
+                    ),
+                    IconButton(
                       onPressed: () => _showRepoBranchesBottomSheet(context),
                       icon: const Icon(Icons.call_split),
                     ),
@@ -780,21 +791,25 @@ class GitStampRepoFiles extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(16.0),
       child: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            GitStampLabel(
-              first: 'Repository files',
-              second: !GitStamp.isEncrypted
-                  ? GitStamp.observedFilesCount.toString()
-                  : 'ENCRYPTED',
-            ),
-            SizedBox(height: 16.0),
-            if (!GitStamp.isEncrypted) ...[
-              Text(GitStamp.observedFiles, style: textDefault)
+        scrollDirection: Axis.vertical,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              GitStampLabel(
+                first: 'Repository files',
+                second: !GitStamp.isEncrypted
+                    ? GitStamp.observedFilesCount.toString()
+                    : 'ENCRYPTED',
+              ),
+              SizedBox(height: 16.0),
+              if (!GitStamp.isEncrypted) ...[
+                Text(GitStamp.observedFiles, style: textDefault)
+              ],
             ],
-          ],
+          ),
         ),
       ),
     );
@@ -807,21 +822,51 @@ class GitStampRepoTags extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(16.0),
       child: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            GitStampLabel(
-              first: 'Repository tags',
-              second: !GitStamp.isEncrypted
-                  ? GitStamp.tagListCount.toString()
-                  : 'ENCRYPTED',
-            ),
-            SizedBox(height: 16.0),
-            if (!GitStamp.isEncrypted) ...[
-              Text(GitStamp.tagListString, style: textDefault)
+        scrollDirection: Axis.vertical,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              GitStampLabel(
+                first: 'Repository tags',
+                second: !GitStamp.isEncrypted
+                    ? GitStamp.tagListCount.toString()
+                    : 'ENCRYPTED',
+              ),
+              SizedBox(height: 16.0),
+              if (!GitStamp.isEncrypted) ...[
+                Text(GitStamp.tagListString, style: textDefault)
+              ],
             ],
-          ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class GitStampRepoReflog extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(16.0),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              GitStampLabel(first: 'Repository reflog'),
+              SizedBox(height: 12),
+              if (!GitStamp.isEncrypted) ...[
+                Text(GitStamp.gitReflog, style: textDefault)
+              ],
+            ],
+          ),
         ),
       ),
     );
@@ -834,21 +879,25 @@ class GitStampRepoBranches extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(16.0),
       child: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            GitStampLabel(
-              first: 'Repository branches',
-              second: !GitStamp.isEncrypted
-                  ? GitStamp.branchListCount.toString()
-                  : 'ENCRYPTED',
-            ),
-            SizedBox(height: 16.0),
-            if (!GitStamp.isEncrypted) ...[
-              Text(GitStamp.branchListString, style: textDefault)
+        scrollDirection: Axis.vertical,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              GitStampLabel(
+                first: 'Repository branches',
+                second: !GitStamp.isEncrypted
+                    ? GitStamp.branchListCount.toString()
+                    : 'ENCRYPTED',
+              ),
+              SizedBox(height: 16.0),
+              if (!GitStamp.isEncrypted) ...[
+                Text(GitStamp.branchListString, style: textDefault)
+              ],
             ],
-          ],
+          ),
         ),
       ),
     );
@@ -949,9 +998,9 @@ class GitStampMore extends StatelessWidget {
 
 class GitStampLabel extends StatelessWidget {
   final String first;
-  final String second;
+  final String? second;
 
-  const GitStampLabel({super.key, required this.first, required this.second});
+  const GitStampLabel({super.key, required this.first, this.second});
 
   @override
   Widget build(BuildContext context) {
@@ -959,8 +1008,10 @@ class GitStampLabel extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(first, style: TextStyle(fontSize: 20)),
-        SizedBox(width: 8.0),
-        GitStampTextLabel(text: second),
+        if (second != null) ...[
+          SizedBox(width: 8.0),
+          GitStampTextLabel(text: second!),
+        ],
       ],
     );
   }
@@ -1025,4 +1076,5 @@ class _GitStampArrowIconState extends State<GitStampArrowIcon>
     );
   }
 }
+
 ''';

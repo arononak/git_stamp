@@ -339,6 +339,10 @@ void _generateDataFiles({
   if (model.gitBranchList) {
     GitBranchList(encrypt).generate();
   }
+
+  if (model.gitReflog) {
+    GitReflog(encrypt).generate();
+  }
 }
 
 void _generateFlutterInterface(bool isLiteVersion, bool encryptEnabled) {
