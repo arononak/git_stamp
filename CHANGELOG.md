@@ -1,3 +1,12 @@
+| 🆕 **Version** | 🗓️ **Date**         | 📝 **Change Description**  |
+| ------------- | ------------------ | ---------------------------- |
+| Version 6     | Someday it will be | 📦 JSON data export          |
+| Version 5     | 07.10.2024         | 🔐 Data encription           |
+| Version 4     | 24.07.2024         | 🌟 New `icon` build-type     |
+| Version 3     | 30.06.2024         | 🔧 New `gen-only` build-type |
+| Version 2     | 10.04.2024         | 🛠️ Commit diff               |
+| Version 1     | 11.12.2023         | 🚀 First version             |
+
 ## 5.2.0
 
 * Added **branch module**
