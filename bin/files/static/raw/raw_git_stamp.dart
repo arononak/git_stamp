@@ -7,7 +7,6 @@ library git_stamp;
  
 export 'git_stamp_node.dart';
 
-${(generateFlutterFiles || generateFlutterIcon).enabled}export 'src/data/git_stamp_commit.dart';
 ${generateFlutterFiles.enabled}export 'src/ui/git_stamp_details_page.dart';
 ${generateFlutterFiles.enabled}export 'src/ui/git_stamp_launcher.dart';
 ${generateFlutterFiles.enabled}export 'src/ui/git_stamp_page.dart';

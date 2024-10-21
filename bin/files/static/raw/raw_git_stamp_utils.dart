@@ -2,6 +2,8 @@ const rawGitStampUtils = '''
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:git_stamp/git_stamp_commit.dart';
+
 import '../../git_stamp.dart';
 
 void showSnackbar({

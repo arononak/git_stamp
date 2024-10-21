@@ -1,6 +1,8 @@
 const rawGitStampDetailsPage = '''
 import 'package:flutter/material.dart';
 
+import 'package:git_stamp/git_stamp_commit.dart';
+
 import 'package:aron_gradient_line/aron_gradient_line.dart';
 
 import '../../git_stamp.dart';
@@ -59,7 +61,8 @@ class _GitStampDetailsPageState extends State<GitStampDetailsPage> {
         ),
         actions: [
           IconButton(
-            onPressed: () => setState(() => _fontSize -= _fontSize <= 1 ? 0 : 1),
+            onPressed: () =>
+                setState(() => _fontSize -= _fontSize <= 1 ? 0 : 1),
             icon: Icon(Icons.remove_circle),
           ),
           Text(_fontSize.toString().padLeft(2, ' ')),

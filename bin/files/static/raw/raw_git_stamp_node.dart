@@ -22,16 +22,18 @@ library git_stamp;
 ${(model.commitList || model.buildMachine).enabled}import 'dart:convert';
 
 ${model.generateFlutterFiles.enabled}import 'package:flutter/widgets.dart';
+
+${model.buildMachine.enabled}import 'package:git_stamp/git_stamp_build_machine.dart';
+${model.commitList.enabled}import 'package:git_stamp/git_stamp_commit.dart';
+
 ${model.generateFlutterFiles.enabled}import 'src/ui/git_stamp_license_page.dart';
 
 ${model.commitList.enabled}import 'src/data/commit_list.dart';
-${model.commitList.enabled}import 'src/data/git_stamp_commit.dart';
 ${model.diffList.enabled}import 'src/data/diff_list.dart';
 ${model.diffStatList.enabled}import 'src/data/diff_stat_list.dart';
 ${model.buildBranch.enabled}import 'src/data/build_branch.dart';
 ${model.buildDateTime.enabled}import 'src/data/build_date_time.dart';
 ${model.buildSystemInfo.enabled}import 'src/data/build_system_info.dart';
-${model.buildMachine.enabled}import 'src/data/git_stamp_build_machine.dart';
 ${model.buildMachine.enabled}import 'src/data/build_machine.dart';
 ${model.repoCreationDate.enabled}import 'src/data/repo_creation_date.dart';
 ${model.repoPath.enabled}import 'src/data/repo_path.dart';

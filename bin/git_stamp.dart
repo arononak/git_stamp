@@ -260,7 +260,6 @@ void _generateDataFiles({
   GitStampVersion().generate();
 
   if (model.commitList) {
-    GitStampCommit().generate();
     CommitList(encrypt, count: model.isIcon ? 1 : null).generate();
   }
 
@@ -290,7 +289,6 @@ void _generateDataFiles({
 
   if (model.buildMachine) {
     BuildMachine(encrypt).generate();
-    GitStampBuildMachine().generate();
   }
 
   if (model.repoPath) {

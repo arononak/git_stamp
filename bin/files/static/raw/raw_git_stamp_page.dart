@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 
 import 'package:aron_gradient_line/aron_gradient_line.dart';
+import 'package:git_stamp/git_stamp_commit.dart';
 
 import '../../git_stamp.dart';
 import 'git_stamp_decrypt_bottom_sheet.dart';

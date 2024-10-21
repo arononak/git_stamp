@@ -1,4 +1,3 @@
-const rawGitStampBuildMachine = '''
 class GitStampBuildMachine {
   final String frameworkVersion;
   final String channel;
@@ -38,8 +37,7 @@ class GitStampBuildMachine {
         flutterRoot: json['flutterRoot'] ?? 'null',
       );
 
-  factory GitStampBuildMachine.all(String value) =>
-      GitStampBuildMachine(
+  factory GitStampBuildMachine.all(String value) => GitStampBuildMachine(
         frameworkVersion: value,
         channel: value,
         repositoryUrl: value,
@@ -52,4 +50,3 @@ class GitStampBuildMachine {
         flutterRoot: value,
       );
 }
-''';

@@ -1,4 +1,3 @@
-const rawGitStampCommit = '''
 class GitStampCommit {
   final String hash;
   final String subject;
@@ -22,5 +21,3 @@ class GitStampCommit {
         authorEmail: json['authorEmail'] ?? 'null',
       );
 }
-
-''';

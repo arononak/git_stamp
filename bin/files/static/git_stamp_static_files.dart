@@ -1,7 +1,5 @@
 import 'raw/raw_git_stamp.dart';
 import 'raw/raw_git_stamp_node.dart';
-import 'raw/raw_git_stamp_commit.dart';
-import 'raw/raw_git_stamp_build_machine.dart';
 import 'raw/raw_git_stamp_details_page.dart';
 import 'raw/raw_git_stamp_launcher.dart';
 import 'raw/raw_git_stamp_page.dart';
@@ -61,26 +59,6 @@ class GitStampLauncher extends GitStampUiFile {
 
   @override
   String get content => rawGitStampLauncher;
-}
-
-class GitStampCommit extends GitStampDataFile {
-  GitStampCommit() : super(null);
-
-  @override
-  String get filename => 'git_stamp_commit.dart';
-
-  @override
-  String get content => rawGitStampCommit;
-}
-
-class GitStampBuildMachine extends GitStampDataFile {
-  GitStampBuildMachine() : super(null);
-
-  @override
-  String get filename => 'git_stamp_build_machine.dart';
-
-  @override
-  String get content => rawGitStampBuildMachine;
 }
 
 class GitStampPage extends GitStampUiFile {
