@@ -13,6 +13,11 @@
 * GitStampPage - fixed bottom sheet ScrollViews
 * Extracted All UI files to package `/lib` folder
 
+<details>
+<summary>Image</summary>
+<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/5.3.0.png?raw=true" alt="Image"></p>
+</details>
+
 ## 5.2.0
 
 * Added **branch module**
