@@ -1,40 +1,22 @@
-const rawGitStampDetailsPage = '''
 import 'package:flutter/material.dart';
-
-import 'package:git_stamp/git_stamp_commit.dart';
-
 import 'package:aron_gradient_line/aron_gradient_line.dart';
 
-import '../../git_stamp.dart';
-
-void showGitStampDetailsPage({
-  required BuildContext context,
-  bool useRootNavigator = false,
-  required GitStampCommit commit,
-  String? monospaceFontFamily,
-}) {
-  Navigator.of(
-    context,
-    rootNavigator: useRootNavigator,
-  ).push(MaterialPageRoute<void>(
-    builder: (BuildContext context) {
-      return GitStampDetailsPage(
-        commit: commit,
-        monospaceFontFamily: monospaceFontFamily,
-      );
-    },
-  ));
-}
+import 'git_stamp_commit.dart';
+import 'git_stamp_node.dart';
+import 'git_stamp_page.dart';
+import 'git_stamp_utils.dart';
 
 class GitStampDetailsPage extends StatefulWidget {
+  final GitStampNode gitStamp;
   final GitStampCommit commit;
   final String? monospaceFontFamily;
 
   const GitStampDetailsPage({
-    Key? key,
+    super.key,
+    required this.gitStamp,
     required this.commit,
     this.monospaceFontFamily,
-  }) : super(key: key);
+  });
 
   @override
   State<GitStampDetailsPage> createState() => _GitStampDetailsPageState();
@@ -43,7 +25,7 @@ class GitStampDetailsPage extends StatefulWidget {
 class _GitStampDetailsPageState extends State<GitStampDetailsPage> {
   var _fontSize = 12;
 
-  String get diffList => GitStamp.diffList[widget.commit.hash] ?? '';
+  String get diffList => widget.gitStamp.diffList[widget.commit.hash] ?? '';
 
   @override
   Widget build(BuildContext context) {
@@ -121,10 +103,10 @@ class GitStampDetailsPageText extends StatelessWidget {
     return SelectableText.rich(
       TextSpan(
         children: [
-          ...diffList.split(newLine).map(
+          ...diffList.split('\n').map(
             (line) {
               return TextSpan(
-                text: line + newLine,
+                text: '$line\n',
                 style: TextStyle(
                   color: _textColor(context, line),
                   backgroundColor: _backgroundColor(context, line),
@@ -175,5 +157,3 @@ class GitStampDetailsPageText extends StatelessWidget {
     }
   }
 }
-
-''';

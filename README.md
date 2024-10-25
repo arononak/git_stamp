@@ -109,7 +109,7 @@ dependency_overrides:
 
 ## [🏗️ Generating](./GENERATING.md)
 
-`dart run git_stamp --build-type full --encrypt`
+`dart run git_stamp --build-type full`
 
 ## [💻 Usage](./USAGE.md)
 

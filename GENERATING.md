@@ -1,18 +1,18 @@
 # 🏗️ Generating
 
-`dart run git_stamp --build-type full --encrypt`
+`dart run git_stamp`
 
 ### 1. Examples
 
-| Build type | Pure Dart | Can encrypt | CLI Command                                                  |
-| ---------- | --------- | ----------- | ------------------------------------------------------------ |
-| FULL       | NO        | YES         | `dart run git_stamp --build-type full --encrypt`             |
-| LITE       | NO        | YES         | `dart run git_stamp --adding-packages disabled`              |
-| ICON       | NO        | NO          | `dart run git_stamp --build-type icon`                       |
-| CUSTOM     | YES       | NO          | `dart run git_stamp --gen-only build-branch,build-date-time` |
+| Build type | Can encrypt | CLI Command                                                                 |
+| ---------- | ----------- | --------------------------------------------------------------------------- |
+| FULL       | YES         | `dart run git_stamp --build-type full --adding-packages disabled --encrypt` |
+| LITE       | YES         | `dart run git_stamp`                                                        |
+| ICON       | NO          | `dart run git_stamp --build-type icon`                                      |
+| CUSTOM     | NO          | `dart run git_stamp --gen-only build-branch,build-date-time`                |
 
 > [!NOTE]
-> To optimize the generation you can disable adding packages to the project for LITE & FULL versions by adding a flag in CLI `--adding-packages disabled` .
+> To optimize the generation **encrypt** version you can disable adding packages to the project by adding a flag in CLI `--adding-packages disabled` .
 
 ### 2. [Benchmarks](./BENCHMARK.md)
 
@@ -45,3 +45,4 @@
 | 16  | git-remote-list     |
 | 17  | git-tag-list        |
 | 18  | git-branch-list     |
+| 19  | git-reflog          |

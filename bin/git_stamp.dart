@@ -6,10 +6,9 @@ import 'package:args/args.dart';
 import 'git_stamp_build_model.dart';
 import 'git_stamp_logger.dart';
 import 'git_stamp_encrypt.dart';
-import 'git_stamp_files.dart';
+import 'git_stamp_file_utils.dart';
 import 'git_stamp_version.dart';
-import 'files/dynamic/git_stamp_dynamic_files.dart';
-import 'files/static/git_stamp_static_files.dart';
+import 'files/git_stamp_files.dart';
 
 final _parser = ArgParser()
   ..addFlag('help', abbr: 'h', negatable: false)
@@ -167,15 +166,8 @@ Future<_GenerationResult> _generate({
         debugCompileKey: debugCompileKey,
       );
 
-      _generateFlutterInterface(true, encryptEnabled);
-      _generateFlutterIcon();
-
-      if (addingPackageEnabled) {
-        _addPackageToPubspec('aron_gradient_line');
-        _addPackageToPubspec('url_launcher');
-        if (encryptEnabled) {
-          _addPackageToPubspec('encrypt');
-        }
+      if (addingPackageEnabled && encryptEnabled) {
+        _addPackageToPubspec('encrypt');
       }
 
       break;
@@ -186,20 +178,12 @@ Future<_GenerationResult> _generate({
         debugCompileKey: debugCompileKey,
       );
 
-      _generateFlutterInterface(false, encryptEnabled);
-      _generateFlutterIcon();
-
-      if (addingPackageEnabled) {
-        _addPackageToPubspec('aron_gradient_line');
-        _addPackageToPubspec('url_launcher');
-        if (encryptEnabled) {
-          _addPackageToPubspec('encrypt');
-        }
+      if (addingPackageEnabled && encryptEnabled) {
+        _addPackageToPubspec('encrypt');
       }
 
       break;
     case 'icon':
-      _generateFlutterIcon();
       _generateDataFiles(
         model: const GitStampBuildModel.icon(),
         isLiteVersion: true,
@@ -255,9 +239,9 @@ void _generateDataFiles({
   final encryptedTestText =
       model.encrypt ? encrypt?.call(decryptedTestText) : null;
 
-  GitStampMain(model).generate();
-  GitStampNode(model, decryptedTestText, encryptedTestText).generate();
+  GitStampMain(model, decryptedTestText, encryptedTestText).generate();
   GitStampVersion().generate();
+  IsLiteVersion(isLiteVersion).generate();
 
   if (model.commitList) {
     CommitList(encrypt, count: model.isIcon ? 1 : null).generate();
@@ -341,27 +325,6 @@ void _generateDataFiles({
   if (model.gitReflog) {
     GitReflog(encrypt).generate();
   }
-}
-
-void _generateFlutterInterface(bool isLiteVersion, bool encryptEnabled) {
-  final gitStampUi = [
-    IsLiteVersion(isLiteVersion),
-    GitStampPage(),
-    GitStampDetailsPage(),
-    GitStampUtils(),
-    GitStampLauncher(),
-    GitStampLicensePage(),
-    GitStampListTile(),
-    GitStampDecryptBottomSheet(!encryptEnabled),
-  ];
-
-  for (var element in gitStampUi) {
-    element.generate();
-  }
-}
-
-void _generateFlutterIcon() {
-  GitStampIcon().generate();
 }
 
 void _addPackageToPubspec(String package) {

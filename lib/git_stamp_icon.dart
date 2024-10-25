@@ -1,10 +1,11 @@
-const rawGitStampIcon = '''
 import 'package:flutter/material.dart';
 
-import '../../git_stamp.dart';
+import 'git_stamp_node.dart';
 
 class GitStampIcon extends StatefulWidget {
-  const GitStampIcon({Key? key}) : super(key: key);
+  final GitStampNode gitStamp;
+
+  const GitStampIcon({super.key, required this.gitStamp});
 
   @override
   State<GitStampIcon> createState() => _GitStampIconState();
@@ -48,11 +49,11 @@ class _GitStampIconState extends State<GitStampIcon> {
             ),
           ),
           TextSpan(
-            text: '\$newLine'
-                'Version: \${GitStamp.appVersionFull}' '\$newLine'
-                'Date: \${GitStamp.buildDateTime}' '\$newLine'
-                'Branch: \${GitStamp.buildBranch}' '\$newLine'
-                'SHA: \${GitStamp.sha}',
+            text: '\n'
+                'Version: ${widget.gitStamp.appVersionFull}\n'
+                'Date: ${widget.gitStamp.buildDateTime}\n'
+                'Branch: ${widget.gitStamp.buildBranch}\n'
+                'SHA: ${widget.gitStamp.sha}',
             style: TextStyle(
               fontWeight: FontWeight.normal,
               fontSize: 12,
@@ -69,5 +70,3 @@ class _GitStampIconState extends State<GitStampIcon> {
     );
   }
 }
-
-''';

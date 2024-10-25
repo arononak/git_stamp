@@ -1,14 +1,14 @@
-const rawGitStampPage = '''
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
-
 import 'package:aron_gradient_line/aron_gradient_line.dart';
-import 'package:git_stamp/git_stamp_commit.dart';
 
-import '../../git_stamp.dart';
+import 'git_stamp_commit.dart';
 import 'git_stamp_decrypt_bottom_sheet.dart';
+import 'git_stamp_launcher.dart';
+import 'git_stamp_node.dart';
+import 'git_stamp_utils.dart';
 
 const textDefault = TextStyle(fontSize: 12);
 const textBold = TextStyle(fontSize: 12, fontWeight: FontWeight.bold);
@@ -16,46 +16,51 @@ const textTitle = TextStyle(fontSize: 16, fontWeight: FontWeight.bold);
 
 bool isMobile(context) => MediaQuery.of(context).size.width < 600;
 
-void showGitStampPage({
-  required BuildContext context,
-  bool useRootNavigator = false,
-  String? monospaceFontFamily,
+void _showRepoFilesBottomSheet(
+  BuildContext context, {
+  required GitStampNode gitStamp,
 }) {
-  Navigator.of(
-    context,
-    rootNavigator: useRootNavigator,
-  ).push(MaterialPageRoute<void>(
+  showModalBottomSheet(
+    context: context,
     builder: (BuildContext context) {
-      return GitStampPage(monospaceFontFamily: monospaceFontFamily);
+      return GitStampRepoFiles(gitStamp: gitStamp);
     },
-  ));
-}
-
-void _showRepoFilesBottomSheet(BuildContext context) {
-  showModalBottomSheet(
-    context: context,
-    builder: (BuildContext context) => GitStampRepoFiles(),
   );
 }
 
-void _showRepoTagsBottomSheet(BuildContext context) {
+void _showRepoTagsBottomSheet(
+  BuildContext context, {
+  required GitStampNode gitStamp,
+}) {
   showModalBottomSheet(
     context: context,
-    builder: (BuildContext context) => GitStampRepoTags(),
+    builder: (BuildContext context) {
+      return GitStampRepoTags(gitStamp: gitStamp);
+    },
   );
 }
 
-void _showRepoReflogBottomSheet(BuildContext context) {
+void _showRepoReflogBottomSheet(
+  BuildContext context, {
+  required GitStampNode gitStamp,
+}) {
   showModalBottomSheet(
     context: context,
-    builder: (BuildContext context) => GitStampRepoReflog(),
+    builder: (BuildContext context) {
+      return GitStampRepoReflog(gitStamp: gitStamp);
+    },
   );
 }
 
-void _showRepoBranchesBottomSheet(BuildContext context) {
+void _showRepoBranchesBottomSheet(
+  BuildContext context, {
+  required GitStampNode gitStamp,
+}) {
   showModalBottomSheet(
     context: context,
-    builder: (BuildContext context) => GitStampRepoBranches(),
+    builder: (BuildContext context) {
+      return GitStampRepoBranches(gitStamp: gitStamp);
+    },
   );
 }
 
@@ -69,6 +74,7 @@ void _showMoreBottomSheet(BuildContext context) {
 
 void _showFilterBottomSheet(
   BuildContext context, {
+  required GitStampNode gitStamp,
   required String? selectedUser,
   required void Function(String? commiter) onFilterPressed,
 }) {
@@ -77,6 +83,7 @@ void _showFilterBottomSheet(
     isScrollControlled: true,
     builder: (BuildContext context) {
       return GitStampFilterList(
+        gitStamp: gitStamp,
         selectedUser: selectedUser,
         onFilterPressed: onFilterPressed,
       );
@@ -86,26 +93,45 @@ void _showFilterBottomSheet(
 
 void _showDetailsBottomSheet(
   BuildContext context, {
+  required GitStampNode gitStamp,
+  required String gitStampVersion,
+  required bool isLiteVersion,
   VoidCallback? onFinish,
 }) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
-    builder: (BuildContext context) => GitStampRepoDetails(),
+    builder: (BuildContext context) {
+      return GitStampRepoDetails(
+        gitStamp: gitStamp,
+        gitStampVersion: gitStampVersion,
+        isLiteVersion: isLiteVersion,
+      );
+    },
   ).then((result) => onFinish?.call());
 }
 
 class GitStampPage extends StatefulWidget {
   const GitStampPage({
     super.key,
+    required this.gitStamp,
+    required this.gitStampVersion,
+    required this.isLiteVersion,
     this.showDetails = false,
     this.showFiles = false,
     this.monospaceFontFamily,
+    this.encryptDebugKey,
+    this.encryptDebugIv,
   });
 
+  final GitStampNode gitStamp;
+  final String gitStampVersion;
+  final bool isLiteVersion;
   final bool showDetails;
   final bool showFiles;
   final String? monospaceFontFamily;
+  final String? encryptDebugKey;
+  final String? encryptDebugIv;
 
   @override
   State<GitStampPage> createState() => _GitStampPageState();
@@ -121,11 +147,23 @@ class _GitStampPageState extends State<GitStampPage> {
     super.initState();
 
     if (widget.showDetails) {
-      Future.delayed(Duration.zero, () => _showDetailsBottomSheet(context));
+      Future.delayed(Duration.zero, () {
+        _showDetailsBottomSheet(
+          context,
+          gitStamp: widget.gitStamp,
+          gitStampVersion: widget.gitStampVersion,
+          isLiteVersion: widget.isLiteVersion,
+        );
+      });
     }
 
     if (widget.showFiles) {
-      Future.delayed(Duration.zero, () => _showRepoFilesBottomSheet(context));
+      Future.delayed(Duration.zero, () {
+        _showRepoFilesBottomSheet(
+          context,
+          gitStamp: widget.gitStamp,
+        );
+      });
     }
   }
 
@@ -141,7 +179,7 @@ class _GitStampPageState extends State<GitStampPage> {
         surfaceTintColor: Colors.transparent,
         title: GitStampLabel(
           first: 'Git Stamp',
-          second: GitStamp.commitCount.toString(),
+          second: widget.gitStamp.commitCount.toString(),
         ),
         flexibleSpace: Center(
           child: SafeArea(
@@ -152,7 +190,7 @@ class _GitStampPageState extends State<GitStampPage> {
                 children: [
                   IconButton(
                     onPressed: () {
-                      setState(() => this.itemLargeType = !this.itemLargeType);
+                      setState(() => itemLargeType = !itemLargeType);
                     },
                     icon: Icon(
                       itemLargeType ? Icons.format_list_bulleted : Icons.list,
@@ -162,6 +200,7 @@ class _GitStampPageState extends State<GitStampPage> {
                     onPressed: () {
                       _showFilterBottomSheet(
                         context,
+                        gitStamp: widget.gitStamp,
                         selectedUser: _filterAuthorName,
                         onFilterPressed: (commiter) {
                           Navigator.pop(context);
@@ -176,6 +215,9 @@ class _GitStampPageState extends State<GitStampPage> {
                     onPressed: () {
                       _showDetailsBottomSheet(
                         context,
+                        gitStamp: widget.gitStamp,
+                        gitStampVersion: widget.gitStampVersion,
+                        isLiteVersion: widget.isLiteVersion,
                         onFinish: () => _arrowIconKey.currentState?.toggle(),
                       );
                     },
@@ -186,22 +228,30 @@ class _GitStampPageState extends State<GitStampPage> {
           ),
         ),
       ),
-      body: GitStamp.isEncrypted
+      body: widget.gitStamp.isEncrypted
           ? Center(
               child: IconButton(
                 onPressed: () {
-                  showDecryptBottomSheet(
+                  showModalBottomSheet(
                     context: context,
-                    onSuccess: () => setState(() {}),
+                    builder: (BuildContext context) {
+                      return GitStampDecryptForm(
+                        gitStamp: widget.gitStamp,
+                        startKey: widget.encryptDebugKey,
+                        startIv: widget.encryptDebugIv,
+                        onSuccess: () => setState(() {}),
+                      );
+                    },
                   );
                 },
                 icon: Icon(Icons.lock_open, size: 60),
               ),
             )
           : GitStampCommitList(
-              commits: GitStamp.commitList,
+              gitStamp: widget.gitStamp,
+              commits: widget.gitStamp.commitList,
               filterAuthorName: _filterAuthorName,
-              isLiteVersion: isLiteVersion,
+              isLiteVersion: widget.isLiteVersion,
               itemLargeType: itemLargeType,
               monospaceFontFamily: widget.monospaceFontFamily,
             ),
@@ -245,6 +295,7 @@ class GitStampCommitHeader {
 }
 
 class GitStampCommitList extends StatelessWidget {
+  final GitStampNode gitStamp;
   final List<GitStampCommit> commits;
   final String? filterAuthorName;
   final bool isLiteVersion;
@@ -252,6 +303,8 @@ class GitStampCommitList extends StatelessWidget {
   final String? monospaceFontFamily;
 
   const GitStampCommitList({
+    super.key,
+    required this.gitStamp,
     this.commits = const [],
     this.filterAuthorName,
     this.isLiteVersion = true,
@@ -272,11 +325,7 @@ class GitStampCommitList extends StatelessWidget {
       (element) {
         final date = DateTime.parse(element.date);
 
-        return date.year.toString() +
-            '-' +
-            date.month.toString().padLeft(2, '0') +
-            '-' +
-            date.day.toString().padLeft(2, '0');
+        return '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
       },
     );
 
@@ -299,6 +348,7 @@ class GitStampCommitList extends StatelessWidget {
             );
           case GitStampCommit():
             return GitStampCommitListElement(
+              gitStamp: gitStamp,
               commit: element,
               isLiteVersion: isLiteVersion,
               itemLargeType: itemLargeType,
@@ -373,12 +423,15 @@ class GitStampDateListElement extends StatelessWidget {
 }
 
 class GitStampCommitListElement extends StatelessWidget {
+  final GitStampNode gitStamp;
   final GitStampCommit commit;
   final bool isLiteVersion;
   final bool itemLargeType;
   final String? monospaceFontFamily;
 
   const GitStampCommitListElement({
+    super.key,
+    required this.gitStamp,
     required this.commit,
     this.isLiteVersion = true,
     required this.itemLargeType,
@@ -396,7 +449,9 @@ class GitStampCommitListElement extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0.0)),
       elevation: 0.0,
       child: InkWell(
-        onTap: isLiteVersion ? null : () => showGitDiffStat(context),
+        onTap: isLiteVersion
+            ? null
+            : () => showGitDiffStat(context, gitStamp: gitStamp),
         splashColor: Colors.orange[900],
         child: Padding(
           padding: EdgeInsets.symmetric(
@@ -422,7 +477,7 @@ class GitStampCommitListElement extends StatelessWidget {
                       InkWell(
                         onTap: () => openEmail(email: commit.authorEmail),
                         child: Text(
-                          commit.authorName + ' (' + commit.authorEmail + ')',
+                          '${commit.authorName} (${commit.authorEmail})',
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.onSurface,
                             fontStyle: FontStyle.italic,
@@ -456,7 +511,10 @@ class GitStampCommitListElement extends StatelessWidget {
     );
   }
 
-  void showGitDiffStat(BuildContext context) {
+  void showGitDiffStat(
+    BuildContext context, {
+    required GitStampNode gitStamp,
+  }) {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
@@ -476,7 +534,7 @@ class GitStampCommitListElement extends StatelessWidget {
                   ),
                   IconButton(
                     onPressed: () {
-                      showGitStampDetailsPage(
+                      gitStamp.showDetailsPage(
                         context: context,
                         commit: commit,
                         monospaceFontFamily: monospaceFontFamily,
@@ -492,7 +550,7 @@ class GitStampCommitListElement extends StatelessWidget {
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Text(
-                      GitStamp.diffStatList[commit.hash] ?? '',
+                      gitStamp.diffStatList[commit.hash] ?? '',
                       style: TextStyle(
                         fontSize: 10,
                         fontFamily: monospaceFontFamily,
@@ -512,7 +570,7 @@ class GitStampCommitListElement extends StatelessWidget {
 class GitStampCommitListHeader extends StatelessWidget {
   final GitStampCommit commit;
 
-  const GitStampCommitListHeader({required this.commit});
+  const GitStampCommitListHeader({super.key, required this.commit});
 
   @override
   Widget build(BuildContext context) {
@@ -547,7 +605,7 @@ class GitStampDoubleText extends StatelessWidget {
   final String left;
   final String right;
 
-  const GitStampDoubleText(this.left, this.right);
+  const GitStampDoubleText(this.left, this.right, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -561,7 +619,16 @@ class GitStampDoubleText extends StatelessWidget {
 }
 
 class GitStampRepoDetails extends StatelessWidget {
-  const GitStampRepoDetails();
+  const GitStampRepoDetails({
+    super.key,
+    required this.gitStamp,
+    required this.gitStampVersion,
+    required this.isLiteVersion,
+  });
+
+  final GitStampNode gitStamp;
+  final String gitStampVersion;
+  final bool isLiteVersion;
 
   @override
   Widget build(BuildContext context) {
@@ -606,7 +673,7 @@ class GitStampRepoDetails extends StatelessWidget {
                         Navigator.pop(context);
                         showSnackbar(
                           context: context,
-                          message: GitStamp.gitRemote,
+                          message: gitStamp.gitRemote,
                           showCloseIcon: true,
                         );
                       },
@@ -617,7 +684,7 @@ class GitStampRepoDetails extends StatelessWidget {
                         Navigator.pop(context);
                         showSnackbar(
                           context: context,
-                          message: GitStamp.gitCountObjects,
+                          message: gitStamp.gitCountObjects,
                           showCloseIcon: true,
                           floating: false,
                         );
@@ -629,7 +696,7 @@ class GitStampRepoDetails extends StatelessWidget {
                         Navigator.pop(context);
                         showSnackbar(
                           context: context,
-                          message: GitStamp.buildSystemInfo,
+                          message: gitStamp.buildSystemInfo,
                           showCloseIcon: true,
                           floating: false,
                         );
@@ -641,7 +708,7 @@ class GitStampRepoDetails extends StatelessWidget {
                         Navigator.pop(context);
                         showSnackbar(
                           context: context,
-                          message: GitStamp.gitConfigList,
+                          message: gitStamp.gitConfigList,
                           showCloseIcon: true,
                           floating: false,
                         );
@@ -653,19 +720,28 @@ class GitStampRepoDetails extends StatelessWidget {
                 Row(
                   children: [
                     IconButton(
-                      onPressed: () => _showRepoReflogBottomSheet(context),
+                      onPressed: () {
+                        _showRepoReflogBottomSheet(context, gitStamp: gitStamp);
+                      },
                       icon: const Icon(Icons.history),
                     ),
                     IconButton(
-                      onPressed: () => _showRepoBranchesBottomSheet(context),
+                      onPressed: () {
+                        _showRepoBranchesBottomSheet(context,
+                            gitStamp: gitStamp);
+                      },
                       icon: const Icon(Icons.call_split),
                     ),
                     IconButton(
-                      onPressed: () => _showRepoTagsBottomSheet(context),
+                      onPressed: () {
+                        _showRepoTagsBottomSheet(context, gitStamp: gitStamp);
+                      },
                       icon: const Icon(Icons.tag),
                     ),
                     IconButton(
-                      onPressed: () => _showRepoFilesBottomSheet(context),
+                      onPressed: () {
+                        _showRepoFilesBottomSheet(context, gitStamp: gitStamp);
+                      },
                       icon: const Icon(Icons.folder),
                     ),
                   ],
@@ -715,11 +791,11 @@ class GitStampRepoDetails extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            GitStampDoubleText('Date: ', GitStamp.buildDateTime),
-            GitStampDoubleText('Path: ', GitStamp.repoPath),
-            GitStampDoubleText('Branch: ', GitStamp.buildBranch),
-            GitStampDoubleText('Tag: ', GitStamp.tagList.first),
-            GitStampDoubleText('SHA: ', GitStamp.sha),
+            GitStampDoubleText('Date: ', gitStamp.buildDateTime),
+            GitStampDoubleText('Path: ', gitStamp.repoPath),
+            GitStampDoubleText('Branch: ', gitStamp.buildBranch),
+            GitStampDoubleText('Tag: ', gitStamp.tagList.first),
+            GitStampDoubleText('SHA: ', gitStamp.sha),
           ],
         ),
       ],
@@ -735,21 +811,21 @@ class GitStampRepoDetails extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            GitStampDoubleText('Global: ', GitStamp.gitConfigGlobalUser),
-            GitStampDoubleText('Local: ', GitStamp.gitConfigUser),
+            GitStampDoubleText('Global: ', gitStamp.gitConfigGlobalUser),
+            GitStampDoubleText('Local: ', gitStamp.gitConfigUser),
             ...{
-              'Framework Version: ': GitStamp.buildMachine.frameworkVersion,
-              'Channel: ': GitStamp.buildMachine.channel,
-              'Repository Url: ': GitStamp.buildMachine.repositoryUrl,
-              'Framework Revision: ': GitStamp.buildMachine.frameworkRevision,
+              'Framework Version: ': gitStamp.buildMachine.frameworkVersion,
+              'Channel: ': gitStamp.buildMachine.channel,
+              'Repository Url: ': gitStamp.buildMachine.repositoryUrl,
+              'Framework Revision: ': gitStamp.buildMachine.frameworkRevision,
               'Framework Commit Date: ':
-                  GitStamp.buildMachine.frameworkCommitDate,
-              'Engine Revision: ': GitStamp.buildMachine.engineRevision,
-              'Dart Sdk Version: ': GitStamp.buildMachine.dartSdkVersion,
-              'DevTools Version: ': GitStamp.buildMachine.devToolsVersion,
-              'Flutter Version: ': GitStamp.buildMachine.flutterVersion,
-              'Flutter Root: ': GitStamp.buildMachine.flutterRoot,
-            }.entries.map((e) => GitStampDoubleText(e.key, e.value)).toList(),
+                  gitStamp.buildMachine.frameworkCommitDate,
+              'Engine Revision: ': gitStamp.buildMachine.engineRevision,
+              'Dart Sdk Version: ': gitStamp.buildMachine.dartSdkVersion,
+              'DevTools Version: ': gitStamp.buildMachine.devToolsVersion,
+              'Flutter Version: ': gitStamp.buildMachine.flutterVersion,
+              'Flutter Root: ': gitStamp.buildMachine.flutterRoot,
+            }.entries.map((e) => GitStampDoubleText(e.key, e.value)),
           ],
         ),
       ],
@@ -762,31 +838,32 @@ class GitStampRepoDetails extends StatelessWidget {
       children: [
         Text('Repository', style: textTitle),
         const SizedBox(height: 4),
-        GitStampDoubleText('App Name: ', GitStamp.appName),
-        GitStampDoubleText('App Version: ', GitStamp.appVersionFull),
-        GitStampDoubleText('Created: ', GitStamp.repoCreationDate),
+        GitStampDoubleText('App Name: ', gitStamp.appName),
+        GitStampDoubleText('App Version: ', gitStamp.appVersionFull),
+        GitStampDoubleText('Created: ', gitStamp.repoCreationDate),
         GitStampDoubleText(
           'Commit count: ',
-          GitStamp.isEncrypted ? 'ENCRYPTED' : GitStamp.commitCount.toString(),
+          gitStamp.isEncrypted ? 'ENCRYPTED' : gitStamp.commitCount.toString(),
         ),
-        ...commitCountByAuthor()
-            .entries
-            .map(
+        ...commitCountByAuthor(gitStamp).entries.map(
               (entry) => Row(
                 children: [
                   SizedBox(width: 16),
-                  Text(entry.key + ': ', style: textDefault),
+                  Text('${entry.key}: ', style: textDefault),
                   Text(entry.value.toString(), style: textBold),
                 ],
               ),
-            )
-            .toList(),
+            ),
       ],
     );
   }
 }
 
 class GitStampRepoFiles extends StatelessWidget {
+  const GitStampRepoFiles({super.key, required this.gitStamp});
+
+  final GitStampNode gitStamp;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -801,13 +878,13 @@ class GitStampRepoFiles extends StatelessWidget {
             children: [
               GitStampLabel(
                 first: 'Repository files',
-                second: !GitStamp.isEncrypted
-                    ? GitStamp.observedFilesCount.toString()
+                second: !gitStamp.isEncrypted
+                    ? gitStamp.observedFilesCount.toString()
                     : 'ENCRYPTED',
               ),
               SizedBox(height: 16.0),
-              if (!GitStamp.isEncrypted) ...[
-                Text(GitStamp.observedFiles, style: textDefault)
+              if (!gitStamp.isEncrypted) ...[
+                Text(gitStamp.observedFiles, style: textDefault)
               ],
             ],
           ),
@@ -818,6 +895,10 @@ class GitStampRepoFiles extends StatelessWidget {
 }
 
 class GitStampRepoTags extends StatelessWidget {
+  const GitStampRepoTags({super.key, required this.gitStamp});
+
+  final GitStampNode gitStamp;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -832,13 +913,13 @@ class GitStampRepoTags extends StatelessWidget {
             children: [
               GitStampLabel(
                 first: 'Repository tags',
-                second: !GitStamp.isEncrypted
-                    ? GitStamp.tagListCount.toString()
+                second: !gitStamp.isEncrypted
+                    ? gitStamp.tagListCount.toString()
                     : 'ENCRYPTED',
               ),
               SizedBox(height: 16.0),
-              if (!GitStamp.isEncrypted) ...[
-                Text(GitStamp.tagListString, style: textDefault)
+              if (!gitStamp.isEncrypted) ...[
+                Text(gitStamp.tagListString, style: textDefault)
               ],
             ],
           ),
@@ -849,6 +930,10 @@ class GitStampRepoTags extends StatelessWidget {
 }
 
 class GitStampRepoReflog extends StatelessWidget {
+  const GitStampRepoReflog({super.key, required this.gitStamp});
+
+  final GitStampNode gitStamp;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -863,8 +948,8 @@ class GitStampRepoReflog extends StatelessWidget {
             children: [
               GitStampLabel(first: 'Repository reflog'),
               SizedBox(height: 12),
-              if (!GitStamp.isEncrypted) ...[
-                Text(GitStamp.gitReflog, style: textDefault)
+              if (!gitStamp.isEncrypted) ...[
+                Text(gitStamp.gitReflog, style: textDefault)
               ],
             ],
           ),
@@ -875,6 +960,10 @@ class GitStampRepoReflog extends StatelessWidget {
 }
 
 class GitStampRepoBranches extends StatelessWidget {
+  const GitStampRepoBranches({super.key, required this.gitStamp});
+
+  final GitStampNode gitStamp;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -889,13 +978,13 @@ class GitStampRepoBranches extends StatelessWidget {
             children: [
               GitStampLabel(
                 first: 'Repository branches',
-                second: !GitStamp.isEncrypted
-                    ? GitStamp.branchListCount.toString()
+                second: !gitStamp.isEncrypted
+                    ? gitStamp.branchListCount.toString()
                     : 'ENCRYPTED',
               ),
               SizedBox(height: 16.0),
-              if (!GitStamp.isEncrypted) ...[
-                Text(GitStamp.branchListString, style: textDefault)
+              if (!gitStamp.isEncrypted) ...[
+                Text(gitStamp.branchListString, style: textDefault)
               ],
             ],
           ),
@@ -906,19 +995,23 @@ class GitStampRepoBranches extends StatelessWidget {
 }
 
 class GitStampFilterList extends StatelessWidget {
+  final GitStampNode gitStamp;
   final String? selectedUser;
   final void Function(String? commiter) onFilterPressed;
 
   const GitStampFilterList({
     super.key,
+    required this.gitStamp,
     required this.selectedUser,
     required this.onFilterPressed,
   });
 
   @override
   Widget build(BuildContext context) {
-    final commitCount = commitCountByAuthor();
-    final users = <String?>[null, ...commitAuthors()]; // null -> no filter
+    final commitCount = commitCountByAuthor(gitStamp);
+
+    /// null -> no filter
+    final users = <String?>[null, ...commitAuthors(gitStamp)];
 
     return Container(
       padding: EdgeInsets.symmetric(vertical: 16.0),
@@ -958,6 +1051,8 @@ class GitStampFilterList extends StatelessWidget {
 }
 
 class GitStampMore extends StatelessWidget {
+  const GitStampMore({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -1024,7 +1119,7 @@ class GitStampArrowIcon extends StatefulWidget {
   const GitStampArrowIcon({super.key, this.onPressed});
 
   @override
-  _GitStampArrowIconState createState() => _GitStampArrowIconState();
+  State<GitStampArrowIcon> createState() => _GitStampArrowIconState();
 }
 
 class _GitStampArrowIconState extends State<GitStampArrowIcon>
@@ -1077,5 +1172,3 @@ class _GitStampArrowIconState extends State<GitStampArrowIcon>
     );
   }
 }
-
-''';

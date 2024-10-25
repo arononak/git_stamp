@@ -76,7 +76,7 @@ class SettingsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Settings Page'),
         actions: [
-          GitStampIcon(),
+          GitStamp.icon(),
         ],
       ),
       body: Column(
@@ -98,7 +98,10 @@ class SettingsPage extends StatelessWidget {
             leading: const Icon(Icons.numbers),
             onTap: () {},
           ),
-          GitStampListTile(monospaceFontFamily: monospaceFontFamily),
+          GitStamp.listTile(
+            context: context,
+            monospaceFontFamily: monospaceFontFamily,
+          ),
         ],
       ),
     );

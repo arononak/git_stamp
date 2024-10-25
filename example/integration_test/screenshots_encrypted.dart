@@ -14,7 +14,7 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
-        home: GitStampPage(showDetails: true),
+        home: GitStamp.mainPage(showDetails: true),
         debugShowCheckedModeBanner: false,
       ),
     );
@@ -29,7 +29,7 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
-        home: GitStampPage(),
+        home: GitStamp.mainPage(),
         themeMode: ThemeMode.dark,
         darkTheme: ThemeData.dark(useMaterial3: true),
         debugShowCheckedModeBanner: false,

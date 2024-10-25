@@ -1,10 +1,8 @@
-const rawGitStampUtils = '''
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:git_stamp/git_stamp_commit.dart';
-
-import '../../git_stamp.dart';
+import 'git_stamp_commit.dart';
+import 'git_stamp_node.dart';
 
 void showSnackbar({
   required BuildContext context,
@@ -54,24 +52,22 @@ void copyToClipboard(BuildContext context, String text) {
   );
 }
 
-Map<String, int> commitCountByAuthor() {
+Map<String, int> commitCountByAuthor(GitStampNode gitStamp) {
   Map<String, int> map = {};
 
-  for (GitStampCommit commit in GitStamp.commitList) {
+  for (GitStampCommit commit in gitStamp.commitList) {
     map.update(commit.authorName, (value) => (value) + 1, ifAbsent: () => 1);
   }
 
   return map;
 }
 
-List<String> commitAuthors() {
+List<String> commitAuthors(GitStampNode gitStamp) {
   Set<String> authors = {};
 
-  for (GitStampCommit commit in GitStamp.commitList) {
+  for (GitStampCommit commit in gitStamp.commitList) {
     authors.add(commit.authorName);
   }
 
   return authors.toList();
 }
-
-''';

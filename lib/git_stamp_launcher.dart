@@ -1,4 +1,3 @@
-const rawGitStampLauncher = '''
 import 'package:url_launcher/url_launcher.dart';
 
 void openEmail({
@@ -6,7 +5,10 @@ void openEmail({
   String? subject,
 }) {
   String? encodeQueryParameters(Map<String, String> params) {
-    return params.entries.map((e) => Uri.encodeComponent(e.key) + '=' + Uri.encodeComponent(e.value)).join('&');
+    return params.entries
+        .map((e) =>
+            '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+        .join('&');
   }
 
   launchUrl(
@@ -25,4 +27,3 @@ void openProjectHomepage() {
     path: 'arononak/git_stamp',
   ));
 }
-''';

@@ -37,16 +37,6 @@ class GitStampMainFile extends GitStampFile {
   String get directory => 'lib/git_stamp';
 }
 
-class GitStampSrcFile extends GitStampFile {
-  @override
-  String get directory => 'lib/git_stamp/src';
-}
-
-class GitStampUiFile extends GitStampFile {
-  @override
-  String get directory => 'lib/git_stamp/src/ui';
-}
-
 typedef EncryptFunction = dynamic Function(String data);
 
 class GitStampDataFile extends GitStampFile {
@@ -55,7 +45,7 @@ class GitStampDataFile extends GitStampFile {
   GitStampDataFile([this.encrypt]);
 
   @override
-  String get directory => 'lib/git_stamp/src/data';
+  String get directory => 'lib/git_stamp/data';
 
   String get variableName => '';
 
@@ -79,9 +69,7 @@ abstract class GitStampDirectory {
 
     final gitStampFiles = [
       GitStampMainFile().path,
-      GitStampSrcFile().path,
       GitStampDataFile().path,
-      GitStampUiFile().path,
     ];
 
     for (var e in gitStampFiles) {

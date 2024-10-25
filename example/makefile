@@ -21,7 +21,7 @@ tests: tests_unit tests_integration
 
 tests_unit:
 	dart run git_stamp --gen-only-all
-	dart test test/type_custom_tests.dart
+	flutter test test/type_custom_tests.dart
 
 ifdef WINDOWS
     COPY = copy

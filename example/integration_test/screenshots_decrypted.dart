@@ -2,6 +2,7 @@ import 'package:example/git_stamp/git_stamp.dart';
 import 'package:example/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:git_stamp/git_stamp_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:integration_test/integration_test.dart';
 
@@ -16,7 +17,7 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
-        home: GitStampPage(),
+        home: GitStamp.mainPage(),
         themeMode: ThemeMode.light,
         debugShowCheckedModeBanner: false,
       ),
@@ -50,7 +51,7 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
-        home: GitStampPage(showFiles: true),
+        home: GitStamp.mainPage(showFiles: true),
         themeMode: ThemeMode.light,
         debugShowCheckedModeBanner: false,
       ),
@@ -66,7 +67,7 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
-        home: GitStampPage(showDetails: true),
+        home: GitStamp.mainPage(showDetails: true),
         themeMode: ThemeMode.dark,
         darkTheme: ThemeData.dark(useMaterial3: true),
         debugShowCheckedModeBanner: false,
@@ -83,7 +84,7 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
-        home: GitStampPage(showDetails: true),
+        home: GitStamp.mainPage(showDetails: true),
         themeMode: ThemeMode.light,
         debugShowCheckedModeBanner: false,
       ),
@@ -102,7 +103,7 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
-        home: GitStampPage(
+        home: GitStamp.mainPage(
           monospaceFontFamily: GoogleFonts.sourceCodePro().fontFamily,
         ),
         themeMode: ThemeMode.dark,

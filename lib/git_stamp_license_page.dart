@@ -1,18 +1,18 @@
-const rawGitStampLicensePage = '''
 import 'package:flutter/material.dart';
 
-import '../../git_stamp.dart';
+import 'git_stamp_node.dart';
 
 void showGitStampLicensePage({
   required BuildContext context,
+  required GitStampNode gitStamp,
   Widget? applicationIcon,
   String? applicationLegalese,
   bool useRootNavigator = false,
 }) {
   showLicensePage(
     context: context,
-    applicationName: GitStamp.appName,
-    applicationVersion: '\${GitStamp.appVersion} (\${GitStamp.appBuild})',
+    applicationName: gitStamp.appName,
+    applicationVersion: '${gitStamp.appVersion} (${gitStamp.appBuild})',
     applicationIcon: applicationIcon,
     applicationLegalese: applicationLegalese,
     useRootNavigator: useRootNavigator,
@@ -22,10 +22,12 @@ void showGitStampLicensePage({
 class GitStampLicenseIcon extends StatelessWidget {
   const GitStampLicenseIcon({
     super.key,
+    required this.gitStamp,
     this.applicationIcon,
     this.applicationLegalese,
   });
 
+  final GitStampNode gitStamp;
   final Widget? applicationIcon;
   final String? applicationLegalese;
 
@@ -35,6 +37,7 @@ class GitStampLicenseIcon extends StatelessWidget {
       onPressed: () {
         showGitStampLicensePage(
           context: context,
+          gitStamp: gitStamp,
           applicationIcon: applicationIcon,
           applicationLegalese: applicationLegalese,
         );
@@ -43,4 +46,3 @@ class GitStampLicenseIcon extends StatelessWidget {
     );
   }
 }
-''';
