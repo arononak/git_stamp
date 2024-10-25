@@ -7,6 +7,12 @@
 | Version 2     | 10.04.2024         | 🛠️ Commit diff               |
 | Version 1     | 11.12.2023         | 🚀 First version             |
 
+## 5.3.0
+
+* Added reflog module
+* GitStampPage - fixed bottom sheet ScrollViews
+* Extracted All UI files to package `/lib` folder
+
 ## 5.2.0
 
 * Added **branch module**
