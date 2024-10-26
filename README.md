@@ -28,8 +28,11 @@ Advanced await-less information provider and development tool.
 
 ## [🏞️ Preview](./PREVIEW.md)
 
-[gitstamp.web.app](https://gitstamp.web.app)                    
-[gitstamp-encrypted.web.app](https://gitstamp-encrypted.web.app)
+| 🌐 Site                                                                          | 📖 Description                           |
+| -------------------------------------------------------------------------------- | ---------------------------------------- |
+| **[Example Decrypted ](https://gitstamp.web.app)**                               | Main version of the GitStamp application |
+| **[Example Encrypted](https://gitstamp-encrypted.web.app)**                      | Encrypted access version of GitStamp     |
+| **[API Documentation](https://arononak.github.io/git_stamp/doc/api/index.html)** | API documentation for GitStamp           |
 
 |                            |                         |
 | :------------------------: | :---------------------: |
