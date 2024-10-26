@@ -18,4 +18,6 @@ jobs:
           flutter-version: '3.24.2'
           channel: 'stable'
       - run: flutter pub get
+      - run: dart format .
+      - run: dart doc
       - run: dart pub publish --force
