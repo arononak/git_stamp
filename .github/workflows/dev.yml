@@ -110,11 +110,41 @@ jobs:
           git add .
           git commit -m 'Benchmarks update'
           git push origin HEAD:main
-  generate_screenshots:
+  generate_doc:
     permissions:
       contents: write
     runs-on: ubuntu-latest
     needs: generate_benchmarks
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.2'
+          channel: 'stable'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '21'
+      - run: git pull
+      - run: flutter pub get
+      - run: dart doc
+      - run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add doc
+          if ! git diff-index --quiet HEAD; then
+            git commit -m 'DOC update'
+            git push origin HEAD:main
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  generate_screenshots:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    needs: generate_doc
     steps:
       - uses: actions/checkout@v4
         with:
@@ -144,39 +174,8 @@ jobs:
       - run: git config --global user.email 'github-actions[bot]@users.noreply.github.com'
       - run: git pull
       - run: flutter pub get
-      - run: make -C example sync
       - run: make -C example screenshots
       - run: |
           git add .
           git commit -m 'Screenshot update'
           git push origin HEAD:main
-  generate_doc:
-    permissions:
-      contents: write
-    runs-on: ubuntu-latest
-    needs: generate_screenshots
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.24.2'
-          channel: 'stable'
-      - uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version: '21'
-      - run: git pull
-      - run: flutter pub get
-      - run: dart doc
-      - run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add doc
-          if ! git diff-index --quiet HEAD; then
-            git commit -m 'DOC update'
-            git push origin HEAD:main
-          fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

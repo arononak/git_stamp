@@ -24,8 +24,8 @@ void main() {
         darkTheme: ThemeData.dark(useMaterial3: true),
         debugShowCheckedModeBanner: false,
       ),
+      duration: Duration(seconds: 2),
     );
-    await tester.pump(Duration(seconds: 2));
     await tester.tap(find.byType(GitStampCommitListElement).first);
     await tester.pump(Duration(seconds: 2));
     await tester.pump(Duration(seconds: 2));
