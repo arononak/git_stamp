@@ -115,7 +115,10 @@ dependency_overrides:
 
 ```dart
 if (kDebugMode) ...[
-  GitStampListTile(monospaceFontFamily: GoogleFonts.spaceMono().fontFamily),
+  GitStamp.listTile(
+    context: context,
+    monospaceFontFamily: GoogleFonts.spaceMono().fontFamily,
+  ),
 ],
 ```
 
