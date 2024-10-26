@@ -66,64 +66,24 @@
 <li><a href="#git-stamp--stamp-every-app-build">Git Stamp 🏷 Stamp Every App Build!</a>
 <ul>
 <li><a href="#%EF%B8%8F-preview">🏞️ Preview</a></li>
-<li><a href="#%EF%B8%8F-about">📑️ About</a>
+<li><a href="#%EF%B8%8F-about-changelog">📑️ About (Changelog)</a>
 <ul>
-<li><a href="#1-why-git-stamp">1. Why Git Stamp?</a></li>
-<li><a href="#2-%EF%B8%8F-mechanism">2. 🕯️ Mechanism</a></li>
-<li><a href="#3-motivation">3. Motivation</a></li>
-<li><a href="#4-changelog">4. Changelog</a></li>
+<li><a href="#why-git-stamp">Why Git Stamp?</a></li>
+<li><a href="#mechanism-%EF%B8%8F">Mechanism 🕯️</a></li>
+<li><a href="#motivation">Motivation</a></li>
 </ul>
 </li>
-<li><a href="#%EF%B8%8F-installation">🛠️ Installation</a>
-<ul>
-<li><a href="#1-pubspecyaml">1. <code>pubspec.yaml</code></a></li>
-<li><a href="#2-gitignore">2. <code>.gitignore</code></a></li>
-<li><a href="#3-analysis_optionsyaml">3. <code>analysis_options.yaml</code></a></li>
-<li><a href="#4-readmemd">4. <code>README.md</code></a></li>
-<li><a href="#5--integration---github-actions">5. 📦 Integration - GitHub Actions</a></li>
-</ul>
-</li>
-<li><a href="#%EF%B8%8F-generating">🏗️ Generating</a>
-<ul>
-<li><a href="#1-examples">1. Examples</a></li>
-<li><a href="#2-benchmarks-repo-615-commits">2. Benchmarks (Repo 615 Commits)</a></li>
-<li><a href="#3-tip">3. Tip</a></li>
-<li><a href="#4-custom-gen-only-parameters">4. Custom <code>gen-only</code> parameters</a></li>
-</ul>
-</li>
-<li><a href="#-usage">💻 Usage</a>
-<ul>
-<li><a href="#1-gitstamplisttile">1. GitStampListTile</a></li>
-<li><a href="#2-gitstampicon">2. GitStampIcon</a></li>
-<li><a href="#3-custom">3. Custom</a></li>
-<li><a href="#4-showgitstamplicensepage">4. showGitStampLicensePage()</a></li>
-<li><a href="#5-central-gitstamp-node-for-advanced-usage">5. Central <strong>GitStamp</strong> node for advanced usage:</a></li>
-</ul>
-</li>
+<li><a href="#%EF%B8%8F-installation">🛠️ Installation</a></li>
+<li><a href="#%EF%B8%8F-generating">🏗️ Generating</a></li>
+<li><a href="#-usage">💻 Usage</a></li>
 <li><a href="#-sponsors">💰 Sponsors</a></li>
 <li><a href="#-license">📝 License</a></li>
 </ul>
 </li>
 </ul>
-<h2 id="-preview">🏞️ Preview</h2>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Link</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>📂 Decrypted</td>
-<td><a href="https://gitstamp.web.app">gitstamp.web.app</a></td>
-</tr>
-<tr>
-<td>🔒 Encrypted</td>
-<td><a href="https://gitstamp-encrypted.web.app">gitstamp-encrypted.web.app</a></td>
-</tr>
-</tbody>
-</table>
+<h2 id="-previewpreviewmd"><a href="./PREVIEW.md">🏞️ Preview</a></h2>
+<p><a href="https://gitstamp.web.app">gitstamp.web.app</a><br>
+<a href="https://gitstamp-encrypted.web.app">gitstamp-encrypted.web.app</a></p>
 <table>
 <thead>
 <tr>
@@ -132,27 +92,15 @@
 </tr>
 </thead>
 <tbody>
-<tr>
-<td align="center"><img src="images/list.png" alt=""></td>
-<td align="center"><img src="images/icon.png" alt=""></td>
-</tr>
-<tr>
-<td align="center"><img src="images/files.png" alt=""></td>
-<td align="center"><img src="images/details.png" alt=""></td>
-</tr>
 <tr>
 <td align="center"><img src="images/git_config.png" alt=""></td>
-<td align="center"><img src="images/commit_diff.png" alt=""></td>
-</tr>
-<tr>
-<td align="center"><img src="images/details_encrypted.png" alt=""></td>
-<td align="center"><img src="images/decrypt.png" alt=""></td>
+<td align="center"><img src="images/details.png" alt=""></td>
 </tr>
 </tbody>
 </table>
-<h2 id="-about">📑️ About</h2>
+<h2 id="-about-changelogchangelogmd">📑️ About (<a href="./CHANGELOG.md">Changelog</a>)</h2>
 <p><a href="https://www.gov.pl/web/rolnictwo/produkt-polski1"><img src="https://www.gov.pl/photo/f98cae42-2b90-4596-904c-752278f85606" height="100" align="right"></a></p>
-<h3 id="1-why-git-stamp">1. Why Git Stamp?</h3>
+<h3 id="why-git-stamp">Why Git Stamp?</h3>
 <p>When working with <strong>Flutter</strong> and <strong>Git</strong>, especially in a team environment, human errors such as forgetting to run git pull can lead to issues during branch merges. Git Stamp helps address these problems by offering:</p>
 <ul>
 <li><strong>Build Date, SHA &amp; Branch Information</strong> - Git Stamp allows you to precisely determine which version of the application was deployed. This is especially useful during debugging or verifying issues, as application versions and build numbers are not always updated correctly.</li>
@@ -160,7 +108,7 @@
 <li><strong>Avoiding Lost Changes in Teamwork</strong> - It allows you to quickly see which commits made it into the final version of the application, helping to prevent missing changes due to overlooked <code>git pull</code> commands.</li>
 <li><strong>Caching Issues in the Web Version</strong> - Even if the latest version is deployed, users may still see an older version due to caching. Git Stamp helps identify whether the deployed version or an outdated one was loaded.</li>
 </ul>
-<h3 id="2--mechanism">2. 🕯️ Mechanism</h3>
+<h3 id="mechanism-">Mechanism 🕯️</h3>
 <pre class="language-mermaid"><code class="language-mermaid">graph TD
     CODE((SOURCE CODE))--&gt;SYNC(flutter pub get)
     SYNC--&gt;BUILD(flutter build ...)
@@ -188,7 +136,7 @@
     GENERATOR--&gt;GENERATE(~$ dart run git_stamp)
     GENERATE--&gt;|Create ./git_stamp directory with .dart files|CODE
 </code></pre>
-<h3 id="3-motivation">3. Motivation</h3>
+<h3 id="motivation">Motivation</h3>
 <p>The main motivation was <strong>Minecraft</strong> with information like this:</p>
 <pre class="language-dart"><code>Version: v1.20.81
 Build: 24130126
@@ -203,378 +151,22 @@ Text('Build: ${GitStamp.appBuild}'),
 Text('Branch: ${GitStamp.buildBranch}'),
 Text('SHA: ${GitStamp.sha}'),
 </code></pre>
-<h3 id="4-changelogchangelogmd">4. <a href="./CHANGELOG.md">Changelog</a></h3>
-<table>
-<thead>
-<tr>
-<th>🆕 <strong>Version</strong></th>
-<th>🗓️ <strong>Date</strong></th>
-<th>📝 <strong>Change Description</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Version 6</td>
-<td>Someday it will be</td>
-<td>📦 JSON data export</td>
-</tr>
-<tr>
-<td>Version 5</td>
-<td>07.10.2024</td>
-<td>🔐 Data encription</td>
-</tr>
-<tr>
-<td>Version 4</td>
-<td>24.07.2024</td>
-<td>🌟 New <code>icon</code> build-type</td>
-</tr>
-<tr>
-<td>Version 3</td>
-<td>30.06.2024</td>
-<td>🔧 New <code>gen-only</code> build-type</td>
-</tr>
-<tr>
-<td>Version 2</td>
-<td>10.04.2024</td>
-<td>🛠️ Commit diff</td>
-</tr>
-<tr>
-<td>Version 1</td>
-<td>11.12.2023</td>
-<td>🚀 First version</td>
-</tr>
-</tbody>
-</table>
-<h2 id="-installation">🛠️ Installation</h2>
-<h3 id="1-pubspecyaml">1. <code>pubspec.yaml</code></h3>
+<h2 id="-installationinstallationmd"><a href="./INSTALLATION.md">🛠️ Installation</a></h2>
 <pre class="language-yml"><code class="language-yml">dependencies:
   git_stamp: ^5.2.0
 dependency_overrides:
   meta: ^1.1.5
 </code></pre>
-<h3 id="2-gitignore">2. <code>.gitignore</code></h3>
-<div class="markdown-alert markdown-alert-important">
-<p class="markdown-alert-title">Important</p>
-<p>Add <strong>git_stamp</strong> to .gitignore.</p>
-<p><code>echo -e "\n/lib/git_stamp/" &gt;&gt; .gitignore</code>.</p>
-<p>If you add a <strong>/git_stamp</strong> folder for the repository and use the <code>FULL</code> version, the size of the repository will grow EXPONENTIALLY.</p>
-</div>
-<h3 id="3-analysis_optionsyaml">3. <code>analysis_options.yaml</code></h3>
-<pre class="language-yaml"><code class="language-yaml">analyzer:
-  exclude:
-    - lib/git_stamp/**
-</code></pre>
-<h3 id="4-readmemd">4. <code>README.md</code></h3>
-<div class="markdown-alert markdown-alert-warning">
-<p class="markdown-alert-title">Warning</p>
-<p>Add badge to your <code>README.md</code> 😄️</p>
-<p><a href="https://github.com/arononak/git_stamp"><img src="https://img.shields.io/badge/i%20love%20Git%20Stamp-ffff99?style=flat" alt="Git Stamp"></a></p>
-<pre class="language-dart"><code>[![Git Stamp](https://img.shields.io/badge/i%20love%20Git%20Stamp-ffff99?style=flat)](https://github.com/arononak/git_stamp)
-</code></pre>
-</div>
-<h3 id="5--integration---github-actions">5. 📦 Integration - GitHub Actions</h3>
-<details>
-<summary>.github/workflows/build_and_deploy.yml</summary>
-<pre class="language-yml"><code class="language-yml">name: build_and_deploy
-
-on:
-  push:
-    branches: [main]
-  pull_request_target:
-    branches: [main]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.22.2'
-          channel: 'stable'
-      - run: flutter --version
-      - uses: actions/setup-java@v1
-        with:
-          java-version: "12.x"
-      - run: flutter pub get
-      - run: dart run git_stamp
-      - run: flutter build web --release --web-renderer canvaskit
-      - uses: actions/upload-artifact@master
-        with:
-          name: build
-          path: build/web
-  deploy:
-    name: "Deploy"
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/download-artifact@master
-        with:
-          name: build
-          path: build/web
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
-          projectId: xxx
-          channelId: live
-</code></pre>
-</details>
-<h2 id="-generating">🏗️ Generating</h2>
-<h3 id="1-examples">1. Examples</h3>
-<table>
-<thead>
-<tr>
-<th>Build type</th>
-<th>Pure Dart</th>
-<th>Can encrypt</th>
-<th>CLI Command</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>FULL</td>
-<td>NO</td>
-<td>YES</td>
-<td><code>dart run git_stamp --build-type full --adding-packages disabled --encrypt</code></td>
-</tr>
-<tr>
-<td>LITE</td>
-<td>NO</td>
-<td>YES</td>
-<td><code>dart run git_stamp</code></td>
-</tr>
-<tr>
-<td>ICON</td>
-<td>NO</td>
-<td>NO</td>
-<td><code>dart run git_stamp --build-type icon</code></td>
-</tr>
-<tr>
-<td>CUSTOM</td>
-<td>YES</td>
-<td>NO</td>
-<td><code>dart run git_stamp --gen-only build-branch,build-date-time</code></td>
-</tr>
-</tbody>
-</table>
-<div class="markdown-alert markdown-alert-note">
-<p class="markdown-alert-title">Note</p>
-<p>To optimize the generation you can disable adding packages to the project for LITE &amp; FULL versions by adding a flag in CLI <code>--adding-packages disabled</code> .</p>
-</div>
-<h3 id="2-benchmarks-repo-615-commits">2. Benchmarks (Repo 615 Commits)</h3>
-<div class="markdown-alert markdown-alert-note">
-<p class="markdown-alert-title">Note</p>
-<p><code>dart run git_stamp --benchmark</code>
-Returns <code>benchmark.json</code> file.</p>
-</div>
-<table>
-<thead>
-<tr>
-<th>Build type</th>
-<th>Generating time</th>
-<th>Number of dart files generated</th>
-<th>Size of generated dart files</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>FULL</td>
-<td>10.16s</td>
-<td>33</td>
-<td>2.3MB</td>
-</tr>
-<tr>
-<td>LITE</td>
-<td>3.73s</td>
-<td>33</td>
-<td>167.9 KB</td>
-</tr>
-<tr>
-<td>ICON</td>
-<td>1.26s</td>
-<td>10</td>
-<td>8.8 KB</td>
-</tr>
-</tbody>
-</table>
-<h3 id="3-tip">3. Tip</h3>
-<div class="markdown-alert markdown-alert-caution">
-<p class="markdown-alert-title">Caution</p>
-<p>Generating requires the use of the <code>git</code> command-line interface (CLI).</p>
-</div>
-<h3 id="4-custom-gen-only-parameters">4. Custom <code>gen-only</code> parameters</h3>
-<table>
-<thead>
-<tr>
-<th>#</th>
-<th>Parameter</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>commit-list</td>
-</tr>
-<tr>
-<td>2</td>
-<td>diff-list</td>
-</tr>
-<tr>
-<td>3</td>
-<td>diff-stat-list</td>
-</tr>
-<tr>
-<td>4</td>
-<td>repo-creation-date</td>
-</tr>
-<tr>
-<td>5</td>
-<td>build-branch</td>
-</tr>
-<tr>
-<td>6</td>
-<td>build-date-time</td>
-</tr>
-<tr>
-<td>7</td>
-<td>build-system-info</td>
-</tr>
-<tr>
-<td>8</td>
-<td>build-machine</td>
-</tr>
-<tr>
-<td>9</td>
-<td>repo-path</td>
-</tr>
-<tr>
-<td>10</td>
-<td>observed-files-list</td>
-</tr>
-<tr>
-<td>11</td>
-<td>app-version</td>
-</tr>
-<tr>
-<td>12</td>
-<td>app-build</td>
-</tr>
-<tr>
-<td>13</td>
-<td>app-name</td>
-</tr>
-<tr>
-<td>14</td>
-<td>git-config</td>
-</tr>
-<tr>
-<td>15</td>
-<td>git-remote</td>
-</tr>
-<tr>
-<td>16</td>
-<td>git-remote-list</td>
-</tr>
-<tr>
-<td>17</td>
-<td>git-tag-list</td>
-</tr>
-<tr>
-<td>18</td>
-<td>git-branch-list</td>
-</tr>
-</tbody>
-</table>
-<h2 id="-usage">💻 Usage</h2>
-<h3 id="1-gitstamplisttile">1. GitStampListTile</h3>
+<h2 id="-generatinggeneratingmd"><a href="./GENERATING.md">🏗️ Generating</a></h2>
+<p><code>dart run git_stamp --build-type full</code></p>
+<h2 id="-usageusagemd"><a href="./USAGE.md">💻 Usage</a></h2>
 <pre class="language-dart"><code class="language-dart">if (kDebugMode) ...[
-  GitStampListTile(monospaceFontFamily: GoogleFonts.spaceMono().fontFamily),
-],
-</code></pre>
-<h3 id="2-gitstampicon">2. GitStampIcon</h3>
-<pre class="language-dart"><code class="language-dart">if (isProd == false) ...[
-  GitStampIcon(),
-],
-</code></pre>
-<h3 id="3-custom">3. Custom</h3>
-<pre class="language-dart"><code class="language-dart">if (isProd == false) ...[
-  IconButton(
-    onPressed: () =&gt; showGitStampPage(context: context, monospaceFontFamily: GoogleFonts.spaceMono().fontFamily),
-    icon: const Icon(Icons.book),
+  GitStamp.listTile(
+    context: context,
+    monospaceFontFamily: GoogleFonts.spaceMono().fontFamily,
   ),
 ],
 </code></pre>
-<h3 id="4-showgitstamplicensepage">4. showGitStampLicensePage()</h3>
-<div class="markdown-alert markdown-alert-note">
-<p class="markdown-alert-title">Note</p>
-<p>Use function <code>GitStamp.showLicensePage</code> instead of <code>showLicensePage</code> if you want the <code>name</code> and <code>version</code> to be added automatically.</p>
-</div>
-<h3 id="5-central-gitstamp-node-for-advanced-usage">5. Central <strong>GitStamp</strong> node for advanced usage:</h3>
-<details>
-<summary>GitStampNode</summary>
-<pre class="language-dart"><code class="language-dart">abstract class GitStampNode {
-  String get commitListString;
-  List&lt;GitStampCommit&gt; get commitList;
-  GitStampCommit? get latestCommit;
-  String get sha;
-  int get commitCount;
-
-  String get diffListString;
-  Map&lt;String, dynamic&gt; get diffList;
-  String get diffStatListString;
-  Map&lt;String, dynamic&gt; get diffStatList;
-
-  String get buildMachineString;
-  GitStampBuildMachine get buildMachine;
-
-  String get buildBranch;
-  String get buildDateTime;
-  String get buildSystemInfo;
-  String get repoCreationDate;
-  String get repoPath;
-
-  String get observedFiles;
-  List&lt;String&gt; get observedFilesList;
-  int get observedFilesCount;
-
-  String get tagListString;
-  List&lt;String&gt; get tagList;
-  int get tagListCount;
-
-  String get branchListString;
-  List&lt;String&gt; get branchList;
-  int get branchListCount;
-
-  String get appVersionFull =&gt; appVersion + ' (' + appBuild + ')';
-  String get appVersion;
-  String get appBuild;
-  String get appName;
-
-  String get gitConfigGlobalUser =&gt; gitConfigGlobalUserName + ' (' + gitConfigGlobalUserEmail + ')';
-  String get gitConfigGlobalUserName;
-  String get gitConfigGlobalUserEmail;
-
-  String get gitConfigUser =&gt; gitConfigUserName + ' (' + gitConfigUserEmail + ')';
-  String get gitConfigUserName;
-  String get gitConfigUserEmail;
-
-  String get gitRemote;
-  String get gitConfigList;
-  String get gitCountObjects;
-
-  void showLicensePage({
-    required BuildContext context,
-    Widget? applicationIcon,
-    String? applicationLegalese,
-    bool useRootNavigator = false,
-  });
-}
-</code></pre>
-</details>
 <h2 id="-sponsors">💰 Sponsors</h2>
 <table>
 <thead>
@@ -601,6 +193,90 @@ If you have any feedback, please contact me at <a href="mailto:arononak@gmail.co
       <section class="summary">
           <h2>Libraries</h2>
         <dl>
+          <dt id="git_stamp">
+  <span class="name"><a href="git_stamp/git_stamp-library.html">git_stamp</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="git_stamp_build_machine">
+  <span class="name"><a href="git_stamp_build_machine/git_stamp_build_machine-library.html">git_stamp_build_machine</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="git_stamp_commit">
+  <span class="name"><a href="git_stamp_commit/git_stamp_commit-library.html">git_stamp_commit</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="git_stamp_decrypt_bottom_sheet">
+  <span class="name"><a href="git_stamp_decrypt_bottom_sheet/git_stamp_decrypt_bottom_sheet-library.html">git_stamp_decrypt_bottom_sheet</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="git_stamp_details_page">
+  <span class="name"><a href="git_stamp_details_page/git_stamp_details_page-library.html">git_stamp_details_page</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="git_stamp_icon">
+  <span class="name"><a href="git_stamp_icon/git_stamp_icon-library.html">git_stamp_icon</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="git_stamp_launcher">
+  <span class="name"><a href="git_stamp_launcher/git_stamp_launcher-library.html">git_stamp_launcher</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="git_stamp_license_page">
+  <span class="name"><a href="git_stamp_license_page/git_stamp_license_page-library.html">git_stamp_license_page</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="git_stamp_list_tile">
+  <span class="name"><a href="git_stamp_list_tile/git_stamp_list_tile-library.html">git_stamp_list_tile</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="git_stamp_node">
+  <span class="name"><a href="git_stamp_node/git_stamp_node-library.html">git_stamp_node</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="git_stamp_page">
+  <span class="name"><a href="git_stamp_page/git_stamp_page-library.html">git_stamp_page</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="git_stamp_utils">
+  <span class="name"><a href="git_stamp_utils/git_stamp_utils-library.html">git_stamp_utils</a></span> 
+
+</dt>
+<dd>
+</dd>
+
         </dl>
       </section>
 
@@ -622,6 +298,18 @@ If you have any feedback, please contact me at <a href="mailto:arononak@gmail.co
     <h5 class="hidden-xs"><span class="package-name">git_stamp</span> <span class="package-kind">package</span></h5>
     <ol>
       <li class="section-title">Libraries</li>
+      <li><a href="git_stamp/git_stamp-library.html">git_stamp</a></li>
+      <li><a href="git_stamp_build_machine/git_stamp_build_machine-library.html">git_stamp_build_machine</a></li>
+      <li><a href="git_stamp_commit/git_stamp_commit-library.html">git_stamp_commit</a></li>
+      <li><a href="git_stamp_decrypt_bottom_sheet/git_stamp_decrypt_bottom_sheet-library.html">git_stamp_decrypt_bottom_sheet</a></li>
+      <li><a href="git_stamp_details_page/git_stamp_details_page-library.html">git_stamp_details_page</a></li>
+      <li><a href="git_stamp_icon/git_stamp_icon-library.html">git_stamp_icon</a></li>
+      <li><a href="git_stamp_launcher/git_stamp_launcher-library.html">git_stamp_launcher</a></li>
+      <li><a href="git_stamp_license_page/git_stamp_license_page-library.html">git_stamp_license_page</a></li>
+      <li><a href="git_stamp_list_tile/git_stamp_list_tile-library.html">git_stamp_list_tile</a></li>
+      <li><a href="git_stamp_node/git_stamp_node-library.html">git_stamp_node</a></li>
+      <li><a href="git_stamp_page/git_stamp_page-library.html">git_stamp_page</a></li>
+      <li><a href="git_stamp_utils/git_stamp_utils-library.html">git_stamp_utils</a></li>
 </ol>
 
   </div>
@@ -634,7 +322,7 @@ If you have any feedback, please contact me at <a href="mailto:arononak@gmail.co
 <footer>
   <span class="no-break">
     git_stamp
-      5.1.0
+      5.3.1
   </span>
 
   
