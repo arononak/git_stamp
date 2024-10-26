@@ -1,5 +1,6 @@
 | 🆕 **Version** | 🗓️ **Date**         | 📝 **Change Description**  |
 | ------------- | ------------------ | ---------------------------- |
+| Version 7     | Someday it will be | 🧩 Pure Dart - 2 packages    |
 | Version 6     | Someday it will be | 📦 JSON data export          |
 | Version 5     | 07.10.2024         | 🔐 Data encription           |
 | Version 4     | 24.07.2024         | 🌟 New `icon` build-type     |
