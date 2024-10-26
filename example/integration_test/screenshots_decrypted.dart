@@ -11,6 +11,30 @@ import 'physical_size.dart';
 void main() {
   final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
+  testWidgets('screenshot-commit_diff', (WidgetTester tester) async {
+    tester.view.physicalSize = physicalSize;
+    tester.view.devicePixelRatio = 1.0;
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: GitStamp.mainPage(
+          monospaceFontFamily: GoogleFonts.sourceCodePro().fontFamily,
+        ),
+        themeMode: ThemeMode.dark,
+        darkTheme: ThemeData.dark(useMaterial3: true),
+        debugShowCheckedModeBanner: false,
+      ),
+    );
+    await tester.pump(Duration(seconds: 2));
+    await tester.tap(find.byType(GitStampCommitListElement).first);
+    await tester.pump(Duration(seconds: 2));
+    await tester.pump(Duration(seconds: 2));
+    await tester.tap(find.byIcon(Icons.arrow_forward));
+    await tester.pump(Duration(seconds: 2));
+    await tester.pump(Duration(seconds: 2));
+    await binding.takeScreenshot('screenshot_commit_diff');
+  });
+
   testWidgets('screenshot-list', (WidgetTester tester) async {
     tester.view.physicalSize = physicalSize;
     tester.view.devicePixelRatio = 1.0;
@@ -95,28 +119,5 @@ void main() {
     await tester.pump(Duration(seconds: 2));
     await tester.pump(Duration(seconds: 2));
     await binding.takeScreenshot('screenshot_git_config');
-  });
-
-  testWidgets('screenshot-commit_diff', (WidgetTester tester) async {
-    tester.view.physicalSize = physicalSize;
-    tester.view.devicePixelRatio = 1.0;
-
-    await tester.pumpWidget(
-      MaterialApp(
-        home: GitStamp.mainPage(
-          monospaceFontFamily: GoogleFonts.sourceCodePro().fontFamily,
-        ),
-        themeMode: ThemeMode.dark,
-        darkTheme: ThemeData.dark(useMaterial3: true),
-        debugShowCheckedModeBanner: false,
-      ),
-    );
-    await tester.tap(find.byType(GitStampCommitListElement).first);
-    await tester.pump(Duration(seconds: 10));
-    await tester.pump(Duration(seconds: 10));
-    await tester.tap(find.byIcon(Icons.arrow_forward));
-    await tester.pump(Duration(seconds: 2));
-    await tester.pump(Duration(seconds: 2));
-    await binding.takeScreenshot('screenshot_commit_diff');
   });
 }
