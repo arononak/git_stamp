@@ -7,6 +7,10 @@
 | Version 2     | 10.04.2024         | 🛠️ Commit diff               |
 | Version 1     | 11.12.2023         | 🚀 First version             |
 
+## 5.3.1
+
+* DOCs update
+
 ## 5.3.0
 
 * Added reflog module
