@@ -1,11 +1,10 @@
-import 'package:example/git_stamp/git_stamp.dart';
-import 'package:example/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:git_stamp/git_stamp_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:integration_test/integration_test.dart';
 
+import 'package:example/git_stamp/git_stamp.dart';
+import 'package:example/main.dart';
 import 'physical_size.dart';
 
 void main() {
@@ -17,21 +16,17 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
-        home: GitStamp.mainPage(
+        home: GitStamp.detailsPage(
           monospaceFontFamily: GoogleFonts.sourceCodePro().fontFamily,
+          commit: GitStamp.commitList.first,
         ),
         themeMode: ThemeMode.dark,
         darkTheme: ThemeData.dark(useMaterial3: true),
         debugShowCheckedModeBanner: false,
       ),
-      duration: Duration(seconds: 2),
     );
-    await tester.tap(find.byType(GitStampCommitListElement).first);
-    await tester.pump(Duration(seconds: 2));
-    await tester.pump(Duration(seconds: 2));
-    await tester.tap(find.byIcon(Icons.arrow_forward));
-    await tester.pump(Duration(seconds: 2));
-    await tester.pump(Duration(seconds: 2));
+    await tester.pump(Duration(seconds: 5));
+    await tester.pump(Duration(seconds: 5));
     await binding.takeScreenshot('screenshot_commit_diff');
   });
 
