@@ -19,21 +19,12 @@ String rawGitStampNode(
 String _content(GitStampBuildModel model) => '''
 library git_stamp;
 
-${(model.commitList || model.buildMachine).enabled}import 'dart:convert';
-
 import 'package:flutter/services.dart';
 ${model.encrypt.enabled}import 'package:encrypt/encrypt.dart' as crypto;
 
 ${(model.generateFlutterFiles || model.isIcon).enabled}import 'package:flutter/material.dart';
 
-import 'package:git_stamp/git_stamp_node.dart';
-${model.generateFlutterFiles.enabled}import 'package:git_stamp/git_stamp_page.dart';
-${model.generateFlutterFiles.enabled}import 'package:git_stamp/git_stamp_details_page.dart';
-${model.generateFlutterFiles.enabled}import 'package:git_stamp/git_stamp_license_page.dart';
-${(model.generateFlutterFiles || model.isIcon).enabled}import 'package:git_stamp/git_stamp_icon.dart';
-${model.generateFlutterFiles.enabled}import 'package:git_stamp/git_stamp_list_tile.dart';
-${model.commitList.enabled}import 'package:git_stamp/git_stamp_commit.dart';
-${(model.buildMachine || model.encrypt).enabled}import 'package:git_stamp/git_stamp_build_machine.dart';
+import 'package:git_stamp/git_stamp.dart';
 
 ${model.commitList.enabled}import 'data/commit_list.dart';
 ${model.diffList.enabled}import 'data/diff_list.dart';
