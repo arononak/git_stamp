@@ -14,6 +14,7 @@
 
 ## 5.3.0
 
+* Removed **Pure Dart** for a `custom` build-type
 * Added reflog module
 * GitStampPage - fixed bottom sheet ScrollViews
 * Extracted All UI files to package `/lib` folder
