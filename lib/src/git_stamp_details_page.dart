@@ -23,6 +23,9 @@ class GitStampDetailsPage extends StatefulWidget {
 }
 
 class _GitStampDetailsPageState extends State<GitStampDetailsPage> {
+  final ScrollController _horizontalScrollController = ScrollController();
+  final ScrollController _verticalScrollController = ScrollController();
+
   var _fontSize = 12;
 
   String get diffList => widget.gitStamp.diffList[widget.commit.hash] ?? '';
@@ -54,25 +57,38 @@ class _GitStampDetailsPageState extends State<GitStampDetailsPage> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
+      body: NotificationListener<ScrollNotification>(
+        onNotification: (scrollNotification) {
+          if (scrollNotification is ScrollUpdateNotification) {
+            if (scrollNotification.metrics.axis == Axis.vertical) {
+              _horizontalScrollController
+                  .jumpTo(_horizontalScrollController.position.pixels);
+            }
+          }
+          return false;
+        },
         child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              minWidth: MediaQuery.of(context).size.width,
-            ),
-            child: Container(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  GitStampDetailsPageText(
-                    diffList: diffList,
-                    monospaceFontFamily: widget.monospaceFontFamily,
-                    fontSize: _fontSize.toDouble(),
-                  ),
-                ],
+          controller: _verticalScrollController,
+          scrollDirection: Axis.vertical,
+          child: SingleChildScrollView(
+            controller: _horizontalScrollController,
+            scrollDirection: Axis.horizontal,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minWidth: MediaQuery.of(context).size.width,
+              ),
+              child: Container(
+                padding: EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    GitStampDetailsPageText(
+                      diffList: diffList,
+                      monospaceFontFamily: widget.monospaceFontFamily,
+                      fontSize: _fontSize.toDouble(),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -83,6 +99,13 @@ class _GitStampDetailsPageState extends State<GitStampDetailsPage> {
         child: Icon(Icons.copy),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _horizontalScrollController.dispose();
+    _verticalScrollController.dispose();
+    super.dispose();
   }
 }
 
