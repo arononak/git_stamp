@@ -136,7 +136,8 @@ Widget build(BuildContext context) {
             ),
             SizedBox(height: 16.0),
             if (!gitStamp.isEncrypted) ...[
-              Text(gitStamp.tagListString, style: textDefault)
+              ...gitStamp.tagList
+                  .map((e) =&gt; GitStampDoubleText(&#39;${e.date} - &#39;, e.name)),
             ],
           ],
         ),
