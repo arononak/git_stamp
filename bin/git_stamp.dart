@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:core';
+
 import 'package:args/args.dart';
 
 import 'git_stamp_build_model.dart';
@@ -8,20 +9,60 @@ import 'git_stamp_logger.dart';
 import 'git_stamp_encrypt.dart';
 import 'git_stamp_file_utils.dart';
 import 'git_stamp_version.dart';
+
 import 'files/git_stamp_files.dart';
 
 final _parser = ArgParser()
-  ..addFlag('help', abbr: 'h', negatable: false)
-  ..addFlag('version', abbr: 'v', negatable: false)
-  ..addFlag('encrypt', abbr: 'e', negatable: false)
-  ..addFlag('gen-only-options', negatable: false)
-  ..addFlag('gen-only-all', negatable: false)
-  ..addFlag('debug-compile-key', negatable: false)
-  ..addFlag('benchmark', negatable: false)
+  ..addFlag(
+    'help',
+    abbr: 'h',
+    negatable: false,
+  )
+  ..addFlag(
+    'version',
+    abbr: 'v',
+    negatable: false,
+  )
+  ..addFlag(
+    'encrypt',
+    abbr: 'e',
+    negatable: false,
+    help:
+        'Encrypts data using AES which can be decrypted in runtime. Only LITE & FULL build-type.',
+  )
+  ..addFlag(
+    'gen-only-options',
+    negatable: false,
+    help: 'Displays possible parameters of custom build-type',
+  )
+  ..addFlag(
+    'gen-only-all',
+    negatable: false,
+    help: 'Runs custom build-type with all parameters.',
+  )
+  ..addFlag(
+    'debug-compile-key',
+    negatable: false,
+    help:
+        'Adds key to compiled version to avoid manual entry upon startup for encrypted version. Not recommended for production.',
+  )
+  ..addFlag(
+    'benchmark',
+    negatable: false,
+    help:
+        'Runs benchmarks of ICON, LITE and FULL types and saves the result to benchmark.json file.',
+  )
   ..addOption(
     'build-type',
     abbr: 'b',
-    allowed: ['lite', 'full', 'icon', 'custom'],
+    allowed: ['full', 'lite', 'icon', 'custom'],
+    help: 'https://github.com/arononak/git_stamp/blob/main/BENCHMARK.md',
+    allowedHelp: {
+      'full': 'Full version with commit list screen with commit diff.',
+      'lite': 'Default version with commit list screen, but without commit diff.',
+      'icon': 'Only icon with tip.',
+      'custom': 'Unused. Use --gen-only build-branch,app-name',
+    },
     defaultsTo: 'lite',
   )
   ..addOption(
@@ -29,12 +70,15 @@ final _parser = ArgParser()
     abbr: 'a',
     allowed: ['enabled', 'disabled'],
     defaultsTo: 'enabled',
+    help:
+        'Whether to add the project to pubspec.yaml to add the encrypt package while generating.',
   )
   ..addMultiOption(
     'gen-only',
     abbr: 'o',
     allowed: GitStampBuildModel.genOnlyOptions,
     defaultsTo: null,
+    help: 'Parameter with data selection for custom build-type.',
   );
 
 class _GenerationResult {
