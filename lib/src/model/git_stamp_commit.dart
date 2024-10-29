@@ -1,6 +1,9 @@
-class GitStampCommit {
+import 'dateable.dart';
+
+class GitStampCommit extends Dateable {
   final String hash;
   final String subject;
+  @override
   final String date;
   final String authorName;
   final String authorEmail;

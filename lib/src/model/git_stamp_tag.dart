@@ -1,5 +1,8 @@
-class GitStampTag {
+import 'dateable.dart';
+
+class GitStampTag extends Dateable {
   final String name;
+  @override
   final String date;
 
   GitStampTag({

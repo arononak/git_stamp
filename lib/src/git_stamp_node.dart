@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'git_stamp_build_machine.dart';
-import 'git_stamp_commit.dart';
-import 'git_stamp_tag.dart';
+import 'model/git_stamp_build_machine.dart';
+import 'model/git_stamp_commit.dart';
+import 'model/git_stamp_tag.dart';
 
 mixin _GitStampNavigator {
   Widget icon();

@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:aron_gradient_line/aron_gradient_line.dart';
 
-import 'git_stamp_commit.dart';
+import 'model/dateable.dart';
+import 'model/git_stamp_commit.dart';
 import 'git_stamp_decrypt_bottom_sheet.dart';
 import 'git_stamp_launcher.dart';
 import 'git_stamp_node.dart';
+import 'model/git_stamp_tag.dart';
 import 'git_stamp_utils.dart';
 
 const textDefault = TextStyle(fontSize: 12);
@@ -33,6 +35,14 @@ extension _GitStampNode on GitStampNode {
     }
 
     return authors.toList();
+  }
+}
+
+extension _String on String {
+  String get asOnlyDate {
+    final date = DateTime.parse(this);
+
+    return '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
   }
 }
 
@@ -201,8 +211,7 @@ class _GitStampPageState extends State<GitStampPage> {
             )
           : _GitStampCommitList(
               gitStamp: widget.gitStamp,
-              commits: widget.gitStamp.commitList,
-              filterAuthorName: _filterAuthorName,
+              filterName: _filterAuthorName,
               isLiteVersion: widget.isLiteVersion,
               itemLargeType: itemLargeType,
               monospaceFontFamily: widget.monospaceFontFamily,
@@ -332,16 +341,14 @@ class _GitStampCommitHeader {
 
 class _GitStampCommitList extends StatelessWidget {
   final GitStampNode gitStamp;
-  final List<GitStampCommit> commits;
-  final String? filterAuthorName;
+  final String? filterName;
   final bool isLiteVersion;
   final bool itemLargeType;
   final String? monospaceFontFamily;
 
   const _GitStampCommitList({
     required this.gitStamp,
-    this.commits = const [],
-    this.filterAuthorName,
+    this.filterName,
     this.isLiteVersion = true,
     this.itemLargeType = true,
     this.monospaceFontFamily,
@@ -349,25 +356,28 @@ class _GitStampCommitList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Map<String, List<GitStampCommit>> groupedCommit = groupBy(
-      commits.where(
-        (element) {
-          return filterAuthorName == null
-              ? true
-              : element.authorName == filterAuthorName;
-        },
-      ),
-      (element) {
-        final date = DateTime.parse(element.date);
-
-        return '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
-      },
-    );
-
     List<dynamic> listElement = [];
-    groupedCommit.forEach((key, commits) {
-      listElement.add(_GitStampCommitHeader(date: key, count: commits.length));
-      listElement.addAll(commits);
+
+    final commitAndTags = <Dateable>[
+      ...gitStamp.tagList,
+      ...gitStamp.commitList,
+    ];
+
+    commitAndTags.sort(
+        (a, b) => DateTime.parse(b.date).compareTo(DateTime.parse(a.date)));
+
+    groupBy(
+      commitAndTags.where(
+        (e) => e is! GitStampCommit
+            ? true
+            : filterName == null
+                ? true
+                : e.authorName == filterName,
+      ),
+      (e) => e.date.asOnlyDate,
+    ).forEach((key, dateable) {
+      listElement.add(_GitStampCommitHeader(date: key, count: dateable.length));
+      listElement.addAll(dateable);
     });
 
     return ListView.builder(
@@ -388,6 +398,10 @@ class _GitStampCommitList extends StatelessWidget {
               isLiteVersion: isLiteVersion,
               itemLargeType: itemLargeType,
               monospaceFontFamily: monospaceFontFamily,
+            );
+          case GitStampTag():
+            return _GitStampTagListElement(
+              tag: element,
             );
           default:
             return SizedBox();
@@ -596,6 +610,58 @@ class _GitStampCommitListElement extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class _GitStampTagListElement extends StatelessWidget {
+  final GitStampTag tag;
+
+  const _GitStampTagListElement({
+    required this.tag,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: Theme.of(context).colorScheme.primary,
+      margin: EdgeInsets.symmetric(
+        horizontal: 0.0,
+        vertical: 4.0,
+      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0.0)),
+      elevation: 0.0,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        child: ListTile(
+          dense: true,
+          minTileHeight: 0.0,
+          contentPadding: const EdgeInsets.all(0),
+          leading: Icon(
+            Icons.tag,
+            size: 28,
+            color: Theme.of(context).colorScheme.inversePrimary,
+          ),
+          title: Text(
+            tag.name,
+            style: TextStyle(
+              fontSize: 14.0,
+              fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.italic,
+              color: Theme.of(context).colorScheme.inversePrimary,
+            ),
+          ),
+          subtitle: Text(
+            tag.date,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontSize: 12.0,
+              color: Theme.of(context).colorScheme.inversePrimary,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

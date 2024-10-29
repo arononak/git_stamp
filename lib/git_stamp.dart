@@ -1,6 +1,6 @@
-export 'src/git_stamp_build_machine.dart';
-export 'src/git_stamp_commit.dart';
-export 'src/git_stamp_tag.dart';
+export 'src/model/git_stamp_build_machine.dart';
+export 'src/model/git_stamp_commit.dart';
+export 'src/model/git_stamp_tag.dart';
 export 'src/git_stamp_decrypt_bottom_sheet.dart';
 export 'src/git_stamp_icon.dart';
 export 'src/git_stamp_launcher.dart';
