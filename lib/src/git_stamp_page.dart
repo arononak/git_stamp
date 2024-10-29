@@ -146,25 +146,23 @@ class _GitStampPageState extends State<GitStampPage> {
   void initState() {
     super.initState();
 
-    if (widget.showDetails) {
-      Future.delayed(Duration.zero, () {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (widget.showDetails) {
         _showDetailsBottomSheet(
           context,
           gitStamp: widget.gitStamp,
           gitStampVersion: widget.gitStampVersion,
           isLiteVersion: widget.isLiteVersion,
         );
-      });
-    }
+      }
 
-    if (widget.showFiles) {
-      Future.delayed(Duration.zero, () {
+      if (widget.showFiles) {
         _showRepoFilesBottomSheet(
           context,
           gitStamp: widget.gitStamp,
         );
-      });
-    }
+      }
+    });
   }
 
   @override
