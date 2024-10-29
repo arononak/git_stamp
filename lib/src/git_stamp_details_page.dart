@@ -56,7 +56,6 @@ class _GitStampDetailsPageState extends State<GitStampDetailsPage> {
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        physics: BouncingScrollPhysics(),
         child: Column(
           children: [
             SingleChildScrollView(
