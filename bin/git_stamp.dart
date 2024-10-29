@@ -59,7 +59,8 @@ final _parser = ArgParser()
     help: 'https://github.com/arononak/git_stamp/blob/main/BENCHMARK.md',
     allowedHelp: {
       'full': 'Full version with commit list screen with commit diff.',
-      'lite': 'Default version with commit list screen, but without commit diff.',
+      'lite':
+          'Default version with commit list screen, but without commit diff.',
       'icon': 'Only icon with tip.',
       'custom': 'Unused. Use --gen-only build-branch,app-name',
     },
