@@ -28,15 +28,18 @@ Advanced await-less information provider and development tool.
 
 ## [🏞️ Preview](./PREVIEW.md)
 
-| 🌐 Site                                                                          | 📖 Description                           |
-| -------------------------------------------------------------------------------- | ---------------------------------------- |
-| **[Example Decrypted ](https://gitstamp.web.app)**                               | Main version of the GitStamp application |
-| **[Example Encrypted](https://gitstamp-encrypted.web.app)**                      | Encrypted access version of GitStamp     |
-| **[API Documentation](https://arononak.github.io/git_stamp/doc/api/index.html)** | API documentation for GitStamp           |
+| 🌐 Sites                                                                         |
+| -------------------------------------------------------------------------------- |
+| **[Example Decrypted](https://gitstamp.web.app)**                                |
+| **[Example Encrypted](https://gitstamp-encrypted.web.app)**                      |
+| **[API Documentation](https://arononak.github.io/git_stamp/doc/api/index.html)** |
 
-|                            |                         |
-| :------------------------: | :---------------------: |
-| ![](images/git_config.png) | ![](images/details.png) |
+<table>
+  <tr>
+    <td><img src="images/git_config.png" alt="Git Config" style="width: 100%;"></td>
+    <td><img src="images/details.png" alt="Details" style="width: 100%;"></td>
+  </tr>
+</table>
 
 ## 📑️ About ([Changelog](./CHANGELOG.md))
 
