@@ -492,14 +492,21 @@ class GitTagList extends GitStampDataFile {
   String get variableName => 'gitStampGitTagList';
 
   @override
-  String get variableContent => exec([
-        'git',
-        'for-each-ref',
-        '--sort=-creatordate',
-        '--format',
-        '%(refname:short)',
-        'refs/tags'
-      ]);
+  String get variableContent {
+    final tagsList = exec([
+      'git',
+      'for-each-ref',
+      '--sort=-creatordate',
+      '--format={"name": "%(refname:short)", "date": "%(creatordate:iso8601)"}',
+      'refs/tags',
+    ]);
+
+    final tags = LineSplitter.split(tagsList)
+        .map((line) => json.decode(line))
+        .toList();
+
+    return jsonEncode(tags);
+  }
 }
 
 class GitBranchList extends GitStampDataFile {

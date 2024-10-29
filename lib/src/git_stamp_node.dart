@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 
 import 'git_stamp_build_machine.dart';
 import 'git_stamp_commit.dart';
+import 'git_stamp_tag.dart';
 
 mixin _GitStampNavigator {
   Widget icon();
@@ -46,7 +47,7 @@ abstract class _GitStampNode with _GitStampNavigator {
   int get observedFilesCount;
 
   String get tagListString;
-  List<String> get tagList;
+  List<GitStampTag> get tagList;
   int get tagListCount;
 
   String get branchListString;
@@ -77,7 +78,7 @@ class GitStampNode extends _GitStampNode {
 
   @override bool decrypt(Uint8List key, Uint8List iv) => true;
 
-  @override String get commitListString => '';
+  @override String get commitListString => '[]';
   @override List<GitStampCommit> get commitList => json.decode(commitListString).map<GitStampCommit>((json) => GitStampCommit.fromJson(json)).toList();
   @override GitStampCommit? get latestCommit => commitList.firstOrNull;
   @override String get sha => latestCommit?.hash ?? 'REPO WITHOUT COMMITS';
@@ -101,8 +102,8 @@ class GitStampNode extends _GitStampNode {
   @override List<String> get observedFilesList => observedFiles.split(RegExp(r'\r?\n'));
   @override int get observedFilesCount => observedFilesList.length;
 
-  @override String get tagListString => '';
-  @override List<String> get tagList => tagListString.split(RegExp(r'\r?\n'));
+  @override String get tagListString => '[]';
+  @override List<GitStampTag> get tagList => json.decode(tagListString).map<GitStampTag>((json) => GitStampTag.fromJson(json)).toList();
   @override int get tagListCount => tagList.length;
 
   @override String get branchListString => '';

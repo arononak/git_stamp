@@ -794,7 +794,7 @@ class GitStampRepoDetails extends StatelessWidget {
             GitStampDoubleText('Date: ', gitStamp.buildDateTime),
             GitStampDoubleText('Path: ', gitStamp.repoPath),
             GitStampDoubleText('Branch: ', gitStamp.buildBranch),
-            GitStampDoubleText('Tag: ', gitStamp.tagList.first),
+            GitStampDoubleText('Tag: ', gitStamp.tagList.first.name),
             GitStampDoubleText('SHA: ', gitStamp.sha),
           ],
         ),
@@ -919,7 +919,8 @@ class GitStampRepoTags extends StatelessWidget {
               ),
               SizedBox(height: 16.0),
               if (!gitStamp.isEncrypted) ...[
-                Text(gitStamp.tagListString, style: textDefault)
+                ...gitStamp.tagList
+                    .map((e) => GitStampDoubleText('${e.date} - ', e.name)),
               ],
             ],
           ),

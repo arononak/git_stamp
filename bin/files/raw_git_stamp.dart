@@ -215,6 +215,7 @@ class EncryptedGitStampNode extends GitStampNode {
   @override String get repoPath => _decrypt(gitStampRepoPath) ?? 'ENCRYPTED';
   @override String get observedFiles => _decrypt(gitStampObservedFilesList) ?? 'ENCRYPTED';
   @override String get tagListString => _decrypt(gitStampGitTagList) ?? 'ENCRYPTED';
+  @override List<GitStampTag> get tagList => isEncrypted ? [GitStampTag.all('ENCRYPTED')] : super.tagList;
   @override String get branchListString => _decrypt(gitStampGitBranchList) ?? 'ENCRYPTED';
   @override String get appVersionFull => !isEncrypted ? super.appVersionFull : 'ENCRYPTED';
   @override String get appVersion => _decrypt(gitStampAppVersion) ?? 'ENCRYPTED';
