@@ -501,9 +501,8 @@ class GitTagList extends GitStampDataFile {
       'refs/tags',
     ]);
 
-    final tags = LineSplitter.split(tagsList)
-        .map((line) => json.decode(line))
-        .toList();
+    final tags =
+        LineSplitter.split(tagsList).map((line) => json.decode(line)).toList();
 
     return jsonEncode(tags);
   }
