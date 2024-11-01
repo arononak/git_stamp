@@ -115,7 +115,9 @@ dependency_overrides:
 
 ## [🏗️ Generating](./GENERATING.md)
 
-`dart run git_stamp --build-type full`
+```cli
+dart run git_stamp --build-type full
+```
 
 ## [💻 Usage](./USAGE.md)
 

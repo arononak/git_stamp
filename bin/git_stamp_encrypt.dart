@@ -23,6 +23,7 @@ class GitStampEncrypt {
 
     GitStampLogger.lightYellow('KEY: ${hexKey.join(' ')}');
     GitStampLogger.lightYellow('IV: ${hexIv.join(' ')}');
+    GitStampLogger.lightYellow('');
   }
 }
 

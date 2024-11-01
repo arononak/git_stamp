@@ -1,5 +1,12 @@
 # 💻 Usage
 
+| BUILD TYPE | INTERNAL TESTING | PUBLIC STORES  | DATA AWAIT-LESS PROVIDER |
+| ---------- | ---------------- | -------------- | ------------------------ |
+| FULL       | YES              | ONLY ENCRYPTED | NO                       |
+| LITE       | YES              | ONLY ENCRYPTED | NO                       |
+| ICON       | YES              | YES            | NO                       |
+| CUSTOM     | YES              | YES            | YES                      |
+
 ### 1. GitStampListTile
 
 ```dart

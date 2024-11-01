@@ -51,7 +51,7 @@
 - [ ] InApp - More diff types
 - [ ] InApp - Router to web
 - [ ] CI - pana
-- [ ] Generator - Disable --add-pub=disable
+- [x] Generator - Disable --add-pub=disable
 - [x] InApp - GitStampDetailsPage - integration test load GoogleFont
 - [x] CI - Generate benchmark reports LITE, FULL, ICON
 - [x] InApp - git reflog
@@ -60,8 +60,8 @@
 - [ ] CI - Chromedriver from image
 - [ ] CI - Generate custom flags file
 - [x] InApp - Branch module
-- [ ] InApp - Tag module - Add date
-- [ ] Generator - collection package to tag module and commit stats as json
+- [x] InApp - Tag module - Add date
+- [x] Generator - collection package to tag module and commit stats as json
 - [ ] InApp - Encrypted model optimization
 - [ ] Generator - Commit limit like last 100
 - [ ] Generator - BuildRunner integration?
@@ -70,3 +70,4 @@
 - [ ] InApp - GitStampIcon - 2 types of view
 - [ ] InApp - GitStampIcon - fix margin on mobile
 - [ ] InApp - Hidden developer mode vibrate or something similar - Android developer mode
+- [ ] InApp - Flutter doctor fix for another languages
