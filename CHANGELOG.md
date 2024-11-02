@@ -12,6 +12,21 @@
 
 # CHANGELOG
 
+## 5.4.0
+
+* **Tag module** - Added date field
+* Added `--help` flag descriptions
+* GitStampPage - Added tags to list & refactor
+* GitStampPage - Fixed async warnings
+* Package /lib folder refactored to /lib/src
+* Fixed encrypted git stamp node
+* Fixed 'ecrypted' -> 'eNcrypted' typo
+
+<details>
+<summary>Image</summary>
+<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/5.4.0.png?raw=true" alt="Image"></p>
+</details>
+
 ## 5.3.1
 
 * DOCs update
