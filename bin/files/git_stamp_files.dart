@@ -134,9 +134,10 @@ class CommitList extends GitStampDataFile {
 }
 
 class DiffList extends GitStampDataFile {
+  int? count;
   bool generateEmpty;
 
-  DiffList(super.encrypt, this.generateEmpty);
+  DiffList(super.encrypt, this.generateEmpty, {this.count});
 
   @override
   String get filename => 'diff_list.dart';
@@ -149,7 +150,12 @@ class DiffList extends GitStampDataFile {
     Map<String, String> map = {};
 
     if (generateEmpty == false) {
-      final hashes = exec(['git', 'rev-list', '--all']).trim().split('\n');
+      final hashes = exec([
+        'git',
+        'rev-list',
+        '--all',
+        if (count != null) ...['-n $count'],
+      ]).trim().split('\n');
 
       for (var hash in hashes) {
         map[hash] = exec(['git', 'show', hash]);
@@ -161,9 +167,10 @@ class DiffList extends GitStampDataFile {
 }
 
 class DiffStatList extends GitStampDataFile {
+  int? count;
   bool generateEmpty;
 
-  DiffStatList(super.encrypt, this.generateEmpty);
+  DiffStatList(super.encrypt, this.generateEmpty, {this.count});
 
   @override
   String get filename => 'diff_stat_list.dart';
@@ -176,7 +183,12 @@ class DiffStatList extends GitStampDataFile {
     Map<String, String> map = {};
 
     if (generateEmpty == false) {
-      final hashes = exec(['git', 'rev-list', '--all']).trim().split('\n');
+      final hashes = exec([
+        'git',
+        'rev-list',
+        '--all',
+        if (count != null) ...['-n $count'],
+      ]).trim().split('\n');
 
       for (var hash in hashes) {
         map[hash] = exec(['git', 'show', '--stat=160', hash]);

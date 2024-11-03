@@ -80,6 +80,12 @@ final _parser = ArgParser()
     allowed: GitStampBuildModel.genOnlyOptions,
     defaultsTo: null,
     help: 'Parameter with data selection for custom build-type.',
+  )
+  ..addOption(
+    'limit',
+    abbr: 'l',
+    help: 'Limits the number of commits in history.',
+    defaultsTo: null,
   );
 
 class _GenerationResult {
@@ -167,12 +173,14 @@ Future<void> main(List<String> arguments) async {
     final addingPackageEnabled = results['adding-packages'] == 'enabled';
     final isCustom = genOnly?.isNotEmpty ?? false;
     final buildType = isCustom ? 'custom' : results['build-type'].toLowerCase();
+    final limit = results['limit'] == null ? null : int.parse(results['limit']);
 
     final result = await _generate(
       buildType: buildType,
       encryptEnabled: encryptEnabled,
       debugCompileKey: debugCompileKey,
       addingPackageEnabled: addingPackageEnabled,
+      limit: limit,
     );
     result.print();
   } on FormatException catch (e) {
@@ -187,6 +195,7 @@ Future<_GenerationResult> _generate({
   required bool encryptEnabled,
   bool debugCompileKey = false,
   bool addingPackageEnabled = false,
+  int? limit,
   List<String>? genOnly,
 }) async {
   if (GitStampFile.loggingEnabled) {
@@ -209,6 +218,7 @@ Future<_GenerationResult> _generate({
         model: GitStampBuildModel.all(encrypt: encryptEnabled),
         isLiteVersion: true,
         debugCompileKey: debugCompileKey,
+        limit: limit,
       );
 
       if (addingPackageEnabled && encryptEnabled) {
@@ -221,6 +231,7 @@ Future<_GenerationResult> _generate({
         model: GitStampBuildModel.all(encrypt: encryptEnabled),
         isLiteVersion: false,
         debugCompileKey: debugCompileKey,
+        limit: limit,
       );
 
       if (addingPackageEnabled && encryptEnabled) {
@@ -232,12 +243,14 @@ Future<_GenerationResult> _generate({
       _generateDataFiles(
         model: const GitStampBuildModel.icon(),
         isLiteVersion: true,
+        limit: 1,
       );
       break;
     case 'custom':
       _generateDataFiles(
         model: GitStampBuildModel.custom(genOnly ?? []),
         isLiteVersion: false,
+        limit: limit,
       );
       break;
     default:
@@ -259,6 +272,7 @@ Future<_GenerationResult> _generate({
 void _generateDataFiles({
   required GitStampBuildModel model,
   required bool isLiteVersion,
+  int? limit,
   bool debugCompileKey = false,
 }) {
   EncryptFunction? encrypt;
@@ -289,15 +303,15 @@ void _generateDataFiles({
   IsLiteVersion(isLiteVersion).generate();
 
   if (model.commitList) {
-    CommitList(encrypt, count: model.isIcon ? 1 : null).generate();
+    CommitList(encrypt, count: limit).generate();
   }
 
   if (model.diffList) {
-    DiffList(encrypt, isLiteVersion).generate();
+    DiffList(encrypt, count: limit, isLiteVersion).generate();
   }
 
   if (model.diffStatList) {
-    DiffStatList(encrypt, isLiteVersion).generate();
+    DiffStatList(encrypt, count: limit, isLiteVersion).generate();
   }
 
   if (model.repoCreationDate) {

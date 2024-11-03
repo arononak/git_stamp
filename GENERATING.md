@@ -16,9 +16,6 @@ dart run git_stamp
 | ICON       | NO          | `dart run git_stamp --build-type icon`                                      |
 | CUSTOM     | NO          | `dart run git_stamp --gen-only build-branch,build-date-time`                |
 
-> [!NOTE]
-> To optimize the generation **encrypt** version you can disable adding packages to the project by adding a flag in CLI `--adding-packages disabled` .
-
 ### 2. Custom `gen-only` parameters 
 
 | #   | Parameter           |
@@ -43,7 +40,13 @@ dart run git_stamp
 | 18  | git-branch-list     |
 | 19  | git-reflog          |
 
-### 3. [Benchmarks](./BENCHMARK.md)
+### 3. Optimization
+
+Commit limit `--limit 100` .
+
+For LITE & FULL encrypted versions, disabling adding a package `--adding-packages disabled` .
+
+### 4. [Benchmarks](./BENCHMARK.md)
 
 ```cli
 dart run git_stamp --benchmark
