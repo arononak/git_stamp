@@ -1,11 +1,11 @@
 # 💻 Usage
 
-| BUILD TYPE | INTERNAL TESTING | PUBLIC STORES  | DATA AWAIT-LESS PROVIDER |
-| ---------- | ---------------- | -------------- | ------------------------ |
-| FULL       | YES              | ONLY ENCRYPTED | NO                       |
-| LITE       | YES              | ONLY ENCRYPTED | NO                       |
-| ICON       | YES              | YES            | NO                       |
-| CUSTOM     | YES              | YES            | YES                      |
+| BUILD TYPE                              | INTERNAL TESTING | PUBLIC STORES  | DATA AWAIT-LESS PROVIDER |
+| --------------------------------------- | ---------------- | -------------- | ------------------------ |
+| FULL                                    | YES              | ONLY ENCRYPTED | NO                       |
+| LITE                                    | YES              | ONLY ENCRYPTED | NO                       |
+| ICON                                    | YES              | YES            | NO                       |
+| [CUSTOM](./lib/src/git_stamp_node.dart) | YES              | YES            | YES                      |
 
 ### 1. GitStampListTile
 
@@ -25,7 +25,7 @@ if (isProd == false) ...[
 ],
 ```
 
-### 3. Custom
+### 3. Custom buttom
 ```dart
 if (isProd == false) ...[
   IconButton(
@@ -39,5 +39,3 @@ if (isProd == false) ...[
 
 > [!NOTE]
 > Use function `GitStamp.showLicensePage` instead of `showLicensePage` if you want the `name` and `version` to be added automatically.
-
-### 5. Central [GitStamp](./lib/git_stamp_node.dart) node for advanced usage

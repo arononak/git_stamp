@@ -1,6 +1,11 @@
 # 🏗️ Generating
 
-`dart run git_stamp`
+```cli
+dart run git_stamp
+```
+
+> [!CAUTION]
+> Generating requires the use of the `git` command-line interface (CLI).
 
 ### 1. Examples
 
@@ -14,16 +19,7 @@
 > [!NOTE]
 > To optimize the generation **encrypt** version you can disable adding packages to the project by adding a flag in CLI `--adding-packages disabled` .
 
-### 2. [Benchmarks](./BENCHMARK.md)
-
-```dart run git_stamp --benchmark```
-
-### 3. Tip
-
-> [!CAUTION]
-> Generating requires the use of the `git` command-line interface (CLI).
-
-### 4. Custom `gen-only` parameters 
+### 2. Custom `gen-only` parameters 
 
 | #   | Parameter           |
 | --- | ------------------- |
@@ -46,3 +42,9 @@
 | 17  | git-tag-list        |
 | 18  | git-branch-list     |
 | 19  | git-reflog          |
+
+### 3. [Benchmarks](./BENCHMARK.md)
+
+```cli
+dart run git_stamp --benchmark
+```
