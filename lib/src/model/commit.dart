@@ -1,6 +1,6 @@
 import 'dateable.dart';
 
-class GitStampCommit extends Dateable {
+class Commit extends Dateable {
   final String hash;
   final String subject;
   @override
@@ -8,7 +8,7 @@ class GitStampCommit extends Dateable {
   final String authorName;
   final String authorEmail;
 
-  GitStampCommit({
+  Commit({
     required this.hash,
     required this.subject,
     required this.date,
@@ -16,7 +16,7 @@ class GitStampCommit extends Dateable {
     required this.authorEmail,
   });
 
-  factory GitStampCommit.fromJson(Map<String, dynamic> json) => GitStampCommit(
+  factory Commit.fromJson(Map<String, dynamic> json) => Commit(
         hash: json['hash'] ?? 'null',
         subject: json['subject'] ?? 'null',
         date: json['date'] ?? 'null',

@@ -3,24 +3,23 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:aron_gradient_line/aron_gradient_line.dart';
+import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'model/dateable.dart';
-import 'model/git_stamp_commit.dart';
-import 'git_stamp_decrypt_bottom_sheet.dart';
-import 'git_stamp_launcher.dart';
+import 'model/commit.dart';
+import 'model/tag.dart';
 import 'git_stamp_node.dart';
-import 'model/git_stamp_tag.dart';
-import 'git_stamp_utils.dart';
 
-const textDefault = TextStyle(fontSize: 12);
-const textBold = TextStyle(fontSize: 12, fontWeight: FontWeight.bold);
-const textTitle = TextStyle(fontSize: 16, fontWeight: FontWeight.bold);
+const _textDefault = TextStyle(fontSize: 12);
+const _textBold = TextStyle(fontSize: 12, fontWeight: FontWeight.bold);
+const _textTitle = TextStyle(fontSize: 16, fontWeight: FontWeight.bold);
 
 extension _GitStampNode on GitStampNode {
   Map<String, int> get commitCountByAuthor {
     Map<String, int> map = {};
 
-    for (GitStampCommit commit in commitList) {
+    for (Commit commit in commitList) {
       map.update(commit.authorName, (value) => (value) + 1, ifAbsent: () => 1);
     }
 
@@ -30,7 +29,7 @@ extension _GitStampNode on GitStampNode {
   List<String> get commitAuthors {
     Set<String> authors = {};
 
-    for (GitStampCommit commit in commitList) {
+    for (Commit commit in commitList) {
       authors.add(commit.authorName);
     }
 
@@ -222,7 +221,7 @@ class _GitStampPageState extends State<GitStampPage> {
 
 class GitStampDetailsPage extends StatefulWidget {
   final GitStampNode gitStamp;
-  final GitStampCommit commit;
+  final Commit commit;
   final String? monospaceFontFamily;
 
   const GitStampDetailsPage({
@@ -297,7 +296,7 @@ class _GitStampDetailsPageState extends State<GitStampDetailsPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton.small(
-        onPressed: () => copyToClipboard(context, diffList),
+        onPressed: () => _copyToClipboard(context, diffList),
         child: Icon(Icons.copy),
       ),
     );
@@ -368,7 +367,7 @@ class _GitStampCommitList extends StatelessWidget {
 
     groupBy(
       commitAndTags.where(
-        (e) => e is! GitStampCommit
+        (e) => e is! Commit
             ? true
             : filterName == null
                 ? true
@@ -391,7 +390,7 @@ class _GitStampCommitList extends StatelessWidget {
               date: element.date,
               count: element.count,
             );
-          case GitStampCommit():
+          case Commit():
             return _GitStampCommitListElement(
               gitStamp: gitStamp,
               commit: element,
@@ -399,7 +398,7 @@ class _GitStampCommitList extends StatelessWidget {
               itemLargeType: itemLargeType,
               monospaceFontFamily: monospaceFontFamily,
             );
-          case GitStampTag():
+          case Tag():
             return _GitStampTagListElement(
               tag: element,
             );
@@ -472,7 +471,7 @@ class _GitStampDateListElement extends StatelessWidget {
 
 class _GitStampCommitListElement extends StatelessWidget {
   final GitStampNode gitStamp;
-  final GitStampCommit commit;
+  final Commit commit;
   final bool isLiteVersion;
   final bool itemLargeType;
   final String? monospaceFontFamily;
@@ -522,7 +521,7 @@ class _GitStampCommitListElement extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       InkWell(
-                        onTap: () => openEmail(email: commit.authorEmail),
+                        onTap: () => _openEmail(email: commit.authorEmail),
                         child: Text(
                           '${commit.authorName} (${commit.authorEmail})',
                           style: TextStyle(
@@ -546,7 +545,7 @@ class _GitStampCommitListElement extends StatelessWidget {
                     ],
                   ),
             trailing: IconButton(
-              onPressed: () => copyToClipboard(context, commit.hash),
+              onPressed: () => _copyToClipboard(context, commit.hash),
               icon: Icon(
                 Icons.content_copy,
                 color: Theme.of(context).colorScheme.primary,
@@ -615,7 +614,7 @@ class _GitStampCommitListElement extends StatelessWidget {
 }
 
 class _GitStampTagListElement extends StatelessWidget {
-  final GitStampTag tag;
+  final Tag tag;
 
   const _GitStampTagListElement({
     required this.tag,
@@ -667,7 +666,7 @@ class _GitStampTagListElement extends StatelessWidget {
 }
 
 class _GitStampCommitListHeader extends StatelessWidget {
-  final GitStampCommit commit;
+  final Commit commit;
 
   const _GitStampCommitListHeader({required this.commit});
 
@@ -710,8 +709,8 @@ class _GitStampDoubleText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(left, style: textDefault),
-        Text(right, style: textBold),
+        Text(left, style: _textDefault),
+        Text(right, style: _textBold),
       ],
     );
   }
@@ -769,7 +768,7 @@ class _GitStampRepoDetails extends StatelessWidget {
                     IconButton(
                       onPressed: () {
                         Navigator.pop(context);
-                        showSnackbar(
+                        _showSnackbar(
                           context: context,
                           message: gitStamp.gitRemote,
                           showCloseIcon: true,
@@ -780,7 +779,7 @@ class _GitStampRepoDetails extends StatelessWidget {
                     IconButton(
                       onPressed: () {
                         Navigator.pop(context);
-                        showSnackbar(
+                        _showSnackbar(
                           context: context,
                           message: gitStamp.gitCountObjects,
                           showCloseIcon: true,
@@ -792,7 +791,7 @@ class _GitStampRepoDetails extends StatelessWidget {
                     IconButton(
                       onPressed: () {
                         Navigator.pop(context);
-                        showSnackbar(
+                        _showSnackbar(
                           context: context,
                           message: gitStamp.buildSystemInfo,
                           showCloseIcon: true,
@@ -804,7 +803,7 @@ class _GitStampRepoDetails extends StatelessWidget {
                     IconButton(
                       onPressed: () {
                         Navigator.pop(context);
-                        showSnackbar(
+                        _showSnackbar(
                           context: context,
                           message: gitStamp.gitConfigList,
                           showCloseIcon: true,
@@ -889,16 +888,16 @@ class _GitStampRepoDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('GitStamp', style: textTitle),
+        Text('GitStamp', style: _textTitle),
         const SizedBox(height: 4),
         _GitStampDoubleText('Version: ', gitStampVersion),
         Row(
           children: [
-            Text('Build type: [', style: textDefault),
-            Text('LITE', style: isLiteVersion ? textBold : textDefault),
-            Text(', ', style: textDefault),
-            Text('FULL', style: isLiteVersion ? textDefault : textBold),
-            Text(']', style: textDefault),
+            Text('Build type: [', style: _textDefault),
+            Text('LITE', style: isLiteVersion ? _textBold : _textDefault),
+            Text(', ', style: _textDefault),
+            Text('FULL', style: isLiteVersion ? _textDefault : _textBold),
+            Text(']', style: _textDefault),
           ],
         ),
       ],
@@ -909,7 +908,7 @@ class _GitStampRepoDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Build', style: textTitle),
+        Text('Build', style: _textTitle),
         const SizedBox(height: 4),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -929,7 +928,7 @@ class _GitStampRepoDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Environment', style: textTitle),
+        Text('Environment', style: _textTitle),
         const SizedBox(height: 4),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -959,7 +958,7 @@ class _GitStampRepoDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Repository', style: textTitle),
+        Text('Repository', style: _textTitle),
         const SizedBox(height: 4),
         _GitStampDoubleText('App Name: ', gitStamp.appName),
         _GitStampDoubleText('App Version: ', gitStamp.appVersionFull),
@@ -972,8 +971,8 @@ class _GitStampRepoDetails extends StatelessWidget {
           (entry) => Row(
             children: [
               SizedBox(width: 16),
-              Text('${entry.key}: ', style: textDefault),
-              Text(entry.value.toString(), style: textBold),
+              Text('${entry.key}: ', style: _textDefault),
+              Text(entry.value.toString(), style: _textBold),
             ],
           ),
         ),
@@ -1007,7 +1006,7 @@ class _GitStampRepoFiles extends StatelessWidget {
               ),
               SizedBox(height: 16.0),
               if (!gitStamp.isEncrypted) ...[
-                Text(gitStamp.observedFiles, style: textDefault)
+                Text(gitStamp.observedFiles, style: _textDefault)
               ],
             ],
           ),
@@ -1073,7 +1072,7 @@ class _GitStampRepoReflog extends StatelessWidget {
               _GitStampLabel(first: 'Repository reflog'),
               SizedBox(height: 12),
               if (!gitStamp.isEncrypted) ...[
-                Text(gitStamp.gitReflog, style: textDefault)
+                Text(gitStamp.gitReflog, style: _textDefault)
               ],
             ],
           ),
@@ -1108,7 +1107,7 @@ class _GitStampRepoBranches extends StatelessWidget {
               ),
               SizedBox(height: 16.0),
               if (!gitStamp.isEncrypted) ...[
-                Text(gitStamp.branchListString, style: textDefault)
+                Text(gitStamp.branchListString, style: _textDefault)
               ],
             ],
           ),
@@ -1145,7 +1144,7 @@ class _GitStampFilterList extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text('Filter', style: textTitle),
+              child: Text('Filter', style: _textTitle),
             ),
             SizedBox(height: 20),
             Flexible(
@@ -1157,7 +1156,7 @@ class _GitStampFilterList extends StatelessWidget {
 
                     return ListTile(
                       leading: Icon(e != null ? Icons.person : Icons.close),
-                      title: Text(e ?? 'No filter', style: textBold),
+                      title: Text(e ?? 'No filter', style: _textBold),
                       subtitle: count == null ? null : Text(count.toString()),
                       trailing: e != selectedUser ? null : Icon(Icons.check),
                       onTap: () => onFilterPressed(e),
@@ -1186,7 +1185,7 @@ class _GitStampMore extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text('Git Stamp', style: textTitle),
+            child: Text('Git Stamp', style: _textTitle),
           ),
           SizedBox(height: 20),
           Flexible(
@@ -1194,16 +1193,16 @@ class _GitStampMore extends StatelessWidget {
               shrinkWrap: true,
               children: [
                 ListTile(
-                  onTap: () => openEmail(email: 'arononak@gmail.com'),
+                  onTap: () => _openEmail(email: 'arononak@gmail.com'),
                   title: Text(
                     'Have a great idea for Git Stamp?',
-                    style: textBold,
+                    style: _textBold,
                   ),
                   leading: Icon(Icons.mail),
                 ),
                 ListTile(
-                  onTap: () => openProjectHomepage(),
-                  title: Text('You love Git Stamp?', style: textBold),
+                  onTap: () => _openProjectHomepage(),
+                  title: Text('You love Git Stamp?', style: _textBold),
                   leading: Icon(Icons.star),
                 ),
               ],
@@ -1365,4 +1364,187 @@ class _GitStampDetailsPageText extends StatelessWidget {
       return Theme.of(context).colorScheme.onSurface;
     }
   }
+}
+
+/// Generated by ChatGPT
+Uint8List _hexToUint8List(String hex) {
+  return Uint8List.fromList(hex
+      .replaceAll(' ', '')
+      .replaceAllMapped(RegExp(r'..'),
+          (match) => String.fromCharCode(int.parse(match.group(0)!, radix: 16)))
+      .codeUnits);
+}
+
+class GitStampDecryptForm extends StatefulWidget {
+  const GitStampDecryptForm({
+    super.key,
+    required this.gitStamp,
+    this.startKey,
+    this.startIv,
+    this.onSuccess,
+  });
+
+  final GitStampNode gitStamp;
+  final String? startKey;
+  final String? startIv;
+  final VoidCallback? onSuccess;
+
+  @override
+  State<GitStampDecryptForm> createState() => _GitStampDecryptFormState();
+}
+
+class _GitStampDecryptFormState extends State<GitStampDecryptForm> {
+  late final TextEditingController _keyController;
+  late final TextEditingController _ivController;
+
+  @override
+  void initState() {
+    _keyController = TextEditingController(text: widget.startKey);
+    _ivController = TextEditingController(text: widget.startIv);
+
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text('Data Decryption', style: _textTitle),
+          SizedBox(height: 12),
+          _buildHexTextField(
+            text: 'KEY',
+            length: 64,
+            controller: _keyController,
+          ),
+          SizedBox(height: 12),
+          _buildHexTextField(
+            text: 'IV',
+            length: 32,
+            controller: _ivController,
+          ),
+          TextButton(
+            onPressed: () {
+              final success = widget.gitStamp.decrypt(
+                _hexToUint8List(_keyController.text),
+                _hexToUint8List(_ivController.text),
+              );
+
+              if (!success) {
+                _showSnackbar(context: context, message: 'Error');
+                Navigator.of(context).pop();
+                return;
+              }
+
+              _showSnackbar(context: context, message: 'Success');
+              Navigator.of(context).pop();
+              widget.onSuccess?.call();
+            },
+            child: Text('Decrypt'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildHexTextField({
+    String? text,
+    int? length,
+    TextEditingController? controller,
+  }) {
+    return TextField(
+      controller: controller,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(),
+        label: Text(text ?? ''),
+      ),
+      keyboardType: TextInputType.text,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(
+          RegExp(r'[0-9a-fA-F]'),
+        ),
+      ],
+      maxLength: length ?? 32,
+      maxLengthEnforcement: MaxLengthEnforcement.enforced,
+    );
+  }
+}
+
+void _openEmail({
+  String? email,
+  String? subject,
+}) {
+  String? encodeQueryParameters(Map<String, String> params) {
+    return params.entries
+        .map((e) =>
+            '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+        .join('&');
+  }
+
+  launchUrl(
+    Uri(
+      scheme: 'mailto',
+      path: email,
+      query: encodeQueryParameters(<String, String>{'subject': subject ?? ''}),
+    ),
+  );
+}
+
+void _openProjectHomepage() {
+  launchUrl(Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'arononak/git_stamp',
+  ));
+}
+
+void _showSnackbar({
+  required BuildContext context,
+  required String message,
+  bool floating = true,
+  bool showCloseIcon = false,
+}) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      closeIconColor: Colors.white,
+      showCloseIcon: showCloseIcon,
+      behavior: floating ? SnackBarBehavior.floating : SnackBarBehavior.fixed,
+      duration: floating ? Duration(seconds: 3) : Duration(seconds: 15),
+      backgroundColor: Colors.orange.withOpacity(0.9),
+      content: Stack(
+        children: [
+          Container(
+            constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(context).size.height,
+            ),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Text(
+                  message,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+void _copyToClipboard(BuildContext context, String text) {
+  Clipboard.setData(ClipboardData(text: text));
+  _showSnackbar(
+    context: context,
+    message: 'Copied to clipboard!',
+    showCloseIcon: true,
+  );
 }

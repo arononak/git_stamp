@@ -1,21 +1,21 @@
 import 'dateable.dart';
 
-class GitStampTag extends Dateable {
+class Tag extends Dateable {
   final String name;
   @override
   final String date;
 
-  GitStampTag({
+  Tag({
     required this.name,
     required this.date,
   });
 
-  factory GitStampTag.fromJson(Map<String, dynamic> json) => GitStampTag(
+  factory Tag.fromJson(Map<String, dynamic> json) => Tag(
         name: json['name'] ?? 'null',
         date: json['date'] ?? 'null',
       );
 
-  factory GitStampTag.all(String value) => GitStampTag(
+  factory Tag.all(String value) => Tag(
         name: value,
         date: value,
       );

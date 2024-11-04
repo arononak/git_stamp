@@ -1,4 +1,4 @@
-class GitStampBuildMachine {
+class BuildMachine {
   final String frameworkVersion;
   final String channel;
   final String repositoryUrl;
@@ -10,7 +10,7 @@ class GitStampBuildMachine {
   final String flutterVersion;
   final String flutterRoot;
 
-  GitStampBuildMachine({
+  BuildMachine({
     required this.frameworkVersion,
     required this.channel,
     required this.repositoryUrl,
@@ -23,8 +23,8 @@ class GitStampBuildMachine {
     required this.flutterRoot,
   });
 
-  factory GitStampBuildMachine.fromJson(Map<String, dynamic> json) =>
-      GitStampBuildMachine(
+  factory BuildMachine.fromJson(Map<String, dynamic> json) =>
+      BuildMachine(
         frameworkVersion: json['frameworkVersion'] ?? 'null',
         channel: json['channel'] ?? 'null',
         repositoryUrl: json['repositoryUrl'] ?? 'null',
@@ -37,7 +37,7 @@ class GitStampBuildMachine {
         flutterRoot: json['flutterRoot'] ?? 'null',
       );
 
-  factory GitStampBuildMachine.all(String value) => GitStampBuildMachine(
+  factory BuildMachine.all(String value) => BuildMachine(
         frameworkVersion: value,
         channel: value,
         repositoryUrl: value,

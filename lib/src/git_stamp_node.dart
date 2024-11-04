@@ -2,18 +2,18 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'model/git_stamp_build_machine.dart';
-import 'model/git_stamp_commit.dart';
-import 'model/git_stamp_tag.dart';
+import 'model/build_machine.dart';
+import 'model/commit.dart';
+import 'model/tag.dart';
 
 mixin _GitStampNavigator {
   Widget icon();
   Widget listTile({required BuildContext context, String? monospaceFontFamily});
   Widget mainPage({String? monospaceFontFamily, bool showDetails = false, bool showFiles = false});
-  Widget detailsPage({required GitStampCommit commit, String? monospaceFontFamily});
+  Widget detailsPage({required Commit commit, String? monospaceFontFamily});
 
   void showMainPage({required BuildContext context, String? monospaceFontFamily, bool useRootNavigator = false});
-  void showDetailsPage({required BuildContext context, required GitStampCommit commit, String? monospaceFontFamily, bool useRootNavigator = false});
+  void showDetailsPage({required BuildContext context, required Commit commit, String? monospaceFontFamily, bool useRootNavigator = false});
   void showLicensePage({required BuildContext context, Widget? applicationIcon, String? applicationLegalese, bool useRootNavigator = false});
 }
 
@@ -23,8 +23,8 @@ abstract class _GitStampNode with _GitStampNavigator {
   bool decrypt(Uint8List key, Uint8List iv);
 
   String get commitListString;
-  List<GitStampCommit> get commitList;
-  GitStampCommit? get latestCommit;
+  List<Commit> get commitList;
+  Commit? get latestCommit;
   String get sha;
   int get commitCount;
 
@@ -34,7 +34,7 @@ abstract class _GitStampNode with _GitStampNavigator {
   Map<String, dynamic> get diffStatList;
 
   String get buildMachineString;
-  GitStampBuildMachine get buildMachine;
+  BuildMachine get buildMachine;
 
   String get buildBranch;
   String get buildDateTime;
@@ -47,7 +47,7 @@ abstract class _GitStampNode with _GitStampNavigator {
   int get observedFilesCount;
 
   String get tagListString;
-  List<GitStampTag> get tagList;
+  List<Tag> get tagList;
   int get tagListCount;
 
   String get branchListString;
@@ -79,8 +79,8 @@ class GitStampNode extends _GitStampNode {
   @override bool decrypt(Uint8List key, Uint8List iv) => true;
 
   @override String get commitListString => '[]';
-  @override List<GitStampCommit> get commitList => json.decode(commitListString).map<GitStampCommit>((json) => GitStampCommit.fromJson(json)).toList();
-  @override GitStampCommit? get latestCommit => commitList.firstOrNull;
+  @override List<Commit> get commitList => json.decode(commitListString).map<Commit>((json) => Commit.fromJson(json)).toList();
+  @override Commit? get latestCommit => commitList.firstOrNull;
   @override String get sha => latestCommit?.hash ?? 'REPO WITHOUT COMMITS';
   @override int get commitCount => commitList.length;
 
@@ -90,7 +90,7 @@ class GitStampNode extends _GitStampNode {
   @override Map<String, dynamic> get diffStatList => json.decode(diffStatListString.replaceAll(r"\'", "'"));
 
   @override String get buildMachineString => '';
-  @override GitStampBuildMachine get buildMachine => GitStampBuildMachine.fromJson(json.decode(buildMachineString));
+  @override BuildMachine get buildMachine => BuildMachine.fromJson(json.decode(buildMachineString));
   
   @override String get buildBranch => '';
   @override String get buildDateTime => '';
@@ -103,7 +103,7 @@ class GitStampNode extends _GitStampNode {
   @override int get observedFilesCount => observedFilesList.length;
 
   @override String get tagListString => '[]';
-  @override List<GitStampTag> get tagList => json.decode(tagListString).map<GitStampTag>((json) => GitStampTag.fromJson(json)).toList();
+  @override List<Tag> get tagList => json.decode(tagListString).map<Tag>((json) => Tag.fromJson(json)).toList();
   @override int get tagListCount => tagList.length;
 
   @override String get branchListString => '';
@@ -129,9 +129,9 @@ class GitStampNode extends _GitStampNode {
   @override Widget icon() => SizedBox();
   @override Widget listTile({required BuildContext context, String? monospaceFontFamily}) => SizedBox();
   @override Widget mainPage({String? monospaceFontFamily, bool showDetails = false, bool showFiles = false}) => SizedBox();
-  @override Widget detailsPage({required GitStampCommit commit, String? monospaceFontFamily}) => SizedBox();
+  @override Widget detailsPage({required Commit commit, String? monospaceFontFamily}) => SizedBox();
 
   @override void showMainPage({required BuildContext context, String? monospaceFontFamily, bool useRootNavigator = false}) {}
-  @override void showDetailsPage({required BuildContext context, required GitStampCommit commit, String? monospaceFontFamily, bool useRootNavigator = false}) {}
+  @override void showDetailsPage({required BuildContext context, required Commit commit, String? monospaceFontFamily, bool useRootNavigator = false}) {}
   @override void showLicensePage({required BuildContext context, Widget? applicationIcon, String? applicationLegalese, bool useRootNavigator = false}) {}
 }
