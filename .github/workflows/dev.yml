@@ -78,12 +78,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: dart-lang/setup-dart@v1
-      - run: git pull
-      - run: dart format bin
       - run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add bin
+          git pull
+          dart format bin
+          git add .
           if ! git diff-index --quiet HEAD; then
             git commit -m 'Code update'
             git push origin HEAD:main
@@ -101,12 +101,12 @@ jobs:
         with:
           flutter-version: '3.24.2'
           channel: 'stable'
-      - run: git config --global user.name 'github-actions[bot]'
-      - run: git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-      - run: git pull
-      - run: flutter pub get
-      - run: make -C example benchmarks
       - run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git pull
+          flutter pub get
+          make -C example benchmarks
           git add .
           git commit -m 'Benchmarks update'
           git push origin HEAD:main
@@ -127,12 +127,12 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '21'
-      - run: git pull
-      - run: flutter pub get
-      - run: dart doc
       - run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git pull
+          flutter pub get
+          dart doc
           git add doc
           if ! git diff-index --quiet HEAD; then
             git commit -m 'DOC update'
@@ -170,12 +170,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - run: git config --global user.name 'github-actions[bot]'
-      - run: git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-      - run: git pull
-      - run: flutter pub get
-      - run: make -C example screenshots
       - run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git pull
+          flutter pub get
+          make -C example screenshots
           git add .
           git commit -m 'Screenshot update'
           git push origin HEAD:main
