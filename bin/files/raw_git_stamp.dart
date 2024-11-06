@@ -121,7 +121,7 @@ class DecryptedGitStampNode extends GitStampNode {
   ${model.generateFlutterFiles.enabled}  );
   ${model.generateFlutterFiles.enabled}}
   ${model.generateFlutterFiles.enabled}
-  ${model.generateFlutterFiles.enabled}@override Widget detailsPage({required GitStampCommit commit, String? monospaceFontFamily}) {
+  ${model.generateFlutterFiles.enabled}@override Widget detailsPage({required Commit commit, String? monospaceFontFamily}) {
   ${model.generateFlutterFiles.enabled}  return GitStampDetailsPage(
   ${model.generateFlutterFiles.enabled}    gitStamp: this,
   ${model.generateFlutterFiles.enabled}    commit: commit,
@@ -137,7 +137,7 @@ class DecryptedGitStampNode extends GitStampNode {
   ${model.generateFlutterFiles.enabled}  ));
   ${model.generateFlutterFiles.enabled}}
   ${model.generateFlutterFiles.enabled}
-  ${model.generateFlutterFiles.enabled}@override void showDetailsPage({required BuildContext context, required GitStampCommit commit, String? monospaceFontFamily, bool useRootNavigator = false}) {
+  ${model.generateFlutterFiles.enabled}@override void showDetailsPage({required BuildContext context, required Commit commit, String? monospaceFontFamily, bool useRootNavigator = false}) {
   ${model.generateFlutterFiles.enabled}  Navigator.of(context, rootNavigator: useRootNavigator).push(MaterialPageRoute<void>(
   ${model.generateFlutterFiles.enabled}    builder: (BuildContext context) {
   ${model.generateFlutterFiles.enabled}      return detailsPage(commit: commit, monospaceFontFamily: monospaceFontFamily);
@@ -215,7 +215,7 @@ class EncryptedGitStampNode extends GitStampNode {
   @override String get repoPath => _decrypt(gitStampRepoPath) ?? 'ENCRYPTED';
   @override String get observedFiles => _decrypt(gitStampObservedFilesList) ?? 'ENCRYPTED';
   @override String get tagListString => _decrypt(gitStampGitTagList) ?? 'ENCRYPTED';
-  @override List<GitStampTag> get tagList => isEncrypted ? [GitStampTag.all('ENCRYPTED')] : super.tagList;
+  @override List<Tag> get tagList => isEncrypted ? [Tag.all('ENCRYPTED')] : super.tagList;
   @override String get branchListString => _decrypt(gitStampGitBranchList) ?? 'ENCRYPTED';
   @override String get appVersionFull => !isEncrypted ? super.appVersionFull : 'ENCRYPTED';
   @override String get appVersion => _decrypt(gitStampAppVersion) ?? 'ENCRYPTED';
@@ -263,7 +263,7 @@ class EncryptedGitStampNode extends GitStampNode {
     );
   }
 
-  @override Widget detailsPage({required GitStampCommit commit, String? monospaceFontFamily}) {
+  @override Widget detailsPage({required Commit commit, String? monospaceFontFamily}) {
     return GitStampDetailsPage(
       gitStamp: this,
       commit: commit,
@@ -279,7 +279,7 @@ class EncryptedGitStampNode extends GitStampNode {
     ));
   }
 
-  @override void showDetailsPage({required BuildContext context, required GitStampCommit commit, String? monospaceFontFamily, bool useRootNavigator = false}) {
+  @override void showDetailsPage({required BuildContext context, required Commit commit, String? monospaceFontFamily, bool useRootNavigator = false}) {
     Navigator.of(context, rootNavigator: useRootNavigator).push(MaterialPageRoute<void>(
       builder: (BuildContext context) {
         return detailsPage(commit: commit, monospaceFontFamily: monospaceFontFamily);
