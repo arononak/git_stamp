@@ -207,7 +207,7 @@ class EncryptedGitStampNode extends GitStampNode {
   @override String get diffListString => _decrypt(gitStampDiffList) ?? '[]';
   @override String get diffStatListString => _decrypt(gitStampDiffStatList) ?? '[]';
   @override String get buildMachineString => _decrypt(gitStampBuildMachine) ?? '{}';
-  @override GitStampBuildMachine get buildMachine => isEncrypted ? GitStampBuildMachine.all('ENCRYPTED') : super.buildMachine;
+  @override BuildMachine get buildMachine => isEncrypted ? BuildMachine.all('ENCRYPTED') : super.buildMachine;
   @override String get buildBranch => _decrypt(gitStampBuildBranch) ?? 'ENCRYPTED';
   @override String get buildDateTime => _decrypt(gitStampBuildDateTime) ?? 'ENCRYPTED';
   @override String get buildSystemInfo => _decrypt(gitStampBuildSystemInfo) ?? 'ENCRYPTED';
