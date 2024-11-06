@@ -71,7 +71,7 @@
         <li>@<a href="https://api.flutter.dev/flutter/dart-core/override-constant.html">override</a></li>
     </ol>
   </div>
-      <span class="returntype"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../git_stamp/GitStampCommit-class.html">GitStampCommit</a></span>&gt;</span></span>
+      <span class="returntype"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../git_stamp/Commit-class.html">Commit</a></span>&gt;</span></span>
       <span class="name ">commitList</span>
       
 
@@ -82,7 +82,7 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">@override List&lt;GitStampCommit&gt; get commitList =&gt; json.decode(commitListString).map&lt;GitStampCommit&gt;((json) =&gt; GitStampCommit.fromJson(json)).toList();</code></pre>
+  <pre class="language-dart"><code class="language-dart">@override List&lt;Commit&gt; get commitList =&gt; json.decode(commitListString).map&lt;Commit&gt;((json) =&gt; Commit.fromJson(json)).toList();</code></pre>
 </section>
 
   </section>
