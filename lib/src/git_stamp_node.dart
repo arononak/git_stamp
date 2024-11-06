@@ -1,3 +1,7 @@
+// Copyright © 2024 Aron Onak. All rights reserved.
+// Licensed under the MIT license.
+// If you have any feedback, please contact me at arononak@gmail.com
+
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
@@ -6,73 +10,20 @@ import 'model/build_machine.dart';
 import 'model/commit.dart';
 import 'model/tag.dart';
 
-mixin _GitStampNavigator {
-  Widget icon();
-  Widget listTile({required BuildContext context, String? monospaceFontFamily});
-  Widget mainPage({String? monospaceFontFamily, bool showDetails = false, bool showFiles = false});
-  Widget detailsPage({required Commit commit, String? monospaceFontFamily});
-
-  void showMainPage({required BuildContext context, String? monospaceFontFamily, bool useRootNavigator = false});
-  void showDetailsPage({required BuildContext context, required Commit commit, String? monospaceFontFamily, bool useRootNavigator = false});
-  void showLicensePage({required BuildContext context, Widget? applicationIcon, String? applicationLegalese, bool useRootNavigator = false});
-}
-
-abstract class _GitStampNode with _GitStampNavigator {
-  bool get isEncrypted;
-
-  bool decrypt(Uint8List key, Uint8List iv);
-
-  String get commitListString;
-  List<Commit> get commitList;
-  Commit? get latestCommit;
-  String get sha;
-  int get commitCount;
-
-  String get diffListString;
-  Map<String, dynamic> get diffList;
-  String get diffStatListString;
-  Map<String, dynamic> get diffStatList;
-
-  String get buildMachineString;
-  BuildMachine get buildMachine;
-
-  String get buildBranch;
-  String get buildDateTime;
-  String get buildSystemInfo;
-  String get repoCreationDate;
-  String get repoPath;
-
-  String get observedFiles;
-  List<String> get observedFilesList;
-  int get observedFilesCount;
-
-  String get tagListString;
-  List<Tag> get tagList;
-  int get tagListCount;
-
-  String get branchListString;
-  List<String> get branchList;
-  int get branchListCount;
-
-  String get appVersionFull => '$appVersion ($appBuild)';
-  String get appVersion;
-  String get appBuild;
-  String get appName;
-
-  String get gitConfigGlobalUser => '$gitConfigGlobalUserName ($gitConfigGlobalUserEmail)';
-  String get gitConfigGlobalUserName;
-  String get gitConfigGlobalUserEmail;
-
-  String get gitConfigUser => '$gitConfigUserName ($gitConfigUserEmail)';
-  String get gitConfigUserName;
-  String get gitConfigUserEmail;
-
-  String get gitRemote;
-  String get gitConfigList;
-  String get gitCountObjects;
-  String get gitReflog;
-}
-
+/// The [GitStampNode] class contains information provided during generation.
+/// 
+/// ```cli
+/// dart run git_stamp --build-type full
+/// ```
+/// 
+/// Used by [GitStampPage].
+/// 
+/// Can be used to extract information.
+/// 
+/// Example:
+/// ```dart
+/// const appVersion = GitStampNode.appVersion;
+/// ```
 class GitStampNode extends _GitStampNode {
   @override bool get isEncrypted => false;
 
@@ -134,4 +85,71 @@ class GitStampNode extends _GitStampNode {
   @override void showMainPage({required BuildContext context, String? monospaceFontFamily, bool useRootNavigator = false}) {}
   @override void showDetailsPage({required BuildContext context, required Commit commit, String? monospaceFontFamily, bool useRootNavigator = false}) {}
   @override void showLicensePage({required BuildContext context, Widget? applicationIcon, String? applicationLegalese, bool useRootNavigator = false}) {}
+}
+
+abstract class _GitStampNode with _GitStampNavigator {
+  bool get isEncrypted;
+
+  bool decrypt(Uint8List key, Uint8List iv);
+
+  String get commitListString;
+  List<Commit> get commitList;
+  Commit? get latestCommit;
+  String get sha;
+  int get commitCount;
+
+  String get diffListString;
+  Map<String, dynamic> get diffList;
+  String get diffStatListString;
+  Map<String, dynamic> get diffStatList;
+
+  String get buildMachineString;
+  BuildMachine get buildMachine;
+
+  String get buildBranch;
+  String get buildDateTime;
+  String get buildSystemInfo;
+  String get repoCreationDate;
+  String get repoPath;
+
+  String get observedFiles;
+  List<String> get observedFilesList;
+  int get observedFilesCount;
+
+  String get tagListString;
+  List<Tag> get tagList;
+  int get tagListCount;
+
+  String get branchListString;
+  List<String> get branchList;
+  int get branchListCount;
+
+  String get appVersionFull => '$appVersion ($appBuild)';
+  String get appVersion;
+  String get appBuild;
+  String get appName;
+
+  String get gitConfigGlobalUser => '$gitConfigGlobalUserName ($gitConfigGlobalUserEmail)';
+  String get gitConfigGlobalUserName;
+  String get gitConfigGlobalUserEmail;
+
+  String get gitConfigUser => '$gitConfigUserName ($gitConfigUserEmail)';
+  String get gitConfigUserName;
+  String get gitConfigUserEmail;
+
+  String get gitRemote;
+  String get gitConfigList;
+  String get gitCountObjects;
+  String get gitReflog;
+}
+
+mixin _GitStampNavigator {
+  Widget icon();
+  Widget listTile({required BuildContext context, String? monospaceFontFamily});
+  Widget mainPage({String? monospaceFontFamily, bool showDetails = false, bool showFiles = false});
+  Widget detailsPage({required Commit commit, String? monospaceFontFamily});
+
+  void showMainPage({required BuildContext context, String? monospaceFontFamily, bool useRootNavigator = false});
+  void showDetailsPage({required BuildContext context, required Commit commit, String? monospaceFontFamily, bool useRootNavigator = false});
+  void showLicensePage({required BuildContext context, Widget? applicationIcon, String? applicationLegalese, bool useRootNavigator = false});
 }

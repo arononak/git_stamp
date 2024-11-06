@@ -1,7 +1,20 @@
+// Copyright © 2024 Aron Onak. All rights reserved.
+// Licensed under the MIT license.
+// If you have any feedback, please contact me at arononak@gmail.com
+
 import 'package:flutter/material.dart';
 
 import 'git_stamp_node.dart';
 
+/// The [GitStampIcon] class used in the application when we want to display an
+/// icon with basic build information.
+///
+/// Such as:
+/// 
+///  * [GitStampNode.appVersionFull].
+///  * [GitStampNode.buildDateTime],
+///  * [GitStampNode.buildBranch].
+///  * [GitStampNode.sha].
 class GitStampIcon extends StatefulWidget {
   final GitStampNode gitStamp;
 

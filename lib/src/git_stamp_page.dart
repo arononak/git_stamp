@@ -1,3 +1,7 @@
+// Copyright © 2024 Aron Onak. All rights reserved.
+// Licensed under the MIT license.
+// If you have any feedback, please contact me at arononak@gmail.com
+
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -67,6 +71,9 @@ void _showDetailsBottomSheet(
   ).then((result) => onFinish?.call());
 }
 
+/// The [GitStampPage] displays a main GitStamp page.
+/// 
+/// You should use [GitStampListTile] or the [showGitStampPage] function.
 class GitStampPage extends StatefulWidget {
   const GitStampPage({
     super.key,
@@ -219,6 +226,9 @@ class _GitStampPageState extends State<GitStampPage> {
   }
 }
 
+/// The [GitStampDetailsPage] displays a page with commit diff.
+/// 
+/// You should use [GitStampListTile] or the [showGitStampPage] function.
 class GitStampDetailsPage extends StatefulWidget {
   final GitStampNode gitStamp;
   final Commit commit;

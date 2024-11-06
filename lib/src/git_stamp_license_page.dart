@@ -1,24 +1,15 @@
+// Copyright © 2024 Aron Onak. All rights reserved.
+// Licensed under the MIT license.
+// If you have any feedback, please contact me at arononak@gmail.com
+
 import 'package:flutter/material.dart';
 
 import 'git_stamp_node.dart';
 
-void showGitStampLicensePage({
-  required BuildContext context,
-  required GitStampNode gitStamp,
-  Widget? applicationIcon,
-  String? applicationLegalese,
-  bool useRootNavigator = false,
-}) {
-  showLicensePage(
-    context: context,
-    applicationName: gitStamp.appName,
-    applicationVersion: '${gitStamp.appVersion} (${gitStamp.appBuild})',
-    applicationIcon: applicationIcon,
-    applicationLegalese: applicationLegalese,
-    useRootNavigator: useRootNavigator,
-  );
-}
-
+/// The [GitStampLicenseIcon] class used when we want to go to the licensing screen.
+/// 
+/// Below that the [showLicensePage] function from [material] is used.
+/// Additionally, information from [pubspec.yaml] is added.
 class GitStampLicenseIcon extends StatelessWidget {
   const GitStampLicenseIcon({
     super.key,
@@ -45,4 +36,21 @@ class GitStampLicenseIcon extends StatelessWidget {
       icon: const Icon(Icons.gavel),
     );
   }
+}
+
+void showGitStampLicensePage({
+  required BuildContext context,
+  required GitStampNode gitStamp,
+  Widget? applicationIcon,
+  String? applicationLegalese,
+  bool useRootNavigator = false,
+}) {
+  showLicensePage(
+    context: context,
+    applicationName: gitStamp.appName,
+    applicationVersion: '${gitStamp.appVersion} (${gitStamp.appBuild})',
+    applicationIcon: applicationIcon,
+    applicationLegalese: applicationLegalese,
+    useRootNavigator: useRootNavigator,
+  );
 }
