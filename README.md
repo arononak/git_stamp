@@ -18,7 +18,6 @@ Advanced await-less **information provider** & **development tool**. Used in dev
   - [🏞️ Preview](#️-preview)
   - [📑️ About (Changelog)](#️-about-changelog)
     - [Why Git Stamp?](#why-git-stamp)
-    - [Mechanism 🕯️](#mechanism-️)
     - [Motivation](#motivation)
   - [🛠️ Installation](#️-installation)
   - [🏗️ Generating](#️-generating)
@@ -53,7 +52,8 @@ When working with **Flutter** and **Git**, especially in a team environment, hum
 - **Avoiding Lost Changes in Teamwork** - It allows you to quickly see which commits made it into the final version of the application, helping to prevent missing changes due to overlooked `git pull` commands.
 - **Caching Issues in the Web Version** - Even if the latest version is deployed, users may still see an older version due to caching. Git Stamp helps identify whether the deployed version or an outdated one was loaded.
 
-### Mechanism 🕯️
+<details>
+<summary>Mechanism 🕯️</summary>
 
 ```mermaid
 graph TD
@@ -83,6 +83,8 @@ graph TD
     GENERATOR-->GENERATE(~$ dart run git_stamp)
     GENERATE-->|Create ./git_stamp directory with .dart files|CODE
 ```
+
+</details>
 
 ### Motivation
 
