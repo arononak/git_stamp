@@ -69,7 +69,6 @@
 <li><a href="#%EF%B8%8F-about-changelog">📑️ About (Changelog)</a>
 <ul>
 <li><a href="#why-git-stamp">Why Git Stamp?</a></li>
-<li><a href="#mechanism-%EF%B8%8F">Mechanism 🕯️</a></li>
 <li><a href="#motivation">Motivation</a></li>
 </ul>
 </li>
@@ -116,7 +115,8 @@
 <li><strong>Avoiding Lost Changes in Teamwork</strong> - It allows you to quickly see which commits made it into the final version of the application, helping to prevent missing changes due to overlooked <code>git pull</code> commands.</li>
 <li><strong>Caching Issues in the Web Version</strong> - Even if the latest version is deployed, users may still see an older version due to caching. Git Stamp helps identify whether the deployed version or an outdated one was loaded.</li>
 </ul>
-<h3 id="mechanism-">Mechanism 🕯️</h3>
+<details>
+<summary>Mechanism 🕯️</summary>
 <pre class="language-mermaid"><code class="language-mermaid">graph TD
     CODE((SOURCE CODE))--&gt;SYNC(flutter pub get)
     SYNC--&gt;BUILD(flutter build ...)
@@ -144,6 +144,7 @@
     GENERATOR--&gt;GENERATE(~$ dart run git_stamp)
     GENERATE--&gt;|Create ./git_stamp directory with .dart files|CODE
 </code></pre>
+</details>
 <h3 id="motivation">Motivation</h3>
 <p>The main motivation was <strong>Minecraft</strong> with information like this:</p>
 <pre class="language-dart"><code>Version: v1.20.81
