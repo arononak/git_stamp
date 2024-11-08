@@ -72,7 +72,7 @@ void _showDetailsBottomSheet(
 }
 
 /// The [GitStampPage] displays a main GitStamp page.
-/// 
+///
 /// You should use [GitStampListTile] or the [showGitStampPage] function.
 class GitStampPage extends StatefulWidget {
   const GitStampPage({
@@ -227,7 +227,7 @@ class _GitStampPageState extends State<GitStampPage> {
 }
 
 /// The [GitStampDetailsPage] displays a page with commit diff.
-/// 
+///
 /// You should use [GitStampListTile] or the [showGitStampPage] function.
 class GitStampDetailsPage extends StatefulWidget {
   final GitStampNode gitStamp;
@@ -411,6 +411,7 @@ class _GitStampCommitList extends StatelessWidget {
           case Tag():
             return _GitStampTagListElement(
               tag: element,
+              itemLargeType: itemLargeType,
             );
           default:
             return SizedBox();
@@ -625,50 +626,63 @@ class _GitStampCommitListElement extends StatelessWidget {
 
 class _GitStampTagListElement extends StatelessWidget {
   final Tag tag;
+  final bool itemLargeType;
 
   const _GitStampTagListElement({
     required this.tag,
+    required this.itemLargeType,
   });
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Theme.of(context).colorScheme.primary,
+      color: Theme.of(context).colorScheme.primaryContainer,
       margin: EdgeInsets.symmetric(
         horizontal: 0.0,
-        vertical: 4.0,
+        vertical: itemLargeType == false ? 0.0 : 4.0,
       ),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0.0)),
       elevation: 0.0,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        padding: EdgeInsets.symmetric(
+          horizontal: itemLargeType == false ? 8.0 : 16,
+        ),
         child: ListTile(
           dense: true,
           minTileHeight: 0.0,
           contentPadding: const EdgeInsets.all(0),
-          leading: Icon(
-            Icons.tag,
-            size: 28,
-            color: Theme.of(context).colorScheme.inversePrimary,
-          ),
+          leading: itemLargeType == false
+              ? null
+              : _isMobile(context)
+                  ? null
+                  : Icon(
+                      Icons.local_offer,
+                      size: 36,
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                    ),
           title: Text(
             tag.name,
             style: TextStyle(
-              fontSize: 14.0,
+              fontSize: 16.0,
               fontWeight: FontWeight.bold,
               fontStyle: FontStyle.italic,
-              color: Theme.of(context).colorScheme.inversePrimary,
+              color: Theme.of(context).colorScheme.onPrimaryContainer,
             ),
           ),
-          subtitle: Text(
-            tag.date,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              fontSize: 12.0,
-              color: Theme.of(context).colorScheme.inversePrimary,
-            ),
-          ),
+          subtitle: itemLargeType == false
+              ? null
+              : Text(
+                  tag.date,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 13.0,
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onPrimaryContainer
+                        .withOpacity(0.7),
+                  ),
+                ),
         ),
       ),
     );
