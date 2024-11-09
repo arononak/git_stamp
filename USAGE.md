@@ -1,11 +1,11 @@
 # 💻 Usage
 
-| BUILD TYPE                              | INTERNAL TESTING | PUBLIC STORES  | DATA AWAIT-LESS PROVIDER |
-| --------------------------------------- | ---------------- | -------------- | ------------------------ |
-| FULL                                    | YES              | ONLY ENCRYPTED | NO                       |
-| LITE                                    | YES              | ONLY ENCRYPTED | NO                       |
-| ICON                                    | YES              | YES            | NO                       |
-| [CUSTOM](./lib/src/git_stamp_node.dart) | YES              | YES            | YES                      |
+| BUILD TYPE                              | DEVELOPMENT | INTERNAL TESTING | PUBLIC STORES  | DATA AWAIT-LESS PROVIDER |
+| --------------------------------------- | ----------- | ---------------- | -------------- | ------------------------ |
+| FULL                                    | YES         | YES              | ONLY ENCRYPTED | YES                      |
+| LITE                                    | YES         | YES              | ONLY ENCRYPTED | YES                      |
+| ICON                                    | YES         | YES              | YES            | YES                      |
+| [CUSTOM](./lib/src/git_stamp_node.dart) | YES         | YES              | YES            | YES                      |
 
 ### 1. GitStampListTile
 

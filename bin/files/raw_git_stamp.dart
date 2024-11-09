@@ -1,3 +1,7 @@
+// Copyright © 2024 Aron Onak. All rights reserved.
+// Licensed under the MIT license.
+// If you have any feedback, please contact me at arononak@gmail.com
+
 import 'dart:typed_data';
 
 import '../git_stamp_build_model.dart';
@@ -6,11 +10,18 @@ extension BoolExtension on bool {
   String get enabled => this ? '' : '//';
 }
 
+const _copyrights = r'''
+// Copyright © 2024 Aron Onak. All rights reserved.
+// Licensed under the MIT license.
+// If you have any feedback, please contact me at arononak@gmail.com
+''';
+
 String rawGitStampNode(
   GitStampBuildModel model,
   String decryptedTestText,
   dynamic encryptedTestText,
 ) =>
+    _copyrights +
     _content(model) +
     (model.encrypt
         ? _encryptedImpl(decryptedTestText, encryptedTestText)
@@ -49,6 +60,7 @@ ${model.gitCountObjects.enabled}import 'data/git_count_objects.dart';
 ${model.gitTagList.enabled}import 'data/git_tag_list.dart';
 ${model.gitBranchList.enabled}import 'data/git_branch_list.dart';
 ${model.gitReflog.enabled}import 'data/git_reflog.dart';
+${model.packages.enabled}import 'data/packages.dart';
 
 ${model.generateFlutterFiles.enabled}import 'git_stamp_is_lite_version.dart';
 import 'git_stamp_tool_version.dart';
@@ -89,6 +101,7 @@ class DecryptedGitStampNode extends GitStampNode {
   ${model.gitConfigList.enabled}@override String get gitConfigList => gitStampGitConfigList;
   ${model.gitCountObjects.enabled}@override String get gitCountObjects => gitStampGitCountObjects;
   ${model.gitReflog.enabled}@override String get gitReflog => gitStampGitReflog;
+  ${model.packages.enabled}@override String get packageListString => gitStampPackages;
 
   ${(model.generateFlutterFiles || model.isIcon).enabled}@override Widget icon() {
   ${(model.generateFlutterFiles || model.isIcon).enabled}  return GitStampIcon(gitStamp: this);
@@ -231,6 +244,7 @@ class EncryptedGitStampNode extends GitStampNode {
   @override String get gitConfigList => _decrypt(gitStampGitConfigList) ?? 'ENCRYPTED';
   @override String get gitCountObjects => _decrypt(gitStampGitCountObjects) ?? 'ENCRYPTED';
   @override String get gitReflog => _decrypt(gitStampGitReflog) ?? 'ENCRYPTED';
+  @override String get packageListString => _decrypt(gitStampPackages) ?? '[]';
 
   @override Widget icon() {
     return GitStampIcon(gitStamp: this);

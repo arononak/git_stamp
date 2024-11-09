@@ -1,3 +1,7 @@
+// Copyright © 2024 Aron Onak. All rights reserved.
+// Licensed under the MIT license.
+// If you have any feedback, please contact me at arononak@gmail.com
+
 import 'dart:typed_data';
 
 import 'package:encrypt/encrypt.dart';

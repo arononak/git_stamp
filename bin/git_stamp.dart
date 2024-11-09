@@ -1,3 +1,7 @@
+// Copyright © 2024 Aron Onak. All rights reserved.
+// Licensed under the MIT license.
+// If you have any feedback, please contact me at arononak@gmail.com
+
 import 'dart:convert';
 import 'dart:io';
 import 'dart:core';
@@ -383,6 +387,10 @@ void _generateDataFiles({
 
   if (model.gitReflog) {
     GitReflog(encrypt).generate();
+  }
+
+  if (model.packages) {
+    Packages(encrypt).generate();
   }
 }
 

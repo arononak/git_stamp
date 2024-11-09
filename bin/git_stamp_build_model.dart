@@ -1,3 +1,7 @@
+// Copyright © 2024 Aron Onak. All rights reserved.
+// Licensed under the MIT license.
+// If you have any feedback, please contact me at arononak@gmail.com
+
 import 'package:meta/meta.dart';
 
 @immutable
@@ -25,6 +29,7 @@ class GitStampBuildModel {
   final bool gitReflog;
   final bool generateFlutterFiles;
   final bool generateFlutterIcon;
+  final bool packages;
 
   const GitStampBuildModel({
     this.encrypt = false,
@@ -50,6 +55,7 @@ class GitStampBuildModel {
     this.gitReflog = false,
     this.generateFlutterFiles = false,
     this.generateFlutterIcon = false,
+    this.packages = false,
   });
 
   const GitStampBuildModel.all({
@@ -76,6 +82,7 @@ class GitStampBuildModel {
     this.gitReflog = true,
     this.generateFlutterFiles = true,
     this.generateFlutterIcon = true,
+    this.packages = true,
   });
 
   const GitStampBuildModel.icon({
@@ -102,6 +109,7 @@ class GitStampBuildModel {
     this.gitReflog = false,
     this.generateFlutterFiles = false,
     this.generateFlutterIcon = true,
+    this.packages = false,
   });
 
   GitStampBuildModel.custom(List<String> args)
@@ -126,6 +134,7 @@ class GitStampBuildModel {
         gitTagList = args.contains('git-tag-list'),
         gitBranchList = args.contains('git-branch-list'),
         gitReflog = args.contains('git-reflog'),
+        packages = args.contains('packages'),
         generateFlutterFiles = false,
         generateFlutterIcon = false;
 
@@ -150,6 +159,7 @@ class GitStampBuildModel {
         'git-tag-list',
         'git-branch-list',
         'git-reflog',
+        'packages',
       ];
 
   bool get isIcon =>
@@ -174,5 +184,6 @@ class GitStampBuildModel {
       gitBranchList == false &&
       gitReflog == false &&
       generateFlutterFiles == false &&
-      generateFlutterIcon == true;
+      generateFlutterIcon == true &&
+      packages == false;
 }

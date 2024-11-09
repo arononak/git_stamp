@@ -20,7 +20,7 @@
 - [x] InApp - Git remote config informations
 - [x] InApp - git rev-parse --show-toplevel
 - [x] InApp - flutter --no-version-check --version --machine
-- [ ] InApp - flutter --no-version-check pub pub outdated --json --up-to-date --no-dev-dependencies --no-dependency-overrides
+- [x] InApp - flutter --no-version-check pub pub outdated --json --up-to-date --no-dev-dependencies --no-dependency-overrides
 - [x] InApp - Extract UI files to lib folder & Add aron_gradient_line package
 - [x] Generator - New data files structure
 - [x] Generator - GitStamp version compile time
@@ -71,3 +71,4 @@
 - [ ] InApp - GitStampIcon - fix margin on mobile
 - [ ] InApp - Hidden developer mode vibrate or something similar - Android developer mode
 - [ ] InApp - Flutter doctor fix for another languages
+- [ ] GitStampPage - Commit list avatars

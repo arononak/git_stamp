@@ -890,6 +890,55 @@ class _GitStampRepoDetails extends StatelessWidget {
                   children: [
                     IconButton(
                       onPressed: () {
+                        Navigator.pop(context);
+                        final items = gitStamp.packageList;
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: _GitStampLabel(
+                                first: 'Dependencies',
+                                second: items.length.toString(),
+                              ),
+                              content: SizedBox(
+                                width: double.maxFinite,
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: items.length,
+                                  itemBuilder: (context, index) {
+                                    final item = items[index];
+                                    return ListTile(
+                                      title: Text(
+                                        '${item.package ?? ''} (${item.current?.version ?? ''})',
+                                      ),
+                                      subtitle: Text(
+                                        'latest: ${item.latest?.version}',
+                                      ),
+                                      onTap: () {},
+                                    );
+                                  },
+                                ),
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text('Close'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                      icon: Icon(Icons.integration_instructions),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: () {
                         showModalBottomSheet(
                           context: context,
                           isScrollControlled: true,

@@ -1,3 +1,7 @@
+// Copyright © 2024 Aron Onak. All rights reserved.
+// Licensed under the MIT license.
+// If you have any feedback, please contact me at arononak@gmail.com
+
 import 'dart:convert';
 import 'dart:io';
 
@@ -544,4 +548,17 @@ class GitReflog extends GitStampDataFile {
 
   @override
   String get variableContent => exec(['git', 'reflog']);
+}
+
+class Packages extends GitStampDataFile {
+  Packages(super.encrypt);
+
+  @override
+  String get filename => 'packages.dart';
+
+  @override
+  String get variableName => 'gitStampPackages';
+
+  @override
+  String get variableContent => exec(['flutter', '--no-version-check', 'pub', 'pub', 'outdated', '--json', '--up-to-date']);
 }

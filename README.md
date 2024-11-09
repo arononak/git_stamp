@@ -1,6 +1,6 @@
 # [Git Stamp 🏷](./TODO.md) Stamp Every App Build!
 
-Advanced await-less **information provider** & **development tool**. Used in development and internal testing. For production release, a special ICON build-type is used.
+Advanced await-less **information provider** & **development tool**.
 
 [![Latest Tag](https://img.shields.io/github/v/tag/arononak/git_stamp?style=flat&logo=github&labelColor=black&color=white)](https://github.com/arononak/git_stamp/tags)
 [![GitHub stars](https://img.shields.io/github/stars/arononak/git_stamp.svg?style=flat&logo=github&label=Star&labelColor=black&color=white)](https://github.com/arononak/git_stamp/)

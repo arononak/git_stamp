@@ -131,6 +131,11 @@ final table = [
     'field': GitStamp.gitReflog,
     'matcher': isNotEmpty,
   },
+  {
+    'param': 'packages',
+    'field': GitStamp.packageList.first.package,
+    'matcher': isNotEmpty,
+  },
 
   /* Build Machine */
   {

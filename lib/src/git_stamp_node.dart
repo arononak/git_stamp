@@ -8,6 +8,7 @@ import 'package:flutter/widgets.dart';
 
 import 'model/build_machine.dart';
 import 'model/commit.dart';
+import 'model/package.dart';
 import 'model/tag.dart';
 
 /// The [GitStampNode] class contains information provided during generation.
@@ -35,6 +36,10 @@ class GitStampNode extends _GitStampNode {
   @override String get sha => latestCommit?.hash ?? 'REPO WITHOUT COMMITS';
   @override int get commitCount => commitList.length;
 
+  @override String get tagListString => '[]';
+  @override List<Tag> get tagList => json.decode(tagListString).map<Tag>((json) => Tag.fromJson(json)).toList();
+  @override int get tagListCount => tagList.length;
+
   @override String get diffListString => '{}';
   @override Map<String, dynamic> get diffList => json.decode(diffListString.replaceAll(r"\'", "'"));
   @override String get diffStatListString => '{}';
@@ -43,23 +48,23 @@ class GitStampNode extends _GitStampNode {
   @override String get buildMachineString => '';
   @override BuildMachine get buildMachine => BuildMachine.fromJson(json.decode(buildMachineString));
   
+  @override String get observedFiles => '';
+  @override List<String> get observedFilesList => observedFiles.split(RegExp(r'\r?\n'));
+  @override int get observedFilesCount => observedFilesList.length;
+
+  @override String get branchListString => '';
+  @override List<String> get branchList => branchListString.split(RegExp(r'\r?\n'));
+  @override int get branchListCount => branchList.length;
+
+  @override String get packageListString => '[]';
+  @override List<Package> get packageList => Packages.fromJson(json.decode(packageListString)).packages ?? [];
+  @override int get packageListCount => packageList.length;
+
   @override String get buildBranch => '';
   @override String get buildDateTime => '';
   @override String get buildSystemInfo => '';
   @override String get repoCreationDate => '';
   @override String get repoPath => '';
-  
-  @override String get observedFiles => '';
-  @override List<String> get observedFilesList => observedFiles.split(RegExp(r'\r?\n'));
-  @override int get observedFilesCount => observedFilesList.length;
-
-  @override String get tagListString => '[]';
-  @override List<Tag> get tagList => json.decode(tagListString).map<Tag>((json) => Tag.fromJson(json)).toList();
-  @override int get tagListCount => tagList.length;
-
-  @override String get branchListString => '';
-  @override List<String> get branchList => branchListString.split(RegExp(r'\r?\n'));
-  @override int get branchListCount => branchList.length;
   
   @override String get appVersionFull => !isEncrypted ? super.appVersionFull : 'ENCRYPTED';
   @override String get appVersion => '';
@@ -98,6 +103,10 @@ abstract class _GitStampNode with _GitStampNavigator {
   String get sha;
   int get commitCount;
 
+  String get tagListString;
+  List<Tag> get tagList;
+  int get tagListCount;
+
   String get diffListString;
   Map<String, dynamic> get diffList;
   String get diffStatListString;
@@ -106,23 +115,23 @@ abstract class _GitStampNode with _GitStampNavigator {
   String get buildMachineString;
   BuildMachine get buildMachine;
 
+  String get observedFiles;
+  List<String> get observedFilesList;
+  int get observedFilesCount;
+
+  String get branchListString;
+  List<String> get branchList;
+  int get branchListCount;
+
+  String get packageListString;
+  List<Package> get packageList;
+  int get packageListCount;
+
   String get buildBranch;
   String get buildDateTime;
   String get buildSystemInfo;
   String get repoCreationDate;
   String get repoPath;
-
-  String get observedFiles;
-  List<String> get observedFilesList;
-  int get observedFilesCount;
-
-  String get tagListString;
-  List<Tag> get tagList;
-  int get tagListCount;
-
-  String get branchListString;
-  List<String> get branchList;
-  int get branchListCount;
 
   String get appVersionFull => '$appVersion ($appBuild)';
   String get appVersion;
