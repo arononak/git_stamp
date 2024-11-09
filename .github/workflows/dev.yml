@@ -70,29 +70,11 @@ jobs:
           projectId: gitstamp
           channelId: live
           entryPoint: ./example
-  format_code:
-    permissions:
-      contents: write
-    runs-on: ubuntu-latest
-    needs: firebase_deploy
-    steps:
-      - uses: actions/checkout@v4
-      - uses: dart-lang/setup-dart@v1
-      - run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git pull
-          dart format bin
-          git add .
-          if ! git diff-index --quiet HEAD; then
-            git commit -m 'Code update'
-            git push origin HEAD:main
-          fi
   generate_benchmarks:
     permissions:
       contents: write
     runs-on: ubuntu-latest
-    needs: format_code
+    needs: firebase_deploy
     steps:
       - uses: actions/checkout@v4
         with:
@@ -110,41 +92,11 @@ jobs:
           git add .
           git commit -m 'Benchmarks update'
           git push origin HEAD:main
-  generate_doc:
-    permissions:
-      contents: write
-    runs-on: ubuntu-latest
-    needs: generate_benchmarks
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.24.2'
-          channel: 'stable'
-      - uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version: '21'
-      - run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git pull
-          flutter pub get
-          dart doc
-          git add doc
-          if ! git diff-index --quiet HEAD; then
-            git commit -m 'DOC update'
-            git push origin HEAD:main
-          fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   generate_screenshots:
     permissions:
       contents: write
     runs-on: ubuntu-latest
-    needs: generate_doc
+    needs: generate_benchmarks
     steps:
       - uses: actions/checkout@v4
         with:
