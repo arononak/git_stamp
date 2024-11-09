@@ -7,7 +7,7 @@
 | ICON                                    | YES         | YES              | YES            | YES                      |
 | [CUSTOM](./lib/src/git_stamp_node.dart) | YES         | YES              | YES            | YES                      |
 
-### 1. GitStampListTile
+### 1. ListTile
 
 ```dart
 if (kDebugMode) ...[
@@ -18,7 +18,7 @@ if (kDebugMode) ...[
 ],
 ```
 
-### 2. GitStampIcon
+### 2. Icon
 ```dart
 if (isProd == false) ...[
   GitStamp.icon(),
@@ -29,13 +29,13 @@ if (isProd == false) ...[
 ```dart
 if (isProd == false) ...[
   IconButton(
-    onPressed: () => showGitStampPage(context: context, monospaceFontFamily: GoogleFonts.spaceMono().fontFamily),
+    onPressed: () => GitStamp.showMainPage(context: context, monospaceFontFamily: GoogleFonts.spaceMono().fontFamily),
     icon: const Icon(Icons.book),
   ),
 ],
 ```
 
-### 4. showGitStampLicensePage()
+### 4. LicensePage
 
 > [!NOTE]
 > Use function `GitStamp.showLicensePage` instead of `showLicensePage` if you want the `name` and `version` to be added automatically.

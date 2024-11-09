@@ -73,7 +73,7 @@ void _showDetailsBottomSheet(
 
 /// The [GitStampPage] displays a main GitStamp page.
 ///
-/// You should use [GitStampListTile] or the [showGitStampPage] function.
+/// You should use [GitStamp.listTile] or the [GitStamp.showMainPage] function.
 class GitStampPage extends StatefulWidget {
   const GitStampPage({
     super.key,
