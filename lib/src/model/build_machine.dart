@@ -2,7 +2,9 @@
 // Licensed under the MIT license.
 // If you have any feedback, please contact me at arononak@gmail.com
 
-/// A model used to store information about a building machine.
+/// A model [BuildMachine] used to store information about a building machine.
+/// 
+/// Stores information about the machine that built the executable file.
 class BuildMachine {
   final String frameworkVersion;
   final String channel;
@@ -15,6 +17,9 @@ class BuildMachine {
   final String flutterVersion;
   final String flutterRoot;
 
+  /// Creates an instance of [BuildMachine].
+  /// 
+  /// This constructor requires all fields.
   BuildMachine({
     required this.frameworkVersion,
     required this.channel,
@@ -28,6 +33,9 @@ class BuildMachine {
     required this.flutterRoot,
   });
 
+  /// Creates an instance of [BuildMachine].
+  /// 
+  /// Requires json map.
   factory BuildMachine.fromJson(Map<String, dynamic> json) =>
       BuildMachine(
         frameworkVersion: json['frameworkVersion'] ?? 'null',
@@ -42,6 +50,9 @@ class BuildMachine {
         flutterRoot: json['flutterRoot'] ?? 'null',
       );
 
+  /// Creates an instance of [BuildMachine].
+  /// 
+  /// Assigns one value to each field, e.g. "null" or "ENCRYPTED".
   factory BuildMachine.all(String value) => BuildMachine(
         frameworkVersion: value,
         channel: value,

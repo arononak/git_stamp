@@ -2,12 +2,21 @@
 // Licensed under the MIT license.
 // If you have any feedback, please contact me at arononak@gmail.com
 
-/// The model used to store information about the repository packages.
+
+/// The model used to store [Package] list.
+/// 
+/// Stores information about your Flutter project's pub packages.
 class Packages {
   final List<Package>? packages;
 
+  /// Creates an instance of [Packages].
+  /// 
+  /// All fields optional.
   Packages({this.packages});
 
+  /// Creates an instance of [Packages].
+  /// 
+  /// Requires json map.
   factory Packages.fromJson(Map<String, dynamic> json) {
     final packagesJson = json['packages'] as List<dynamic>?;
     return Packages(
@@ -16,6 +25,9 @@ class Packages {
   }
 }
 
+/// The model used to store information about the [Package].
+/// 
+/// Stores information about your Flutter project's pub single package.
 class Package {
   final String? package;
   final String? kind;
@@ -27,6 +39,9 @@ class Package {
   final Version? resolvable;
   final Version? latest;
 
+  /// Creates an instance of [Package].
+  /// 
+  /// All fields optional.
   Package({
     this.package,
     this.kind,
@@ -39,6 +54,9 @@ class Package {
     this.latest,
   });
 
+  /// Creates an instance of [Package].
+  /// 
+  /// Requires json map.
   factory Package.fromJson(Map<String, dynamic> json) {
     return Package(
       package: json['package'],
@@ -54,11 +72,20 @@ class Package {
   }
 }
 
+/// The model used to store information about the package [Version].
+/// 
+/// Stores information about your Flutter project's pub single package version.
 class Version {
   final String? version;
 
+  /// Creates an instance of [Version].
+  /// 
+  /// All fields optional.
   Version({this.version});
 
+  /// Creates an instance of [Version].
+  /// 
+  /// Requires json map.
   factory Version.fromJson(Map<String, dynamic>? json) {
     return Version(version: json?['version']);
   }

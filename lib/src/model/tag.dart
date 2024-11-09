@@ -4,22 +4,33 @@
 
 import 'dateable.dart';
 
-/// The model used to store information about the Tag.
+/// The model used to store information about the [Tag].
+/// 
+/// Stores information about the tag.
 class Tag extends Dateable {
   final String name;
   @override
   final String date;
 
+  /// Creates an instance of [Tag].
+  /// 
+  /// This constructor requires all fields.
   Tag({
     required this.name,
     required this.date,
   });
 
+  /// Creates an instance of [Tag].
+  /// 
+  /// Requires json map.
   factory Tag.fromJson(Map<String, dynamic> json) => Tag(
         name: json['name'] ?? 'null',
         date: json['date'] ?? 'null',
       );
 
+  /// Creates an instance of [Tag].
+  /// 
+  /// Assigns one value to each field, e.g. "null" or "ENCRYPTED".
   factory Tag.all(String value) => Tag(
         name: value,
         date: value,

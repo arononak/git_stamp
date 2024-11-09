@@ -6,5 +6,6 @@
 ///
 /// Only used in [Commit] and [Tag] classes.
 abstract class Dateable {
+  /// What is the current creation date of the object.
   String get date;
 }

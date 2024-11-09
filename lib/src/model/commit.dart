@@ -4,7 +4,9 @@
 
 import 'dateable.dart';
 
-/// The model used to store information about the Commit.
+/// The model used to store information about the [Commit].
+/// 
+/// Stores information about the commit.
 class Commit extends Dateable {
   final String hash;
   final String subject;
@@ -13,6 +15,9 @@ class Commit extends Dateable {
   final String authorName;
   final String authorEmail;
 
+  /// Creates an instance of [Commit].
+  /// 
+  /// This constructor requires all fields.
   Commit({
     required this.hash,
     required this.subject,
@@ -21,6 +26,9 @@ class Commit extends Dateable {
     required this.authorEmail,
   });
 
+  /// Creates an instance of [Commit].
+  /// 
+  /// Requires json map.
   factory Commit.fromJson(Map<String, dynamic> json) => Commit(
         hash: json['hash'] ?? 'null',
         subject: json['subject'] ?? 'null',
