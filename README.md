@@ -18,7 +18,7 @@ Advanced await-less **information provider** & **development tool**.
   - [🏞️ Preview](#️-preview)
   - [📑️ About (Changelog)](#️-about-changelog)
     - [Why Git Stamp?](#why-git-stamp)
-    - [Motivation](#motivation)
+    - [Inspiration](#inspiration)
   - [🛠️ Installation](#️-installation)
   - [🏗️ Generating](#️-generating)
   - [💻 Usage](#-usage)
@@ -86,9 +86,9 @@ graph TD
 
 </details>
 
-### Motivation
+### Inspiration
 
-The main motivation was **Minecraft** with information like this:
+The main inspiration was **Minecraft** with information like this:
 ```
 Version: v1.20.81
 Build: 24130126
