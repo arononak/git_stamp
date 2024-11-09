@@ -35,8 +35,8 @@ Advanced await-less **information provider** & **development tool**. Used in dev
 
 <table>
   <tr>
-    <td><img src="images/git_config.png" alt="Git Config" style="width: 100%;"></td>
-    <td><img src="images/details.png" alt="Details" style="width: 100%;"></td>
+    <td><img src="https://github.com/arononak/git_stamp/blob/main/images/git_config.png?raw=true" alt="Git Config" style="width: 100%;"></td>
+    <td><img src="https://github.com/arononak/git_stamp/blob/main/images/details.png?raw=true" alt="Details" style="width: 100%;"></td>
   </tr>
 </table>
 
