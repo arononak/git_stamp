@@ -1,1 +1,1 @@
-const gitStampVersion = 'Version 5.4.0';
+const gitStampVersion = 'Version 5.5.0';

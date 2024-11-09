@@ -12,6 +12,18 @@
 
 # CHANGELOG
 
+## 5.5.0
+
+* GitStampPage - New Tag Item design
+* Added `--limit` CLI flag for commits
+* Added dartdoc to `/lib` files
+* Refactor
+
+<details>
+<summary>Image</summary>
+<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/5.5.0.png?raw=true" alt="Image"></p>
+</details>
+
 ## 5.4.0
 
 * **Tag module** - Added date field
