@@ -890,8 +890,8 @@ class _GitStampRepoDetails extends StatelessWidget {
                   children: [
                     IconButton(
                       onPressed: () {
-                        Navigator.pop(context);
                         final items = gitStamp.packageList;
+                        items.sort((a, b) => a.kind?.compareTo(b.kind ?? '') ?? 0);
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
@@ -907,14 +907,36 @@ class _GitStampRepoDetails extends StatelessWidget {
                                   itemCount: items.length,
                                   itemBuilder: (context, index) {
                                     final item = items[index];
-                                    return ListTile(
-                                      title: Text(
-                                        '${item.package ?? ''} (${item.current?.version ?? ''})',
+                                    return Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            '${item.package}: ${item.current?.version} (latest: ${item.latest?.version})',
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
+                                            ),
+                                          ),
+                                          Text(
+                                            '${item.kind}',
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onSurface
+                                                  .withOpacity(0.7),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                      subtitle: Text(
-                                        'latest: ${item.latest?.version}',
-                                      ),
-                                      onTap: () {},
                                     );
                                   },
                                 ),
