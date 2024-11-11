@@ -546,6 +546,7 @@ class _GitStampCommitListElement extends StatelessWidget {
                       Text(
                         commit.date,
                         style: TextStyle(
+                          fontSize: 14.0,
                           color: Theme.of(context)
                               .colorScheme
                               .onSurface
@@ -676,7 +677,7 @@ class _GitStampTagListElement extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                    fontSize: 13.0,
+                    fontSize: 14.0,
                     color: Theme.of(context)
                         .colorScheme
                         .onPrimaryContainer
@@ -891,7 +892,8 @@ class _GitStampRepoDetails extends StatelessWidget {
                     IconButton(
                       onPressed: () {
                         final items = gitStamp.packageList;
-                        items.sort((a, b) => a.kind?.compareTo(b.kind ?? '') ?? 0);
+                        items.sort(
+                            (a, b) => a.kind?.compareTo(b.kind ?? '') ?? 0);
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {

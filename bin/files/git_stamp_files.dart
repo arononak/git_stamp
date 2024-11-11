@@ -126,7 +126,7 @@ class CommitList extends GitStampDataFile {
       'log',
       if (count != null) ...['-n $count'],
       '--pretty=format:{"hash":"%H","subject":"%s","date":"%ad","authorName":"%an","authorEmail":"%ae"}',
-      '--date=format-local:%Y-%m-%d %H:%M %z'
+      '--date=format-local:%Y-%m-%d %H:%M:%S %z'
     ]);
 
     final logs = LineSplitter.split(gitLogJson)
