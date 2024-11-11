@@ -71,6 +71,82 @@ void _showDetailsBottomSheet(
   ).then((result) => onFinish?.call());
 }
 
+void _showPackagesDialog(BuildContext context, GitStampNode gitStamp) {
+  final items = gitStamp.packageList;
+  items.sort((a, b) => a.kind?.compareTo(b.kind ?? '') ?? 0);
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: _GitStampLabel(
+          first: 'Dependencies',
+          second: items.length.toString(),
+        ),
+        content: SizedBox(
+          width: double.maxFinite,
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              final item = items[index];
+              final version = item.current?.version;
+              final latest = item.latest?.version;
+              final possibleUpdate =
+                  version != null && latest != null && version != latest;
+              return Padding(
+                padding: EdgeInsets.symmetric(vertical: 8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          '${item.package}: $version',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Theme.of(context).colorScheme.primary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        if (possibleUpdate) ...[
+                          SizedBox(width: 2.0),
+                          Text(
+                            '(latest: $latest)',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Theme.of(context).colorScheme.primary.withOpacity(0.7),
+                            ),
+                          ),
+                        ],
+                      ],
+                    ),
+                    Text(
+                      '${item.kind}',
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text('Close'),
+          ),
+        ],
+      );
+    },
+  );
+}
+
 /// The [GitStampPage] displays a main GitStamp page.
 ///
 /// You should use [GitStamp.listTile] or the [GitStamp.showMainPage] function.
@@ -891,69 +967,7 @@ class _GitStampRepoDetails extends StatelessWidget {
                   children: [
                     IconButton(
                       onPressed: () {
-                        final items = gitStamp.packageList;
-                        items.sort(
-                            (a, b) => a.kind?.compareTo(b.kind ?? '') ?? 0);
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: _GitStampLabel(
-                                first: 'Dependencies',
-                                second: items.length.toString(),
-                              ),
-                              content: SizedBox(
-                                width: double.maxFinite,
-                                child: ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount: items.length,
-                                  itemBuilder: (context, index) {
-                                    final item = items[index];
-                                    return Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 8.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            '${item.package}: ${item.current?.version} (latest: ${item.latest?.version})',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .primary,
-                                            ),
-                                          ),
-                                          Text(
-                                            '${item.kind}',
-                                            style: TextStyle(
-                                              fontSize: 10,
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .onSurface
-                                                  .withOpacity(0.7),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Text('Close'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
+                        _showPackagesDialog(context, gitStamp);
                       },
                       icon: Icon(Icons.integration_instructions),
                     ),
