@@ -115,4 +115,43 @@ void main() {
     await tester.pump(Duration(seconds: 2));
     await binding.takeScreenshot('screenshot_git_config');
   });
+
+  testWidgets('screenshot-tags', (WidgetTester tester) async {
+    tester.view.physicalSize = physicalSize;
+    tester.view.devicePixelRatio = 1.0;
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: GitStamp.mainPage(showDetails: true),
+        themeMode: ThemeMode.light,
+        debugShowCheckedModeBanner: false,
+      ),
+    );
+    await tester.pump(Duration(seconds: 2));
+    await tester.pump(Duration(seconds: 2));
+    await tester.tap(find.byIcon(Icons.tag));
+    await tester.pump(Duration(seconds: 2));
+    await tester.pump(Duration(seconds: 2));
+    await binding.takeScreenshot('screenshot_tags');
+  });
+
+  testWidgets('screenshot-packages', (WidgetTester tester) async {
+    tester.view.physicalSize = physicalSize;
+    tester.view.devicePixelRatio = 1.0;
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: GitStamp.mainPage(showDetails: true),
+        themeMode: ThemeMode.dark,
+        darkTheme: ThemeData.dark(useMaterial3: true),
+        debugShowCheckedModeBanner: false,
+      ),
+    );
+    await tester.pump(Duration(seconds: 2));
+    await tester.pump(Duration(seconds: 2));
+    await tester.tap(find.byIcon(Icons.integration_instructions));
+    await tester.pump(Duration(seconds: 2));
+    await tester.pump(Duration(seconds: 2));
+    await binding.takeScreenshot('screenshot_packages');
+  });
 }

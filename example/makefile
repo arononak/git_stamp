@@ -56,6 +56,8 @@ screenshots:
 	convert screenshot_files.png -crop 610x885+0+0 files.png
 	convert screenshot_icon.png -crop 610x885+0+0 icon.png
 	convert screenshot_list.png -crop 610x885+0+0 list.png
+	convert screenshot_tags.png -crop 610x885+0+0 tags.png
+	convert screenshot_packages.png -crop 610x885+0+0 packages.png
 	convert screenshot_details_encrypted.png -crop 610x885+0+0 details_encrypted.png
 	convert screenshot_decrypt.png -crop 610x885+0+0 decrypt.png
 	rm -f screenshot_commit_diff.png
@@ -64,6 +66,8 @@ screenshots:
 	rm -f screenshot_files.png
 	rm -f screenshot_icon.png
 	rm -f screenshot_list.png
+	rm -f screenshot_tags.png
+	rm -f screenshot_packages.png
 	rm -f screenshot_details_encrypted.png
 	rm -f screenshot_decrypt.png
 	mv commit_diff.png ../images
@@ -72,6 +76,8 @@ screenshots:
 	mv files.png ../images
 	mv icon.png ../images
 	mv list.png ../images
+	mv tags.png ../images
+	mv packages.png ../images
 	mv details_encrypted.png ../images
 	mv decrypt.png ../images
 	kill $$(cat chromedriver.pid)
