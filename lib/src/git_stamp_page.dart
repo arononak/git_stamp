@@ -12,6 +12,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'model/dateable.dart';
 import 'model/commit.dart';
+import 'model/package.dart';
 import 'model/tag.dart';
 import 'git_stamp_node.dart';
 
@@ -72,8 +73,56 @@ void _showDetailsBottomSheet(
 }
 
 void _showPackagesDialog(BuildContext context, GitStampNode gitStamp) {
+  Widget buildItem(Package item) {
+    final version = item.current?.version;
+    final latest = item.latest?.version;
+    final possibleUpdate =
+        version != null && latest != null && version != latest;
+
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            children: [
+              Text(
+                '${item.package}: $version',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Theme.of(context).colorScheme.primary,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              if (possibleUpdate) ...[
+                SizedBox(width: 2.0),
+                Text(
+                  '(latest: $latest)',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color:
+                        Theme.of(context).colorScheme.primary.withOpacity(0.7),
+                  ),
+                ),
+              ],
+            ],
+          ),
+          Text(
+            '${item.kind}',
+            style: TextStyle(
+              fontSize: 10,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   final items = gitStamp.packageList;
   items.sort((a, b) => a.kind?.compareTo(b.kind ?? '') ?? 0);
+
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -87,51 +136,7 @@ void _showPackagesDialog(BuildContext context, GitStampNode gitStamp) {
           child: ListView.builder(
             shrinkWrap: true,
             itemCount: items.length,
-            itemBuilder: (context, index) {
-              final item = items[index];
-              final version = item.current?.version;
-              final latest = item.latest?.version;
-              final possibleUpdate =
-                  version != null && latest != null && version != latest;
-              return Padding(
-                padding: EdgeInsets.symmetric(vertical: 8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          '${item.package}: $version',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Theme.of(context).colorScheme.primary,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        if (possibleUpdate) ...[
-                          SizedBox(width: 2.0),
-                          Text(
-                            '(latest: $latest)',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Theme.of(context).colorScheme.primary.withOpacity(0.7),
-                            ),
-                          ),
-                        ],
-                      ],
-                    ),
-                    Text(
-                      '${item.kind}',
-                      style: TextStyle(
-                        fontSize: 10,
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
+            itemBuilder: (context, index) => buildItem(items[index]),
           ),
         ),
         actions: [
