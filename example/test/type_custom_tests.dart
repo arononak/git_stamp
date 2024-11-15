@@ -75,12 +75,6 @@ final table = [
     'matcher': isNotEmpty,
   },
   {
-    /* app-name only for run generate command */
-    'param': 'app-name',
-    'field': GitStamp.isLiteVersion,
-    'matcher': isNotEmpty,
-  },
-  {
     'param': 'git-config',
     'field': GitStamp.gitConfigGlobalUserName,
     'matcher': isNotEmpty,
