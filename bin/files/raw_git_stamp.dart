@@ -62,19 +62,20 @@ ${model.gitBranchList.enabled}import 'data/git_branch_list.dart';
 ${model.gitReflog.enabled}import 'data/git_reflog.dart';
 ${model.packages.enabled}import 'data/packages.dart';
 
-${model.generateFlutterFiles.enabled}import 'git_stamp_is_lite_version.dart';
-import 'git_stamp_tool_version.dart';
 ${model.encrypt.enabled}import 'git_stamp_encrypt_debug_key.dart';
 
-${model.generateFlutterFiles.enabled}const bool isLiteVersion = gitStampIsLiteVersion;
-const String gitStampVersion = gitStampToolVersion;
+import 'data/tool_build_type.dart';
+import 'data/tool_version.dart';
 
 ''';
 
 String _decryptedImpl(GitStampBuildModel model) => '''
-final GitStamp = DecryptedGitStampNode();
+final GitStamp = GitStampNodeImpl();
 
-class DecryptedGitStampNode extends GitStampNode {
+class GitStampNodeImpl extends GitStampNode {
+  @override String get toolVersion => gitStampToolVersion;
+  @override String get toolBuildType => gitStampToolBuildType;
+  
   @override bool get isEncrypted => false;
   @override bool decrypt(Uint8List key, Uint8List iv) => true;
 
@@ -110,7 +111,7 @@ class DecryptedGitStampNode extends GitStampNode {
   ${model.generateFlutterFiles.enabled}@override Widget listTile({required BuildContext context, String? monospaceFontFamily}) {
   ${model.generateFlutterFiles.enabled}  return GitStampListTile(
   ${model.generateFlutterFiles.enabled}    gitStamp: this,
-  ${model.generateFlutterFiles.enabled}    gitStampVersion: gitStampVersion,
+  ${model.generateFlutterFiles.enabled}    gitStampVersion: toolVersion,
   ${model.generateFlutterFiles.enabled}    isLiteVersion: isLiteVersion,
   ${model.generateFlutterFiles.enabled}    onPressed: () {
   ${model.generateFlutterFiles.enabled}      showMainPage(
@@ -124,7 +125,7 @@ class DecryptedGitStampNode extends GitStampNode {
   ${model.generateFlutterFiles.enabled}@override Widget mainPage({String? monospaceFontFamily, bool showDetails = false, bool showFiles = false}) {
   ${model.generateFlutterFiles.enabled}  return GitStampPage(
   ${model.generateFlutterFiles.enabled}    gitStamp: this,
-  ${model.generateFlutterFiles.enabled}    gitStampVersion: gitStampVersion,
+  ${model.generateFlutterFiles.enabled}    gitStampVersion: toolVersion,
   ${model.generateFlutterFiles.enabled}    isLiteVersion: isLiteVersion,
   ${model.generateFlutterFiles.enabled}    monospaceFontFamily: monospaceFontFamily,
   ${model.generateFlutterFiles.enabled}    showDetails: showDetails,
@@ -175,35 +176,11 @@ String _encryptedImpl(
   Uint8List encryptedTestText,
 ) =>
     '''
-final GitStamp = EncryptedGitStampNode();
+final GitStamp = GitStampNodeImpl();
 
-class EncryptedGitStampNode extends GitStampNode {
+class GitStampNodeImpl extends GitStampNode {
   static Uint8List? key;
   static Uint8List? iv;
-
-  EncryptedGitStampNode();
-
-  @override bool get isEncrypted => (key == null || iv == null);
-
-  @override bool decrypt(Uint8List key, Uint8List iv) {
-    EncryptedGitStampNode.key = key;
-    EncryptedGitStampNode.iv = iv;
-
-    bool success = false;
-
-    try {
-      success = _checkKeyAndIv();
-    } catch (e) {
-      success = false;
-    }
-
-    if (success == false) {
-      EncryptedGitStampNode.key = null;
-      EncryptedGitStampNode.iv = null;
-    }
-
-    return success;
-  }
 
   String? _decrypt(Uint8List text) {
     if (isEncrypted) {
@@ -214,6 +191,32 @@ class EncryptedGitStampNode extends GitStampNode {
   }
 
   bool _checkKeyAndIv() => _decrypt(Uint8List.fromList($encryptedTestText)) == '$decryptedTestText';
+
+  GitStampNodeImpl();
+
+  @override String get toolVersion => gitStampToolVersion;
+  @override String get toolBuildType => gitStampToolBuildType;
+
+  @override bool get isEncrypted => (key == null || iv == null);
+  @override bool decrypt(Uint8List key, Uint8List iv) {
+    GitStampNodeImpl.key = key;
+    GitStampNodeImpl.iv = iv;
+
+    bool success = false;
+
+    try {
+      success = _checkKeyAndIv();
+    } catch (e) {
+      success = false;
+    }
+
+    if (success == false) {
+      GitStampNodeImpl.key = null;
+      GitStampNodeImpl.iv = null;
+    }
+
+    return success;
+  }
 
   @override String get commitListString => _decrypt(gitStampCommitList) ?? '[]';
   @override String get sha => latestCommit?.hash ?? (isEncrypted ?'ENCRYPTED' : 'REPO WITHOUT COMMITS');
@@ -253,7 +256,7 @@ class EncryptedGitStampNode extends GitStampNode {
   @override Widget listTile({required BuildContext context, String? monospaceFontFamily}) {
     return GitStampListTile(
       gitStamp: this,
-      gitStampVersion: gitStampVersion,
+      gitStampVersion: toolVersion,
       isLiteVersion: isLiteVersion,
       onPressed: () {
         showMainPage(
@@ -267,7 +270,7 @@ class EncryptedGitStampNode extends GitStampNode {
   @override Widget mainPage({String? monospaceFontFamily, bool showDetails = false, bool showFiles = false}) {
     return GitStampPage(
       gitStamp: this,
-      gitStampVersion: gitStampVersion,
+      gitStampVersion: toolVersion,
       isLiteVersion: isLiteVersion,
       monospaceFontFamily: monospaceFontFamily,
       showDetails: showDetails,

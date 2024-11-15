@@ -61,35 +61,6 @@ class GitStampMain extends GitStampMainFile {
       );
 }
 
-class IsLiteVersion extends GitStampMainFile {
-  final bool isLiteVersion;
-
-  IsLiteVersion(this.isLiteVersion);
-
-  @override
-  String get filename => 'git_stamp_is_lite_version.dart';
-
-  @override
-  String get content => 'const gitStampIsLiteVersion = $isLiteVersion;';
-}
-
-class GitStampVersion extends GitStampMainFile {
-  @override
-  String get filename => 'git_stamp_tool_version.dart';
-
-  @override
-  String get content {
-    final versionStdout = exec(['dart', 'run', 'git_stamp', '--version']);
-
-    final gitStampVersion =
-        versionStdout.toString().trim().split(' ').last.split('').first;
-
-    return '''
-      const gitStampToolVersion = r\'\'\'$gitStampVersion\'\'\';
-    ''';
-  }
-}
-
 class EncryptDebugKey extends GitStampMainFile {
   final String? key;
   final String? iv;
@@ -106,6 +77,38 @@ class EncryptDebugKey extends GitStampMainFile {
       static String? iv = ${iv == null ? 'null' : "'$iv'"};
     }
   ''';
+}
+
+class ToolBuildType extends GitStampDataFile {
+  final String type;
+
+  ToolBuildType(this.type);
+
+  @override
+  String get filename => 'tool_build_type.dart';
+
+  @override
+  String get variableName => 'gitStampToolBuildType';
+
+  @override
+  String get variableContent => type;
+}
+
+class ToolVersion extends GitStampDataFile {
+  @override
+  String get filename => 'tool_version.dart';
+
+  @override
+  String get variableName => 'gitStampToolVersion';
+
+  @override
+  String get variableContent => exec(['dart', 'run', 'git_stamp', '--version'])
+      .toString()
+      .trim()
+      .split(' ')
+      .last
+      .split('')
+      .first;
 }
 
 class CommitList extends GitStampDataFile {
@@ -560,5 +563,13 @@ class Packages extends GitStampDataFile {
   String get variableName => 'gitStampPackages';
 
   @override
-  String get variableContent => exec(['flutter', '--no-version-check', 'pub', 'pub', 'outdated', '--json', '--up-to-date']);
+  String get variableContent => exec([
+        'flutter',
+        '--no-version-check',
+        'pub',
+        'pub',
+        'outdated',
+        '--json',
+        '--up-to-date',
+      ]);
 }

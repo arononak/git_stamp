@@ -217,10 +217,12 @@ Future<_GenerationResult> _generate({
   await GitStampDirectory.recreateDirectories();
 
   switch (buildType) {
-    case 'lite':
+    case 'full':
       _generateDataFiles(
-        model: GitStampBuildModel.all(encrypt: encryptEnabled),
-        isLiteVersion: true,
+        model: GitStampBuildModel.all(
+          toolBuildType: 'FULL',
+          encrypt: encryptEnabled,
+        ),
         debugCompileKey: debugCompileKey,
         limit: limit,
       );
@@ -230,10 +232,12 @@ Future<_GenerationResult> _generate({
       }
 
       break;
-    case 'full':
+    case 'lite':
       _generateDataFiles(
-        model: GitStampBuildModel.all(encrypt: encryptEnabled),
-        isLiteVersion: false,
+        model: GitStampBuildModel.all(
+          toolBuildType: 'LITE',
+          encrypt: encryptEnabled,
+        ),
         debugCompileKey: debugCompileKey,
         limit: limit,
       );
@@ -246,14 +250,12 @@ Future<_GenerationResult> _generate({
     case 'icon':
       _generateDataFiles(
         model: const GitStampBuildModel.icon(),
-        isLiteVersion: true,
         limit: 1,
       );
       break;
     case 'custom':
       _generateDataFiles(
         model: GitStampBuildModel.custom(genOnly ?? []),
-        isLiteVersion: false,
         limit: limit,
       );
       break;
@@ -275,7 +277,6 @@ Future<_GenerationResult> _generate({
 
 void _generateDataFiles({
   required GitStampBuildModel model,
-  required bool isLiteVersion,
   int? limit,
   bool debugCompileKey = false,
 }) {
@@ -303,19 +304,19 @@ void _generateDataFiles({
       model.encrypt ? encrypt?.call(decryptedTestText) : null;
 
   GitStampMain(model, decryptedTestText, encryptedTestText).generate();
-  GitStampVersion().generate();
-  IsLiteVersion(isLiteVersion).generate();
+  ToolVersion().generate();
+  ToolBuildType(model.toolBuildType).generate();
 
   if (model.commitList) {
     CommitList(encrypt, count: limit).generate();
   }
 
   if (model.diffList) {
-    DiffList(encrypt, count: limit, isLiteVersion).generate();
+    DiffList(encrypt, count: limit, model.isLiteVersion).generate();
   }
 
   if (model.diffStatList) {
-    DiffStatList(encrypt, count: limit, isLiteVersion).generate();
+    DiffStatList(encrypt, count: limit, model.isLiteVersion).generate();
   }
 
   if (model.repoCreationDate) {

@@ -23,9 +23,14 @@ import 'model/tag.dart';
 /// 
 /// Example:
 /// ```dart
-/// const appVersion = GitStampNode.appVersion;
+/// const appVersion = GitStamp.appVersion;
 /// ```
 abstract class GitStampNode {
+  String get toolVersion;
+
+  String get toolBuildType;
+  bool get isLiteVersion => toolBuildType == 'LITE';
+
   bool get isEncrypted => false;
 
   bool decrypt(Uint8List key, Uint8List iv) => true;

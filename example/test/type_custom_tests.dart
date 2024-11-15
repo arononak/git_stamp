@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:example/git_stamp/git_stamp.dart';
-import 'package:example/git_stamp/git_stamp_tool_version.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 final table = [
@@ -78,7 +77,7 @@ final table = [
   {
     /* app-name only for run generate command */
     'param': 'app-name',
-    'field': gitStampToolVersion,
+    'field': GitStamp.isLiteVersion,
     'matcher': isNotEmpty,
   },
   {

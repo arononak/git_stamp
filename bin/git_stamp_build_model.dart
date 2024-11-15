@@ -6,6 +6,7 @@ import 'package:meta/meta.dart';
 
 @immutable
 class GitStampBuildModel {
+  final String toolBuildType;
   final bool encrypt;
   final bool commitList;
   final bool diffList;
@@ -32,6 +33,7 @@ class GitStampBuildModel {
   final bool packages;
 
   const GitStampBuildModel({
+    this.toolBuildType = '',
     this.encrypt = false,
     this.commitList = false,
     this.diffList = false,
@@ -59,6 +61,7 @@ class GitStampBuildModel {
   });
 
   const GitStampBuildModel.all({
+    this.toolBuildType = '',
     this.encrypt = false,
     this.commitList = true,
     this.diffList = true,
@@ -86,6 +89,7 @@ class GitStampBuildModel {
   });
 
   const GitStampBuildModel.icon({
+    this.toolBuildType = 'ICON',
     this.encrypt = false,
     this.appVersion = true,
     this.appBuild = true,
@@ -113,7 +117,8 @@ class GitStampBuildModel {
   });
 
   GitStampBuildModel.custom(List<String> args)
-      : encrypt = false,
+      : toolBuildType = 'CUSTOM',
+        encrypt = false,
         commitList = args.contains('commit-list'),
         diffList = args.contains('diff-list'),
         diffStatList = args.contains('diff-stat-list'),
@@ -162,28 +167,6 @@ class GitStampBuildModel {
         'packages',
       ];
 
-  bool get isIcon =>
-      commitList == true &&
-      diffList == false &&
-      diffStatList == false &&
-      buildBranch == true &&
-      buildDateTime == true &&
-      buildSystemInfo == false &&
-      buildMachine == false &&
-      repoCreationDate == false &&
-      repoPath == false &&
-      observedFilesList == false &&
-      appVersion == true &&
-      appBuild == true &&
-      appName == false &&
-      gitConfig == false &&
-      gitRemote == false &&
-      gitConfigList == false &&
-      gitCountObjects == false &&
-      gitTagList == false &&
-      gitBranchList == false &&
-      gitReflog == false &&
-      generateFlutterFiles == false &&
-      generateFlutterIcon == true &&
-      packages == false;
+  bool get isIcon => toolBuildType == 'ICON';
+  bool get isLiteVersion => toolBuildType == 'LITE';
 }
