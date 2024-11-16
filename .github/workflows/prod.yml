@@ -12,13 +12,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: dart-lang/setup-dart@v1
       - run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git checkout main
           git pull origin main
-          dart format bin
+          dart format .
           git add .
           if ! git diff-index --quiet HEAD; then
             git commit -m 'Code update'
@@ -48,7 +50,7 @@ jobs:
           git pull origin main
           flutter pub get
           dart doc
-          git add doc
+          git add .
           if ! git diff-index --quiet HEAD; then
             git commit -m 'DOC update'
             git push origin HEAD:main
@@ -62,12 +64,12 @@ jobs:
     needs: generate_doc
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: dart-lang/setup-dart@v1
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.24.2'
           channel: 'stable'
       - run: flutter pub get
-      - run: dart format .
-      - run: dart doc
       - run: dart pub publish --force
