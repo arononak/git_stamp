@@ -12,6 +12,17 @@
 
 # CHANGELOG
 
+## 5.6.0
+
+* Added **packages modeule**
+* GitStampPage - Fixed commit & tag dates
+* Refactor
+
+<details>
+<summary>Image</summary>
+<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/5.6.0.png?raw=true" alt="Image"></p>
+</details>
+
 ## 5.5.0
 
 * GitStampPage - New Tag Item design

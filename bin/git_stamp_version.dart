@@ -2,4 +2,4 @@
 // Licensed under the MIT license.
 // If you have any feedback, please contact me at arononak@gmail.com
 
-const gitStampVersion = 'Version 5.5.0';
+const gitStampVersion = 'Version 5.6.0';
