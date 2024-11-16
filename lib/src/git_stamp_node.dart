@@ -12,15 +12,15 @@ import 'model/package.dart';
 import 'model/tag.dart';
 
 /// The [GitStampNode] class contains information provided during generation.
-/// 
+///
 /// ```cli
 /// dart run git_stamp --build-type full
 /// ```
-/// 
+///
 /// Used by [GitStampPage].
-/// 
+///
 /// Can be used to extract information.
-/// 
+///
 /// Example:
 /// ```dart
 /// const appVersion = GitStamp.appVersion;
@@ -30,7 +30,7 @@ abstract class GitStampNode {
   String get toolVersion;
 
   /// GitStamp Build Type selected during generation.
-  /// 
+  ///
   /// Possible values ​​are: [FULL], [LITE], [ICON] & [CUSTOM].
   String get toolBuildType;
 
@@ -47,7 +47,10 @@ abstract class GitStampNode {
   String get commitListString => '[]';
 
   /// Commit List.
-  List<Commit> get commitList => json.decode(commitListString).map<Commit>((json) => Commit.fromJson(json)).toList();
+  List<Commit> get commitList => json
+      .decode(commitListString)
+      .map<Commit>((json) => Commit.fromJson(json))
+      .toList();
 
   /// Latest Commit.
   Commit? get latestCommit => commitList.firstOrNull;
@@ -62,7 +65,10 @@ abstract class GitStampNode {
   String get tagListString => '[]';
 
   /// Tag List.
-  List<Tag> get tagList => json.decode(tagListString).map<Tag>((json) => Tag.fromJson(json)).toList();
+  List<Tag> get tagList => json
+      .decode(tagListString)
+      .map<Tag>((json) => Tag.fromJson(json))
+      .toList();
 
   /// Tag List Count.
   int get tagListCount => tagList.length;
@@ -71,20 +77,23 @@ abstract class GitStampNode {
   String get diffListString => '{}';
 
   /// Diff List.
-  Map<String, dynamic> get diffList => json.decode(diffListString.replaceAll(r"\'", "'"));
+  Map<String, dynamic> get diffList =>
+      json.decode(diffListString.replaceAll(r"\'", "'"));
 
   /// Diff Stat List as JSON.
   String get diffStatListString => '{}';
 
   /// Diff Stat List.
-  Map<String, dynamic> get diffStatList => json.decode(diffStatListString.replaceAll(r"\'", "'"));
+  Map<String, dynamic> get diffStatList =>
+      json.decode(diffStatListString.replaceAll(r"\'", "'"));
 
   /// Return [BuildMachine] as JSON.
   String get buildMachineString => '';
-  
+
   /// Returns [BuildMachine].
-  BuildMachine get buildMachine => BuildMachine.fromJson(json.decode(buildMachineString));
-  
+  BuildMachine get buildMachine =>
+      BuildMachine.fromJson(json.decode(buildMachineString));
+
   /// List of observable files in a [git] repository as String.
   String get observedFiles => '';
 
@@ -105,10 +114,11 @@ abstract class GitStampNode {
 
   /// List of packages that are in [pubspec.yml] as JSON.
   String get packageListString => '[]';
-  
+
   /// List of packages that are in [pubspec.yml] as List.
-  List<Package> get packageList => Packages.fromJson(json.decode(packageListString)).packages ?? [];
-  
+  List<Package> get packageList =>
+      Packages.fromJson(json.decode(packageListString)).packages ?? [];
+
   /// The number of packages that are in [pubspec.yml].
   int get packageListCount => packageList.length;
 
@@ -128,52 +138,54 @@ abstract class GitStampNode {
   String get repoPath => '';
 
   /// Application version + build number from [pubspec.yaml].
-  /// 
+  ///
   /// Example: '1.0.0 (1)'.
-  String get appVersionFull => !isEncrypted ? '$appVersion ($appBuild)' : 'ENCRYPTED';
+  String get appVersionFull =>
+      !isEncrypted ? '$appVersion ($appBuild)' : 'ENCRYPTED';
 
   /// Application version from [pubspec.yaml].
-  /// 
+  ///
   /// Example: '1.0.0'.
   String get appVersion => '';
-  
+
   /// Application build number from [pubspec.yaml].
-  /// 
+  ///
   /// Example: '1'.
   String get appBuild => '';
-  
+
   /// Application name from [pubspec.yaml].
-  /// 
+  ///
   /// Example: 'example_app'.
   String get appName => '';
-  
+
   /// [git] global configuration from system during build.
-  /// 
+  ///
   /// Example: 'Jan Pyta (jan.pyta69@mail.com)'.
-  String get gitConfigGlobalUser => '$gitConfigGlobalUserName ($gitConfigGlobalUserEmail)';
-  
+  String get gitConfigGlobalUser =>
+      '$gitConfigGlobalUserName ($gitConfigGlobalUserEmail)';
+
   /// [git] global configuration from system during build.
-  /// 
+  ///
   /// Example: 'Jan Pyta'.
   String get gitConfigGlobalUserName => '';
-  
+
   /// [git] global configuration from system during build.
-  /// 
+  ///
   /// Example: 'jan.pyta69@mail.com'.
   String get gitConfigGlobalUserEmail => '';
 
   /// [git] local configuration from system during build.
-  /// 
+  ///
   /// Example: 'Jan Pyta (jan.pyta69@mail.com)'.
   String get gitConfigUser => '$gitConfigUserName ($gitConfigUserEmail)';
-  
+
   /// [git] local configuration from system during build.
-  /// 
+  ///
   /// Example: 'Jan Pyta'.
   String get gitConfigUserName => '';
-  
+
   /// [git] local configuration from system during build.
-  /// 
+  ///
   /// Example: 'jan.pyta69@mail.com'.
   String get gitConfigUserEmail => '';
 
@@ -182,37 +194,55 @@ abstract class GitStampNode {
 
   /// [git] configuration while building.
   String get gitConfigList => '';
-  
+
   /// [git] count objects.
   String get gitCountObjects => '';
-  
+
   /// [git] reflog.
   String get gitReflog => '';
 
   /// Returns an icon with information.
-  /// 
+  ///
   /// Only possible for BuildType: [ICON], [LITE], [FULL].
   Widget icon() => SizedBox();
-  
+
   /// Returns a [ListTile] widget to open a [GitStampPage].
-  /// 
+  ///
   /// Only possible for BuildType: [LITE], [FULL].
-  Widget listTile({required BuildContext context, String? monospaceFontFamily}) => SizedBox();
-  
+  Widget listTile(
+          {required BuildContext context, String? monospaceFontFamily}) =>
+      SizedBox();
+
   /// Only for testing.
-  Widget mainPage({String? monospaceFontFamily, bool showDetails = false, bool showFiles = false}) => SizedBox();
-  
+  Widget mainPage(
+          {String? monospaceFontFamily,
+          bool showDetails = false,
+          bool showFiles = false}) =>
+      SizedBox();
+
   /// Only for testing.
-  Widget detailsPage({required Commit commit, String? monospaceFontFamily}) => SizedBox();
+  Widget detailsPage({required Commit commit, String? monospaceFontFamily}) =>
+      SizedBox();
 
   /// Starts [GitStampPage].
-  void showMainPage({required BuildContext context, String? monospaceFontFamily, bool useRootNavigator = false}) {}
+  void showMainPage(
+      {required BuildContext context,
+      String? monospaceFontFamily,
+      bool useRootNavigator = false}) {}
 
   /// Only for testing.
-  void showDetailsPage({required BuildContext context, required Commit commit, String? monospaceFontFamily, bool useRootNavigator = false}) {}
-  
+  void showDetailsPage(
+      {required BuildContext context,
+      required Commit commit,
+      String? monospaceFontFamily,
+      bool useRootNavigator = false}) {}
+
   /// Starts [showLicensePage] function from [material] package.
-  /// 
+  ///
   /// Adds [appName] and [appVersion] automatically.
-  void showLicensePage({required BuildContext context, Widget? applicationIcon, String? applicationLegalese, bool useRootNavigator = false}) {}
+  void showLicensePage(
+      {required BuildContext context,
+      Widget? applicationIcon,
+      String? applicationLegalese,
+      bool useRootNavigator = false}) {}
 }

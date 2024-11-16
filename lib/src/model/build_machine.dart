@@ -3,7 +3,7 @@
 // If you have any feedback, please contact me at arononak@gmail.com
 
 /// A model [BuildMachine] used to store information about a building machine.
-/// 
+///
 /// Stores information about the machine that built the executable file.
 class BuildMachine {
   final String frameworkVersion;
@@ -18,7 +18,7 @@ class BuildMachine {
   final String flutterRoot;
 
   /// Creates an instance of [BuildMachine].
-  /// 
+  ///
   /// This constructor requires all fields.
   BuildMachine({
     required this.frameworkVersion,
@@ -34,10 +34,9 @@ class BuildMachine {
   });
 
   /// Creates an instance of [BuildMachine].
-  /// 
+  ///
   /// Requires json map.
-  factory BuildMachine.fromJson(Map<String, dynamic> json) =>
-      BuildMachine(
+  factory BuildMachine.fromJson(Map<String, dynamic> json) => BuildMachine(
         frameworkVersion: json['frameworkVersion'] ?? 'null',
         channel: json['channel'] ?? 'null',
         repositoryUrl: json['repositoryUrl'] ?? 'null',
@@ -51,7 +50,7 @@ class BuildMachine {
       );
 
   /// Creates an instance of [BuildMachine].
-  /// 
+  ///
   /// Assigns one value to each field, e.g. "null" or "ENCRYPTED".
   factory BuildMachine.all(String value) => BuildMachine(
         frameworkVersion: value,

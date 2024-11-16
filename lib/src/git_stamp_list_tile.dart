@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'git_stamp_node.dart';
 
 /// The [GitStampListTile] class used when we want to go to the main screen of the tool.
-/// 
+///
 /// Example:
 /// ```dart
 /// const Row(

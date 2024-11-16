@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'git_stamp_node.dart';
 
 /// The [GitStampLicenseIcon] class used when we want to go to the licensing screen.
-/// 
+///
 /// Below that the [showLicensePage] function from [material] is used.
 /// Additionally, information from [pubspec.yaml] is added.
 class GitStampLicenseIcon extends StatelessWidget {

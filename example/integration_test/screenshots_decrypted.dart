@@ -57,7 +57,8 @@ void main() {
   testWidgets('screenshot-details', (WidgetTester tester) async {
     tester.view.physicalSize = physicalSize;
     tester.view.devicePixelRatio = 1.0;
-    await tester.pumpPage(page: GitStamp.mainPage(showDetails: true), isDark: true);
+    await tester.pumpPage(
+        page: GitStamp.mainPage(showDetails: true), isDark: true);
     await tester.pump(Duration(seconds: 2));
     await tester.pump(Duration(seconds: 2));
     await binding.takeScreenshot('screenshot_details');
@@ -90,7 +91,8 @@ void main() {
   testWidgets('screenshot-packages', (WidgetTester tester) async {
     tester.view.physicalSize = physicalSize;
     tester.view.devicePixelRatio = 1.0;
-    await tester.pumpPage(page: GitStamp.mainPage(showDetails: true), isDark: true);
+    await tester.pumpPage(
+        page: GitStamp.mainPage(showDetails: true), isDark: true);
     await tester.pump(Duration(seconds: 2));
     await tester.pump(Duration(seconds: 2));
     await tester.tap(find.byIcon(Icons.integration_instructions));

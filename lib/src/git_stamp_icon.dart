@@ -10,7 +10,7 @@ import 'git_stamp_node.dart';
 /// icon with basic build information.
 ///
 /// Such as:
-/// 
+///
 ///  * [GitStampNode.appVersionFull].
 ///  * [GitStampNode.buildDateTime],
 ///  * [GitStampNode.buildBranch].
