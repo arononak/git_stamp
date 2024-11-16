@@ -57,6 +57,7 @@
     data-below-sidebar="git_stamp&#47;GitStampNode-class-sidebar.html">
     <div>
 <h1><span class="kind-class">GitStampNode</span> class 
+    <a href="https://dart.dev/language/class-modifiers#abstract" class="feature feature-abstract" title="This type can not be directly constructed.">abstract</a>
  
 </h1></div>
 
@@ -68,7 +69,7 @@
 <p>Used by <a href="../git_stamp/GitStampPage-class.html">GitStampPage</a>.</p>
 <p>Can be used to extract information.</p>
 <p>Example:</p>
-<pre class="language-dart"><code class="language-dart">const appVersion = GitStampNode.appVersion;
+<pre class="language-dart"><code class="language-dart">const appVersion = GitStamp.appVersion;
 </code></pre>
 </section>
 
@@ -100,7 +101,7 @@
 
 </dt>
 <dd>
-  
+  Application build number from <code>pubspec.yaml</code>.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -112,7 +113,7 @@
 
 </dt>
 <dd>
-  
+  Application name from <code>pubspec.yaml</code>.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -124,7 +125,7 @@
 
 </dt>
 <dd>
-  
+  Application version from <code>pubspec.yaml</code>.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -136,7 +137,7 @@
 
 </dt>
 <dd>
-  
+  Application version + build number from <code>pubspec.yaml</code>.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -148,7 +149,7 @@
 
 </dt>
 <dd>
-  
+  List of branches in <code>git</code> repository as List.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -160,7 +161,7 @@
 
 </dt>
 <dd>
-  
+  Number of branches in the repository.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -172,7 +173,7 @@
 
 </dt>
 <dd>
-  
+  List of branches in <code>git</code> repository as String.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -184,7 +185,7 @@
 
 </dt>
 <dd>
-  
+  The branch from which the applications were built.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -196,7 +197,7 @@
 
 </dt>
 <dd>
-  
+  Date the application was built.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -208,7 +209,7 @@
 
 </dt>
 <dd>
-  
+  Returns <a href="../git_stamp/BuildMachine-class.html">BuildMachine</a>.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -220,7 +221,7 @@
 
 </dt>
 <dd>
-  
+  Return <a href="../git_stamp/BuildMachine-class.html">BuildMachine</a> as JSON.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -232,7 +233,7 @@
 
 </dt>
 <dd>
-  
+  Information that is visible during the <code>flutter doctor</code> command
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -244,7 +245,7 @@
 
 </dt>
 <dd>
-  
+  Commit List Count.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -256,7 +257,7 @@
 
 </dt>
 <dd>
-  
+  Commit List.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -268,7 +269,7 @@
 
 </dt>
 <dd>
-  
+  Commit List as JSON.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -280,7 +281,7 @@
 
 </dt>
 <dd>
-  
+  Diff List.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -292,7 +293,7 @@
 
 </dt>
 <dd>
-  
+  Diff List as JSON.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -304,7 +305,7 @@
 
 </dt>
 <dd>
-  
+  Diff Stat List.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -316,20 +317,20 @@
 
 </dt>
 <dd>
-  
+  Diff Stat List as JSON.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
 
-        <dt id="gitConfigGlobalUser" class="property inherited">
+        <dt id="gitConfigGlobalUser" class="property">
   <span class="name"><a href="../git_stamp/GitStampNode/gitConfigGlobalUser.html">gitConfigGlobalUser</a></span>
   <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
   
 
 </dt>
-<dd class="inherited">
-  
-  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+<dd>
+  <code>git</code> global configuration from system during build.
+  <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
 
@@ -340,7 +341,7 @@
 
 </dt>
 <dd>
-  
+  <code>git</code> global configuration from system during build.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -352,7 +353,7 @@
 
 </dt>
 <dd>
-  
+  <code>git</code> global configuration from system during build.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -364,20 +365,20 @@
 
 </dt>
 <dd>
-  
+  <code>git</code> configuration while building.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
 
-        <dt id="gitConfigUser" class="property inherited">
+        <dt id="gitConfigUser" class="property">
   <span class="name"><a href="../git_stamp/GitStampNode/gitConfigUser.html">gitConfigUser</a></span>
   <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
   
 
 </dt>
-<dd class="inherited">
-  
-  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+<dd>
+  <code>git</code> local configuration from system during build.
+  <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
 
@@ -388,7 +389,7 @@
 
 </dt>
 <dd>
-  
+  <code>git</code> local configuration from system during build.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -400,7 +401,7 @@
 
 </dt>
 <dd>
-  
+  <code>git</code> local configuration from system during build.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -412,7 +413,7 @@
 
 </dt>
 <dd>
-  
+  <code>git</code> count objects.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -424,7 +425,7 @@
 
 </dt>
 <dd>
-  
+  <code>git</code> reflog.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -436,7 +437,7 @@
 
 </dt>
 <dd>
-  
+  <code>git</code> origin.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -460,7 +461,19 @@
 
 </dt>
 <dd>
+  Displays whether <a href="../git_stamp/GitStampNode-class.html">GitStampNode</a> is encrypted.
+  <div class="features"><span class="feature">no setter</span></div>
+
+</dd>
+
+        <dt id="isLiteVersion" class="property">
+  <span class="name"><a href="../git_stamp/GitStampNode/isLiteVersion.html">isLiteVersion</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>
   
+
+</dt>
+<dd>
+  Checks if the build type is <code>LITE</code>.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -472,7 +485,7 @@
 
 </dt>
 <dd>
-  
+  Latest Commit.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -484,7 +497,7 @@
 
 </dt>
 <dd>
-  
+  List of observable files in a <code>git</code> repository as String.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -496,7 +509,7 @@
 
 </dt>
 <dd>
-  
+  Number of observable files in <code>git</code> repository.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -508,7 +521,43 @@
 
 </dt>
 <dd>
+  List of observable files in a <code>git</code> repository as List.
+  <div class="features"><span class="feature">no setter</span></div>
+
+</dd>
+
+        <dt id="packageList" class="property">
+  <span class="name"><a href="../git_stamp/GitStampNode/packageList.html">packageList</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter">Package</span>&gt;</span></span>
   
+
+</dt>
+<dd>
+  List of packages that are in <code>pubspec.yml</code> as List.
+  <div class="features"><span class="feature">no setter</span></div>
+
+</dd>
+
+        <dt id="packageListCount" class="property">
+  <span class="name"><a href="../git_stamp/GitStampNode/packageListCount.html">packageListCount</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd>
+  The number of packages that are in <code>pubspec.yml</code>.
+  <div class="features"><span class="feature">no setter</span></div>
+
+</dd>
+
+        <dt id="packageListString" class="property">
+  <span class="name"><a href="../git_stamp/GitStampNode/packageListString.html">packageListString</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  List of packages that are in <code>pubspec.yml</code> as JSON.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -520,7 +569,7 @@
 
 </dt>
 <dd>
-  
+  The date the <code>git</code> repository was created.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -532,7 +581,7 @@
 
 </dt>
 <dd>
-  
+  The path of the repository on the system during build.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -556,7 +605,7 @@
 
 </dt>
 <dd>
-  
+  Latest Commit SHA.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -568,7 +617,7 @@
 
 </dt>
 <dd>
-  
+  Tag List.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -580,7 +629,7 @@
 
 </dt>
 <dd>
-  
+  Tag List Count.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -592,7 +641,31 @@
 
 </dt>
 <dd>
+  Tag List as json.
+  <div class="features"><span class="feature">no setter</span></div>
+
+</dd>
+
+        <dt id="toolBuildType" class="property">
+  <span class="name"><a href="../git_stamp/GitStampNode/toolBuildType.html">toolBuildType</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
   
+
+</dt>
+<dd>
+  GitStamp Build Type selected during generation.
+  <div class="features"><span class="feature">no setter</span></div>
+
+</dd>
+
+        <dt id="toolVersion" class="property">
+  <span class="name"><a href="../git_stamp/GitStampNode/toolVersion.html">toolVersion</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  GitStamp version.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -613,7 +686,7 @@
 
 </dt>
 <dd>
-  
+  Function to decrypt GitStampNode.
   
 
 </dd>
@@ -626,7 +699,7 @@
 
 </dt>
 <dd>
-  
+  Only for testing.
   
 
 </dd>
@@ -639,7 +712,7 @@
 
 </dt>
 <dd>
-  
+  Returns an icon with information.
   
 
 </dd>
@@ -652,7 +725,7 @@
 
 </dt>
 <dd>
-  
+  Returns a <a href="https://api.flutter.dev/flutter/material/ListTile-class.html">ListTile</a> widget to open a <a href="../git_stamp/GitStampPage-class.html">GitStampPage</a>.
   
 
 </dd>
@@ -665,7 +738,7 @@
 
 </dt>
 <dd>
-  
+  Only for testing.
   
 
 </dd>
@@ -691,7 +764,7 @@
 
 </dt>
 <dd>
-  
+  Only for testing.
   
 
 </dd>
@@ -704,7 +777,7 @@
 
 </dt>
 <dd>
-  
+  Starts <a href="../git_stamp/GitStampNode/showLicensePage.html">showLicensePage</a> function from <code>material</code> package.
   
 
 </dd>
@@ -717,7 +790,7 @@
 
 </dt>
 <dd>
-  
+  Starts <a href="../git_stamp/GitStampPage-class.html">GitStampPage</a>.
   
 
 </dd>
@@ -792,7 +865,7 @@
 <footer>
   <span class="no-break">
     git_stamp
-      5.5.0
+      5.6.0
   </span>
 
   

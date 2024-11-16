@@ -67,13 +67,16 @@
     </section>
 
     
+<section class="desc markdown">
+  <p>Creates an instance of <a href="../../git_stamp/BuildMachine-class.html">BuildMachine</a>.</p>
+<p>Requires json map.</p>
+</section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">factory BuildMachine.fromJson(Map&lt;String, dynamic&gt; json) =&gt;
-    BuildMachine(
+  <pre class="language-dart"><code class="language-dart">factory BuildMachine.fromJson(Map&lt;String, dynamic&gt; json) =&gt; BuildMachine(
       frameworkVersion: json[&#39;frameworkVersion&#39;] ?? &#39;null&#39;,
       channel: json[&#39;channel&#39;] ?? &#39;null&#39;,
       repositoryUrl: json[&#39;repositoryUrl&#39;] ?? &#39;null&#39;,
@@ -118,7 +121,7 @@
 <footer>
   <span class="no-break">
     git_stamp
-      5.5.0
+      5.6.0
   </span>
 
   
