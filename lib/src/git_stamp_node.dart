@@ -11,6 +11,10 @@ import 'model/commit.dart';
 import 'model/package.dart';
 import 'model/tag.dart';
 
+extension _StringExtension on String {
+  dynamic get jsonDecode => json.decode(this);
+}
+
 /// The [GitStampNode] class contains information provided during generation.
 ///
 /// ```cli
@@ -47,8 +51,7 @@ abstract class GitStampNode {
   String get commitListString => '[]';
 
   /// Commit List.
-  List<Commit> get commitList => json
-      .decode(commitListString)
+  List<Commit> get commitList => commitListString.jsonDecode
       .map<Commit>((json) => Commit.fromJson(json))
       .toList();
 
@@ -65,10 +68,8 @@ abstract class GitStampNode {
   String get tagListString => '[]';
 
   /// Tag List.
-  List<Tag> get tagList => json
-      .decode(tagListString)
-      .map<Tag>((json) => Tag.fromJson(json))
-      .toList();
+  List<Tag> get tagList =>
+      tagListString.jsonDecode.map<Tag>((json) => Tag.fromJson(json)).toList();
 
   /// Tag List Count.
   int get tagListCount => tagList.length;
@@ -78,21 +79,21 @@ abstract class GitStampNode {
 
   /// Diff List.
   Map<String, dynamic> get diffList =>
-      json.decode(diffListString.replaceAll(r"\'", "'"));
+      diffListString.replaceAll(r"\'", "'").jsonDecode;
 
   /// Diff Stat List as JSON.
   String get diffStatListString => '{}';
 
   /// Diff Stat List.
   Map<String, dynamic> get diffStatList =>
-      json.decode(diffStatListString.replaceAll(r"\'", "'"));
+      diffStatListString.replaceAll(r"\'", "'").jsonDecode;
 
   /// Return [BuildMachine] as JSON.
   String get buildMachineString => '';
 
   /// Returns [BuildMachine].
   BuildMachine get buildMachine =>
-      BuildMachine.fromJson(json.decode(buildMachineString));
+      BuildMachine.fromJson(buildMachineString.jsonDecode);
 
   /// List of observable files in a [git] repository as String.
   String get observedFiles => '';
@@ -117,7 +118,7 @@ abstract class GitStampNode {
 
   /// List of packages that are in [pubspec.yml] as List.
   List<Package> get packageList =>
-      Packages.fromJson(json.decode(packageListString)).packages ?? [];
+      Packages.fromJson(packageListString.jsonDecode).packages ?? [];
 
   /// The number of packages that are in [pubspec.yml].
   int get packageListCount => packageList.length;
