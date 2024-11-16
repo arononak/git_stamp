@@ -209,40 +209,52 @@ abstract class GitStampNode {
   /// Returns a [ListTile] widget to open a [GitStampPage].
   ///
   /// Only possible for BuildType: [LITE], [FULL].
-  Widget listTile(
-          {required BuildContext context, String? monospaceFontFamily}) =>
-      SizedBox();
+  Widget listTile({
+    required BuildContext context,
+    String? monospaceFontFamily,
+  }) {
+    return SizedBox();
+  }
 
   /// Only for testing.
-  Widget mainPage(
-          {String? monospaceFontFamily,
-          bool showDetails = false,
-          bool showFiles = false}) =>
-      SizedBox();
+  Widget mainPage({
+    String? monospaceFontFamily,
+    bool showDetails = false,
+    bool showFiles = false,
+  }) {
+    return SizedBox();
+  }
 
   /// Only for testing.
-  Widget detailsPage({required Commit commit, String? monospaceFontFamily}) =>
-      SizedBox();
+  Widget detailsPage({
+    required Commit commit,
+    String? monospaceFontFamily,
+  }) {
+    return SizedBox();
+  }
 
   /// Starts [GitStampPage].
-  void showMainPage(
-      {required BuildContext context,
-      String? monospaceFontFamily,
-      bool useRootNavigator = false}) {}
+  void showMainPage({
+    required BuildContext context,
+    String? monospaceFontFamily,
+    bool useRootNavigator = false,
+  }) {}
 
   /// Only for testing.
-  void showDetailsPage(
-      {required BuildContext context,
-      required Commit commit,
-      String? monospaceFontFamily,
-      bool useRootNavigator = false}) {}
+  void showDetailsPage({
+    required BuildContext context,
+    required Commit commit,
+    String? monospaceFontFamily,
+    bool useRootNavigator = false,
+  }) {}
 
   /// Starts [showLicensePage] function from [material] package.
   ///
   /// Adds [appName] and [appVersion] automatically.
-  void showLicensePage(
-      {required BuildContext context,
-      Widget? applicationIcon,
-      String? applicationLegalese,
-      bool useRootNavigator = false}) {}
+  void showLicensePage({
+    required BuildContext context,
+    Widget? applicationIcon,
+    String? applicationLegalese,
+    bool useRootNavigator = false,
+  }) {}
 }
