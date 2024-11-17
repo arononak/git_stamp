@@ -284,7 +284,7 @@ class _GitStampPageState extends State<GitStampPage> {
                   showModalBottomSheet(
                     context: context,
                     builder: (BuildContext context) {
-                      return GitStampDecryptForm(
+                      return _GitStampDecryptForm(
                         gitStamp: widget.gitStamp,
                         startKey: widget.encryptDebugKey,
                         startIv: widget.encryptDebugIv,
@@ -1269,7 +1269,6 @@ class _GitStampFilterList extends StatelessWidget {
                 children: users.map(
                   (e) {
                     final count = commitCount[e];
-
                     return ListTile(
                       leading: Icon(e != null ? Icons.person : Icons.close),
                       title: Text(e ?? 'No filter', style: _textBold),
@@ -1491,9 +1490,8 @@ Uint8List _hexToUint8List(String hex) {
       .codeUnits);
 }
 
-class GitStampDecryptForm extends StatefulWidget {
-  const GitStampDecryptForm({
-    super.key,
+class _GitStampDecryptForm extends StatefulWidget {
+  const _GitStampDecryptForm({
     required this.gitStamp,
     this.startKey,
     this.startIv,
@@ -1506,10 +1504,10 @@ class GitStampDecryptForm extends StatefulWidget {
   final VoidCallback? onSuccess;
 
   @override
-  State<GitStampDecryptForm> createState() => _GitStampDecryptFormState();
+  State<_GitStampDecryptForm> createState() => _GitStampDecryptFormState();
 }
 
-class _GitStampDecryptFormState extends State<GitStampDecryptForm> {
+class _GitStampDecryptFormState extends State<_GitStampDecryptForm> {
   late final TextEditingController _keyController;
   late final TextEditingController _ivController;
 
