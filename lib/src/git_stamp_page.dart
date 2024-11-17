@@ -82,39 +82,45 @@ void _showPackagesDialog(BuildContext context, GitStampNode gitStamp) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 8.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Row(
             children: [
               Text(
-                '${item.package}: $version',
+                '${item.package}: ',
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 10,
                   color: Theme.of(context).colorScheme.primary,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              if (possibleUpdate) ...[
-                SizedBox(width: 2.0),
-                Text(
-                  '(latest: $latest)',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color:
-                        Theme.of(context).colorScheme.primary.withOpacity(0.7),
-                  ),
+              Text(
+                '$version',
+                style: TextStyle(
+                  fontSize: 10,
+                  color: Theme.of(context).colorScheme.secondary,
+                  fontWeight: FontWeight.bold,
                 ),
-              ],
+              ),
             ],
           ),
-          Text(
-            '${item.kind}',
-            style: TextStyle(
-              fontSize: 10,
-              color: Theme.of(context).colorScheme.onSurface,
+          if (possibleUpdate) ...[
+            Text(
+              'latest: $latest',
+              style: TextStyle(
+                fontSize: 8,
+                color: Theme.of(context).colorScheme.primary.withOpacity(0.7),
+              ),
             ),
-          ),
+          ] else ...[
+            Text(
+              'The newest',
+              style: TextStyle(
+                fontSize: 8,
+              ),
+            ),
+          ],
         ],
       ),
     );
@@ -122,6 +128,7 @@ void _showPackagesDialog(BuildContext context, GitStampNode gitStamp) {
 
   final items = gitStamp.packageList;
   items.sort((a, b) => a.kind?.compareTo(b.kind ?? '') ?? 0);
+  final groupedItems = groupBy(items, (item) => item.kind);
 
   showDialog(
     context: context,
@@ -133,10 +140,38 @@ void _showPackagesDialog(BuildContext context, GitStampNode gitStamp) {
         ),
         content: SizedBox(
           width: double.maxFinite,
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: items.length,
-            itemBuilder: (context, index) => buildItem(items[index]),
+          child: ListView(
+            children: [
+              ...{
+                'dependencies:': groupedItems['direct'] ?? [],
+                'dev_dependencies:': groupedItems['dev'] ?? [],
+                'transitive:': groupedItems['transitive'] ?? [],
+              }.entries.map(
+                (entry) {
+                  final values = entry.value;
+                  return ExpansionTile(
+                    tilePadding: EdgeInsets.symmetric(horizontal: 8.0),
+                    childrenPadding: EdgeInsets.symmetric(horizontal: 16.0),
+                    title: Text(
+                      entry.key,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Theme.of(context).colorScheme.primary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    subtitle: Text(
+                      '${values.length} packages',
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
+                    children: values.map((item) => buildItem(item)).toList(),
+                  );
+                },
+              ),
+            ],
           ),
         ),
         actions: [
