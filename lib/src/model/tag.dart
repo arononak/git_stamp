@@ -8,7 +8,10 @@ import 'dateable.dart';
 ///
 /// Stores information about the tag.
 class Tag extends Dateable {
+  /// Example: `v5.0.0`.
   final String name;
+
+  /// Example: `2024-11-16 08:05:28 +0100`.
   @override
   final String date;
 

@@ -8,11 +8,20 @@ import 'dateable.dart';
 ///
 /// Stores information about the commit.
 class Commit extends Dateable {
+  /// Example: `7e48e2e650e6f08e7a98d9c424d671d59bd271b2`.
   final String hash;
+
+  /// Example: `refactor`.
   final String subject;
+
+  /// Example: `2024-11-16 08:05:28 +0100`.
   @override
   final String date;
+  
+  /// Example: `Jan Pyta`.
   final String authorName;
+  
+  /// Example: `jan.pyta69@mail.com`.
   final String authorEmail;
 
   /// Creates an instance of [Commit].
