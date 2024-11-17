@@ -27,7 +27,7 @@ Advanced await-less **information provider** & **development tool**.
 
 ## [🏞️ Preview](./PREVIEW.md)
 
-| 🌐 Sites                                                                         |
+| 🌐 Sites                                                                          |
 | -------------------------------------------------------------------------------- |
 | **[Example Decrypted](https://gitstamp.web.app)**                                |
 | **[Example Encrypted](https://gitstamp-encrypted.web.app)**                      |
@@ -134,9 +134,9 @@ if (kDebugMode) ...[
 
 ## 💰 Sponsors
 
-| [Aron Code](https://aroncode.com) |
-| :-------------------------------: |
-|     ![](images/aroncode.png)      |
+|                         [Aron Code](https://aroncode.com)                         |
+| :-------------------------------------------------------------------------------: |
+| ![](https://github.com/arononak/git_stamp/blob/main/images/aroncode.png?raw=true) |
 
 ## 📝 License
 
