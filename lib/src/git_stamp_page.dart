@@ -988,7 +988,7 @@ class _GitStampRepoDetails extends StatelessWidget {
                           },
                         );
                       },
-                      icon: const Icon(Icons.tag),
+                      icon: const Icon(Icons.local_offer),
                     ),
                     IconButton(
                       onPressed: () {
@@ -1023,7 +1023,7 @@ class _GitStampRepoDetails extends StatelessWidget {
                           builder: (BuildContext context) => _GitStampMore(),
                         );
                       },
-                      icon: const Icon(Icons.more),
+                      icon: Icon(Icons.more, color: Colors.orange),
                     ),
                   ],
                 ),
@@ -1333,27 +1333,28 @@ class _GitStampMore extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text('Git Stamp', style: _textTitle),
-          ),
-          SizedBox(height: 20),
           Flexible(
             child: ListView(
               shrinkWrap: true,
               children: [
                 ListTile(
                   onTap: () => _openEmail(email: 'arononak@gmail.com'),
-                  title: Text(
-                    'Have a great idea for Git Stamp?',
-                    style: _textBold,
-                  ),
+                  title: Text('Have a great idea for GitStamp?'),
                   leading: Icon(Icons.mail),
                 ),
                 ListTile(
                   onTap: () => _openProjectHomepage(),
-                  title: Text('You love Git Stamp?', style: _textBold),
+                  title: Text('You love GitStamp?'),
                   leading: Icon(Icons.star),
+                ),
+                ListTile(
+                  onLongPress: () => _openProjectHomepage(),
+                  title: Text('Become a contributor!'),
+                  subtitle: Text(
+                    'Create a Pull Request and agree to be listed.\nIf it gets merged you will be in the README.md file.\nPress LongPress to get started.',
+                  ),
+                  tileColor: Colors.orange.withOpacity(0.5),
+                  splashColor: Colors.orange,
                 ),
               ],
             ),
