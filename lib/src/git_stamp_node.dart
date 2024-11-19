@@ -129,7 +129,11 @@ abstract class GitStampNode {
   /// Date the application was built.
   String get buildDateTime => '';
 
-  /// Information that is visible during the ```flutter doctor``` command
+  /// Information that is visible during the 
+  /// ```cli
+  /// flutter doctor
+  /// ```
+  /// command
   String get buildSystemInfo => '';
 
   /// The date the [git] repository was created.
