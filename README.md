@@ -22,6 +22,7 @@ Advanced await-less **information provider** & **development tool**.
   - [🛠️ Installation](#️-installation)
   - [🏗️ Generating](#️-generating)
   - [💻 Usage](#-usage)
+  - [🔥Contributors](#contributors)
   - [💰 Sponsors](#-sponsors)
   - [📝 License](#-license)
 
@@ -131,6 +132,12 @@ if (kDebugMode) ...[
   ),
 ],
 ```
+
+## 🔥Contributors
+
+<a href="https://github.com/arononak/git_stamp/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=arononak/git_stamp" />
+</a>
 
 ## 💰 Sponsors
 
