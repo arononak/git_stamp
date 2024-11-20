@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:example/git_stamp/git_stamp.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+const _initCommitHash = '11ffded15a71616a0e65fcd5578cceb2949dd90e';
+
 final table = [
   {
     'param': 'commit-list',
@@ -21,12 +23,12 @@ final table = [
   },
   {
     'param': 'diff-list',
-    'field': GitStamp.diffList.isNotEmpty,
+    'field': GitStamp.diffStatList.elementForHash(_initCommitHash).isNotEmpty,
     'matcher': isTrue,
   },
   {
     'param': 'diff-stat-list',
-    'field': GitStamp.diffStatList.isNotEmpty,
+    'field': GitStamp.diffStatList.elementForHash(_initCommitHash).isNotEmpty,
     'matcher': isTrue,
   },
   {
