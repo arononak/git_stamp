@@ -19,6 +19,10 @@ class GitStampLogger {
         .forEach((line) => GitStampLogger.lightYellow(line));
   }
 
+  static void white(String message) {
+    print(message);
+  }
+
   static void red(String message) {
     print('\x1B[31m$message\x1B[0m');
   }

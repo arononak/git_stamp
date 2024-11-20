@@ -20,6 +20,7 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git checkout main
           git pull origin main
+          make generate_version_file
           dart format .
           git add .
           if ! git diff-index --quiet HEAD; then

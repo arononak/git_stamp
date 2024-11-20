@@ -1,10 +1,10 @@
 # 📋 TODO list
 
-| Step                             | Description                                                  |
-| -------------------------------- | ------------------------------------------------------------ |
-| 🔧 Run `pana` command            | Check 160/160 points                                         |
-| 📈 Update version and changelogs | `pubspec.yaml`, `CHANGELOG.md`, `bin/git_stamp_version.dart` |
-| 🏷️ New tag and push              | Deploy every week                                            |
+| Step                             | Description                    |
+| -------------------------------- | ------------------------------ |
+| 🔧 Run `pana` command            | Check 160/160 points           |
+| 📈 Update version and changelogs | `pubspec.yaml`, `CHANGELOG.md` |
+| 🏷️ New tag and push              | Deploy every week              |
 
 - [x] Github Actions - deploy to pub.dev
 - [x] InApp - AppBar commit count right & icon

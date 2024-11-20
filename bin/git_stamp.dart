@@ -146,7 +146,7 @@ Future<void> main(List<String> arguments) async {
       GitStampLogger.lightGrey(usage);
       return;
     } else if (results['version']) {
-      GitStampLogger.lightGrey(gitStampVersion);
+      GitStampLogger.white(gitStampVersion);
       return;
     } else if (results['gen-only-options']) {
       GitStampLogger.lightGrey(GitStampBuildModel.genOnlyOptions.toString());
@@ -203,7 +203,7 @@ Future<_GenerationResult> _generate({
   List<String>? genOnly,
 }) async {
   if (GitStampFile.loggingEnabled) {
-    GitStampLogger.lightGreen(gitStampVersion);
+    GitStampLogger.lightGreen('Version: $gitStampVersion');
     GitStampLogger.lightGreen(
       'Build type: ${buildType == 'custom' ? 'custom ($genOnly)' : buildType}',
     );

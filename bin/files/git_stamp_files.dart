@@ -102,13 +102,8 @@ class ToolVersion extends GitStampDataFile {
   String get variableName => 'gitStampToolVersion';
 
   @override
-  String get variableContent => exec(['dart', 'run', 'git_stamp', '--version'])
-      .toString()
-      .trim()
-      .split(' ')
-      .last
-      .split('')
-      .first;
+  String get variableContent =>
+      exec(['dart', 'run', 'git_stamp', '--version']).toString().trim();
 }
 
 class CommitList extends GitStampDataFile {
