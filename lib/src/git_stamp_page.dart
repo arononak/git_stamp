@@ -362,7 +362,9 @@ class GitStampDetailsPage extends StatefulWidget {
 }
 
 class _GitStampDetailsPageState extends State<GitStampDetailsPage> {
-  String get diffList => widget.gitStamp.diffList[widget.commit.hash] ?? '';
+  String get _hash => widget.commit.hash;
+
+  String get _diff => widget.gitStamp.diffList.elementForHash(_hash);
 
   var _fontSize = 12;
 
@@ -409,7 +411,7 @@ class _GitStampDetailsPageState extends State<GitStampDetailsPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _GitStampDetailsPageText(
-                        diffList: diffList,
+                        diffList: _diff,
                         monospaceFontFamily: widget.monospaceFontFamily,
                         fontSize: _fontSize.toDouble(),
                       ),
@@ -422,7 +424,7 @@ class _GitStampDetailsPageState extends State<GitStampDetailsPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton.small(
-        onPressed: () => _copyToClipboard(context, diffList),
+        onPressed: () => _copyToClipboard(context, _diff),
         child: Icon(Icons.copy),
       ),
     );
@@ -724,7 +726,7 @@ class _GitStampCommitListElement extends StatelessWidget {
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Text(
-                      gitStamp.diffStatList[commit.hash] ?? '',
+                      gitStamp.diffStatList.elementForHash(commit.hash),
                       style: TextStyle(
                         fontSize: 10,
                         fontFamily: monospaceFontFamily,

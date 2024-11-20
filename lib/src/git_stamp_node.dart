@@ -8,6 +8,7 @@ import 'package:flutter/widgets.dart';
 
 import 'model/build_machine.dart';
 import 'model/commit.dart';
+import 'model/diff_list.dart';
 import 'model/package.dart';
 import 'model/tag.dart';
 
@@ -78,15 +79,15 @@ abstract class GitStampNode {
   String get diffListString => '{}';
 
   /// Diff List.
-  Map<String, dynamic> get diffList =>
-      diffListString.replaceAll(r"\'", "'").jsonDecode;
+  DiffList get diffList =>
+      DiffList.fromJson(diffListString.replaceAll(r"\'", "'").jsonDecode);
 
   /// Diff Stat List as JSON.
   String get diffStatListString => '{}';
 
   /// Diff Stat List.
-  Map<String, dynamic> get diffStatList =>
-      diffStatListString.replaceAll(r"\'", "'").jsonDecode;
+  DiffList get diffStatList =>
+      DiffList.fromJson(diffStatListString.replaceAll(r"\'", "'").jsonDecode);
 
   /// Return [BuildMachine] as JSON.
   String get buildMachineString => '';
@@ -129,7 +130,7 @@ abstract class GitStampNode {
   /// Date the application was built.
   String get buildDateTime => '';
 
-  /// Information that is visible during the 
+  /// Information that is visible during the
   /// ```cli
   /// flutter doctor
   /// ```
