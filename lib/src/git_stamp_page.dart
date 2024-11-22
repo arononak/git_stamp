@@ -613,6 +613,8 @@ class _GitStampCommitListElement extends StatelessWidget {
     this.monospaceFontFamily,
   });
 
+  bool get _isBotCommit => commit.authorEmail.contains('[bot]');
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -639,9 +641,12 @@ class _GitStampCommitListElement extends StatelessWidget {
                 : _isMobile(context)
                     ? null
                     : Icon(
-                        Icons.code,
+                        _isBotCommit ? Icons.auto_mode : Icons.code,
                         size: 36,
-                        color: Theme.of(context).colorScheme.primary,
+                        color: Theme.of(context)
+                            .colorScheme
+                            .primary
+                            .withOpacity(_isBotCommit ? 0.1 : 1.0),
                       ),
             title: _GitStampCommitListHeader(commit: commit),
             subtitle: itemLargeType == false
