@@ -82,7 +82,7 @@ void main() {
     await tester.pumpPage(page: GitStamp.mainPage(showDetails: true));
     await tester.pump(Duration(seconds: 2));
     await tester.pump(Duration(seconds: 2));
-    await tester.tap(find.byIcon(Icons.tag));
+    await tester.tap(find.byIcon(Icons.local_offer));
     await tester.pump(Duration(seconds: 2));
     await tester.pump(Duration(seconds: 2));
     await binding.takeScreenshot('screenshot_tags');
