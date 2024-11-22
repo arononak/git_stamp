@@ -19,7 +19,7 @@ class GitStampLogger {
         .forEach((line) => GitStampLogger.lightYellow(line));
   }
 
-  static void white(String message) {
+  static void print(String message) {
     print(message);
   }
 

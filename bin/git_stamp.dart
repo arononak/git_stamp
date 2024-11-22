@@ -146,7 +146,7 @@ Future<void> main(List<String> arguments) async {
       GitStampLogger.lightGrey(usage);
       return;
     } else if (results['version']) {
-      GitStampLogger.white(gitStampVersion);
+      GitStampLogger.print(gitStampVersion);
       return;
     } else if (results['gen-only-options']) {
       GitStampLogger.lightGrey(GitStampBuildModel.genOnlyOptions.toString());
