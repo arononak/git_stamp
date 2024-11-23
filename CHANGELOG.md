@@ -12,6 +12,10 @@
 
 # CHANGELOG
 
+## 5.7.1
+
+* Markdowns & docs update
+
 ## 5.7.0
 
 * **Package module** - New design
