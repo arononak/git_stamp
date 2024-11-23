@@ -1,6 +1,6 @@
-# Commit count: 820
+# Commit count: 825
 | Build type | Generating time | Number of dart files generated | Size of generated dart files |
 |------------|-----------------|-------------------------------|------------------------------|
-| FULL | 18.59 | 27 | 7.6 MB |
-| LITE | 2.98 | 27 | 239.8 KB |
-| ICON | 0.75 | 8 | 6.0 KB |
+| FULL | 14.34 | 27 | 7.8 MB |
+| LITE | 2.97 | 27 | 240.9 KB |
+| ICON | 0.69 | 8 | 6.0 KB |
