@@ -12,6 +12,20 @@
 
 # CHANGELOG
 
+## 5.7.0
+
+* **Package module** - New design
+* GitStampCommit - Different icon for auto-commit
+* GitStampPage - Added contribution section & New tag icon
+* GitStampNode refactor
+* Added `DiffList` model
+* Added dart doc to models
+
+<details>
+<summary>Image</summary>
+<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/5.7.0.png?raw=true" alt="Image"></p>
+</details>
+
 ## 5.6.0
 
 * Added **packages modeule**
