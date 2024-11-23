@@ -29,7 +29,7 @@ class Packages {
 /// Stores information about your Flutter project's pub single package.
 class Package {
   /// Package name.
-  /// 
+  ///
   /// Example: `git_stamp`.
   final String? package;
 
@@ -41,18 +41,18 @@ class Package {
   final String? kind;
 
   final bool? isDiscontinued;
-  
+
   final bool? isCurrentRetracted;
-  
+
   final bool? isCurrentAffectedByAdvisory;
-  
+
   /// Current version of the package being used.
   final Version? current;
-  
+
   final Version? upgradable;
-  
+
   final Version? resolvable;
-  
+
   /// The latest possible version of the package available at the time of compilation.
   final Version? latest;
 

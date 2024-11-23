@@ -11,28 +11,28 @@ class BuildMachine {
 
   /// Example: `stable`.
   final String channel;
-  
+
   /// Example: `https://github.com/flutter/flutter.git`.
   final String repositoryUrl;
-  
+
   /// Example: `603104015dd692ea3403755b55d07813d5cf8965`.
   final String frameworkRevision;
-  
+
   /// Example: `2024-10-24 08:01:25 -0700`.
   final String frameworkCommitDate;
-  
+
   /// Example: `db49896cf25ceabc44096d5f088d86414e05a7aa`.
   final String engineRevision;
-  
+
   /// Example: `3.5.4`.
   final String dartSdkVersion;
-  
+
   /// Example: `2.37.3`.
   final String devToolsVersion;
-  
+
   /// Example: `3.24.4`.
   final String flutterVersion;
-  
+
   /// Example: `/home/aron/flutter`.
   final String flutterRoot;
 

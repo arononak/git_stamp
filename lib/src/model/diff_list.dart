@@ -19,7 +19,7 @@ class DiffList {
   factory DiffList.fromJson(Map<String, dynamic> json) => DiffList(json);
 
   /// Returns changes as a [String] by hash.
-  /// 
+  ///
   /// Requires [Commit] hash.
   String elementForHash(String hash) => _map[hash] ?? '';
 }

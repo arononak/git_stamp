@@ -17,10 +17,10 @@ class Commit extends Dateable {
   /// Example: `2024-11-16 08:05:28 +0100`.
   @override
   final String date;
-  
+
   /// Example: `Jan Pyta`.
   final String authorName;
-  
+
   /// Example: `jan.pyta69@mail.com`.
   final String authorEmail;
 
