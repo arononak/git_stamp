@@ -995,7 +995,10 @@ class _GitStampRepoDetails extends StatelessWidget {
                           },
                         );
                       },
-                      icon: const Icon(key: Key('show_tags_icon'), Icons.local_offer),
+                      icon: const Icon(
+                        key: Key('show_tags_icon'),
+                        Icons.local_offer,
+                      ),
                     ),
                     IconButton(
                       onPressed: () {
