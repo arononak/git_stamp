@@ -81,7 +81,7 @@
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">BuildMachine get buildMachine =&gt;
-    BuildMachine.fromJson(json.decode(buildMachineString));</code></pre>
+    BuildMachine.fromJson(buildMachineString.jsonDecode);</code></pre>
 </section>
 
   </section>
@@ -117,7 +117,7 @@
 <footer>
   <span class="no-break">
     git_stamp
-      5.6.0
+      5.7.0
   </span>
 
   

@@ -81,7 +81,7 @@
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">List&lt;Package&gt; get packageList =&gt;
-    Packages.fromJson(json.decode(packageListString)).packages ?? [];</code></pre>
+    Packages.fromJson(packageListString.jsonDecode).packages ?? [];</code></pre>
 </section>
 
   </section>
@@ -117,7 +117,7 @@
 <footer>
   <span class="no-break">
     git_stamp
-      5.6.0
+      5.7.0
   </span>
 
   

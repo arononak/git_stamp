@@ -80,10 +80,8 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">List&lt;Tag&gt; get tagList =&gt; json
-    .decode(tagListString)
-    .map&lt;Tag&gt;((json) =&gt; Tag.fromJson(json))
-    .toList();</code></pre>
+  <pre class="language-dart"><code class="language-dart">List&lt;Tag&gt; get tagList =&gt;
+    tagListString.jsonDecode.map&lt;Tag&gt;((json) =&gt; Tag.fromJson(json)).toList();</code></pre>
 </section>
 
   </section>
@@ -119,7 +117,7 @@
 <footer>
   <span class="no-break">
     git_stamp
-      5.6.0
+      5.7.0
   </span>
 
   
