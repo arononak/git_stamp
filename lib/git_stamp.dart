@@ -2,6 +2,12 @@
 // Licensed under the MIT license.
 // If you have any feedback, please contact me at arononak@gmail.com
 
+/// Advanced await-less information provider & development tool.
+///
+/// Check how to use:
+/// https://github.com/arononak/git_stamp
+library;
+
 export 'src/model/build_machine.dart';
 export 'src/model/commit.dart';
 export 'src/model/tag.dart';

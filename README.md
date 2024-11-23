@@ -1,4 +1,4 @@
-# [Git Stamp 🏷](./TODO.md) Stamp Every App Build!
+# [Git Stamp 🏷](TODO.md) Stamp Every App Build!
 
 Advanced await-less **information provider** & **development tool**.
 
@@ -26,7 +26,7 @@ Advanced await-less **information provider** & **development tool**.
   - [💰 Sponsors](#-sponsors)
   - [📝 License](#-license)
 
-## [🏞️ Preview](./PREVIEW.md)
+## [🏞️ Preview](PREVIEW.md)
 
 | 🌐 Sites                                                                          |
 | -------------------------------------------------------------------------------- |
@@ -41,7 +41,7 @@ Advanced await-less **information provider** & **development tool**.
   </tr>
 </table>
 
-## 📑️ About ([Changelog](./CHANGELOG.md))
+## 📑️ About ([Changelog](CHANGELOG.md))
 
 [<img src="https://www.gov.pl/photo/f98cae42-2b90-4596-904c-752278f85606" height="100" align="right">](https://www.gov.pl/web/rolnictwo/produkt-polski1)
 
@@ -107,7 +107,7 @@ Text('Branch: ${GitStamp.buildBranch}'),
 Text('SHA: ${GitStamp.sha}'),
 ```
 
-## [🛠️ Installation](./INSTALLATION.md)
+## [🛠️ Installation](INSTALLATION.md)
 
 ```yml
 dependencies:
@@ -116,13 +116,13 @@ dependency_overrides:
   meta: ^1.1.5
 ```
 
-## [🏗️ Generating](./GENERATING.md)
+## [🏗️ Generating](GENERATING.md)
 
 ```cli
 dart run git_stamp --build-type full
 ```
 
-## [💻 Usage](./USAGE.md)
+## [💻 Usage](USAGE.md)
 
 ```dart
 if (kDebugMode) ...[

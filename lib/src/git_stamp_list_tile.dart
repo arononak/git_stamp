@@ -18,10 +18,25 @@ import 'git_stamp_node.dart';
 /// ),
 /// ```
 class GitStampListTile extends StatelessWidget {
+  /// The [GitStampNode] class contains information provided during generation.
   final GitStampNode gitStamp;
+
+  /// GitStamp version.
   final String gitStampVersion;
+
+  /// Checks if the build type is LITE.
   final bool isLiteVersion;
+
+  /// Font name used to display changes.
+  ///
+  /// This field is not required, but if we want the changes to be displayed
+  /// evenly, we need to pass the font name.
+  ///
+  /// See for example:
+  /// https://github.com/arononak/git_stamp/blob/main/example/lib/main.dart#L9
   final String? monospaceFontFamily;
+
+  /// Called when the user taps.
   final VoidCallback onPressed;
 
   const GitStampListTile({

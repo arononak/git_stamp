@@ -16,6 +16,7 @@ import 'git_stamp_node.dart';
 ///  * [GitStampNode.buildBranch].
 ///  * [GitStampNode.sha].
 class GitStampIcon extends StatefulWidget {
+  /// The [GitStampNode] class contains information provided during generation.
   final GitStampNode gitStamp;
 
   const GitStampIcon({super.key, required this.gitStamp});

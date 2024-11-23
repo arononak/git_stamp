@@ -189,7 +189,8 @@ void _showPackagesDialog(BuildContext context, GitStampNode gitStamp) {
 
 /// The [GitStampPage] displays a main GitStamp page.
 ///
-/// You should use [GitStamp.listTile] or the [GitStamp.showMainPage] function.
+/// You should use [GitStampNode.listTile] as a GitStamp.listTile or the
+/// [GitStampNode.showMainPage] as a GitStamp.showMainPage function.
 class GitStampPage extends StatefulWidget {
   const GitStampPage({
     super.key,
@@ -203,13 +204,34 @@ class GitStampPage extends StatefulWidget {
     this.encryptDebugIv,
   });
 
+  /// The [GitStampNode] class contains information provided during generation.
   final GitStampNode gitStamp;
+
+  /// GitStamp version.
   final String gitStampVersion;
+
+  /// Checks if the build type is LITE.
   final bool isLiteVersion;
+
+  /// For debug version only.
   final bool showDetails;
+
+  /// For debug version only.
   final bool showFiles;
+
+  /// Font name used to display changes.
+  ///
+  /// This field is not required, but if we want the changes to be displayed
+  /// evenly, we need to pass the font name.
+  ///
+  /// See for example:
+  /// https://github.com/arononak/git_stamp/blob/main/example/lib/main.dart#L9
   final String? monospaceFontFamily;
+
+  /// For debug version only.
   final String? encryptDebugKey;
+
+  /// For debug version only.
   final String? encryptDebugIv;
 
   @override
@@ -344,10 +366,24 @@ class _GitStampPageState extends State<GitStampPage> {
 
 /// The [GitStampDetailsPage] displays a page with commit diff.
 ///
-/// You should use [GitStampListTile] or the [showGitStampPage] function.
+/// You should use [GitStampListTile] or the [GitStampNode.showMainPage]
+/// function as a GitStamp.showMainPage.
 class GitStampDetailsPage extends StatefulWidget {
+  /// The [GitStampNode] class contains information provided during generation.
   final GitStampNode gitStamp;
+
+  /// The model used to store information about the [Commit].
+  ///
+  /// Stores information about the commit.
   final Commit commit;
+
+  /// Font name used to display changes.
+  ///
+  /// This field is not required, but if we want the changes to be displayed
+  /// evenly, we need to pass the font name.
+  ///
+  /// See for example:
+  /// https://github.com/arononak/git_stamp/blob/main/example/lib/main.dart#L9
   final String? monospaceFontFamily;
 
   const GitStampDetailsPage({

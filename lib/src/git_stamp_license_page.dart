@@ -9,7 +9,7 @@ import 'git_stamp_node.dart';
 /// The [GitStampLicenseIcon] class used when we want to go to the licensing screen.
 ///
 /// Below that the [showLicensePage] function from [material] is used.
-/// Additionally, information from [pubspec.yaml] is added.
+/// Additionally, information from pubspec.yaml is added.
 class GitStampLicenseIcon extends StatelessWidget {
   const GitStampLicenseIcon({
     super.key,
@@ -18,8 +18,13 @@ class GitStampLicenseIcon extends StatelessWidget {
     this.applicationLegalese,
   });
 
+  /// The [GitStampNode] class contains information provided during generation.
   final GitStampNode gitStamp;
+
+  /// Usually a company logo.
   final Widget? applicationIcon;
+
+  /// Example: `© Aron Code 2024. All rights reserved.`.
   final String? applicationLegalese;
 
   @override
@@ -38,6 +43,7 @@ class GitStampLicenseIcon extends StatelessWidget {
   }
 }
 
+/// The [showGitStampLicensePage] function shows the license screen.
 void showGitStampLicensePage({
   required BuildContext context,
   required GitStampNode gitStamp,

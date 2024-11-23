@@ -46,7 +46,7 @@ Commit limit `--limit 100` .
 
 For LITE & FULL encrypted versions, disabling adding a package `--adding-packages disabled` .
 
-### 4. [Benchmarks](./BENCHMARK.md)
+### 4. [Benchmarks](BENCHMARK.md)
 
 ```cli
 dart run git_stamp --benchmark
