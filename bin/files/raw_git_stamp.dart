@@ -112,7 +112,6 @@ class GitStampNodeImpl extends GitStampNode {
   ${model.generateFlutterFiles.enabled}  return GitStampListTile(
   ${model.generateFlutterFiles.enabled}    gitStamp: this,
   ${model.generateFlutterFiles.enabled}    gitStampVersion: toolVersion,
-  ${model.generateFlutterFiles.enabled}    isLiteVersion: isLiteVersion,
   ${model.generateFlutterFiles.enabled}    onPressed: () {
   ${model.generateFlutterFiles.enabled}      showMainPage(
   ${model.generateFlutterFiles.enabled}        context: context,
@@ -126,7 +125,6 @@ class GitStampNodeImpl extends GitStampNode {
   ${model.generateFlutterFiles.enabled}  return GitStampPage(
   ${model.generateFlutterFiles.enabled}    gitStamp: this,
   ${model.generateFlutterFiles.enabled}    gitStampVersion: toolVersion,
-  ${model.generateFlutterFiles.enabled}    isLiteVersion: isLiteVersion,
   ${model.generateFlutterFiles.enabled}    monospaceFontFamily: monospaceFontFamily,
   ${model.generateFlutterFiles.enabled}    showDetails: showDetails,
   ${model.generateFlutterFiles.enabled}    showFiles: showFiles,
@@ -257,7 +255,6 @@ class GitStampNodeImpl extends GitStampNode {
     return GitStampListTile(
       gitStamp: this,
       gitStampVersion: toolVersion,
-      isLiteVersion: isLiteVersion,
       onPressed: () {
         showMainPage(
           context: context,
@@ -271,7 +268,6 @@ class GitStampNodeImpl extends GitStampNode {
     return GitStampPage(
       gitStamp: this,
       gitStampVersion: toolVersion,
-      isLiteVersion: isLiteVersion,
       monospaceFontFamily: monospaceFontFamily,
       showDetails: showDetails,
       showFiles: showFiles,

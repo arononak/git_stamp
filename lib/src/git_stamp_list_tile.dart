@@ -24,9 +24,6 @@ class GitStampListTile extends StatelessWidget {
   /// GitStamp version.
   final String gitStampVersion;
 
-  /// Checks if the build type is [BuildType.lite].
-  final bool isLiteVersion;
-
   /// Font name used to display changes.
   ///
   /// This field is not required, but if we want the changes to be displayed
@@ -43,7 +40,6 @@ class GitStampListTile extends StatelessWidget {
     super.key,
     required this.gitStamp,
     required this.gitStampVersion,
-    required this.isLiteVersion,
     required this.onPressed,
     this.monospaceFontFamily,
   });

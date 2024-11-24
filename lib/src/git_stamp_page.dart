@@ -56,7 +56,6 @@ void _showDetailsBottomSheet(
   BuildContext context, {
   required GitStampNode gitStamp,
   required String gitStampVersion,
-  required bool isLiteVersion,
   VoidCallback? onFinish,
 }) {
   showModalBottomSheet(
@@ -66,7 +65,6 @@ void _showDetailsBottomSheet(
       return _GitStampRepoDetails(
         gitStamp: gitStamp,
         gitStampVersion: gitStampVersion,
-        isLiteVersion: isLiteVersion,
       );
     },
   ).then((result) => onFinish?.call());
@@ -196,7 +194,6 @@ class GitStampPage extends StatefulWidget {
     super.key,
     required this.gitStamp,
     required this.gitStampVersion,
-    required this.isLiteVersion,
     this.showDetails = false,
     this.showFiles = false,
     this.monospaceFontFamily,
@@ -209,9 +206,6 @@ class GitStampPage extends StatefulWidget {
 
   /// GitStamp version.
   final String gitStampVersion;
-
-  /// Checks if the build type is [BuildType.lite].
-  final bool isLiteVersion;
 
   /// For debug version only.
   final bool showDetails;
@@ -253,7 +247,6 @@ class _GitStampPageState extends State<GitStampPage> {
           context,
           gitStamp: widget.gitStamp,
           gitStampVersion: widget.gitStampVersion,
-          isLiteVersion: widget.isLiteVersion,
         );
       }
 
@@ -323,7 +316,6 @@ class _GitStampPageState extends State<GitStampPage> {
                         context,
                         gitStamp: widget.gitStamp,
                         gitStampVersion: widget.gitStampVersion,
-                        isLiteVersion: widget.isLiteVersion,
                         onFinish: () => _arrowIconKey.currentState?.toggle(),
                       );
                     },
@@ -356,7 +348,6 @@ class _GitStampPageState extends State<GitStampPage> {
           : _GitStampCommitList(
               gitStamp: widget.gitStamp,
               filterName: _filterAuthorName,
-              isLiteVersion: widget.isLiteVersion,
               itemLargeType: itemLargeType,
               monospaceFontFamily: widget.monospaceFontFamily,
             ),
@@ -505,14 +496,12 @@ class _GitStampCommitHeader {
 class _GitStampCommitList extends StatelessWidget {
   final GitStampNode gitStamp;
   final String? filterName;
-  final bool isLiteVersion;
   final bool itemLargeType;
   final String? monospaceFontFamily;
 
   const _GitStampCommitList({
     required this.gitStamp,
     this.filterName,
-    this.isLiteVersion = true,
     this.itemLargeType = true,
     this.monospaceFontFamily,
   });
@@ -558,7 +547,6 @@ class _GitStampCommitList extends StatelessWidget {
             return _GitStampCommitListElement(
               gitStamp: gitStamp,
               commit: element,
-              isLiteVersion: isLiteVersion,
               itemLargeType: itemLargeType,
               monospaceFontFamily: monospaceFontFamily,
             );
@@ -637,14 +625,12 @@ class _GitStampDateListElement extends StatelessWidget {
 class _GitStampCommitListElement extends StatelessWidget {
   final GitStampNode gitStamp;
   final Commit commit;
-  final bool isLiteVersion;
   final bool itemLargeType;
   final String? monospaceFontFamily;
 
   const _GitStampCommitListElement({
     required this.gitStamp,
     required this.commit,
-    this.isLiteVersion = true,
     required this.itemLargeType,
     this.monospaceFontFamily,
   });
@@ -662,7 +648,7 @@ class _GitStampCommitListElement extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0.0)),
       elevation: 0.0,
       child: InkWell(
-        onTap: isLiteVersion
+        onTap: gitStamp.isLiteVersion
             ? null
             : () => showGitDiffStat(context, gitStamp: gitStamp),
         splashColor: Colors.orange[900],
@@ -904,12 +890,10 @@ class _GitStampRepoDetails extends StatelessWidget {
   const _GitStampRepoDetails({
     required this.gitStamp,
     required this.gitStampVersion,
-    required this.isLiteVersion,
   });
 
   final GitStampNode gitStamp;
   final String gitStampVersion;
-  final bool isLiteVersion;
 
   @override
   Widget build(BuildContext context) {
@@ -1091,9 +1075,9 @@ class _GitStampRepoDetails extends StatelessWidget {
         Row(
           children: [
             Text('Build type: [', style: _textDefault),
-            Text('LITE', style: isLiteVersion ? _textBold : _textDefault),
+            Text('LITE', style: gitStamp.isLiteVersion ? _textBold : _textDefault),
             Text(', ', style: _textDefault),
-            Text('FULL', style: isLiteVersion ? _textDefault : _textBold),
+            Text('FULL', style: gitStamp.isLiteVersion ? _textDefault : _textBold),
             Text(']', style: _textDefault),
           ],
         ),
