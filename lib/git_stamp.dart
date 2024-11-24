@@ -8,6 +8,7 @@
 /// https://github.com/arononak/git_stamp
 library;
 
+export 'src/model/build_type.dart';
 export 'src/model/build_machine.dart';
 export 'src/model/commit.dart';
 export 'src/model/tag.dart';

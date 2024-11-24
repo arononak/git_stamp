@@ -24,7 +24,7 @@ class GitStampListTile extends StatelessWidget {
   /// GitStamp version.
   final String gitStampVersion;
 
-  /// Checks if the build type is LITE.
+  /// Checks if the build type is [BuildType.lite].
   final bool isLiteVersion;
 
   /// Font name used to display changes.

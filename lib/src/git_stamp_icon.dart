@@ -11,9 +11,9 @@ import 'git_stamp_node.dart';
 ///
 /// Such as:
 ///
-///  * [GitStampNode.appVersionFull].
+///  * [GitStampNode.appVersionFull],
 ///  * [GitStampNode.buildDateTime],
-///  * [GitStampNode.buildBranch].
+///  * [GitStampNode.buildBranch],
 ///  * [GitStampNode.sha].
 class GitStampIcon extends StatefulWidget {
   /// The [GitStampNode] class contains information provided during generation.

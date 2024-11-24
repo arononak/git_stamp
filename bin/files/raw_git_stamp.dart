@@ -74,7 +74,7 @@ final GitStamp = GitStampNodeImpl();
 
 class GitStampNodeImpl extends GitStampNode {
   @override String get toolVersion => gitStampToolVersion;
-  @override String get toolBuildType => gitStampToolBuildType;
+  @override BuildType get toolBuildType => BuildType.fromString(gitStampToolBuildType);
   
   @override bool get isEncrypted => false;
   @override bool decrypt(Uint8List key, Uint8List iv) => true;
@@ -195,7 +195,7 @@ class GitStampNodeImpl extends GitStampNode {
   GitStampNodeImpl();
 
   @override String get toolVersion => gitStampToolVersion;
-  @override String get toolBuildType => gitStampToolBuildType;
+  @override BuildType get toolBuildType => BuildType.fromString(gitStampToolBuildType);
 
   @override bool get isEncrypted => (key == null || iv == null);
   @override bool decrypt(Uint8List key, Uint8List iv) {

@@ -5,6 +5,7 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:git_stamp/src/model/build_type.dart';
 
 import 'model/build_machine.dart';
 import 'model/commit.dart';
@@ -36,11 +37,16 @@ abstract class GitStampNode {
 
   /// GitStamp Build Type selected during generation.
   ///
-  /// Possible values ​​are: FULL, LITE, ICON & CUSTOM.
-  String get toolBuildType;
+  /// Possible values ​​are:
+  ///
+  ///  * [BuildType.full],
+  ///  * [BuildType.lite],
+  ///  * [BuildType.icon],
+  ///  * [BuildType.custom].
+  BuildType get toolBuildType;
 
-  /// Checks if the build type is LITE.
-  bool get isLiteVersion => toolBuildType == 'LITE';
+  /// Checks if the build type is [BuildType.lite].
+  bool get isLiteVersion => toolBuildType.isLiteVersion;
 
   /// Displays whether [GitStampNode] is encrypted.
   bool get isEncrypted => false;
@@ -209,12 +215,19 @@ abstract class GitStampNode {
 
   /// Returns an icon with information.
   ///
-  /// Only possible for BuildType: ICON, LITE, FULL.
+  /// Only possible for BuildType:
+  ///
+  ///  * [BuildType.icon],
+  ///  * [BuildType.lite],
+  ///  * [BuildType.full].
   Widget icon() => SizedBox();
 
   /// Returns a [ListTile] widget to open a [GitStampPage].
   ///
-  /// Only possible for BuildType: LITE, FULL.
+  /// Only possible for BuildType:
+  ///
+  ///  * [BuildType.lite],
+  ///  * [BuildType.full].
   Widget listTile({
     required BuildContext context,
     String? monospaceFontFamily,

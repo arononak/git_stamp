@@ -210,7 +210,7 @@ class GitStampPage extends StatefulWidget {
   /// GitStamp version.
   final String gitStampVersion;
 
-  /// Checks if the build type is LITE.
+  /// Checks if the build type is [BuildType.lite].
   final bool isLiteVersion;
 
   /// For debug version only.
