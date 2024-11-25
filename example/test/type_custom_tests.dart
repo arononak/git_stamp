@@ -131,6 +131,11 @@ final table = [
     'field': GitStamp.packageList.first.package,
     'matcher': isNotEmpty,
   },
+  {
+    'param': 'deps',
+    'field': GitStamp.deps,
+    'matcher': isNotEmpty,
+  },
 
   /* Build Machine */
   {

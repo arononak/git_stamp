@@ -95,7 +95,7 @@ void main() {
         page: GitStamp.mainPage(showDetails: true), isDark: true);
     await tester.pump(Duration(seconds: 2));
     await tester.pump(Duration(seconds: 2));
-    await tester.tap(find.byIcon(Icons.integration_instructions));
+    await tester.tap(find.byIcon(Icons.data_array));
     await tester.pump(Duration(seconds: 2));
     await tester.pump(Duration(seconds: 2));
     await binding.takeScreenshot('screenshot_packages');

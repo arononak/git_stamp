@@ -31,6 +31,7 @@ class GitStampBuildModel {
   final bool generateFlutterFiles;
   final bool generateFlutterIcon;
   final bool packages;
+  final bool deps;
 
   const GitStampBuildModel({
     this.toolBuildType = '',
@@ -58,6 +59,7 @@ class GitStampBuildModel {
     this.generateFlutterFiles = false,
     this.generateFlutterIcon = false,
     this.packages = false,
+    this.deps = false,
   });
 
   const GitStampBuildModel.all({
@@ -86,6 +88,7 @@ class GitStampBuildModel {
     this.generateFlutterFiles = true,
     this.generateFlutterIcon = true,
     this.packages = true,
+    this.deps = true,
   });
 
   const GitStampBuildModel.icon({
@@ -114,6 +117,7 @@ class GitStampBuildModel {
     this.generateFlutterFiles = false,
     this.generateFlutterIcon = true,
     this.packages = false,
+    this.deps = false,
   });
 
   GitStampBuildModel.custom(List<String> args)
@@ -140,6 +144,7 @@ class GitStampBuildModel {
         gitBranchList = args.contains('git-branch-list'),
         gitReflog = args.contains('git-reflog'),
         packages = args.contains('packages'),
+        deps = args.contains('deps'),
         generateFlutterFiles = false,
         generateFlutterIcon = false;
 
@@ -165,6 +170,7 @@ class GitStampBuildModel {
         'git-branch-list',
         'git-reflog',
         'packages',
+        'deps',
       ];
 
   bool get isIcon => toolBuildType == 'ICON';

@@ -185,6 +185,52 @@ void _showPackagesDialog(BuildContext context, GitStampNode gitStamp) {
   );
 }
 
+void _showDepsDialog(BuildContext context, GitStampNode gitStamp) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: _GitStampLabel(first: 'pubspec.yaml', second: 'Deps'),
+        content: SizedBox(
+          width: double.maxFinite,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              children: [
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minWidth: MediaQuery.of(context).size.width,
+                    ),
+                    child: Container(
+                      padding: EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(gitStamp.deps, style: TextStyle(fontSize: 12)),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text('Close'),
+          ),
+        ],
+      );
+    },
+  );
+}
+
 /// The [GitStampPage] displays a main GitStamp page.
 ///
 /// You should use [GitStampNode.listTile] as a GitStamp.listTile or the
@@ -1034,10 +1080,12 @@ class _GitStampRepoDetails extends StatelessWidget {
                 Row(
                   children: [
                     IconButton(
-                      onPressed: () {
-                        _showPackagesDialog(context, gitStamp);
-                      },
-                      icon: Icon(Icons.integration_instructions),
+                      onPressed: () => _showDepsDialog(context, gitStamp),
+                      icon: Icon(Icons.data_object),
+                    ),
+                    IconButton(
+                      onPressed: () => _showPackagesDialog(context, gitStamp),
+                      icon: Icon(Icons.data_array),
                     ),
                   ],
                 ),

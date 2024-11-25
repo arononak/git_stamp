@@ -130,6 +130,9 @@ abstract class GitStampNode {
   /// The number of packages that are in pubspec.yaml.
   int get packageListCount => packageList.length;
 
+  /// List of packages as a CLI style string.
+  String get deps => '';
+
   /// The branch from which the applications were built.
   String get buildBranch => '';
 

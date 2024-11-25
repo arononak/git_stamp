@@ -61,6 +61,7 @@ ${model.gitTagList.enabled}import 'data/git_tag_list.dart';
 ${model.gitBranchList.enabled}import 'data/git_branch_list.dart';
 ${model.gitReflog.enabled}import 'data/git_reflog.dart';
 ${model.packages.enabled}import 'data/packages.dart';
+${model.deps.enabled}import 'data/deps.dart';
 
 ${model.encrypt.enabled}import 'git_stamp_encrypt_debug_key.dart';
 
@@ -103,6 +104,7 @@ class GitStampNodeImpl extends GitStampNode {
   ${model.gitCountObjects.enabled}@override String get gitCountObjects => gitStampGitCountObjects;
   ${model.gitReflog.enabled}@override String get gitReflog => gitStampGitReflog;
   ${model.packages.enabled}@override String get packageListString => gitStampPackages;
+  ${model.deps.enabled}@override String get deps => gitStampDeps;
 
   ${(model.generateFlutterFiles || model.isIcon).enabled}@override Widget icon() {
   ${(model.generateFlutterFiles || model.isIcon).enabled}  return GitStampIcon(gitStamp: this);
@@ -246,6 +248,7 @@ class GitStampNodeImpl extends GitStampNode {
   @override String get gitCountObjects => _decrypt(gitStampGitCountObjects) ?? 'ENCRYPTED';
   @override String get gitReflog => _decrypt(gitStampGitReflog) ?? 'ENCRYPTED';
   @override String get packageListString => _decrypt(gitStampPackages) ?? '[]';
+  @override String get deps => _decrypt(gitStampDeps) ?? 'ENCRYPTED';
 
   @override Widget icon() {
     return GitStampIcon(gitStamp: this);

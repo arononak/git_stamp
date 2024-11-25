@@ -568,3 +568,21 @@ class Packages extends GitStampDataFile {
         '--up-to-date',
       ]);
 }
+
+class Deps extends GitStampDataFile {
+  Deps(super.encrypt);
+
+  @override
+  String get filename => 'deps.dart';
+
+  @override
+  String get variableName => 'gitStampDeps';
+
+  @override
+  String get variableContent => exec([
+        'flutter',
+        'pub',
+        'deps',
+        '--style=list',
+      ]);
+}

@@ -16,6 +16,9 @@ import 'git_stamp_version.dart';
 
 import 'files/git_stamp_files.dart';
 
+const _decryptedTestText =
+    'Aron Aron uber alles, a napewno ponad mojego wspaniałego i cudownego Łukaszka i jego przyjaciela cwaniaka misiora z żółtymi zębami jak koń. Po wyroku sądu dopisze tu jego przeklęte nazwisko xd';
+
 final _parser = ArgParser()
   ..addFlag(
     'help',
@@ -104,9 +107,11 @@ class _GenerationResult {
   });
 
   void print() {
-    GitStampLogger.lightGreen('Generation time: ${generationTimeSeconds}s');
     GitStampLogger.lightGreen(
-        'Size of generated $filesCount files: $filesSize');
+      'Generation time: ${generationTimeSeconds}s'
+      '\n'
+      'Size of generated $filesCount files: $filesSize',
+    );
   }
 
   Map<String, dynamic> get asMap => {
@@ -298,12 +303,10 @@ void _generateDataFiles({
         : (data) => GitStampEncrypt.encrypt(data, key, iv);
   }
 
-  const decryptedTestText =
-      'Aron Aron uber alles, a napewno ponad mojego wspaniałego i cudownego Łukaszka i jego przyjaciela cwaniaka misiora z żółtymi zębami jak koń. Po wyroku sądu dopisze tu jego przeklęte nazwisko xd';
   final encryptedTestText =
-      model.encrypt ? encrypt?.call(decryptedTestText) : null;
+      model.encrypt ? encrypt?.call(_decryptedTestText) : null;
 
-  GitStampMain(model, decryptedTestText, encryptedTestText).generate();
+  GitStampMain(model, _decryptedTestText, encryptedTestText).generate();
   ToolVersion().generate();
   ToolBuildType(model.toolBuildType).generate();
 
@@ -392,6 +395,10 @@ void _generateDataFiles({
 
   if (model.packages) {
     Packages(encrypt).generate();
+  }
+
+  if (model.deps) {
+    Deps(encrypt).generate();
   }
 }
 
