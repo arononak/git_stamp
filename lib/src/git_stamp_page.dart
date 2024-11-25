@@ -658,18 +658,16 @@ class _GitStampCommitListElement extends StatelessWidget {
           ),
           child: ListTile(
             contentPadding: const EdgeInsets.all(0),
-            leading: itemLargeType == false
+            leading: _isMobile(context)
                 ? null
-                : _isMobile(context)
-                    ? null
-                    : Icon(
-                        _isBotCommit ? Icons.auto_mode : Icons.code,
-                        size: 36,
-                        color: Theme.of(context)
-                            .colorScheme
-                            .primary
-                            .withOpacity(_isBotCommit ? 0.1 : 1.0),
-                      ),
+                : Icon(
+                    _isBotCommit ? Icons.auto_mode : Icons.code,
+                    size: itemLargeType ? 36 : null,
+                    color: Theme.of(context)
+                        .colorScheme
+                        .primary
+                        .withOpacity(_isBotCommit ? 0.1 : 1.0),
+                  ),
             title: _GitStampCommitListHeader(commit: commit),
             subtitle: itemLargeType == false
                 ? null
@@ -1075,9 +1073,11 @@ class _GitStampRepoDetails extends StatelessWidget {
         Row(
           children: [
             Text('Build type: [', style: _textDefault),
-            Text('LITE', style: gitStamp.isLiteVersion ? _textBold : _textDefault),
+            Text('LITE',
+                style: gitStamp.isLiteVersion ? _textBold : _textDefault),
             Text(', ', style: _textDefault),
-            Text('FULL', style: gitStamp.isLiteVersion ? _textDefault : _textBold),
+            Text('FULL',
+                style: gitStamp.isLiteVersion ? _textDefault : _textBold),
             Text(']', style: _textDefault),
           ],
         ),
