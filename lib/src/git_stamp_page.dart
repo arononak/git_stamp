@@ -42,31 +42,19 @@ extension _GitStampNode on GitStampNode {
   }
 }
 
-extension _String on String {
-  String get asOnlyDate {
-    final date = DateTime.parse(this);
-
-    return '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
-  }
-}
-
-bool _isMobile(context) => MediaQuery.of(context).size.width < 600;
-
 void _showDetailsBottomSheet(
   BuildContext context, {
   required GitStampNode gitStamp,
   required String gitStampVersion,
   VoidCallback? onFinish,
 }) {
-  showModalBottomSheet(
+  _showModal(
     context: context,
     isScrollControlled: true,
-    builder: (BuildContext context) {
-      return _GitStampRepoDetails(
-        gitStamp: gitStamp,
-        gitStampVersion: gitStampVersion,
-      );
-    },
+    child: _GitStampRepoDetails(
+      gitStamp: gitStamp,
+      gitStampVersion: gitStampVersion,
+    ),
   ).then((result) => onFinish?.call());
 }
 
@@ -128,106 +116,75 @@ void _showPackagesDialog(BuildContext context, GitStampNode gitStamp) {
   items.sort((a, b) => a.kind?.compareTo(b.kind ?? '') ?? 0);
   final groupedItems = groupBy(items, (item) => item.kind);
 
-  showDialog(
+  _showDialog(
     context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: _GitStampLabel(
-          first: 'Dependencies',
-          second: items.length.toString(),
-        ),
-        content: SizedBox(
-          width: double.maxFinite,
-          child: ListView(
-            children: [
-              ...{
-                'dependencies:': groupedItems['direct'] ?? [],
-                'dev_dependencies:': groupedItems['dev'] ?? [],
-                'transitive:': groupedItems['transitive'] ?? [],
-              }.entries.map(
-                (entry) {
-                  final values = entry.value;
-                  return ExpansionTile(
-                    tilePadding: EdgeInsets.symmetric(horizontal: 8.0),
-                    childrenPadding: EdgeInsets.symmetric(horizontal: 16.0),
-                    title: Text(
-                      entry.key,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Theme.of(context).colorScheme.primary,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    subtitle: Text(
-                      '${values.length} packages',
-                      style: TextStyle(
-                        fontSize: 10,
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
-                    ),
-                    children: values.map((item) => buildItem(item)).toList(),
-                  );
-                },
+    titleFirst: 'Dependencies',
+    titleSecond: items.length.toString(),
+    child: ListView(
+      children: [
+        ...{
+          'dependencies:': groupedItems['direct'] ?? [],
+          'dev_dependencies:': groupedItems['dev'] ?? [],
+          'transitive:': groupedItems['transitive'] ?? [],
+        }.entries.map(
+          (entry) {
+            final values = entry.value;
+            return ExpansionTile(
+              tilePadding: EdgeInsets.symmetric(horizontal: 8.0),
+              childrenPadding: EdgeInsets.symmetric(horizontal: 16.0),
+              title: Text(
+                entry.key,
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Theme.of(context).colorScheme.primary,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ],
-          ),
+              subtitle: Text(
+                '${values.length} packages',
+                style: TextStyle(
+                  fontSize: 10,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+              ),
+              children: values.map((item) => buildItem(item)).toList(),
+            );
+          },
         ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text('Close'),
-          ),
-        ],
-      );
-    },
+      ],
+    ),
   );
 }
 
 void _showDepsDialog(BuildContext context, GitStampNode gitStamp) {
-  showDialog(
+  _showDialog(
     context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: _GitStampLabel(first: 'pubspec.yaml', second: 'Deps'),
-        content: SizedBox(
-          width: double.maxFinite,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
-              children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      minWidth: MediaQuery.of(context).size.width,
-                    ),
-                    child: Container(
-                      padding: EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(gitStamp.deps, style: TextStyle(fontSize: 12)),
-                        ],
-                      ),
-                    ),
-                  ),
+    titleFirst: 'pubspec.yaml',
+    titleSecond: 'Deps',
+    child: SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: Column(
+        children: [
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minWidth: MediaQuery.of(context).size.width,
+              ),
+              child: Container(
+                padding: EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(gitStamp.deps, style: TextStyle(fontSize: 12)),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text('Close'),
-          ),
         ],
-      );
-    },
+      ),
+    ),
   );
 }
 
@@ -297,11 +254,9 @@ class _GitStampPageState extends State<GitStampPage> {
       }
 
       if (widget.showFiles) {
-        showModalBottomSheet(
+        _showModal(
           context: context,
-          builder: (BuildContext context) {
-            return _GitStampRepoFiles(gitStamp: widget.gitStamp);
-          },
+          child: _GitStampRepoFiles(gitStamp: widget.gitStamp),
         );
       }
     });
@@ -338,19 +293,17 @@ class _GitStampPageState extends State<GitStampPage> {
                   ),
                   IconButton(
                     onPressed: () {
-                      showModalBottomSheet(
+                      _showModal(
                         context: context,
                         isScrollControlled: true,
-                        builder: (BuildContext context) {
-                          return _GitStampFilterList(
-                            gitStamp: widget.gitStamp,
-                            selectedUser: _filterAuthorName,
-                            onFilterPressed: (commiter) {
-                              Navigator.pop(context);
-                              setState(() => _filterAuthorName = commiter);
-                            },
-                          );
-                        },
+                        child: _GitStampFilterList(
+                          gitStamp: widget.gitStamp,
+                          selectedUser: _filterAuthorName,
+                          onFilterPressed: (commiter) {
+                            Navigator.pop(context);
+                            setState(() => _filterAuthorName = commiter);
+                          },
+                        ),
                       );
                     },
                     icon: const Icon(Icons.filter_list),
@@ -376,16 +329,14 @@ class _GitStampPageState extends State<GitStampPage> {
           ? Center(
               child: IconButton(
                 onPressed: () {
-                  showModalBottomSheet(
+                  _showModal(
                     context: context,
-                    builder: (BuildContext context) {
-                      return _GitStampDecryptForm(
-                        gitStamp: widget.gitStamp,
-                        startKey: widget.encryptDebugKey,
-                        startIv: widget.encryptDebugIv,
-                        onSuccess: () => setState(() {}),
-                      );
-                    },
+                    child: _GitStampDecryptForm(
+                      gitStamp: widget.gitStamp,
+                      startKey: widget.encryptDebugKey,
+                      startIv: widget.encryptDebugIv,
+                      onSuccess: () => setState(() {}),
+                    ),
                   );
                 },
                 icon: Icon(Icons.lock_open, size: 60),
@@ -762,54 +713,52 @@ class _GitStampCommitListElement extends StatelessWidget {
     BuildContext context, {
     required GitStampNode gitStamp,
   }) {
-    showModalBottomSheet(
+    _showModal(
       context: context,
-      builder: (BuildContext context) {
-        return Container(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: _GitStampCommitListHeader(commit: commit),
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      gitStamp.showDetailsPage(
-                        context: context,
-                        commit: commit,
-                        monospaceFontFamily: monospaceFontFamily,
-                      );
-                    },
-                    icon: Icon(Icons.arrow_forward),
-                  ),
-                ],
-              ),
-              Expanded(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
+      child: Container(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: Text(
-                      gitStamp.diffStatList.elementForHash(commit.hash),
-                      style: TextStyle(
-                        fontSize: 10,
-                        fontFamily: monospaceFontFamily,
-                      ),
+                    child: _GitStampCommitListHeader(commit: commit),
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    gitStamp.showDetailsPage(
+                      context: context,
+                      commit: commit,
+                      monospaceFontFamily: monospaceFontFamily,
+                    );
+                  },
+                  icon: Icon(Icons.arrow_forward),
+                ),
+              ],
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Text(
+                    gitStamp.diffStatList.elementForHash(commit.hash),
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontFamily: monospaceFontFamily,
                     ),
                   ),
                 ),
               ),
-            ],
-          ),
-        );
-      },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -1029,50 +978,34 @@ class _GitStampRepoDetails extends StatelessWidget {
                 Row(
                   children: [
                     IconButton(
-                      onPressed: () {
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return _GitStampRepoReflog(gitStamp: gitStamp);
-                          },
-                        );
-                      },
+                      onPressed: () => _showModal(
+                        context: context,
+                        child: _GitStampRepoReflog(gitStamp: gitStamp),
+                      ),
                       icon: const Icon(Icons.history),
                     ),
                     IconButton(
-                      onPressed: () {
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return _GitStampRepoBranches(gitStamp: gitStamp);
-                          },
-                        );
-                      },
+                      onPressed: () => _showModal(
+                        context: context,
+                        child: _GitStampRepoBranches(gitStamp: gitStamp),
+                      ),
                       icon: const Icon(Icons.call_split),
                     ),
                     IconButton(
-                      onPressed: () {
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return _GitStampRepoTags(gitStamp: gitStamp);
-                          },
-                        );
-                      },
+                      onPressed: () => _showModal(
+                        context: context,
+                        child: _GitStampRepoTags(gitStamp: gitStamp),
+                      ),
                       icon: const Icon(
                         key: Key('show_tags_icon'),
                         Icons.local_offer,
                       ),
                     ),
                     IconButton(
-                      onPressed: () {
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return _GitStampRepoFiles(gitStamp: gitStamp);
-                          },
-                        );
-                      },
+                      onPressed: () => _showModal(
+                        context: context,
+                        child: _GitStampRepoFiles(gitStamp: gitStamp),
+                      ),
                       icon: const Icon(Icons.folder),
                     ),
                   ],
@@ -1092,13 +1025,11 @@ class _GitStampRepoDetails extends StatelessWidget {
                 Row(
                   children: [
                     IconButton(
-                      onPressed: () {
-                        showModalBottomSheet(
-                          context: context,
-                          isScrollControlled: true,
-                          builder: (BuildContext context) => _GitStampMore(),
-                        );
-                      },
+                      onPressed: () => _showModal(
+                        context: context,
+                        isScrollControlled: true,
+                        child: _GitStampMore(),
+                      ),
                       icon: Icon(Icons.more, color: Colors.orange),
                     ),
                   ],
@@ -1765,6 +1696,58 @@ void _showSnackbar({
         ],
       ),
     ),
+  );
+}
+
+extension _String on String {
+  String get asOnlyDate {
+    final date = DateTime.parse(this);
+
+    return '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
+  }
+}
+
+bool _isMobile(context) => MediaQuery.of(context).size.width < 600;
+
+Future<void> _showModal({
+  required BuildContext context,
+  VoidCallback? onFinish,
+  bool isScrollControlled = true,
+  required Widget child,
+}) async {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: isScrollControlled,
+    builder: (BuildContext context) => child,
+  ).then((result) => onFinish?.call());
+}
+
+void _showDialog({
+  required BuildContext context,
+  required String titleFirst,
+  required String titleSecond,
+  required Widget child,
+}) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: _GitStampLabel(
+          first: titleFirst,
+          second: titleSecond,
+        ),
+        content: SizedBox(
+          width: double.maxFinite,
+          child: child,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text('Close'),
+          ),
+        ],
+      );
+    },
   );
 }
 
