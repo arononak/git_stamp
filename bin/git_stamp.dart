@@ -8,13 +8,13 @@ import 'dart:core';
 
 import 'package:args/args.dart';
 
-import 'git_stamp_build_model.dart';
-import 'git_stamp_logger.dart';
-import 'git_stamp_encrypt.dart';
-import 'git_stamp_file_utils.dart';
-import 'git_stamp_version.dart';
+import 'src/git_stamp_build_model.dart';
+import 'src/git_stamp_logger.dart';
+import 'src/git_stamp_encrypt.dart';
+import 'src/git_stamp_file_utils.dart';
+import 'src/git_stamp_version.dart';
 
-import 'files/git_stamp_files.dart';
+import 'src/git_stamp_files.dart';
 
 const _decryptedTestText =
     'Aron Aron uber alles, a napewno ponad mojego wspaniałego i cudownego Łukaszka i jego przyjaciela cwaniaka misiora z żółtymi zębami jak koń. Po wyroku sądu dopisze tu jego przeklęte nazwisko xd';

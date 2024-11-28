@@ -4,7 +4,7 @@
 
 import 'dart:typed_data';
 
-import '../git_stamp_build_model.dart';
+import 'git_stamp_build_model.dart';
 
 extension BoolExtension on bool {
   String get enabled => this ? '' : '//';
