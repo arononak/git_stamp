@@ -127,7 +127,7 @@ Widget build(BuildContext context) {
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0.0)),
     elevation: 0.0,
     child: InkWell(
-      onTap: isLiteVersion
+      onTap: gitStamp.isLiteVersion
           ? null
           : () =&gt; showGitDiffStat(context, gitStamp: gitStamp),
       splashColor: Colors.orange[900],
@@ -137,23 +137,24 @@ Widget build(BuildContext context) {
         ),
         child: ListTile(
           contentPadding: const EdgeInsets.all(0),
-          leading: itemLargeType == false
+          leading: _isMobile(context)
               ? null
-              : isMobile(context)
-                  ? null
-                  : Icon(
-                      Icons.code,
-                      size: 36,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-          title: GitStampCommitListHeader(commit: commit),
+              : Icon(
+                  _isBotCommit ? Icons.auto_mode : Icons.code,
+                  size: itemLargeType ? 36 : null,
+                  color: Theme.of(context)
+                      .colorScheme
+                      .primary
+                      .withOpacity(_isBotCommit ? 0.1 : 1.0),
+                ),
+          title: _GitStampCommitListHeader(commit: commit),
           subtitle: itemLargeType == false
               ? null
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     InkWell(
-                      onTap: () =&gt; openEmail(email: commit.authorEmail),
+                      onTap: () =&gt; _openEmail(email: commit.authorEmail),
                       child: Text(
                         &#39;${commit.authorName} (${commit.authorEmail})&#39;,
                         style: TextStyle(
@@ -167,6 +168,7 @@ Widget build(BuildContext context) {
                     Text(
                       commit.date,
                       style: TextStyle(
+                        fontSize: 14.0,
                         color: Theme.of(context)
                             .colorScheme
                             .onSurface
@@ -177,7 +179,7 @@ Widget build(BuildContext context) {
                   ],
                 ),
           trailing: IconButton(
-            onPressed: () =&gt; copyToClipboard(context, commit.hash),
+            onPressed: () =&gt; _copyToClipboard(context, commit.hash),
             icon: Icon(
               Icons.content_copy,
               color: Theme.of(context).colorScheme.primary,
@@ -221,7 +223,7 @@ Widget build(BuildContext context) {
 <footer>
   <span class="no-break">
     git_stamp
-      5.3.1
+      5.8.0
   </span>
 
   

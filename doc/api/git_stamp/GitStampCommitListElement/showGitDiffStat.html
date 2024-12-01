@@ -81,54 +81,52 @@
   BuildContext context, {
   required GitStampNode gitStamp,
 }) {
-  showModalBottomSheet(
+  _showModal(
     context: context,
-    builder: (BuildContext context) {
-      return Container(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: GitStampCommitListHeader(commit: commit),
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {
-                    gitStamp.showDetailsPage(
-                      context: context,
-                      commit: commit,
-                      monospaceFontFamily: monospaceFontFamily,
-                    );
-                  },
-                  icon: Icon(Icons.arrow_forward),
-                ),
-              ],
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
+    child: Container(
+      padding: EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  child: Text(
-                    gitStamp.diffStatList[commit.hash] ?? &#39;&#39;,
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontFamily: monospaceFontFamily,
-                    ),
+                  child: _GitStampCommitListHeader(commit: commit),
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  gitStamp.showDetailsPage(
+                    context: context,
+                    commit: commit,
+                    monospaceFontFamily: monospaceFontFamily,
+                  );
+                },
+                icon: Icon(Icons.arrow_forward),
+              ),
+            ],
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Text(
+                  gitStamp.diffStatList.elementForHash(commit.hash),
+                  style: TextStyle(
+                    fontSize: 10,
+                    fontFamily: monospaceFontFamily,
                   ),
                 ),
               ),
             ),
-          ],
-        ),
-      );
-    },
+          ),
+        ],
+      ),
+    ),
   );
 }</code></pre>
 </section>
@@ -164,7 +162,7 @@
 <footer>
   <span class="no-break">
     git_stamp
-      5.3.1
+      5.8.0
   </span>
 
   
