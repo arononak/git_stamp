@@ -1,1 +1,1 @@
-/*Auto-generated*/ const gitStampVersion = 'v5.7.1';
+/*Auto-generated*/ const gitStampVersion = 'v5.8.0';
