@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:git_stamp/git_stamp.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:integration_test/integration_test.dart';
 
@@ -58,7 +59,9 @@ void main() {
     tester.view.physicalSize = physicalSize;
     tester.view.devicePixelRatio = 1.0;
     await tester.pumpPage(
-        page: GitStamp.mainPage(showDetails: true), isDark: true);
+      page: GitStamp.mainPage(showDetails: true),
+      isDark: true,
+    );
     await tester.pump(Duration(seconds: 2));
     await tester.pump(Duration(seconds: 2));
     await binding.takeScreenshot('screenshot_details');
@@ -88,11 +91,37 @@ void main() {
     await binding.takeScreenshot('screenshot_tags');
   });
 
+  testWidgets('screenshot-short_diff', (WidgetTester tester) async {
+    tester.view.physicalSize = physicalSize;
+    tester.view.devicePixelRatio = 1.0;
+    await tester.pumpPage(page: GitStamp.mainPage(), isDark: true);
+    await tester.pump(Duration(seconds: 2));
+    await tester.pump(Duration(seconds: 2));
+    await tester.tap(find.byType(GitStampCommitListElement).first);
+    await tester.pump(Duration(seconds: 2));
+    await tester.pump(Duration(seconds: 2));
+    await binding.takeScreenshot('screenshot_short_diff');
+  });
+
+  testWidgets('screenshot-deps', (WidgetTester tester) async {
+    tester.view.physicalSize = physicalSize;
+    tester.view.devicePixelRatio = 1.0;
+    await tester.pumpPage(page: GitStamp.mainPage(showDetails: true));
+    await tester.pump(Duration(seconds: 2));
+    await tester.pump(Duration(seconds: 2));
+    await tester.tap(find.byIcon(Icons.data_object));
+    await tester.pump(Duration(seconds: 2));
+    await tester.pump(Duration(seconds: 2));
+    await binding.takeScreenshot('screenshot_deps');
+  });
+
   testWidgets('screenshot-packages', (WidgetTester tester) async {
     tester.view.physicalSize = physicalSize;
     tester.view.devicePixelRatio = 1.0;
     await tester.pumpPage(
-        page: GitStamp.mainPage(showDetails: true), isDark: true);
+      page: GitStamp.mainPage(showDetails: true),
+      isDark: true,
+    );
     await tester.pump(Duration(seconds: 2));
     await tester.pump(Duration(seconds: 2));
     await tester.tap(find.byIcon(Icons.data_array));

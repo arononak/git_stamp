@@ -541,7 +541,7 @@ class _GitStampCommitList extends StatelessWidget {
               count: element.count,
             );
           case Commit():
-            return _GitStampCommitListElement(
+            return GitStampCommitListElement(
               gitStamp: gitStamp,
               commit: element,
               itemLargeType: itemLargeType,
@@ -619,13 +619,15 @@ class _GitStampDateListElement extends StatelessWidget {
   }
 }
 
-class _GitStampCommitListElement extends StatelessWidget {
+/// Class [GitStampCommitListElement] is public only for tests.
+class GitStampCommitListElement extends StatelessWidget {
   final GitStampNode gitStamp;
   final Commit commit;
   final bool itemLargeType;
   final String? monospaceFontFamily;
 
-  const _GitStampCommitListElement({
+  const GitStampCommitListElement({
+    super.key,
     required this.gitStamp,
     required this.commit,
     required this.itemLargeType,
