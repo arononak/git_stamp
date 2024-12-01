@@ -1714,7 +1714,7 @@ bool _isMobile(context) => MediaQuery.of(context).size.width < 600;
 Future<void> _showModal({
   required BuildContext context,
   VoidCallback? onFinish,
-  bool isScrollControlled = true,
+  bool isScrollControlled = false,
   required Widget child,
 }) async {
   showModalBottomSheet(
