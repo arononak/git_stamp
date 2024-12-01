@@ -12,6 +12,18 @@
 
 # CHANGELOG
 
+## 5.8.0
+
+* Added **deps module**
+* GitStampPage - CommitList - Added icon for small items
+* Refactor - Changed type of build type from String to BuildType
+* Refactor - GitStampPage - refactor - removed isLiteVersion field
+
+<details>
+<summary>Image</summary>
+<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/5.8.0.png?raw=true" alt="Image"></p>
+</details>
+
 ## 5.7.1
 
 * Markdowns & docs update
