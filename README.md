@@ -28,11 +28,11 @@ Advanced await-less **information provider** & **development tool**.
 
 ## [🏞️ Preview](PREVIEW.md)
 
-| 🌐 Sites                                                                          |
-| -------------------------------------------------------------------------------- |
-| **[Example Decrypted](https://gitstamp.web.app)**                                |
-| **[Example Encrypted](https://gitstamp-encrypted.web.app)**                      |
-| **[API Documentation](https://arononak.github.io/git_stamp/doc/api/index.html)** |
+<p align="center">
+  <a href="https://gitstamp.web.app"><b>Example</b></a> •
+  <a href="https://gitstamp-encrypted.web.app"><b>Example Encrypted</b></a> •
+  <a href="https://arononak.github.io/git_stamp/doc/api/index.html"><b>API Documentation</b></a>
+</p>
 
 <table>
   <tr>
