@@ -128,7 +128,7 @@ class CommitList extends GitStampDataFile {
     ]);
 
     final logs = gitLogJson.split('\x1e').where((e) => e.isNotEmpty).map((e) {
-      final fields = e.split('\x1f');
+      final fields = e.split('\x1f').map((e) => e.trim()).toList();
       return {
         'hash': fields[0],
         'subject': fields[1],
