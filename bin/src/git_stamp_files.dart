@@ -127,16 +127,24 @@ class CommitList extends GitStampDataFile {
       '--date=format-local:%Y-%m-%d %H:%M:%S %z'
     ]);
 
-    final logs = gitLogJson.split('\n').map((line) {
-      final parts = line.split('|');
-      return {
-        "hash": parts[0],
-        "subject": parts[1],
-        "date": parts[2],
-        "authorName": parts[3],
-        "authorEmail": parts[4],
-      };
-    }).toList();
+    final logs = gitLogJson
+        .split('\n')
+        .where((line) => line.trim().isNotEmpty)
+        .map((line) {
+          final parts = line.split('|');
+          if (parts.length < 5) {
+            return null;
+          }
+          return {
+            "hash": parts[0],
+            "subject": parts[1],
+            "date": parts[2],
+            "authorName": parts[3],
+            "authorEmail": parts[4],
+          };
+        })
+        .where((log) => log != null)
+        .toList();
 
     return jsonEncode(logs);
   }
