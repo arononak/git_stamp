@@ -12,6 +12,10 @@
 
 # CHANGELOG
 
+## 5.8.1
+
+* Fixed commit list generation for commits with a message where there was a double quote
+
 ## 5.8.0
 
 * Added **deps module**
