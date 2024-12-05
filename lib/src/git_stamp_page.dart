@@ -118,7 +118,7 @@ void _showPackagesDialog(BuildContext context, GitStampNode gitStamp) {
 
   _showDialog(
     context: context,
-    titleFirst: 'Dependencies',
+    titleFirst: 'Packages',
     titleSecond: items.length.toString(),
     child: ListView(
       children: [
@@ -159,8 +159,8 @@ void _showPackagesDialog(BuildContext context, GitStampNode gitStamp) {
 void _showDepsDialog(BuildContext context, GitStampNode gitStamp) {
   _showDialog(
     context: context,
-    titleFirst: 'pubspec.yaml',
-    titleSecond: 'Deps',
+    titleFirst: 'Deps',
+    titleSecond: 'pubspec.yaml',
     child: SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: Column(
