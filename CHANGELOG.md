@@ -12,6 +12,16 @@
 
 # CHANGELOG
 
+## 5.9.0
+
+* Added **fl_chart** package
+* GitStampPage - Deps & Packages - Changed dialog title
+
+<details>
+<summary>Image</summary>
+<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/5.9.0.png?raw=true" alt="Image"></p>
+</details>
+
 ## 5.8.2
 
 * Fixed commit list generation for commits with a message where there was a double quote - fix
