@@ -1130,6 +1130,15 @@ class _GitStampRepoDetails extends StatelessWidget {
           'Commit count: ',
           gitStamp.isEncrypted ? 'ENCRYPTED' : gitStamp.commitCount.toString(),
         ),
+        ...gitStamp.commitCountByAuthor.entries.map(
+          (entry) => Row(
+            children: [
+              SizedBox(width: 16),
+              Text('${entry.key}: ', style: _textDefault),
+              Text(entry.value.toString(), style: _textBold),
+            ],
+          ),
+        ),
         const SizedBox(height: 32),
         _GitStampCommitChart(
           commitCountByAuthor: gitStamp.commitCountByAuthor,
