@@ -43,6 +43,10 @@ extension _GitStampNode on GitStampNode {
   }
 }
 
+extension _Color on Color {
+  Color changeOpacity(opacity) => withAlpha((255.0 * opacity).round());
+}
+
 void _showDetailsBottomSheet(
   BuildContext context, {
   required GitStampNode gitStamp,
@@ -97,7 +101,7 @@ void _showPackagesDialog(BuildContext context, GitStampNode gitStamp) {
               'latest: $latest',
               style: TextStyle(
                 fontSize: 8,
-                color: Theme.of(context).colorScheme.primary.withOpacity(0.7),
+                color: Theme.of(context).colorScheme.primary.changeOpacity(0.7),
               ),
             ),
           ] else ...[
@@ -666,7 +670,7 @@ class GitStampCommitListElement extends StatelessWidget {
                     color: Theme.of(context)
                         .colorScheme
                         .primary
-                        .withOpacity(_isBotCommit ? 0.1 : 1.0),
+                        .changeOpacity(_isBotCommit ? 0.1 : 1.0),
                   ),
             title: _GitStampCommitListHeader(commit: commit),
             subtitle: itemLargeType == false
@@ -693,7 +697,7 @@ class GitStampCommitListElement extends StatelessWidget {
                           color: Theme.of(context)
                               .colorScheme
                               .onSurface
-                              .withOpacity(0.6),
+                              .changeOpacity(0.6),
                         ),
                         maxLines: 1,
                       ),
@@ -822,7 +826,7 @@ class _GitStampTagListElement extends StatelessWidget {
                     color: Theme.of(context)
                         .colorScheme
                         .onPrimaryContainer
-                        .withOpacity(0.7),
+                        .changeOpacity(0.7),
                   ),
                 ),
         ),
@@ -1428,7 +1432,7 @@ class _GitStampMore extends StatelessWidget {
                   subtitle: Text(
                     'Create a Pull Request and agree to be listed.\nIf it gets merged you will be in the README.md file.\nPress LongPress to get started.',
                   ),
-                  tileColor: Colors.orange.withOpacity(0.5),
+                  tileColor: Colors.orange.changeOpacity(0.5),
                   splashColor: Colors.orange,
                 ),
               ],
@@ -1564,11 +1568,11 @@ class _GitStampDetailsPageText extends StatelessWidget {
         line.startsWith('+++ ') ||
         line.startsWith('@@ ') ||
         line.startsWith('new file mode ')) {
-      return Theme.of(context).colorScheme.tertiaryContainer.withOpacity(0.2);
+      return Theme.of(context).colorScheme.tertiaryContainer.changeOpacity(0.2);
     } else if (line.startsWith('-') && !line.startsWith('--- ')) {
-      return Theme.of(context).colorScheme.errorContainer.withOpacity(0.8);
+      return Theme.of(context).colorScheme.errorContainer.changeOpacity(0.8);
     } else if (line.startsWith('+') && !line.startsWith('+++ ')) {
-      return Theme.of(context).colorScheme.primaryContainer.withOpacity(0.8);
+      return Theme.of(context).colorScheme.primaryContainer.changeOpacity(0.8);
     } else {
       return Colors.transparent;
     }
@@ -1581,7 +1585,7 @@ class _GitStampDetailsPageText extends StatelessWidget {
         line.startsWith('+++ ') ||
         line.startsWith('@@ ') ||
         line.startsWith('new file mode ')) {
-      return Theme.of(context).colorScheme.onTertiaryContainer.withOpacity(0.4);
+      return Theme.of(context).colorScheme.onTertiaryContainer.changeOpacity(0.4);
     } else if (line.startsWith('-') && !line.startsWith('--- ')) {
       return Theme.of(context).colorScheme.onErrorContainer;
     } else if (line.startsWith('+') && !line.startsWith('+++ ')) {
@@ -1738,7 +1742,7 @@ void _showSnackbar({
       showCloseIcon: showCloseIcon,
       behavior: floating ? SnackBarBehavior.floating : SnackBarBehavior.fixed,
       duration: floating ? Duration(seconds: 3) : Duration(seconds: 15),
-      backgroundColor: Colors.orange.withOpacity(0.9),
+      backgroundColor: Colors.orange.changeOpacity(0.9),
       content: Stack(
         children: [
           Container(
