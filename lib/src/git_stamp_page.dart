@@ -4,6 +4,7 @@
 
 import 'dart:math';
 
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:aron_gradient_line/aron_gradient_line.dart';
@@ -1129,16 +1130,69 @@ class _GitStampRepoDetails extends StatelessWidget {
           'Commit count: ',
           gitStamp.isEncrypted ? 'ENCRYPTED' : gitStamp.commitCount.toString(),
         ),
-        ...gitStamp.commitCountByAuthor.entries.map(
-          (entry) => Row(
-            children: [
-              SizedBox(width: 16),
-              Text('${entry.key}: ', style: _textDefault),
-              Text(entry.value.toString(), style: _textBold),
-            ],
-          ),
+        const SizedBox(height: 32),
+        _GitStampCommitChart(
+          commitCountByAuthor: gitStamp.commitCountByAuthor,
+          commitCount: gitStamp.commitCount,
         ),
       ],
+    );
+  }
+}
+
+class _GitStampCommitChart extends StatelessWidget {
+  final Map<String, int> commitCountByAuthor;
+  final int commitCount;
+
+  const _GitStampCommitChart({
+    required this.commitCountByAuthor,
+    required this.commitCount,
+  });
+
+  Color get _randomColor {
+    final Random random = Random();
+    return Color.fromARGB(
+      128,
+      random.nextInt(256),
+      random.nextInt(256),
+      random.nextInt(256),
+    );
+  }
+
+  double _percentOfCommits(value) {
+    return (value / commitCount * 100.0);
+  }
+
+  int get _sections {
+    return commitCountByAuthor.entries.toList().length;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 240,
+      height: 200,
+      child: PieChart(
+        PieChartData(
+          sectionsSpace: _sections.toDouble(),
+          centerSpaceRadius: 50,
+          sections: commitCountByAuthor.entries.map(
+            (element) {
+              final percent = _percentOfCommits(element.value);
+              return PieChartSectionData(
+                value: percent.ceilToDouble(),
+                title: '${element.key} - ${percent.toStringAsFixed(2)}%',
+                color: _randomColor,
+                radius: 50,
+                titleStyle: TextStyle(
+                  fontSize: 9,
+                  fontWeight: FontWeight.bold,
+                ),
+              );
+            },
+          ).toList(),
+        ),
+      ),
     );
   }
 }
