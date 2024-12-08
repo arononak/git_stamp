@@ -895,13 +895,13 @@ class _GitStampRepoDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       constraints: BoxConstraints(minWidth: 400),
-      child: Stack(
-        children: [
-          Positioned(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Stack(
+            children: [
+              Positioned(
                 child: Container(
                   padding: EdgeInsets.all(16.0),
                   child: Column(
@@ -919,128 +919,129 @@ class _GitStampRepoDetails extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
+              Positioned(
+                right: 20,
+                top: 8,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            _showSnackbar(
+                              context: context,
+                              message: gitStamp.gitRemote,
+                              showCloseIcon: true,
+                            );
+                          },
+                          icon: Icon(Icons.cloud),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            _showSnackbar(
+                              context: context,
+                              message: gitStamp.gitCountObjects,
+                              showCloseIcon: true,
+                              floating: false,
+                            );
+                          },
+                          icon: Icon(Icons.storage),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            _showSnackbar(
+                              context: context,
+                              message: gitStamp.buildSystemInfo,
+                              showCloseIcon: true,
+                              floating: false,
+                            );
+                          },
+                          icon: Icon(Icons.medical_information),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            _showSnackbar(
+                              context: context,
+                              message: gitStamp.gitConfigList,
+                              showCloseIcon: true,
+                              floating: false,
+                            );
+                          },
+                          icon: Icon(Icons.settings),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () => _showModal(
+                            context: context,
+                            child: _GitStampRepoReflog(gitStamp: gitStamp),
+                          ),
+                          icon: const Icon(Icons.history),
+                        ),
+                        IconButton(
+                          onPressed: () => _showModal(
+                            context: context,
+                            child: _GitStampRepoBranches(gitStamp: gitStamp),
+                          ),
+                          icon: const Icon(Icons.call_split),
+                        ),
+                        IconButton(
+                          onPressed: () => _showModal(
+                            context: context,
+                            child: _GitStampRepoTags(gitStamp: gitStamp),
+                          ),
+                          icon: const Icon(
+                            key: Key('show_tags_icon'),
+                            Icons.local_offer,
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () => _showModal(
+                            context: context,
+                            child: _GitStampRepoFiles(gitStamp: gitStamp),
+                          ),
+                          icon: const Icon(Icons.folder),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () => _showDepsDialog(context, gitStamp),
+                          icon: Icon(Icons.data_object),
+                        ),
+                        IconButton(
+                          onPressed: () =>
+                              _showPackagesDialog(context, gitStamp),
+                          icon: Icon(Icons.data_array),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () => _showModal(
+                            context: context,
+                            isScrollControlled: true,
+                            child: _GitStampMore(),
+                          ),
+                          icon: Icon(Icons.more, color: Colors.orange),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          Positioned(
-            right: 20,
-            top: 8,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                        _showSnackbar(
-                          context: context,
-                          message: gitStamp.gitRemote,
-                          showCloseIcon: true,
-                        );
-                      },
-                      icon: Icon(Icons.cloud),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                        _showSnackbar(
-                          context: context,
-                          message: gitStamp.gitCountObjects,
-                          showCloseIcon: true,
-                          floating: false,
-                        );
-                      },
-                      icon: Icon(Icons.storage),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                        _showSnackbar(
-                          context: context,
-                          message: gitStamp.buildSystemInfo,
-                          showCloseIcon: true,
-                          floating: false,
-                        );
-                      },
-                      icon: Icon(Icons.medical_information),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                        _showSnackbar(
-                          context: context,
-                          message: gitStamp.gitConfigList,
-                          showCloseIcon: true,
-                          floating: false,
-                        );
-                      },
-                      icon: Icon(Icons.settings),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: () => _showModal(
-                        context: context,
-                        child: _GitStampRepoReflog(gitStamp: gitStamp),
-                      ),
-                      icon: const Icon(Icons.history),
-                    ),
-                    IconButton(
-                      onPressed: () => _showModal(
-                        context: context,
-                        child: _GitStampRepoBranches(gitStamp: gitStamp),
-                      ),
-                      icon: const Icon(Icons.call_split),
-                    ),
-                    IconButton(
-                      onPressed: () => _showModal(
-                        context: context,
-                        child: _GitStampRepoTags(gitStamp: gitStamp),
-                      ),
-                      icon: const Icon(
-                        key: Key('show_tags_icon'),
-                        Icons.local_offer,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () => _showModal(
-                        context: context,
-                        child: _GitStampRepoFiles(gitStamp: gitStamp),
-                      ),
-                      icon: const Icon(Icons.folder),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: () => _showDepsDialog(context, gitStamp),
-                      icon: Icon(Icons.data_object),
-                    ),
-                    IconButton(
-                      onPressed: () => _showPackagesDialog(context, gitStamp),
-                      icon: Icon(Icons.data_array),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: () => _showModal(
-                        context: context,
-                        isScrollControlled: true,
-                        child: _GitStampMore(),
-                      ),
-                      icon: Icon(Icons.more, color: Colors.orange),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
