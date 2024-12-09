@@ -1034,6 +1034,33 @@ class _GitStampRepoDetails extends StatelessWidget {
                           onPressed: () => _showModal(
                             context: context,
                             isScrollControlled: true,
+                            child: Container(
+                              padding: EdgeInsets.all(16.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text('Commit Statistics'),
+                                  SizedBox(height: 16.0),
+                                  _GitStampCommitChart(
+                                    commitCountByAuthor:
+                                        gitStamp.commitCountByAuthor,
+                                    commitCount: gitStamp.commitCount,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          icon: Icon(Icons.trending_up),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () => _showModal(
+                            context: context,
+                            isScrollControlled: true,
                             child: _GitStampMore(),
                           ),
                           icon: Icon(Icons.more, color: Colors.orange),
@@ -1143,11 +1170,6 @@ class _GitStampRepoDetails extends StatelessWidget {
               Text(entry.value.toString(), style: _textBold),
             ],
           ),
-        ),
-        const SizedBox(height: 32),
-        _GitStampCommitChart(
-          commitCountByAuthor: gitStamp.commitCountByAuthor,
-          commitCount: gitStamp.commitCount,
         ),
       ],
     );
@@ -1585,7 +1607,10 @@ class _GitStampDetailsPageText extends StatelessWidget {
         line.startsWith('+++ ') ||
         line.startsWith('@@ ') ||
         line.startsWith('new file mode ')) {
-      return Theme.of(context).colorScheme.onTertiaryContainer.changeOpacity(0.4);
+      return Theme.of(context)
+          .colorScheme
+          .onTertiaryContainer
+          .changeOpacity(0.4);
     } else if (line.startsWith('-') && !line.startsWith('--- ')) {
       return Theme.of(context).colorScheme.onErrorContainer;
     } else if (line.startsWith('+') && !line.startsWith('+++ ')) {
