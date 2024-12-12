@@ -1162,7 +1162,7 @@ class _GitStampRepoDetails extends StatelessWidget {
           'Commit count: ',
           gitStamp.isEncrypted ? 'ENCRYPTED' : gitStamp.commitCount.toString(),
         ),
-        ...gitStamp.commitCountByAuthor.entries.map(
+        ...gitStamp.commitCountByAuthor.entries.sortedBy((e) => e.key).map(
           (entry) => Row(
             children: [
               SizedBox(width: 16),
