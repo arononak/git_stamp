@@ -1163,14 +1163,14 @@ class _GitStampRepoDetails extends StatelessWidget {
           gitStamp.isEncrypted ? 'ENCRYPTED' : gitStamp.commitCount.toString(),
         ),
         ...gitStamp.commitCountByAuthor.entries.sortedBy((e) => e.key).map(
-          (entry) => Row(
-            children: [
-              SizedBox(width: 16),
-              Text('${entry.key}: ', style: _textDefault),
-              Text(entry.value.toString(), style: _textBold),
-            ],
-          ),
-        ),
+              (entry) => Row(
+                children: [
+                  SizedBox(width: 16),
+                  Text('${entry.key}: ', style: _textDefault),
+                  Text(entry.value.toString(), style: _textBold),
+                ],
+              ),
+            ),
       ],
     );
   }
