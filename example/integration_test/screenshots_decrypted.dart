@@ -95,11 +95,11 @@ void main() {
     tester.view.physicalSize = physicalSize;
     tester.view.devicePixelRatio = 1.0;
     await tester.pumpPage(page: GitStamp.mainPage(), isDark: true);
-    await tester.pump(Duration(seconds: 2));
-    await tester.pump(Duration(seconds: 2));
+    await tester.pump(Duration(seconds: 10));
+    await tester.pump(Duration(seconds: 10));
     await tester.tap(find.byType(GitStampCommitListElement).first);
-    await tester.pump(Duration(seconds: 2));
-    await tester.pump(Duration(seconds: 2));
+    await tester.pump(Duration(seconds: 10));
+    await tester.pump(Duration(seconds: 10));
     await binding.takeScreenshot('screenshot_short_diff');
   });
 
