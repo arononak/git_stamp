@@ -145,7 +145,7 @@ Widget build(BuildContext context) {
                   color: Theme.of(context)
                       .colorScheme
                       .primary
-                      .withOpacity(_isBotCommit ? 0.1 : 1.0),
+                      .changeOpacity(_isBotCommit ? 0.1 : 1.0),
                 ),
           title: _GitStampCommitListHeader(commit: commit),
           subtitle: itemLargeType == false
@@ -172,7 +172,7 @@ Widget build(BuildContext context) {
                         color: Theme.of(context)
                             .colorScheme
                             .onSurface
-                            .withOpacity(0.6),
+                            .changeOpacity(0.6),
                       ),
                       maxLines: 1,
                     ),
