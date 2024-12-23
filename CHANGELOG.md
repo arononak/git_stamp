@@ -12,6 +12,18 @@
 
 # CHANGELOG
 
+## 5.10.0
+
+* GitStampPage - Fixed details BottomSheet scroll
+* GitStampPage - Changed commit chart to another modal
+* GitStampPage - Fixed commit users stats
+* Fixed pana .withOpacity function deprecated warning
+
+<details>
+<summary>Image</summary>
+<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/5.10.0.png?raw=true" alt="Image"></p>
+</details>
+
 ## 5.9.0
 
 * Added **fl_chart** package
