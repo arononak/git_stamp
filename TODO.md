@@ -72,3 +72,8 @@
 - [ ] InApp - Hidden developer mode vibrate or something similar - Android developer mode
 - [ ] InApp - Flutter doctor fix for another languages
 - [ ] GitStampPage - Commit list avatars
+- [ ] InApp - Files list - file size
+- [ ] CI - Fix short diff screenshot
+- [ ] CI - Tests - Download flutter repo & create example project with stamp & compole
+- [ ] InApp - More charts
+- [ ] InApp - Build IP & MAC
