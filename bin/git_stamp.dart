@@ -20,16 +20,8 @@ const _decryptedTestText =
     'Aron Aron uber alles, a napewno ponad mojego wspaniałego i cudownego Łukaszka i jego przyjaciela cwaniaka misiora z żółtymi zębami jak koń. Po wyroku sądu dopisze tu jego przeklęte nazwisko xd';
 
 final _parser = ArgParser()
-  ..addFlag(
-    'help',
-    abbr: 'h',
-    negatable: false,
-  )
-  ..addFlag(
-    'version',
-    abbr: 'v',
-    negatable: false,
-  )
+  ..addFlag('help', abbr: 'h', negatable: false)
+  ..addFlag('version', abbr: 'v', negatable: false)
   ..addFlag(
     'encrypt',
     abbr: 'e',
@@ -115,17 +107,17 @@ class _GenerationResult {
   }
 
   Map<String, dynamic> get asMap => {
-        'generationTimeSeconds': generationTimeSeconds,
-        'filesSize': filesSize,
-        'filesCount': filesCount,
-      };
+    'generationTimeSeconds': generationTimeSeconds,
+    'filesSize': filesSize,
+    'filesCount': filesCount,
+  };
 
   static String benchmark(full, lite, icon, commitCount) => jsonEncode({
-        'full': full.asMap,
-        'lite': lite.asMap,
-        'icon': icon.asMap,
-        'commitCount': commitCount,
-      });
+    'full': full.asMap,
+    'lite': lite.asMap,
+    'icon': icon.asMap,
+    'commitCount': commitCount,
+  });
 }
 
 extension DurationExtension on Duration {
@@ -190,6 +182,7 @@ Future<void> main(List<String> arguments) async {
       debugCompileKey: debugCompileKey,
       addingPackageEnabled: addingPackageEnabled,
       limit: limit,
+      genOnly: genOnly,
     );
     result.print();
   } on FormatException catch (e) {
@@ -253,10 +246,7 @@ Future<_GenerationResult> _generate({
 
       break;
     case 'icon':
-      _generateDataFiles(
-        model: const GitStampBuildModel.icon(),
-        limit: 1,
-      );
+      _generateDataFiles(model: const GitStampBuildModel.icon(), limit: 1);
       break;
     case 'custom':
       _generateDataFiles(
@@ -303,8 +293,9 @@ void _generateDataFiles({
         : (data) => GitStampEncrypt.encrypt(data, key, iv);
   }
 
-  final encryptedTestText =
-      model.encrypt ? encrypt?.call(_decryptedTestText) : null;
+  final encryptedTestText = model.encrypt
+      ? encrypt?.call(_decryptedTestText)
+      : null;
 
   GitStampMain(model, _decryptedTestText, encryptedTestText).generate();
   ToolVersion().generate();
