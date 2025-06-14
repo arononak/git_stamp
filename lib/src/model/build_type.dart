@@ -24,7 +24,7 @@ enum BuildType {
   ///
   /// Requires [String] value.
   static BuildType fromString(String value) => BuildType.values.firstWhere(
-        (e) => e.value == value,
-        orElse: () => noBuildType,
-      );
+    (e) => e.value == value,
+    orElse: () => noBuildType,
+  );
 }

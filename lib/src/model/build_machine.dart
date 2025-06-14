@@ -56,31 +56,31 @@ class BuildMachine {
   ///
   /// Requires json map.
   factory BuildMachine.fromJson(Map<String, dynamic> json) => BuildMachine(
-        frameworkVersion: json['frameworkVersion'] ?? 'null',
-        channel: json['channel'] ?? 'null',
-        repositoryUrl: json['repositoryUrl'] ?? 'null',
-        frameworkRevision: json['frameworkRevision'] ?? 'null',
-        frameworkCommitDate: json['frameworkCommitDate'] ?? 'null',
-        engineRevision: json['engineRevision'] ?? 'null',
-        dartSdkVersion: json['dartSdkVersion'] ?? 'null',
-        devToolsVersion: json['devToolsVersion'] ?? 'null',
-        flutterVersion: json['flutterVersion'] ?? 'null',
-        flutterRoot: json['flutterRoot'] ?? 'null',
-      );
+    frameworkVersion: json['frameworkVersion'] ?? 'null',
+    channel: json['channel'] ?? 'null',
+    repositoryUrl: json['repositoryUrl'] ?? 'null',
+    frameworkRevision: json['frameworkRevision'] ?? 'null',
+    frameworkCommitDate: json['frameworkCommitDate'] ?? 'null',
+    engineRevision: json['engineRevision'] ?? 'null',
+    dartSdkVersion: json['dartSdkVersion'] ?? 'null',
+    devToolsVersion: json['devToolsVersion'] ?? 'null',
+    flutterVersion: json['flutterVersion'] ?? 'null',
+    flutterRoot: json['flutterRoot'] ?? 'null',
+  );
 
   /// Creates an instance of [BuildMachine].
   ///
   /// Assigns one value to each field, e.g. "null" or "ENCRYPTED".
   factory BuildMachine.all(String value) => BuildMachine(
-        frameworkVersion: value,
-        channel: value,
-        repositoryUrl: value,
-        frameworkRevision: value,
-        frameworkCommitDate: value,
-        engineRevision: value,
-        dartSdkVersion: value,
-        devToolsVersion: value,
-        flutterVersion: value,
-        flutterRoot: value,
-      );
+    frameworkVersion: value,
+    channel: value,
+    repositoryUrl: value,
+    frameworkRevision: value,
+    frameworkCommitDate: value,
+    engineRevision: value,
+    dartSdkVersion: value,
+    devToolsVersion: value,
+    flutterVersion: value,
+    flutterRoot: value,
+  );
 }

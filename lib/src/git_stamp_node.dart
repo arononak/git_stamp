@@ -248,10 +248,7 @@ abstract class GitStampNode {
   }
 
   /// Only for testing.
-  Widget detailsPage({
-    required Commit commit,
-    String? monospaceFontFamily,
-  }) {
+  Widget detailsPage({required Commit commit, String? monospaceFontFamily}) {
     return SizedBox();
   }
 

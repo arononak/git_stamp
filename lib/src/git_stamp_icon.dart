@@ -63,7 +63,8 @@ class _GitStampIconState extends State<GitStampIcon> {
             ),
           ),
           TextSpan(
-            text: '\n'
+            text:
+                '\n'
                 'Version: ${widget.gitStamp.appVersionFull}\n'
                 'Date: ${widget.gitStamp.buildDateTime}\n'
                 'Branch: ${widget.gitStamp.buildBranch}\n'

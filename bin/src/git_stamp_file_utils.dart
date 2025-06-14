@@ -71,10 +71,7 @@ abstract class GitStampDirectory {
       mainDirectory.deleteSync(recursive: true);
     }
 
-    final gitStampFiles = [
-      GitStampMainFile().path,
-      GitStampDataFile().path,
-    ];
+    final gitStampFiles = [GitStampMainFile().path, GitStampDataFile().path];
 
     for (var e in gitStampFiles) {
       Directory(e).createSync(recursive: true);

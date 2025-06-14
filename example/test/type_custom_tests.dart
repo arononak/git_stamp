@@ -16,11 +16,7 @@ final table = [
     'field': GitStamp.latestCommit?.authorName.isNotEmpty,
     'matcher': isTrue,
   },
-  {
-    'param': 'commit-list',
-    'field': GitStamp.sha.isNotEmpty,
-    'matcher': isTrue,
-  },
+  {'param': 'commit-list', 'field': GitStamp.sha.isNotEmpty, 'matcher': isTrue},
   {
     'param': 'diff-list',
     'field': GitStamp.diffStatList.elementForHash(_initCommitHash).isNotEmpty,
@@ -51,31 +47,15 @@ final table = [
     'field': GitStamp.repoCreationDate,
     'matcher': isNotEmpty,
   },
-  {
-    'param': 'repo-path',
-    'field': GitStamp.repoPath,
-    'matcher': isNotEmpty,
-  },
+  {'param': 'repo-path', 'field': GitStamp.repoPath, 'matcher': isNotEmpty},
   {
     'param': 'observed-files-list',
     'field': GitStamp.observedFilesList,
     'matcher': isNotEmpty,
   },
-  {
-    'param': 'app-version',
-    'field': GitStamp.appVersion,
-    'matcher': isNotEmpty,
-  },
-  {
-    'param': 'app-build',
-    'field': GitStamp.appBuild,
-    'matcher': isNotEmpty,
-  },
-  {
-    'param': 'app-name',
-    'field': GitStamp.appName,
-    'matcher': isNotEmpty,
-  },
+  {'param': 'app-version', 'field': GitStamp.appVersion, 'matcher': isNotEmpty},
+  {'param': 'app-build', 'field': GitStamp.appBuild, 'matcher': isNotEmpty},
+  {'param': 'app-name', 'field': GitStamp.appName, 'matcher': isNotEmpty},
   {
     'param': 'git-config',
     'field': GitStamp.gitConfigGlobalUserName,
@@ -96,11 +76,7 @@ final table = [
     'field': GitStamp.gitConfigUserEmail,
     'matcher': isNotEmpty,
   },
-  {
-    'param': 'git-remote',
-    'field': GitStamp.gitRemote,
-    'matcher': isNotEmpty,
-  },
+  {'param': 'git-remote', 'field': GitStamp.gitRemote, 'matcher': isNotEmpty},
   {
     'param': 'git-config-list',
     'field': GitStamp.gitConfigList,
@@ -111,31 +87,19 @@ final table = [
     'field': GitStamp.gitCountObjects,
     'matcher': isNotEmpty,
   },
-  {
-    'param': 'git-tag-list',
-    'field': GitStamp.tagList,
-    'matcher': isNotEmpty,
-  },
+  {'param': 'git-tag-list', 'field': GitStamp.tagList, 'matcher': isNotEmpty},
   {
     'param': 'git-branch-list',
     'field': GitStamp.branchList,
     'matcher': isNotEmpty,
   },
-  {
-    'param': 'git-reflog',
-    'field': GitStamp.gitReflog,
-    'matcher': isNotEmpty,
-  },
+  {'param': 'git-reflog', 'field': GitStamp.gitReflog, 'matcher': isNotEmpty},
   {
     'param': 'packages',
     'field': GitStamp.packageList.first.package,
     'matcher': isNotEmpty,
   },
-  {
-    'param': 'deps',
-    'field': GitStamp.deps,
-    'matcher': isNotEmpty,
-  },
+  {'param': 'deps', 'field': GitStamp.deps, 'matcher': isNotEmpty},
 
   /* Build Machine */
   {
@@ -200,8 +164,12 @@ void main() {
 }
 
 void runGenOnlyCommand(param, field, matcher) {
-  final result =
-      Process.runSync('dart', ['run', 'git_stamp', '--gen-only', param]);
+  final result = Process.runSync('dart', [
+    'run',
+    'git_stamp',
+    '--gen-only',
+    param,
+  ]);
 
   expect(result.exitCode, 0);
   expect(result.stderr, isEmpty);

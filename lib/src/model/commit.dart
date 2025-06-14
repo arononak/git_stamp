@@ -39,10 +39,10 @@ class Commit extends Dateable {
   ///
   /// Requires json map.
   factory Commit.fromJson(Map<String, dynamic> json) => Commit(
-        hash: json['hash'] ?? 'null',
-        subject: json['subject'] ?? 'null',
-        date: json['date'] ?? 'null',
-        authorName: json['authorName'] ?? 'null',
-        authorEmail: json['authorEmail'] ?? 'null',
-      );
+    hash: json['hash'] ?? 'null',
+    subject: json['subject'] ?? 'null',
+    date: json['date'] ?? 'null',
+    authorName: json['authorName'] ?? 'null',
+    authorEmail: json['authorEmail'] ?? 'null',
+  );
 }

@@ -27,7 +27,8 @@ String rawGitStampNode(
         ? _encryptedImpl(decryptedTestText, encryptedTestText)
         : _decryptedImpl(model));
 
-String _content(GitStampBuildModel model) => '''
+String _content(GitStampBuildModel model) =>
+    '''
 library git_stamp;
 
 import 'package:flutter/services.dart';
@@ -70,7 +71,8 @@ import 'data/tool_version.dart';
 
 ''';
 
-String _decryptedImpl(GitStampBuildModel model) => '''
+String _decryptedImpl(GitStampBuildModel model) =>
+    '''
 final GitStamp = GitStampNodeImpl();
 
 class GitStampNodeImpl extends GitStampNode {
@@ -171,10 +173,7 @@ class GitStampNodeImpl extends GitStampNode {
 }
 ''';
 
-String _encryptedImpl(
-  String decryptedTestText,
-  Uint8List encryptedTestText,
-) =>
+String _encryptedImpl(String decryptedTestText, Uint8List encryptedTestText) =>
     '''
 final GitStamp = GitStampNodeImpl();
 

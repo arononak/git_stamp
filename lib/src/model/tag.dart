@@ -18,24 +18,16 @@ class Tag extends Dateable {
   /// Creates an instance of [Tag].
   ///
   /// This constructor requires all fields.
-  Tag({
-    required this.name,
-    required this.date,
-  });
+  Tag({required this.name, required this.date});
 
   /// Creates an instance of [Tag].
   ///
   /// Requires json map.
-  factory Tag.fromJson(Map<String, dynamic> json) => Tag(
-        name: json['name'] ?? 'null',
-        date: json['date'] ?? 'null',
-      );
+  factory Tag.fromJson(Map<String, dynamic> json) =>
+      Tag(name: json['name'] ?? 'null', date: json['date'] ?? 'null');
 
   /// Creates an instance of [Tag].
   ///
   /// Assigns one value to each field, e.g. "null" or "ENCRYPTED".
-  factory Tag.all(String value) => Tag(
-        name: value,
-        date: value,
-      );
+  factory Tag.all(String value) => Tag(name: value, date: value);
 }

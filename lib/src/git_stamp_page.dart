@@ -105,12 +105,7 @@ void _showPackagesDialog(BuildContext context, GitStampNode gitStamp) {
               ),
             ),
           ] else ...[
-            Text(
-              'The newest',
-              style: TextStyle(
-                fontSize: 8,
-              ),
-            ),
+            Text('The newest', style: TextStyle(fontSize: 8)),
           ],
         ],
       ),
@@ -131,31 +126,29 @@ void _showPackagesDialog(BuildContext context, GitStampNode gitStamp) {
           'dependencies:': groupedItems['direct'] ?? [],
           'dev_dependencies:': groupedItems['dev'] ?? [],
           'transitive:': groupedItems['transitive'] ?? [],
-        }.entries.map(
-          (entry) {
-            final values = entry.value;
-            return ExpansionTile(
-              tilePadding: EdgeInsets.symmetric(horizontal: 8.0),
-              childrenPadding: EdgeInsets.symmetric(horizontal: 16.0),
-              title: Text(
-                entry.key,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Theme.of(context).colorScheme.primary,
-                  fontWeight: FontWeight.bold,
-                ),
+        }.entries.map((entry) {
+          final values = entry.value;
+          return ExpansionTile(
+            tilePadding: EdgeInsets.symmetric(horizontal: 8.0),
+            childrenPadding: EdgeInsets.symmetric(horizontal: 16.0),
+            title: Text(
+              entry.key,
+              style: TextStyle(
+                fontSize: 12,
+                color: Theme.of(context).colorScheme.primary,
+                fontWeight: FontWeight.bold,
               ),
-              subtitle: Text(
-                '${values.length} packages',
-                style: TextStyle(
-                  fontSize: 10,
-                  color: Theme.of(context).colorScheme.secondary,
-                ),
+            ),
+            subtitle: Text(
+              '${values.length} packages',
+              style: TextStyle(
+                fontSize: 10,
+                color: Theme.of(context).colorScheme.secondary,
               ),
-              children: values.map((item) => buildItem(item)).toList(),
-            );
-          },
-        ),
+            ),
+            children: values.map((item) => buildItem(item)).toList(),
+          );
+        }),
       ],
     ),
   );
@@ -468,19 +461,12 @@ class _GitStampTextLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: 8.0,
-        vertical: 4.0,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.inversePrimary,
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Text(
-        text,
-        maxLines: 1,
-        style: TextStyle(fontSize: 20),
-      ),
+      child: Text(text, maxLines: 1, style: TextStyle(fontSize: 20)),
     );
   }
 }
@@ -489,10 +475,7 @@ class _GitStampCommitHeader {
   final String date;
   final int count;
 
-  const _GitStampCommitHeader({
-    required this.date,
-    required this.count,
-  });
+  const _GitStampCommitHeader({required this.date, required this.count});
 }
 
 class _GitStampCommitList extends StatelessWidget {
@@ -518,15 +501,16 @@ class _GitStampCommitList extends StatelessWidget {
     ];
 
     commitAndTags.sort(
-        (a, b) => DateTime.parse(b.date).compareTo(DateTime.parse(a.date)));
+      (a, b) => DateTime.parse(b.date).compareTo(DateTime.parse(a.date)),
+    );
 
     groupBy(
       commitAndTags.where(
         (e) => e is! Commit
             ? true
             : filterName == null
-                ? true
-                : e.authorName == filterName,
+            ? true
+            : e.authorName == filterName,
       ),
       (e) => e.date.asOnlyDate,
     ).forEach((key, dateable) {
@@ -569,10 +553,7 @@ class _GitStampDateListElement extends StatelessWidget {
   final String date;
   final int count;
 
-  const _GitStampDateListElement({
-    required this.date,
-    required this.count,
-  });
+  const _GitStampDateListElement({required this.date, required this.count});
 
   @override
   Widget build(BuildContext context) {
@@ -600,10 +581,7 @@ class _GitStampDateListElement extends StatelessWidget {
             ],
           ),
           Container(
-            constraints: BoxConstraints(
-              minHeight: 40,
-              minWidth: 40,
-            ),
+            constraints: BoxConstraints(minHeight: 40, minWidth: 40),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: Theme.of(context).colorScheme.surfaceContainer,
@@ -667,10 +645,9 @@ class GitStampCommitListElement extends StatelessWidget {
                 : Icon(
                     _isBotCommit ? Icons.auto_mode : Icons.code,
                     size: itemLargeType ? 36 : null,
-                    color: Theme.of(context)
-                        .colorScheme
-                        .primary
-                        .changeOpacity(_isBotCommit ? 0.1 : 1.0),
+                    color: Theme.of(context).colorScheme.primary.changeOpacity(
+                      _isBotCommit ? 0.1 : 1.0,
+                    ),
                   ),
             title: _GitStampCommitListHeader(commit: commit),
             subtitle: itemLargeType == false
@@ -694,10 +671,9 @@ class GitStampCommitListElement extends StatelessWidget {
                         commit.date,
                         style: TextStyle(
                           fontSize: 14.0,
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onSurface
-                              .changeOpacity(0.6),
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.onSurface.changeOpacity(0.6),
                         ),
                         maxLines: 1,
                       ),
@@ -716,10 +692,7 @@ class GitStampCommitListElement extends StatelessWidget {
     );
   }
 
-  void showGitDiffStat(
-    BuildContext context, {
-    required GitStampNode gitStamp,
-  }) {
+  void showGitDiffStat(BuildContext context, {required GitStampNode gitStamp}) {
     _showModal(
       context: context,
       child: Container(
@@ -800,12 +773,12 @@ class _GitStampTagListElement extends StatelessWidget {
           leading: itemLargeType == false
               ? null
               : _isMobile(context)
-                  ? null
-                  : Icon(
-                      Icons.local_offer,
-                      size: 36,
-                      color: Theme.of(context).colorScheme.onPrimaryContainer,
-                    ),
+              ? null
+              : Icon(
+                  Icons.local_offer,
+                  size: 36,
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                ),
           title: Text(
             tag.name,
             style: TextStyle(
@@ -823,10 +796,9 @@ class _GitStampTagListElement extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: 14.0,
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onPrimaryContainer
-                        .changeOpacity(0.7),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.onPrimaryContainer.changeOpacity(0.7),
                   ),
                 ),
         ),
@@ -1087,11 +1059,15 @@ class _GitStampRepoDetails extends StatelessWidget {
         Row(
           children: [
             Text('Build type: [', style: _textDefault),
-            Text('LITE',
-                style: gitStamp.isLiteVersion ? _textBold : _textDefault),
+            Text(
+              'LITE',
+              style: gitStamp.isLiteVersion ? _textBold : _textDefault,
+            ),
             Text(', ', style: _textDefault),
-            Text('FULL',
-                style: gitStamp.isLiteVersion ? _textDefault : _textBold),
+            Text(
+              'FULL',
+              style: gitStamp.isLiteVersion ? _textDefault : _textBold,
+            ),
             Text(']', style: _textDefault),
           ],
         ),
@@ -1162,7 +1138,9 @@ class _GitStampRepoDetails extends StatelessWidget {
           'Commit count: ',
           gitStamp.isEncrypted ? 'ENCRYPTED' : gitStamp.commitCount.toString(),
         ),
-        ...gitStamp.commitCountByAuthor.entries.sortedBy((e) => e.key).map(
+        ...gitStamp.commitCountByAuthor.entries
+            .sortedBy((e) => e.key)
+            .map(
               (entry) => Row(
                 children: [
                   SizedBox(width: 16),
@@ -1212,21 +1190,16 @@ class _GitStampCommitChart extends StatelessWidget {
         PieChartData(
           sectionsSpace: _sections.toDouble(),
           centerSpaceRadius: 50,
-          sections: commitCountByAuthor.entries.map(
-            (element) {
-              final percent = _percentOfCommits(element.value);
-              return PieChartSectionData(
-                value: percent.ceilToDouble(),
-                title: '${element.key} - ${percent.toStringAsFixed(2)}%',
-                color: _randomColor,
-                radius: 50,
-                titleStyle: TextStyle(
-                  fontSize: 9,
-                  fontWeight: FontWeight.bold,
-                ),
-              );
-            },
-          ).toList(),
+          sections: commitCountByAuthor.entries.map((element) {
+            final percent = _percentOfCommits(element.value);
+            return PieChartSectionData(
+              value: percent.ceilToDouble(),
+              title: '${element.key} - ${percent.toStringAsFixed(2)}%',
+              color: _randomColor,
+              radius: 50,
+              titleStyle: TextStyle(fontSize: 9, fontWeight: FontWeight.bold),
+            );
+          }).toList(),
         ),
       ),
     );
@@ -1258,7 +1231,7 @@ class _GitStampRepoFiles extends StatelessWidget {
               ),
               SizedBox(height: 16.0),
               if (!gitStamp.isEncrypted) ...[
-                Text(gitStamp.observedFiles, style: _textDefault)
+                Text(gitStamp.observedFiles, style: _textDefault),
               ],
             ],
           ),
@@ -1293,8 +1266,9 @@ class _GitStampRepoTags extends StatelessWidget {
               ),
               SizedBox(height: 16.0),
               if (!gitStamp.isEncrypted) ...[
-                ...gitStamp.tagList
-                    .map((e) => _GitStampDoubleText('${e.date} - ', e.name)),
+                ...gitStamp.tagList.map(
+                  (e) => _GitStampDoubleText('${e.date} - ', e.name),
+                ),
               ],
             ],
           ),
@@ -1324,7 +1298,7 @@ class _GitStampRepoReflog extends StatelessWidget {
               _GitStampLabel(first: 'Repository reflog'),
               SizedBox(height: 12),
               if (!gitStamp.isEncrypted) ...[
-                Text(gitStamp.gitReflog, style: _textDefault)
+                Text(gitStamp.gitReflog, style: _textDefault),
               ],
             ],
           ),
@@ -1359,7 +1333,7 @@ class _GitStampRepoBranches extends StatelessWidget {
               ),
               SizedBox(height: 16.0),
               if (!gitStamp.isEncrypted) ...[
-                Text(gitStamp.branchListString, style: _textDefault)
+                Text(gitStamp.branchListString, style: _textDefault),
               ],
             ],
           ),
@@ -1402,18 +1376,16 @@ class _GitStampFilterList extends StatelessWidget {
             Flexible(
               child: ListView(
                 shrinkWrap: true,
-                children: users.map(
-                  (e) {
-                    final count = commitCount[e];
-                    return ListTile(
-                      leading: Icon(e != null ? Icons.person : Icons.close),
-                      title: Text(e ?? 'No filter', style: _textBold),
-                      subtitle: count == null ? null : Text(count.toString()),
-                      trailing: e != selectedUser ? null : Icon(Icons.check),
-                      onTap: () => onFilterPressed(e),
-                    );
-                  },
-                ).toList(),
+                children: users.map((e) {
+                  final count = commitCount[e];
+                  return ListTile(
+                    leading: Icon(e != null ? Icons.person : Icons.close),
+                    title: Text(e ?? 'No filter', style: _textBold),
+                    subtitle: count == null ? null : Text(count.toString()),
+                    trailing: e != selectedUser ? null : Icon(Icons.check),
+                    onTap: () => onFilterPressed(e),
+                  );
+                }).toList(),
               ),
             ),
           ],
@@ -1503,8 +1475,10 @@ class _GitStampArrowIconState extends State<_GitStampArrowIcon>
 
   @override
   void initState() {
-    _controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 300),
+    );
     _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
     super.initState();
 
@@ -1534,10 +1508,7 @@ class _GitStampArrowIconState extends State<_GitStampArrowIcon>
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
-        return Transform.rotate(
-          angle: _animation.value * pi,
-          child: child,
-        );
+        return Transform.rotate(angle: _animation.value * pi, child: child);
       },
       child: IconButton(
         icon: Icon(Icons.arrow_upward),
@@ -1563,23 +1534,18 @@ class _GitStampDetailsPageText extends StatelessWidget {
     return SelectableText.rich(
       TextSpan(
         children: [
-          ...diffList.split('\n').map(
-            (line) {
-              return TextSpan(
-                text: '$line\n',
-                style: TextStyle(
-                  color: _textColor(context, line),
-                  backgroundColor: _backgroundColor(context, line),
-                ),
-              );
-            },
-          ),
+          ...diffList.split('\n').map((line) {
+            return TextSpan(
+              text: '$line\n',
+              style: TextStyle(
+                color: _textColor(context, line),
+                backgroundColor: _backgroundColor(context, line),
+              ),
+            );
+          }),
         ],
       ),
-      style: TextStyle(
-        fontSize: fontSize,
-        fontFamily: monospaceFontFamily,
-      ),
+      style: TextStyle(fontSize: fontSize, fontFamily: monospaceFontFamily),
     );
   }
 
@@ -1607,10 +1573,9 @@ class _GitStampDetailsPageText extends StatelessWidget {
         line.startsWith('+++ ') ||
         line.startsWith('@@ ') ||
         line.startsWith('new file mode ')) {
-      return Theme.of(context)
-          .colorScheme
-          .onTertiaryContainer
-          .changeOpacity(0.4);
+      return Theme.of(
+        context,
+      ).colorScheme.onTertiaryContainer.changeOpacity(0.4);
     } else if (line.startsWith('-') && !line.startsWith('--- ')) {
       return Theme.of(context).colorScheme.onErrorContainer;
     } else if (line.startsWith('+') && !line.startsWith('+++ ')) {
@@ -1623,11 +1588,15 @@ class _GitStampDetailsPageText extends StatelessWidget {
 
 /// Generated by ChatGPT
 Uint8List _hexToUint8List(String hex) {
-  return Uint8List.fromList(hex
-      .replaceAll(' ', '')
-      .replaceAllMapped(RegExp(r'..'),
-          (match) => String.fromCharCode(int.parse(match.group(0)!, radix: 16)))
-      .codeUnits);
+  return Uint8List.fromList(
+    hex
+        .replaceAll(' ', '')
+        .replaceAllMapped(
+          RegExp(r'..'),
+          (match) => String.fromCharCode(int.parse(match.group(0)!, radix: 16)),
+        )
+        .codeUnits,
+  );
 }
 
 class _GitStampDecryptForm extends StatefulWidget {
@@ -1675,11 +1644,7 @@ class _GitStampDecryptFormState extends State<_GitStampDecryptForm> {
             controller: _keyController,
           ),
           SizedBox(height: 12),
-          _buildHexTextField(
-            text: 'IV',
-            length: 32,
-            controller: _ivController,
-          ),
+          _buildHexTextField(text: 'IV', length: 32, controller: _ivController),
           TextButton(
             onPressed: () {
               final success = widget.gitStamp.decrypt(
@@ -1717,9 +1682,7 @@ class _GitStampDecryptFormState extends State<_GitStampDecryptForm> {
       ),
       keyboardType: TextInputType.text,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(
-          RegExp(r'[0-9a-fA-F]'),
-        ),
+        FilteringTextInputFormatter.allow(RegExp(r'[0-9a-fA-F]')),
       ],
       maxLength: length ?? 32,
       maxLengthEnforcement: MaxLengthEnforcement.enforced,
@@ -1727,14 +1690,13 @@ class _GitStampDecryptFormState extends State<_GitStampDecryptForm> {
   }
 }
 
-void _openEmail({
-  String? email,
-  String? subject,
-}) {
+void _openEmail({String? email, String? subject}) {
   String? encodeQueryParameters(Map<String, String> params) {
     return params.entries
-        .map((e) =>
-            '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+        .map(
+          (e) =>
+              '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}',
+        )
         .join('&');
   }
 
@@ -1748,11 +1710,9 @@ void _openEmail({
 }
 
 void _openProjectHomepage() {
-  launchUrl(Uri(
-    scheme: 'https',
-    host: 'github.com',
-    path: 'arononak/git_stamp',
-  ));
+  launchUrl(
+    Uri(scheme: 'https', host: 'github.com', path: 'arononak/git_stamp'),
+  );
 }
 
 void _showSnackbar({
@@ -1780,10 +1740,7 @@ void _showSnackbar({
                 scrollDirection: Axis.horizontal,
                 child: Text(
                   message,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.white,
-                  ),
+                  style: TextStyle(fontSize: 12, color: Colors.white),
                 ),
               ),
             ),
@@ -1827,14 +1784,8 @@ void _showDialog({
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: _GitStampLabel(
-          first: titleFirst,
-          second: titleSecond,
-        ),
-        content: SizedBox(
-          width: double.maxFinite,
-          child: child,
-        ),
+        title: _GitStampLabel(first: titleFirst, second: titleSecond),
+        content: SizedBox(width: double.maxFinite, child: child),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),

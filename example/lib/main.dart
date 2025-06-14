@@ -73,12 +73,7 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Settings Page'),
-        actions: [
-          GitStamp.icon(),
-        ],
-      ),
+      appBar: AppBar(title: Text('Settings Page'), actions: [GitStamp.icon()]),
       body: Column(
         children: [
           FutureBuilder<int>(
