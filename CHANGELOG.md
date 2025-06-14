@@ -12,6 +12,15 @@
 
 # CHANGELOG
 
+## 5.10.1
+
+* Fixed _generate::genOnly forgotten param
+
+<details>
+<summary>Image</summary>
+<p><img src="https://github.com/arononak/git_stamp/blob/main/changelog/5.10.1.png?raw=true" alt="Image"></p>
+</details>
+
 ## 5.10.0
 
 * GitStampPage - Fixed details BottomSheet scroll
